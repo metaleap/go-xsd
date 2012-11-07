@@ -33,7 +33,7 @@ var (
 			"positiveInteger": "uint",
 		},
 		Name: "goxsdpkg",
-		BaseCodePath: util.BaseCodePath("metaleap", "go-xsd", "xsd"),
+		BaseCodePath: util.BaseCodePath("metaleap", "go-xsd-pkg"),
 	}
 )
 
