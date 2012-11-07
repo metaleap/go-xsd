@@ -4,7 +4,11 @@ import (
 	"encoding/xml"
 )
 
+type elemBase struct {
+}
+
 type All struct {
+	elemBase
 	XMLName xml.Name `xml:"all"`
 	hasAttrId
 	hasAttrMaxOccurs
@@ -14,12 +18,14 @@ type All struct {
 }
 
 type Annotation struct {
+	elemBase
 	XMLName xml.Name `xml:"annotation"`
 	hasElemsAppInfo
 	hasElemsDocumentation
 }
 
 type Any struct {
+	elemBase
 	XMLName xml.Name `xml:"any"`
 	hasAttrId
 	hasAttrMaxOccurs
@@ -30,6 +36,7 @@ type Any struct {
 }
 
 type AnyAttribute struct {
+	elemBase
 	XMLName xml.Name `xml:"anyAttribute"`
 	hasAttrId
 	hasAttrNamespace
@@ -38,12 +45,14 @@ type AnyAttribute struct {
 }
 
 type AppInfo struct {
+	elemBase
 	XMLName xml.Name `xml:"appinfo"`
 	hasAttrSource
 	hasCdata
 }
 
 type Attribute struct {
+	elemBase
 	XMLName xml.Name `xml:"attribute"`
 	hasAttrDefault
 	hasAttrFixed
@@ -58,6 +67,7 @@ type Attribute struct {
 }
 
 type AttributeGroup struct {
+	elemBase
 	XMLName xml.Name `xml:"attributeGroup"`
 	hasAttrId
 	hasAttrName
@@ -69,6 +79,7 @@ type AttributeGroup struct {
 }
 
 type Choice struct {
+	elemBase
 	XMLName xml.Name `xml:"choice"`
 	hasAttrId
 	hasAttrMaxOccurs
@@ -82,6 +93,7 @@ type Choice struct {
 }
 
 type ComplexContent struct {
+	elemBase
 	XMLName xml.Name `xml:"complexContent"`
 	hasAttrId
 	hasAttrMixed
@@ -91,6 +103,7 @@ type ComplexContent struct {
 }
 
 type ComplexType struct {
+	elemBase
 	XMLName xml.Name `xml:"complexType"`
 	hasAttrAbstract
 	hasAttrBlock
@@ -111,6 +124,7 @@ type ComplexType struct {
 }
 
 type Documentation struct {
+	elemBase
 	XMLName xml.Name `xml:"documentation"`
 	hasAttrLang
 	hasAttrSource
@@ -118,6 +132,7 @@ type Documentation struct {
 }
 
 type Element struct {
+	elemBase
 	XMLName xml.Name `xml:"element"`
 	hasAttrAbstract
 	hasAttrBlock
@@ -142,6 +157,7 @@ type Element struct {
 }
 
 type ExtensionComplexContent struct {
+	elemBase
 	XMLName xml.Name `xml:"extension"`
 	hasAttrBase
 	hasAttrId
@@ -156,6 +172,7 @@ type ExtensionComplexContent struct {
 }
 
 type ExtensionSimpleContent struct {
+	elemBase
 	XMLName xml.Name `xml:"extension"`
 	hasAttrBase
 	hasAttrId
@@ -166,6 +183,7 @@ type ExtensionSimpleContent struct {
 }
 
 type Field struct {
+	elemBase
 	XMLName xml.Name `xml:"field"`
 	hasAttrId
 	hasAttrXpath
@@ -173,6 +191,7 @@ type Field struct {
 }
 
 type Group struct {
+	elemBase
 	XMLName xml.Name `xml:"group"`
 	hasAttrId
 	hasAttrMaxOccurs
@@ -186,6 +205,7 @@ type Group struct {
 }
 
 type Include struct {
+	elemBase
 	XMLName xml.Name `xml:"include"`
 	hasAttrId
 	hasAttrSchemaLocation
@@ -193,6 +213,7 @@ type Include struct {
 }
 
 type Import struct {
+	elemBase
 	XMLName xml.Name `xml:"import"`
 	hasAttrId
 	hasAttrNamespace
@@ -201,6 +222,7 @@ type Import struct {
 }
 
 type Key struct {
+	elemBase
 	XMLName xml.Name `xml:"key"`
 	hasAttrId
 	hasAttrName
@@ -210,6 +232,7 @@ type Key struct {
 }
 
 type KeyRef struct {
+	elemBase
 	XMLName xml.Name `xml:"keyref"`
 	hasAttrId
 	hasAttrName
@@ -220,6 +243,7 @@ type KeyRef struct {
 }
 
 type List struct {
+	elemBase
 	XMLName xml.Name `xml:"list"`
 	hasAttrId
 	hasAttrItemType
@@ -228,6 +252,7 @@ type List struct {
 }
 
 type Notation struct {
+	elemBase
 	XMLName xml.Name `xml:"notation"`
 	hasAttrId
 	hasAttrName
@@ -237,6 +262,7 @@ type Notation struct {
 }
 
 type Redefine struct {
+	elemBase
 	XMLName xml.Name `xml:"redefine"`
 	hasAttrId
 	hasAttrSchemaLocation
@@ -248,6 +274,7 @@ type Redefine struct {
 }
 
 type RestrictionComplexContent struct {
+	elemBase
 	XMLName xml.Name `xml:"restriction"`
 	hasAttrBase
 	hasAttrId
@@ -261,6 +288,7 @@ type RestrictionComplexContent struct {
 }
 
 type RestrictionSimpleContent struct {
+	elemBase
 	XMLName xml.Name `xml:"restriction"`
 	hasAttrBase
 	hasAttrId
@@ -284,61 +312,73 @@ type RestrictionSimpleContent struct {
 }
 
 type RestrictionSimpleEnumeration struct {
+	elemBase
 	XMLName xml.Name `xml:"enumeration"`
 	hasAttrValue
 }
 
 type RestrictionSimpleFractionDigits struct {
+	elemBase
 	XMLName xml.Name `xml:"fractionDigits"`
 	hasAttrValue
 }
 
 type RestrictionSimpleLength struct {
+	elemBase
 	XMLName xml.Name `xml:"length"`
 	hasAttrValue
 }
 
 type RestrictionSimpleMaxExclusive struct {
+	elemBase
 	XMLName xml.Name `xml:"maxExclusive"`
 	hasAttrValue
 }
 
 type RestrictionSimpleMaxInclusive struct {
+	elemBase
 	XMLName xml.Name `xml:"maxInclusive"`
 	hasAttrValue
 }
 
 type RestrictionSimpleMaxLength struct {
+	elemBase
 	XMLName xml.Name `xml:"maxLength"`
 	hasAttrValue
 }
 
 type RestrictionSimpleMinExclusive struct {
+	elemBase
 	XMLName xml.Name `xml:"minExclusive"`
 	hasAttrValue
 }
 
 type RestrictionSimpleMinInclusive struct {
+	elemBase
 	XMLName xml.Name `xml:"minInclusive"`
 	hasAttrValue
 }
 
 type RestrictionSimpleMinLength struct {
+	elemBase
 	XMLName xml.Name `xml:"minLength"`
 	hasAttrValue
 }
 
 type RestrictionSimplePattern struct {
+	elemBase
 	XMLName xml.Name `xml:"pattern"`
 	hasAttrValue
 }
 
 type RestrictionSimpleTotalDigits struct {
+	elemBase
 	XMLName xml.Name `xml:"totalDigits"`
 	hasAttrValue
 }
 
 type RestrictionSimpleType struct {
+	elemBase
 	XMLName xml.Name `xml:"restriction"`
 	hasAttrBase
 	hasAttrId
@@ -359,11 +399,13 @@ type RestrictionSimpleType struct {
 }
 
 type RestrictionSimpleWhiteSpace struct {
+	elemBase
 	XMLName xml.Name `xml:"whiteSpace"`
 	hasAttrValue
 }
 
 type Selector struct {
+	elemBase
 	XMLName xml.Name `xml:"selector"`
 	hasAttrId
 	hasAttrXpath
@@ -371,6 +413,7 @@ type Selector struct {
 }
 
 type Sequence struct {
+	elemBase
 	XMLName xml.Name `xml:"sequence"`
 	hasAttrId
 	hasAttrMaxOccurs
@@ -384,6 +427,7 @@ type Sequence struct {
 }
 
 type SimpleContent struct {
+	elemBase
 	XMLName xml.Name `xml:"simpleContent"`
 	hasAttrId
 	hasElemAnnotation
@@ -392,6 +436,7 @@ type SimpleContent struct {
 }
 
 type SimpleType struct {
+	elemBase
 	XMLName xml.Name `xml:"simpleType"`
 	hasAttrFinal
 	hasAttrId
@@ -403,6 +448,7 @@ type SimpleType struct {
 }
 
 type Union struct {
+	elemBase
 	XMLName xml.Name `xml:"union"`
 	hasAttrId
 	hasAttrMemberTypes
@@ -411,6 +457,7 @@ type Union struct {
 }
 
 type Unique struct {
+	elemBase
 	XMLName xml.Name `xml:"unique"`
 	hasAttrId
 	hasAttrName

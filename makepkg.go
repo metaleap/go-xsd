@@ -34,12 +34,13 @@ var (
 		},
 		Name: "goxsdpkg",
 		BaseCodePath: util.BaseCodePath("metaleap", "go-xsd-pkg"),
+		BasePath: "github.com/metaleap/go-xsd-pkg",
 	}
 )
 
 type goPkgSrcMaker struct {
 	BaseTypes map[string]string
-	BaseCodePath, Name, TypePrefix string
+	BaseCodePath, BasePath, Name, TypePrefix string
 
 	lines []string
 	imports map[string]string
@@ -66,41 +67,20 @@ type goPkgSrcMaker struct {
 		me.imports = map[string]string {}
 	}
 
-func (me *hasElemAnnotation) makePkg () {
-	if me.Annotation != nil { me.Annotation.makePkg() }
+type makerBag struct {
+	Schema *Schema
 }
 
-func (me *hasElemsSimpleType) makePkg () {
-	for _, st := range me.SimpleTypes { st.makePkg(); PkgGen.append("") }
-}
-
-func (me *Annotation) makePkg () {
-	var s, ln string
-	for _, d := range me.Documentations {
-		if len(d.CDATA) > 0 {
-			for _, ln = range strings.Split(d.CDATA, "\n") {
-				if s = strings.Trim(ln, " \t\r\n"); len(s) > 0 { PkgGen.appendFmt("//\t%s", s) }
-			}
-		}
-	}
-}
-
-func (me *Schema) makePkg () {
+func (me *Schema) makePkg (bag *makerBag) {
+	var impPos int
 	PkgGen.reinit()
 	PkgGen.imports["xsdt"] = "github.com/metaleap/go-xsd/types"
-	me.hasElemAnnotation.makePkg()
-	var impPos = len(PkgGen.lines) + 1
+	me.hasElemAnnotation.makePkg(bag)
+	me.hasElemsImport.makePkg(bag)
+	impPos = len(PkgGen.lines) + 1
 	PkgGen.append("import (", ")", "")
-	me.hasElemsSimpleType.makePkg()
+	me.hasElemsSimpleType.makePkg(bag)
 	for impName, impPath := range PkgGen.imports {
-		println(impName)
 		PkgGen.insertFmt(impPos, "\t%v \"%v\"", impName, impPath)
-	}
-}
-
-func (me *SimpleType) makePkg () {
-	me.hasElemAnnotation.makePkg()
-	if me.RestrictionSimpleType != nil {
-		PkgGen.appendFmt("type %s%s %s", PkgGen.TypePrefix, PkgGen.pascalCase(me.Name), me.RestrictionSimpleType.Base)
 	}
 }

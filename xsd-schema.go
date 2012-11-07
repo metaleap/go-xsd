@@ -12,6 +12,7 @@ import (
 
 	uio "github.com/metaleap/go-util/io"
 	unet "github.com/metaleap/go-util/net"
+	ustr "github.com/metaleap/go-util/str"
 )
 
 const (
@@ -48,14 +49,14 @@ type Schema struct {
 	hasElemsRedefine
 	hasElemsSimpleType
 
-	loadLocalPath string
+	loadLocalPath, loadUri string
 }
 
 	func (me *Schema) onLoad (rootAtts []xml.Attr, loadUri, localPath string) (err error) {
 		var tmpUrl string
 		var sd *Schema
 		loadedSchemas[loadUri] = me
-		me.loadLocalPath = localPath
+		me.loadLocalPath, me.loadUri = localPath, loadUri
 		me.XMLNamespaces = map[string]string {}
 		for _, att := range rootAtts {
 			if att.Name.Space == "xmlns" {
@@ -66,6 +67,7 @@ type Schema struct {
 				me.XMLNamespaces[""] = att.Value
 			}
 		}
+		if len(me.XMLNamespaces["xml"]) == 0 { me.XMLNamespaces["xml"] = "http://www.w3.org/XML/1998/namespace" }
 		me.XMLIncludedSchemas = map[string]*Schema {}
 		for _, inc := range me.Includes {
 			if tmpUrl = inc.SchemaLocation; strings.Index(tmpUrl, protSep) < 0 {
@@ -80,13 +82,19 @@ type Schema struct {
 	}
 
 	func (me *Schema) MakeGoPkgSrc () string {
-		me.makePkg()
+		me.makePkg(&makerBag { Schema: me })
 		return strings.Join(PkgGen.lines, "\n")
 	}
 
 	func (me *Schema) MakeGoPkgSrcFile () (goOutFilePath string, err error) {
 		var goOutDirPath = filepath.Join(filepath.Dir(me.loadLocalPath), "_gopkg_" + filepath.Base(me.loadLocalPath))
-		goOutFilePath = filepath.Join(goOutDirPath, "pkg.go"); err = me.MakeGoPkgSrcFileAt(goOutFilePath); return
+		for _, inc := range me.XMLIncludedSchemas {
+			var s = strings.Replace(inc.loadUri, path.Dir(me.loadUri), "", -1)
+			inc.MakeGoPkgSrcFileAt(filepath.Join(goOutDirPath, ustr.Replace(s, map[string]string { "/": "_", ":": "_", "..": "__" }) + ".go"))
+		}
+		goOutFilePath = filepath.Join(goOutDirPath, path.Base(me.loadUri) + ".go")
+		err = me.MakeGoPkgSrcFileAt(goOutFilePath)
+		return
 	}
 
 	func (me *Schema) MakeGoPkgSrcFileAt (goOutFilePath string) (err error) {
