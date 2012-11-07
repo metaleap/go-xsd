@@ -38,6 +38,11 @@ type Schema struct {
 	schemaLocations []string
 }
 
+	func (me *Schema) MakeGoPkgSrc () string {
+		me.makePkg()
+		return strings.Join(PkgGen.lines, "\n")
+	}
+
 	func (me *Schema) SchemaLocations () []string {
 		return me.schemaLocations
 	}

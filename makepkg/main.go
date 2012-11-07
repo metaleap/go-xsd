@@ -12,6 +12,7 @@ func main () {
 	if sd, err = xsd.LoadSchemaFile("C:\\gd\\src\\github.com\\metaleap\\_misc\\xsd\\coll14.xsd"); err != nil {
 		panic(err)
 	} else {
-		fmt.Printf("%#v", sd)
+		xsd.PkgGen.Name = "collada"
+		fmt.Printf("%v", sd.MakeGoPkgSrc())
 	}
 }
