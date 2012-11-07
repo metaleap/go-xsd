@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.w3.org/2001/vxml" 
+xmlns="http://www.w3.org/2001/vxml" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified" version="1.0">
+    <xsd:annotation>
+        <xsd:documentation>VoiceXML 2.0 datatypes (20060316)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:annotation>
+        <xsd:documentation>
+Copyright 1998-2006 W3C (MIT, ERCIM, Keio), All Rights Reserved. Permission to
+use, copy, modify and distribute the VoiceXML schema and its accompanying
+documentation for any purpose and without fee is hereby granted in perpetuity,
+provided that the above copyright notice and this paragraph appear in all
+copies.  The copyright holders make no representation about the suitability of
+the schema for any purpose. It is provided "as is" without expressed or
+implied warranty.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:annotation>
+        <xsd:documentation>
+	XML Schema datatypes module for VoiceXML 2.0
+	</xsd:documentation>
+    </xsd:annotation>
+    <xsd:annotation>
+        <xsd:documentation>General Datatypes</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType name="Boolean.datatype">
+        <xsd:annotation>
+            <xsd:documentation>Boolean: true or false only</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:NMTOKENS">
+            <xsd:enumeration value="true"/>
+            <xsd:enumeration value="false"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="URI.datatype">
+        <xsd:annotation>
+            <xsd:documentation>
+             The xsd:anyURI type and thus URI references in VoiceXML documents may contain a wide array of international characters. 
+             Implementers should reference RFC 3987 and the "Character Model for the World Wide Web 1.0: Resource Identifiers"
+             in order to provide appropriate support for these characters in VoiceXML documents and when processing values of this type 
+             or mapping them to URIs.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:anyURI"/>
+    </xsd:simpleType>
+    <xsd:simpleType name="Script.datatype">
+        <xsd:annotation>
+            <xsd:documentation>Script Expression (ECMA-262 ECMAScript)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+    <xsd:simpleType name="Integer.datatype">
+        <xsd:annotation>
+            <xsd:documentation>Non-negative integer</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:nonNegativeInteger"/>
+    </xsd:simpleType>
+    <xsd:simpleType name="Duration.datatype">
+        <xsd:annotation>
+            <xsd:documentation>Time designation following Time [CSS2]; negative numbers not allowed (6.5)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="(\+)?([0-9]*\.)?[0-9]+(ms|s)"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ContentType.datatype">
+        <xsd:annotation>
+            <xsd:documentation>Content type [RFC2045]</xsd:documentation>
+        </xsd:annotation>
+        <xsd:list itemType="xsd:token"/>
+    </xsd:simpleType>
+    <xsd:annotation>
+        <xsd:documentation>VoiceXML specific datatypes</xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:simpleType name="RestrictedVariableName.datatype">
+        <xsd:annotation>
+            <xsd:documentation>Variable name which doesn't start with "_"
+          or number, doesn't end with '$' and doesn't contain ".". 
+          Additional constraints: must follow ECMAScript variable naming 
+          conventions; not include ECMAScript reserve words</xsd:documentation>
+        </xsd:annotation>
+        <!-- was xsd:NMTOKEN -->
+      <xsd:restriction base="xsd:token">
+        <xsd:pattern 
+          value="([\p{L}\p{Nl}$]|[\p{L}\p{Nl}$][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}$_]*[\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}_])"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+
+
+    <xsd:simpleType name="VariableName.datatype">
+        <xsd:annotation>
+            <xsd:documentation>Variable name which are model on NMTOKENS
+        except that "$" is permitted. Additional constraints: must 
+follow ECMAScript variable naming conventions; not include ECMAScript 
+reserve words</xsd:documentation>
+        </xsd:annotation>
+	<xsd:restriction base="xsd:token">
+	<xsd:pattern value="[$\c]+"/>
+	</xsd:restriction>
+    </xsd:simpleType>
+
+
+
+    <xsd:simpleType name="RestrictedVariableNames.datatype">
+        <xsd:annotation>
+            <xsd:documentation>space separated list of restricted variable names </xsd:documentation>
+        </xsd:annotation>
+	    <xsd:list itemType="RestrictedVariableName.datatype"/>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="VariableNames.datatype">
+        <xsd:annotation>
+            <xsd:documentation>space separated list of variable names</xsd:documentation>
+        </xsd:annotation>
+        <xsd:list itemType="VariableName.datatype"/>	
+    </xsd:simpleType>
+
+
+    <xsd:simpleType name="DTMFSequence.datatype">
+        <xsd:annotation>
+            <xsd:documentation>DTMF sequence ([0-9#*] with spaces)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="([\s]*[0-9#*]+[\s]*)+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="EventName.datatype">
+        <xsd:annotation>
+            <xsd:documentation>EventName (5.2)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:NMTOKEN"/>
+    </xsd:simpleType>
+    <xsd:simpleType name="EventNames.datatype">
+        <xsd:annotation>
+            <xsd:documentation>space separated list of EventName.datatype</xsd:documentation>
+        </xsd:annotation>
+        <xsd:list itemType="EventName.datatype"/>
+    </xsd:simpleType>
+    <xsd:simpleType name="Bargeintype.datatype">
+        <xsd:annotation>
+            <xsd:documentation>bargeintype: speech or hotword (4.1.5)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:NMTOKEN">
+            <xsd:enumeration value="speech"/>
+            <xsd:enumeration value="hotword"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
+<xsd:simpleType name="Fetchhint.datatype">
+ <xsd:annotation>
+  <xsd:documentation>prefetch or safe</xsd:documentation>
+ </xsd:annotation>
+  <xsd:restriction base="xsd:NMTOKEN">
+      <xsd:enumeration value="prefetch"/>
+      <xsd:enumeration value="safe"/>
+ </xsd:restriction>
+</xsd:simpleType>
+
+
+<xsd:simpleType name="Accept.datatype">
+ <xsd:annotation>
+  <xsd:documentation>exact or approximate</xsd:documentation>
+ </xsd:annotation>
+ <xsd:restriction base="xsd:NMTOKEN">
+       <xsd:enumeration value="exact"/>
+       <xsd:enumeration value="approximate"/>
+ </xsd:restriction>
+</xsd:simpleType>
+
+
+<xsd:simpleType name="GrammarScope.datatype">
+ <xsd:annotation>
+  <xsd:documentation>dialog or document</xsd:documentation>
+ </xsd:annotation>
+   <xsd:restriction base="xsd:NMTOKEN">
+       <xsd:enumeration value="document"/>
+       <xsd:enumeration value="dialog"/>
+   </xsd:restriction>
+</xsd:simpleType>
+
+     <xsd:simpleType name="Method.datatype">
+ <xsd:annotation>
+  <xsd:documentation>get or post</xsd:documentation>
+ </xsd:annotation>
+                <xsd:restriction base="xsd:NMTOKEN">
+                    <xsd:enumeration value="get"/>
+                    <xsd:enumeration value="post"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+
+
+  <xsd:simpleType name="FilledMode.datatype">
+ <xsd:annotation>
+  <xsd:documentation>any or all</xsd:documentation>
+ </xsd:annotation>
+       <xsd:restriction base="xsd:string">
+                      <xsd:enumeration value="any"/>
+                       <xsd:enumeration value="all"/>
+                   </xsd:restriction>
+               </xsd:simpleType>
+
+  <xsd:simpleType name="TransferType.datatype">
+    <xsd:annotation>
+      <xsd:documentation>bridge, blind, or consultation</xsd:documentation>
+    </xsd:annotation>
+       <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="bridge"/>
+         <xsd:enumeration value="blind"/>
+         <xsd:enumeration value="consultation"/>
+       </xsd:restriction>
+  </xsd:simpleType>
+
+<xsd:simpleType name="Valuetype.datatype">
+ <xsd:annotation>
+  <xsd:documentation>data or ref</xsd:documentation>
+ </xsd:annotation>
+<xsd:restriction base="xsd:string">
+    <xsd:enumeration value="data"/>
+     <xsd:enumeration value="ref"/>
+         </xsd:restriction>
+ </xsd:simpleType>
+
+</xsd:schema>

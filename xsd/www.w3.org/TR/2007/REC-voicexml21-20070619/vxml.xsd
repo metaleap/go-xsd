@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.w3.org/2001/vxml" 
+xmlns="http://www.w3.org/2001/vxml" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xsd:annotation>
+        <xsd:documentation>VoiceXML 2.1 schema ($Date: 2007/06/16 18:12:27 $) </xsd:documentation>
+    </xsd:annotation>
+    <xsd:annotation>
+        <xsd:documentation>
+Copyright 1998-2006 W3C (MIT, ERCIM, Keio), All Rights Reserved. Permission to
+use, copy, modify and distribute the VoiceXML schema and its accompanying
+documentation for any purpose and without fee is hereby granted in perpetuity,
+provided that the above copyright notice and this paragraph appear in all
+copies.  The copyright holders make no representation about the suitability of
+the schema for any purpose. It is provided "as is" without expressed or
+implied warranty.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:annotation>
+        <xsd:documentation>Numeric references are to sections in VoiceXML 2.0.
+ [REFERENCE] refers to a reference in VoiceXML 2.0. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:annotation>
+        <xsd:documentation>Importing dependent schemas including datatypes,
+	attributes and adapter schemas for SRGS 1.0  and SSML 1.0
+    </xsd:documentation>
+    </xsd:annotation>
+    
+   <xsd:include schemaLocation="vxml-datatypes.xsd"/>    
+   <xsd:include schemaLocation="vxml-attribs.xsd"/>    
+   <xsd:include schemaLocation="vxml-grammar-extension.xsd"/>
+   <xsd:include schemaLocation="vxml-synthesis-extension.xsd"/>
+
+   <xsd:import namespace="http://www.w3.org/XML/1998/namespace" 
+                schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+
+    <xsd:annotation>
+        <xsd:documentation>Common Content Models</xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:complexType name="basic.event.handler" mixed="true">
+        <xsd:group ref="executable.content" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:attributeGroup ref="EventHandler.attribs"/>
+    </xsd:complexType>
+    <xsd:group name="audio">
+        <xsd:choice>
+           <xsd:element ref="enumerate"/>
+           <xsd:element ref="value"/>
+           <xsd:element ref="audio"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:group name="input">
+        <xsd:annotation>
+            <xsd:documentation>input using adapted SRGS grammars</xsd:documentation>
+        </xsd:annotation>
+
+        <xsd:choice>
+            <xsd:element name="grammar" type="mixed-grammar"/> 
+        </xsd:choice>
+
+    </xsd:group>
+    <xsd:group name="event.handler">
+        <xsd:choice>
+            <xsd:element ref="catch"/>
+            <xsd:element ref="help"/>
+            <xsd:element ref="noinput"/>
+            <xsd:element ref="nomatch"/>
+            <xsd:element ref="error"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:group name="executable.content">
+        <xsd:choice>
+            <xsd:group ref="audio"/>
+            <xsd:element ref="assign"/>
+            <xsd:element ref="clear"/>
+            <xsd:element ref="data"/>
+            <xsd:element ref="disconnect"/>
+            <xsd:element ref="exit"/>
+            <xsd:element name="foreach" type="foreach-not-in-prompt.type"/>
+            <xsd:element ref="goto"/>
+            <xsd:element ref="if"/>
+            <xsd:element ref="log"/>
+            <xsd:element ref="reprompt"/>
+            <xsd:element ref="return"/>
+            <xsd:element ref="script"/>
+            <xsd:element ref="submit"/>
+            <xsd:element ref="throw"/>
+            <xsd:element ref="var"/>
+            <xsd:element ref="prompt"/> 
+        </xsd:choice>
+    </xsd:group>
+    <xsd:group name="variable">
+        <xsd:choice>
+            <xsd:element ref="block"/>
+            <xsd:element ref="data"/>
+            <xsd:element ref="field"/>
+            <xsd:element ref="var"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:annotation>
+        <xsd:documentation>VoiceXML Elements</xsd:documentation>
+    </xsd:annotation>
+    <xsd:element name="assign">
+        <xsd:complexType>
+            <xsd:attribute name="name" type="VariableName.datatype" use="required"/>
+            <xsd:attribute name="expr" type="Script.datatype" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="block">
+        <xsd:complexType mixed="true">
+            <xsd:group ref="executable.content" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:attributeGroup ref="Form-item.attribs"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="catch">
+        <xsd:complexType>
+            <xsd:complexContent mixed="true">
+                <xsd:extension base="basic.event.handler">
+                   <xsd:attribute name="event" type="EventNames.datatype"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="choice">
+        <xsd:complexType mixed="true">
+            <xsd:group ref="input" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:attributeGroup ref="Cache.attribs"/>
+            <xsd:attribute name="accept" type="Accept.datatype"/>
+            <xsd:attributeGroup ref="Throw.attribs"/>
+            <xsd:attribute name="dtmf" type="DTMFSequence.datatype"/>
+            <xsd:attribute name="fetchaudio" type="URI.datatype"/>
+            <xsd:attributeGroup ref="Next.attribs"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="clear">
+        <xsd:complexType>
+            <xsd:attributeGroup ref="Namelist.attrib"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="disconnect">
+        <xsd:complexType>
+          <xsd:attributeGroup ref="Namelist.attrib"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="else">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="elseif">
+        <xsd:complexType>
+            <xsd:attributeGroup ref="If.attribs"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="error" type="basic.event.handler"/>
+    <xsd:element name="exit">
+        <xsd:complexType>
+            <xsd:attribute name="expr" type="Script.datatype"/>
+            <xsd:attributeGroup ref="Namelist.attrib"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="field">
+        <xsd:complexType mixed="true">
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="audio"/>
+                <xsd:group ref="event.handler"/>
+                <xsd:element ref="filled"/>
+                <xsd:element ref="link"/>
+                <xsd:element ref="option"/>
+                <xsd:element ref="property"/>
+                <xsd:group ref="input"/>
+                <xsd:element ref="prompt"/>
+            </xsd:choice>
+            <xsd:attributeGroup ref="Form-item.attribs"/>
+            <xsd:attribute name="type" type="xsd:string"/>
+            <xsd:attribute name="slot" type="xsd:NMTOKEN"/>
+            <xsd:attribute name="modal" type="Boolean.datatype" default="false"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="filled">
+        <xsd:complexType mixed="true">
+            <xsd:group ref="executable.content" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:attribute name="mode" type="FilledMode.datatype"/>
+            <xsd:attributeGroup ref="RestrictedNamelist.attrib"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="form">
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="event.handler"/>
+                <xsd:element ref="filled"/>
+                <xsd:element ref="initial"/>
+                <xsd:element ref="object"/>
+                <xsd:element ref="link"/>
+                <xsd:element ref="property"/>
+                <xsd:element ref="record"/>
+                <xsd:element ref="script"/>
+                <xsd:element ref="subdialog"/>
+                <xsd:element ref="transfer"/>
+                <xsd:group ref="variable"/>
+                <xsd:group ref="input"/>
+            </xsd:choice>
+            <xsd:attribute name="id" type="xsd:ID"/>
+            <xsd:attributeGroup ref="GrammarScope.attrib"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="goto">
+        <xsd:complexType>
+            <xsd:attributeGroup ref="Cache.attribs"/>
+            <xsd:attributeGroup ref="Next.attribs"/>
+            <xsd:attribute name="fetchaudio" type="URI.datatype"/>
+            <xsd:attribute name="expritem" type="Script.datatype"/>
+            <xsd:attribute name="nextitem" type="RestrictedVariableName.datatype"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="help" type="basic.event.handler"/>
+    <xsd:element name="if">
+        <xsd:complexType mixed="true">
+	 <xsd:sequence>
+           <xsd:group ref="executable.content" minOccurs="0" maxOccurs="unbounded"/>
+	   <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+             <xsd:element ref="elseif"/>
+             <xsd:group ref="executable.content" minOccurs="0" maxOccurs="unbounded"/>
+	   </xsd:sequence>  
+	   <xsd:sequence minOccurs="0" maxOccurs="1">
+              <xsd:element ref="else"/>
+              <xsd:group ref="executable.content" minOccurs="0" maxOccurs="unbounded"/>
+ 	   </xsd:sequence>
+	 </xsd:sequence>
+         <xsd:attributeGroup ref="If.attribs"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="initial">
+        <xsd:complexType mixed="true">
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="audio"/>
+                <xsd:group ref="event.handler"/>
+                <xsd:element ref="link"/>
+                <xsd:element ref="property"/>
+                <xsd:element ref="prompt"/>
+            </xsd:choice>
+            <xsd:attributeGroup ref="Form-item.attribs"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="link">
+        <xsd:complexType>
+            <xsd:group ref="input" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:attributeGroup ref="Cache.attribs"/>
+            <xsd:attributeGroup ref="Next.attribs"/>
+            <xsd:attributeGroup ref="Throw.attribs"/>
+            <xsd:attribute name="fetchaudio" type="URI.datatype"/>
+            <xsd:attribute name="dtmf" type="DTMFSequence.datatype"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="log">
+        <xsd:complexType mixed="true">
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+               <xsd:element ref="value"/>
+            </xsd:choice>
+            <xsd:attribute name="label" type="xsd:string"/>
+            <xsd:attribute name="expr" type="Script.datatype"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="menu">
+        <xsd:complexType mixed="true">
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="audio"/>
+                <xsd:element ref="choice"/>
+                <xsd:group ref="event.handler"/>
+                <xsd:element ref="property"/>
+                <xsd:element ref="prompt"/>
+            </xsd:choice>
+            <xsd:attribute name="id" type="xsd:ID"/>
+            <xsd:attributeGroup ref="GrammarScope.attrib"/>
+            <xsd:attributeGroup ref="Accept.attrib"/>
+            <xsd:attribute name="dtmf" type="Boolean.datatype" default="false"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="meta">
+        <xsd:complexType>
+            <xsd:attribute name="name" type="xsd:NMTOKEN"/>
+            <xsd:attribute name="content" type="xsd:string" use="required"/>
+            <xsd:attribute name="http-equiv" type="xsd:NMTOKEN"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="metadata">
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:any namespace="##other" processContents="lax"/>
+            </xsd:choice>
+            <xsd:anyAttribute namespace="##any" processContents="strict"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="noinput" type="basic.event.handler"/>
+    <xsd:element name="nomatch" type="basic.event.handler"/>
+    <xsd:element name="object">
+        <xsd:complexType mixed="true">
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="audio"/>
+                <xsd:group ref="event.handler"/>
+                <xsd:element ref="filled"/>
+                <xsd:element ref="param"/>
+                <xsd:element ref="property"/>
+                <xsd:element ref="prompt"/>
+            </xsd:choice>
+            <xsd:attributeGroup ref="Form-item.attribs"/>
+            <xsd:attributeGroup ref="Cache.attribs"/>
+            <xsd:attribute name="classid" type="URI.datatype"/>
+            <xsd:attribute name="codebase" type="URI.datatype"/>
+            <xsd:attribute name="data" type="URI.datatype"/>
+            <xsd:attribute name="type" type="xsd:string"/>
+            <xsd:attribute name="codetype" type="xsd:string"/>
+            <xsd:attribute name="archive" type="URI.datatype"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="option">
+        <xsd:complexType mixed="true">
+            <xsd:attributeGroup ref="Accept.attrib"/>
+            <xsd:attribute name="dtmf" type="DTMFSequence.datatype"/>
+            <xsd:attribute name="value" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="prompt" type="vxml.speak">
+        <xsd:annotation>
+            <xsd:documentation>prompt element uses a type similar to SSML speak</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:element name="param">
+        <xsd:complexType>
+            <xsd:attribute name="name" type="xsd:NMTOKEN" use="required"/>
+            <xsd:attribute name="expr" type="Script.datatype"/>
+            <xsd:attribute name="value" type="xsd:string"/>
+            <xsd:attribute name="valuetype" type="Valuetype.datatype" default="data"/>
+            <xsd:attribute name="type" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="property">
+        <xsd:complexType>
+            <xsd:attribute name="name" type="xsd:NMTOKEN" use="required"/>
+            <xsd:attribute name="value" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="record">
+        <xsd:complexType mixed="true">
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="audio"/>
+                <xsd:group ref="event.handler"/>
+                <xsd:element ref="filled"/>
+                <xsd:element ref="property"/>
+                <xsd:group ref="input"/>
+                <xsd:element ref="prompt"/>
+            </xsd:choice>
+            <xsd:attributeGroup ref="Form-item.attribs"/>
+            <xsd:attribute name="type" type="ContentType.datatype"/>
+            <xsd:attribute name="beep" type="Boolean.datatype" default="false"/>
+            <xsd:attribute name="maxtime" type="Duration.datatype"/>
+            <xsd:attribute name="modal" type="Boolean.datatype" default="true"/>
+            <xsd:attribute name="finalsilence" type="Duration.datatype"/>
+            <xsd:attribute name="dtmfterm" type="Boolean.datatype" default="true"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="reprompt">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="return">
+        <xsd:complexType>
+            <xsd:attributeGroup ref="Namelist.attrib"/>
+            <xsd:attributeGroup ref="Throw.attribs"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="script">
+        <xsd:complexType mixed="true">
+            <xsd:attribute name="src" type="URI.datatype"/>
+            <xsd:attribute name="srcexpr" type="Script.datatype"/>
+            <xsd:attribute name="charset" type="xsd:string"/>
+            <xsd:attributeGroup ref="Cache.attribs"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="subdialog">
+        <xsd:complexType mixed="true">
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="audio"/>
+                <xsd:group ref="event.handler"/>
+                <xsd:element ref="filled"/>
+                <xsd:element ref="param"/>
+                <xsd:element ref="property"/>
+                <xsd:element ref="prompt"/>
+            </xsd:choice>
+            <xsd:attributeGroup ref="Form-item.attribs"/>
+            <xsd:attribute name="src" type="URI.datatype"/>
+            <xsd:attribute name="srcexpr" type="Script.datatype"/>
+            <xsd:attributeGroup ref="Cache.attribs"/>
+            <xsd:attribute name="fetchaudio" type="URI.datatype"/>
+            <xsd:attributeGroup ref="Submit.attribs"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="submit">
+        <xsd:complexType>
+            <xsd:attributeGroup ref="Cache.attribs"/>
+            <xsd:attributeGroup ref="Next.attribs"/>
+            <xsd:attribute name="fetchaudio" type="URI.datatype"/>
+            <xsd:attributeGroup ref="Submit.attribs"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="throw">
+        <xsd:complexType>
+            <xsd:attributeGroup ref="Throw.attribs"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="transfer">
+        <xsd:complexType mixed="true">
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="audio"/>
+                <xsd:group ref="event.handler"/>
+                <xsd:element ref="filled"/>
+                <xsd:element ref="property"/>
+                <xsd:group ref="input"/>
+                <xsd:element ref="prompt"/>
+            </xsd:choice>
+            <xsd:attributeGroup ref="Form-item.attribs"/>
+            <xsd:attribute name="dest" type="URI.datatype"/>
+            <xsd:attribute name="destexpr" type="Script.datatype"/>
+            <xsd:attribute name="bridge" type="Boolean.datatype"/>
+            <xsd:attribute name="connecttimeout" type="Duration.datatype"/>
+            <xsd:attribute name="maxtime" type="Duration.datatype"/>
+            <xsd:attribute name="transferaudio" type="URI.datatype"/>
+            <xsd:attribute name="type" type="TransferType.datatype"/>
+            <xsd:attribute name="aai" type="xsd:string"/>
+            <xsd:attribute name="aaiexpr" type="Script.datatype"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="data">
+        <xsd:complexType>
+            <xsd:attributeGroup ref="Cache.attribs"/>
+            <xsd:attribute name="name" type="RestrictedVariableName.datatype"/>
+            <xsd:attribute name="srcexpr" type="Script.datatype"/>
+            <xsd:attribute name="fetchaudio" type="URI.datatype"/>
+            <xsd:attribute name="src" type="URI.datatype"/>
+            <xsd:attributeGroup ref="Submit.attribs"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="var">
+        <xsd:complexType>
+            <xsd:attribute name="name" type="RestrictedVariableName.datatype" use="required"/>
+            <xsd:attributeGroup ref="Expr.attrib"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="vxml">
+        <xsd:complexType>
+            <xsd:choice maxOccurs="unbounded">
+                <xsd:element ref="data"/>
+                <xsd:group ref="event.handler"/>
+                <xsd:element ref="form"/>
+                <xsd:element ref="link"/>
+                <xsd:element ref="menu"/>
+                <xsd:element ref="meta"/>
+                <xsd:element ref="metadata"/>
+                <xsd:element ref="property"/>
+                <xsd:element ref="script"/>
+                <xsd:element ref="var"/>
+            </xsd:choice>
+            <xsd:attribute name="application" type="URI.datatype"/>
+            <xsd:attribute ref="xml:base"/>
+            <xsd:attribute ref="xml:lang"/>
+            <xsd:attribute name="version" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+
+</xsd:schema>

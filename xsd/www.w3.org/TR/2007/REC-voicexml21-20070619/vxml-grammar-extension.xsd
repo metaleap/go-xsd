@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.w3.org/2001/vxml" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns="http://www.w3.org/2001/vxml" elementFormDefault="qualified">
+    <xsd:annotation>
+        <xsd:documentation>VoiceXML 2.0 extension schema for SRGS 1.0 (20030207) </xsd:documentation>
+    </xsd:annotation>
+    <xsd:annotation>
+        <xsd:documentation>
+Copyright 1998-2002 W3C (MIT, INRIA, Keio), All Rights Reserved. Permission to
+use, copy, modify and distribute the VoiceXML SRGS adaption schema and its
+accompanying documentation for any purpose and without fee is hereby granted
+in perpetuity, provided that the above copyright notice and this paragraph
+appear in all copies.  The copyright holders make no representation about the
+suitability of the schema for any purpose. It is provided "as is" without
+expressed or implied warranty.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:include schemaLocation="vxml-attribs.xsd"/>    
+
+
+    <xsd:annotation>
+        <xsd:documentation>Extension of SRGS 1.0 no-namespace schema for use
+        in VoiceXML 2.0. The grammar type is first restricted in        
+	voicexml20-grammar-restriction.xsd by creating a new complex type
+        mixed-grammar.</xsd:documentation>
+    </xsd:annotation>
+
+
+   <xsd:redefine schemaLocation="vxml-grammar-restriction.xsd">
+        <xsd:complexType name="mixed-grammar" mixed="true">
+	<xsd:annotation>
+        <xsd:documentation>extends grammar type - add VoiceXML grammar attributes </xsd:documentation>
+	</xsd:annotation>
+            <xsd:complexContent>
+                <xsd:extension base="mixed-grammar">
+                <xsd:attributeGroup ref="VXMLGrammar.attribs"/>
+		</xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:redefine>
+
+
+
+</xsd:schema>
+
+
+
+
+
+

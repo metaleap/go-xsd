@@ -3,6 +3,8 @@ package xsd
 import (
 	"fmt"
 	"strings"
+
+	util "github.com/metaleap/go-util"
 )
 
 var (
@@ -30,16 +32,17 @@ var (
 			"unsignedByte": "uint8",
 			"positiveInteger": "uint",
 		},
-		Name: "gox",
+		Name: "goxsdpkg",
+		BaseCodePath: util.BaseCodePath("metaleap", "go-xsd", "xsd"),
 	}
 )
 
 type goPkgSrcMaker struct {
 	BaseTypes map[string]string
-	Name, TypePrefix string
+	BaseCodePath, Name, TypePrefix string
 
 	lines []string
-	impPos int
+	imports map[string]string
 }
 
 	func (me *goPkgSrcMaker) append (lines ... string) {
@@ -50,8 +53,17 @@ type goPkgSrcMaker struct {
 		me.append(fmt.Sprintf(format, fmtArgs ...))
 	}
 
+	func (me *goPkgSrcMaker) insertFmt (index int, format string, fmtArgs ... interface{}) {
+		me.lines = append(me.lines[: index], append([]string { fmt.Sprintf(format, fmtArgs ...) }, me.lines[index : ] ...) ...)
+	}
+
 	func (me *goPkgSrcMaker) pascalCase (name string) string {
 		return strings.ToUpper(name[: 1]) + name[1 :]
+	}
+
+	func (me *goPkgSrcMaker) reinit () {
+		me.lines = []string { "package " + me.Name, "" }
+		me.imports = map[string]string {}
 	}
 
 func (me *hasElemAnnotation) makePkg () {
@@ -74,11 +86,16 @@ func (me *Annotation) makePkg () {
 }
 
 func (me *Schema) makePkg () {
-	PkgGen.lines = []string { "package " + PkgGen.Name, "" }
+	PkgGen.reinit()
+	PkgGen.imports["xsdt"] = "github.com/metaleap/go-xsd/types"
 	me.hasElemAnnotation.makePkg()
-	PkgGen.impPos = len(PkgGen.lines) + 1
-	PkgGen.append("", "import (", ")", "")
+	var impPos = len(PkgGen.lines) + 1
+	PkgGen.append("import (", ")", "")
 	me.hasElemsSimpleType.makePkg()
+	for impName, impPath := range PkgGen.imports {
+		println(impName)
+		PkgGen.insertFmt(impPos, "\t%v \"%v\"", impName, impPath)
+	}
 }
 
 func (me *SimpleType) makePkg () {

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.w3.org/2001/vxml" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns="http://www.w3.org/2001/vxml" elementFormDefault="qualified">
+    <xsd:annotation>
+        <xsd:documentation>VoiceXML 2.0 extension schema for SSML 1.0 (20060322) </xsd:documentation>
+    </xsd:annotation>
+    <xsd:annotation>
+        <xsd:documentation>
+Copyright 1998-2006 W3C (MIT, ERCIM, Keio), All Rights Reserved. Permission to
+use, copy, modify and distribute the VoiceXML SSML adaption schema and its
+accompanying documentation for any purpose and without fee is hereby granted
+in perpetuity, provided that the above copyright notice and this paragraph
+appear in all copies.  The copyright holders make no representation about the
+suitability of the schema for any purpose. It is provided "as is" without
+expressed or implied warranty.
+</xsd:documentation>
+    </xsd:annotation>
+    
+    <xsd:include schemaLocation="vxml-attribs.xsd"/>   
+
+    <xsd:annotation>
+        <xsd:documentation>Extension of SSML 1.0 no-namespace schema for use 
+in VoiceXML 2.0. Restrictions are defined in voicexml20-synthesis-restriction.xsd.
+	 </xsd:documentation>
+    </xsd:annotation>
+
+<xsd:redefine schemaLocation="vxml-synthesis-restriction.xsd">
+
+        <xsd:complexType name="say-as" mixed="true">
+            <xsd:annotation>
+                <xsd:documentation>extends say-as type by allowing the value element as a child</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexContent>
+                <xsd:extension base="say-as">
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element ref="value"/>
+            </xsd:choice>
+	    </xsd:extension>
+	    </xsd:complexContent>
+        </xsd:complexType>
+
+        <xsd:complexType name="audio" mixed="true">
+            <xsd:annotation>
+                <xsd:documentation>extends audio type with VoiceXML 'expr' and caching attributes</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexContent>
+                <xsd:extension base="audio">
+                    <xsd:attributeGroup ref="Expr.attrib"/>
+                    <xsd:attributeGroup ref="Cache.attribs"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+
+        <xsd:complexType name="mark">
+            <xsd:annotation>
+                <xsd:documentation>extends mark type with VoiceXML 'nameexpr'</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexContent>
+                <xsd:extension base="mark">
+                  <xsd:attribute name="nameexpr" type="Script.datatype"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:redefine>
+
+    <xsd:element name="value" substitutionGroup="aws">
+        <xsd:annotation>
+            <xsd:documentation>value element is 'allowed-within-sentence' in SSML</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+	      <xsd:attribute name="expr" type="Script.datatype" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="enumerate" substitutionGroup="aws">
+        <xsd:annotation>
+            <xsd:documentation>enumerate element is 'allowed-within-sentence' in SSML</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType mixed="true">
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:group ref="allowed-within-sentence"/>
+                <xsd:group ref="structure"/>
+                <xsd:element name="foreach" type="foreach-in-prompt.type"/>
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="foreach-not-in-prompt.type" mixed="true">
+      <xsd:annotation>
+        <xsd:documentation>This type is for foreach elements that appear outside of prompts</xsd:documentation>
+      </xsd:annotation>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:group ref="executable.content"/>
+      </xsd:choice>
+      <xsd:attribute name="item" type="RestrictedVariableName.datatype" use="required"/>
+      <xsd:attribute name="array" type="Script.datatype" use="required"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="foreach-in-prompt.type" mixed="true">
+      <xsd:annotation>
+        <xsd:documentation>This type is for foreach elements that appear within prompts</xsd:documentation>
+      </xsd:annotation>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:group ref="allowed-within-sentence"/>
+        <xsd:group ref="structure"/>
+        <xsd:element name="foreach" type="foreach-in-prompt.type"/> 
+      </xsd:choice>
+      <xsd:attribute name="item" type="RestrictedVariableName.datatype" use="required"/>
+      <xsd:attribute name="array" type="Script.datatype" use="required"/>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="vxml.speak" mixed="true">
+       <xsd:annotation>
+           <xsd:documentation>
+               This is similar to speak.class from SSML, but it allows
+               the foreach element as a child of prompt, and also adds
+               the prompt attributes from VXML.
+           </xsd:documentation>
+       </xsd:annotation>
+       <xsd:sequence>
+          <xsd:choice minOccurs="0" maxOccurs="unbounded">
+             <xsd:element name="meta" type="ssml-meta"/>
+             <xsd:element name="metadata" type="ssml-metadata"/>
+             <xsd:element name="lexicon"  type="ssml-lexicon"/>
+          </xsd:choice>
+          <xsd:choice minOccurs="0" maxOccurs="unbounded">
+             <xsd:group ref="sentenceAndStructure.class"/>
+             <xsd:element name="foreach" type="foreach-in-prompt.type"/> 
+          </xsd:choice>
+       </xsd:sequence>
+       <xsd:attributeGroup ref="speak.attribs"/>
+       <xsd:attributeGroup ref="Prompt.attribs"/>
+    </xsd:complexType>
+
+
+</xsd:schema>
+
+
+
+
+
