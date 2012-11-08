@@ -1,7 +1,11 @@
 package xsd
 
+import (
+	xsdt "github.com/metaleap/go-xsd/types"
+)
+
 type hasAttrAbstract struct {
-	Abstract string `xml:"abstract,attr"`
+	Abstract bool `xml:"abstract,attr"`
 }
 
 type hasAttrAttributeFormDefault struct {
@@ -9,7 +13,7 @@ type hasAttrAttributeFormDefault struct {
 }
 
 type hasAttrBase struct {
-	Base string `xml:"base,attr"`
+	Base xsdt.Qname `xml:"base,attr"`
 }
 
 type hasAttrBlock struct {
@@ -22,10 +26,6 @@ type hasAttrBlockDefault struct {
 
 type hasAttrDefault struct {
 	Default string `xml:"default,attr"`
-}
-
-type hasAttrElementFormDefault struct {
-	ElementFormDefault string `xml:"elementFormDefault,attr"`
 }
 
 type hasAttrFinal struct {
@@ -44,20 +44,24 @@ type hasAttrForm struct {
 	Form string `xml:"form,attr"`
 }
 
+type hasAttrElementFormDefault struct {
+	ElementFormDefault string `xml:"elementFormDefault,attr"`
+}
+
 type hasAttrId struct {
-	Id string `xml:"id,attr"`
+	Id xsdt.Id `xml:"id,attr"`
 }
 
 type hasAttrItemType struct {
-	ItemType string `xml:"itemType,attr"`
+	ItemType xsdt.Qname `xml:"itemType,attr"`
 }
 
 type hasAttrLang struct {
-	Lang string `xml:"lang,attr"`
+	Lang xsdt.Language `xml:"lang,attr"`
 }
 
 type hasAttrMaxOccurs struct {
-	MaxOccurs string `xml:"maxOccurs,attr"`
+	MaxOccurs uint64 `xml:"maxOccurs,attr"`
 }
 
 type hasAttrMemberTypes struct {
@@ -65,15 +69,15 @@ type hasAttrMemberTypes struct {
 }
 
 type hasAttrMinOccurs struct {
-	MinOccurs string `xml:"minOccurs,attr"`
+	MinOccurs uint64 `xml:"minOccurs,attr"`
 }
 
 type hasAttrMixed struct {
-	Mixed string `xml:"mixed,attr"`
+	Mixed bool `xml:"mixed,attr"`
 }
 
 type hasAttrName struct {
-	Name string `xml:"name,attr"`
+	Name xsdt.NCName `xml:"name,attr"`
 }
 
 type hasAttrNamespace struct {
@@ -81,7 +85,7 @@ type hasAttrNamespace struct {
 }
 
 type hasAttrNillable struct {
-	Nillable string `xml:"nillable,attr"`
+	Nillable bool `xml:"nillable,attr"`
 }
 
 type hasAttrProcessContents struct {
@@ -93,35 +97,35 @@ type hasAttrPublic struct {
 }
 
 type hasAttrRef struct {
-	Ref string `xml:"ref,attr"`
+	Ref xsdt.Qname `xml:"ref,attr"`
 }
 
 type hasAttrRefer struct {
-	Refer string `xml:"refer,attr"`
+	Refer xsdt.Qname `xml:"refer,attr"`
 }
 
 type hasAttrSchemaLocation struct {
-	SchemaLocation string `xml:"schemaLocation,attr"`
+	SchemaLocation xsdt.AnyURI `xml:"schemaLocation,attr"`
 }
 
 type hasAttrSource struct {
-	Source string `xml:"source,attr"`
+	Source xsdt.AnyURI `xml:"source,attr"`
 }
 
 type hasAttrSubstitutionGroup struct {
-	SubstitutionGroup string `xml:"substitutionGroup,attr"`
+	SubstitutionGroup xsdt.Qname `xml:"substitutionGroup,attr"`
 }
 
 type hasAttrSystem struct {
-	System string `xml:"system,attr"`
+	System xsdt.AnyURI `xml:"system,attr"`
 }
 
 type hasAttrTargetNamespace struct {
-	TargetNamespace string `xml:"targetNamespace,attr"`
+	TargetNamespace xsdt.AnyURI `xml:"targetNamespace,attr"`
 }
 
 type hasAttrType struct {
-	Type string `xml:"type,attr"`
+	Type xsdt.Qname `xml:"type,attr"`
 }
 
 type hasAttrUse struct {
@@ -133,7 +137,7 @@ type hasAttrValue struct {
 }
 
 type hasAttrVersion struct {
-	Version string `xml:"version,attr"`
+	Version xsdt.Token `xml:"version,attr"`
 }
 
 type hasAttrXpath struct {

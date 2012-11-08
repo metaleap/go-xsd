@@ -16,7 +16,10 @@ import (
 )
 
 const (
+	goPkgPrefix = ""
+	goPkgSuffix = "_gopkg"
 	protSep = "://"
+	xsdNamespaceUri = "http://www.w3.org/2001/XMLSchema"
 )
 
 var (
@@ -27,6 +30,7 @@ type Schema struct {
 	XMLName xml.Name `xml:"schema"`
 	XMLNamespaces map[string]string `xml:"-"`
 	XMLIncludedSchemas map[string]*Schema `xml:"-"`
+	XSDNamespace string `xml:"-"`
 
 	hasAttrAttributeFormDefault
 	hasAttrBlockDefault
@@ -67,16 +71,17 @@ type Schema struct {
 				me.XMLNamespaces[""] = att.Value
 			}
 		}
+		for k, v := range me.XMLNamespaces { if v == xsdNamespaceUri { me.XSDNamespace = k } }
 		if len(me.XMLNamespaces["xml"]) == 0 { me.XMLNamespaces["xml"] = "http://www.w3.org/XML/1998/namespace" }
 		me.XMLIncludedSchemas = map[string]*Schema {}
 		for _, inc := range me.Includes {
-			if tmpUrl = inc.SchemaLocation; strings.Index(tmpUrl, protSep) < 0 {
+			if tmpUrl = inc.SchemaLocation.String(); strings.Index(tmpUrl, protSep) < 0 {
 				tmpUrl = path.Join(path.Dir(loadUri), tmpUrl)
 			}
 			if sd = loadedSchemas[tmpUrl]; sd == nil {
 				if sd, err = LoadSchema(tmpUrl, len(localPath) > 0); err != nil { return }
 			}
-			me.XMLIncludedSchemas[inc.SchemaLocation] = sd
+			me.XMLIncludedSchemas[inc.SchemaLocation.String()] = sd
 		}
 		return
 	}
@@ -87,9 +92,10 @@ type Schema struct {
 	}
 
 	func (me *Schema) MakeGoPkgSrcFile () (goOutFilePath string, err error) {
-		var goOutDirPath = filepath.Join(filepath.Dir(me.loadLocalPath), "_gopkg_" + filepath.Base(me.loadLocalPath))
+		var goOutDirPath = filepath.Join(filepath.Dir(me.loadLocalPath), goPkgPrefix + filepath.Base(me.loadLocalPath) + goPkgSuffix)
 		for _, inc := range me.XMLIncludedSchemas {
-			var s = strings.Replace(inc.loadUri, path.Dir(me.loadUri), "", -1)
+			var s = strings.Replace(inc.loadUri, strings.Trim(path.Dir(me.loadUri), "/") + "/", "", -1)
+			println(s)
 			inc.MakeGoPkgSrcFileAt(filepath.Join(goOutDirPath, ustr.Replace(s, map[string]string { "/": "_", ":": "_", "..": "__" }) + ".go"))
 		}
 		goOutFilePath = filepath.Join(goOutDirPath, path.Base(me.loadUri) + ".go")

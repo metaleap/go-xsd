@@ -11,6 +11,8 @@ func main () {
 	var err error
 	var outFilePath string
 	var schemas = []string {
+		"docs.oasis-open.org/election/external/xAL.xsd",
+		"www.w3.org/2001/03/xml.xsd",
 		"docbook.org/xml/5.0/xsd/docbook.xsd",
 		"kbcafe.com/rss/atom.xsd.xml",
 		"thearchitect.co.uk/schemas/rss-2_0.xsd",
@@ -21,6 +23,7 @@ func main () {
 		"khronos.org/files/collada_schema_1_4",
 		"khronos.org/files/collada_schema_1_5",
 		"schemas.opengis.net/kml/2.2.0/ogckml22.xsd",
+		"schemas.opengis.net/kml/2.2.0/atom-author-link.xsd",
 	}
 	for _, s := range schemas {
 		fmt.Printf("LOAD: %v\n", s)
