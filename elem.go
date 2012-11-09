@@ -2,10 +2,38 @@ package xsd
 
 import (
 	"encoding/xml"
+
+	xsdt "github.com/metaleap/go-xsd/types"
 )
 
-type elemBase struct {
+type element interface {
+	Parent () element
+	init (parent, self element, xsdName xsdt.NCName, atts ... beforeAfterMake)
 }
+
+type elemBase struct {
+	atts []beforeAfterMake
+	parent, self element // self is the struct that embeds elemBase, rather than the elemBase pseudo-field
+	xsdName xsdt.NCName
+	hasNameAttr bool
+}
+
+	func (me *elemBase) afterMakePkg (bag *PkgBag) {
+		if !me.hasNameAttr { bag.Stacks.Name.Pop() }
+		for _, a := range me.atts { a.afterMakePkg(bag) }
+	}
+
+	func (me *elemBase) beforeMakePkg (bag *PkgBag) {
+		if !me.hasNameAttr { bag.Stacks.Name.Push(me.xsdName) }
+		for _, a := range me.atts { a.beforeMakePkg(bag) }
+	}
+
+	func (me *elemBase) init (parent, self element, xsdName xsdt.NCName, atts ... beforeAfterMake) {
+		me.parent, me.self, me.xsdName, me.atts = parent, self, xsdName, atts
+		for _, a := range atts { if _, me.hasNameAttr = a.(*hasAttrName); me.hasNameAttr { break } }
+	}
+
+	func (me *elemBase) Parent () element { return me.parent }
 
 type All struct {
 	elemBase

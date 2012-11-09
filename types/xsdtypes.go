@@ -2,7 +2,10 @@ package xsdt
 
 import (
 	"strconv"
-	"strings"
+)
+
+var (
+	ParseTypes = []string { "Boolean", "Bool", "Byte", "Double", "Float", "Int", "Integer", "Long", "NegativeInteger", "NonNegativeInteger", "NonPositiveInteger", "PositiveInteger", "Short", "UnsignedByte", "UnsignedInt", "UnsignedLong", "UnsignedShort" }
 )
 
 type AnyURI string
@@ -28,8 +31,7 @@ type Base64Binary string // []byte
 type Boolean bool
 
 	func (me *Boolean) SetFromString (v string) {
-		b, _ := strconv.ParseBool(v)
-		*me = Boolean(b)
+		b, _ := strconv.ParseBool(v); *me = Boolean(b)
 	}
 
 	func (me Boolean) String () string {
@@ -39,8 +41,7 @@ type Boolean bool
 type Byte byte
 
 	func (me *Byte) SetFromString (s string) {
-		v, _ := strconv.ParseUint(s, 0, 8)
-		*me = Byte(v)
+		v, _ := strconv.ParseUint(s, 0, 8); *me = Byte(v)
 	}
 
 	func (me Byte) String () string {
@@ -80,8 +81,7 @@ type Decimal string // complex128
 type Double float64
 
 	func (me *Double) SetFromString (s string) {
-		v, _ := strconv.ParseFloat(s, 64)
-		*me = Double(v)
+		v, _ := strconv.ParseFloat(s, 64); *me = Double(v)
 	}
 
 	func (me Double) String () string {
@@ -110,7 +110,7 @@ type Entities string
 
 	func (me Entities) Values () (list []Entity) {
 		var btv = new(Entity)
-		var spl = strings.Split(string(me), " ")
+		var spl = ListValues(string(me))
 		list = make([]Entity, len(spl))
 		for i, s := range spl { btv.SetFromString(s); list[i] = *btv }
 		return
@@ -129,8 +129,7 @@ type Entity string
 type Float float32
 
 	func (me *Float) SetFromString (s string) {
-		v, _ := strconv.ParseFloat(s, 32)
-		*me = Float(v)
+		v, _ := strconv.ParseFloat(s, 32); *me = Float(v)
 	}
 
 	func (me Float) String () string {
@@ -229,7 +228,7 @@ type Idrefs string
 
 	func (me Idrefs) Values () (list []Idref) {
 		var btv = new(Idref)
-		var spl = strings.Split(string(me), " ")
+		var spl = ListValues(string(me))
 		list = make([]Idref, len(spl))
 		for i, s := range spl { btv.SetFromString(s); list[i] = *btv }
 		return
@@ -238,8 +237,7 @@ type Idrefs string
 type Int int32
 
 	func (me *Int) SetFromString (s string) {
-		v, _ := strconv.ParseInt(s, 0, 32)
-		*me = Int(v)
+		v, _ := strconv.ParseInt(s, 0, 32); *me = Int(v)
 	}
 
 	func (me Int) String () string {
@@ -249,8 +247,7 @@ type Int int32
 type Integer int
 
 	func (me *Integer) SetFromString (s string) {
-		v, _ := strconv.ParseInt(s, 0, 64)
-		*me = Integer(v)
+		v, _ := strconv.ParseInt(s, 0, 64); *me = Integer(v)
 	}
 
 	func (me Integer) String () string {
@@ -270,8 +267,7 @@ type Language string
 type Long int64
 
 	func (me *Long) SetFromString (s string) {
-		v, _ := strconv.ParseInt(s, 0, 64)
-		*me = Long(v)
+		v, _ := strconv.ParseInt(s, 0, 64); *me = Long(v)
 	}
 
 	func (me Long) String () string {
@@ -301,8 +297,7 @@ type NCName string
 type NegativeInteger int
 
 	func (me *NegativeInteger) SetFromString (s string) {
-		v, _ := strconv.ParseInt(s, 0, 64)
-		*me = NegativeInteger(v)
+		v, _ := strconv.ParseInt(s, 0, 64); *me = NegativeInteger(v)
 	}
 
 	func (me NegativeInteger) String () string {
@@ -331,7 +326,7 @@ type Nmtokens string
 
 	func (me Nmtokens) Values () (list []Nmtoken) {
 		var btv = new(Nmtoken)
-		var spl = strings.Split(string(me), " ")
+		var spl = ListValues(string(me))
 		list = make([]Nmtoken, len(spl))
 		for i, s := range spl { btv.SetFromString(s); list[i] = *btv }
 		return
@@ -340,8 +335,7 @@ type Nmtokens string
 type NonNegativeInteger uint
 
 	func (me *NonNegativeInteger) SetFromString (s string) {
-		v, _ := strconv.ParseUint(s, 0, 64)
-		*me = NonNegativeInteger(v)
+		v, _ := strconv.ParseUint(s, 0, 64); *me = NonNegativeInteger(v)
 	}
 
 	func (me NonNegativeInteger) String () string {
@@ -351,8 +345,7 @@ type NonNegativeInteger uint
 type NonPositiveInteger int
 
 	func (me *NonPositiveInteger) SetFromString (s string) {
-		v, _ := strconv.ParseInt(s, 0, 64)
-		*me = NonPositiveInteger(v)
+		v, _ := strconv.ParseInt(s, 0, 64); *me = NonPositiveInteger(v)
 	}
 
 	func (me NonPositiveInteger) String () string {
@@ -392,8 +385,7 @@ type Notations map[string]*notation
 type PositiveInteger uint
 
 	func (me *PositiveInteger) SetFromString (s string) {
-		v, _ := strconv.ParseUint(s, 0, 64)
-		*me = PositiveInteger(v)
+		v, _ := strconv.ParseUint(s, 0, 64); *me = PositiveInteger(v)
 	}
 
 	func (me PositiveInteger) String () string {
@@ -413,8 +405,7 @@ type Qname string
 type Short int16
 
 	func (me *Short) SetFromString (s string) {
-		v, _ := strconv.ParseInt(s, 0, 16)
-		*me = Short(v)
+		v, _ := strconv.ParseInt(s, 0, 16); *me = Short(v)
 	}
 
 	func (me Short) String () string {
@@ -444,8 +435,7 @@ type Token string
 type UnsignedByte uint8
 
 	func (me *UnsignedByte) SetFromString (s string) {
-		v, _ := strconv.ParseUint(s, 0, 8)
-		*me = UnsignedByte(v)
+		v, _ := strconv.ParseUint(s, 0, 8); *me = UnsignedByte(v)
 	}
 
 	func (me UnsignedByte) String () string {
@@ -455,8 +445,7 @@ type UnsignedByte uint8
 type UnsignedInt uint32
 
 	func (me *UnsignedInt) SetFromString (s string) {
-		v, _ := strconv.ParseUint(s, 0, 32)
-		*me = UnsignedInt(v)
+		v, _ := strconv.ParseUint(s, 0, 32); *me = UnsignedInt(v)
 	}
 
 	func (me UnsignedInt) String () string {
@@ -466,8 +455,7 @@ type UnsignedInt uint32
 type UnsignedLong uint64
 
 	func (me *UnsignedLong) SetFromString (s string) {
-		v, _ := strconv.ParseUint(s, 0, 64)
-		*me = UnsignedLong(v)
+		v, _ := strconv.ParseUint(s, 0, 64); *me = UnsignedLong(v)
 	}
 
 	func (me UnsignedLong) String () string {
@@ -477,10 +465,23 @@ type UnsignedLong uint64
 type UnsignedShort uint16
 
 	func (me *UnsignedShort) SetFromString (s string) {
-		v, _ := strconv.ParseUint(s, 0, 16)
-		*me = UnsignedShort(v)
+		v, _ := strconv.ParseUint(s, 0, 16); *me = UnsignedShort(v)
 	}
 
 	func (me UnsignedShort) String () string {
 		return strconv.FormatUint(uint64(me), 10)
 	}
+
+// why import "strings" just for this one need to Split()...
+func ListValues (v string) (spl []string) {
+	var cur = ""
+	for _, r := range v {
+		if r == ' ' {
+			if len(cur) > 0 { spl = append(spl, cur) }
+			cur = ""
+		} else {
+			cur += string(r)
+		}
+	}
+	return
+}

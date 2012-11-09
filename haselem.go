@@ -84,12 +84,12 @@ type hasElemsGroup struct {
 	Groups []*Group `xml:"group"`
 }
 
-type hasElemsInclude struct {
-	Includes []*Include `xml:"include"`
-}
-
 type hasElemsImport struct {
 	Imports []*Import `xml:"import"`
+}
+
+type hasElemsInclude struct {
+	Includes []*Include `xml:"include"`
 }
 
 type hasElemsKey struct {

@@ -27,10 +27,12 @@ var (
 )
 
 type Schema struct {
+	elemBase
 	XMLName xml.Name `xml:"schema"`
 	XMLNamespaces map[string]string `xml:"-"`
-	XMLIncludedSchemas map[string]*Schema `xml:"-"`
+	XMLIncludedSchemas []*Schema `xml:"-"`
 	XSDNamespace string `xml:"-"`
+	XSDParentSchema *Schema `xml:"-"`
 
 	hasAttrAttributeFormDefault
 	hasAttrBlockDefault
@@ -73,29 +75,31 @@ type Schema struct {
 		}
 		for k, v := range me.XMLNamespaces { if v == xsdNamespaceUri { me.XSDNamespace = k } }
 		if len(me.XMLNamespaces["xml"]) == 0 { me.XMLNamespaces["xml"] = "http://www.w3.org/XML/1998/namespace" }
-		me.XMLIncludedSchemas = map[string]*Schema {}
+		me.XMLIncludedSchemas = []*Schema {}
 		for _, inc := range me.Includes {
 			if tmpUrl = inc.SchemaLocation.String(); strings.Index(tmpUrl, protSep) < 0 {
 				tmpUrl = path.Join(path.Dir(loadUri), tmpUrl)
 			}
 			if sd = loadedSchemas[tmpUrl]; sd == nil {
 				if sd, err = LoadSchema(tmpUrl, len(localPath) > 0); err != nil { return }
+				sd.XSDParentSchema = me
 			}
-			me.XMLIncludedSchemas[inc.SchemaLocation.String()] = sd
+			me.XMLIncludedSchemas = append(me.XMLIncludedSchemas, sd)
 		}
+		me.initElement(nil)
 		return
 	}
 
 	func (me *Schema) MakeGoPkgSrc () string {
-		me.makePkg(&makerBag { Schema: me })
-		return strings.Join(PkgGen.lines, "\n")
+		var bag = &PkgBag { Schema: me }
+		me.makePkg(bag)
+		return strings.Join(bag.lines, "\n")
 	}
 
 	func (me *Schema) MakeGoPkgSrcFile () (goOutFilePath string, err error) {
 		var goOutDirPath = filepath.Join(filepath.Dir(me.loadLocalPath), goPkgPrefix + filepath.Base(me.loadLocalPath) + goPkgSuffix)
 		for _, inc := range me.XMLIncludedSchemas {
 			var s = strings.Replace(inc.loadUri, strings.Trim(path.Dir(me.loadUri), "/") + "/", "", -1)
-			println(s)
 			inc.MakeGoPkgSrcFileAt(filepath.Join(goOutDirPath, ustr.Replace(s, map[string]string { "/": "_", ":": "_", "..": "__" }) + ".go"))
 		}
 		goOutFilePath = filepath.Join(goOutDirPath, path.Base(me.loadUri) + ".go")
@@ -154,4 +158,9 @@ func LoadSchema (uri string, localCopy bool) (sd *Schema, err error) {
 		sd, err = loadSchema(rc, uri, "")
 	}
 	return
+}
+
+func (me *Schema) RootSchema () *Schema {
+	if me.XSDParentSchema != nil { return me.XSDParentSchema.RootSchema() }
+	return me
 }
