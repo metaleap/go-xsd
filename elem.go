@@ -7,8 +7,9 @@ import (
 )
 
 type element interface {
-	Parent () element
+	base () *elemBase
 	init (parent, self element, xsdName xsdt.NCName, atts ... beforeAfterMake)
+	Parent () element
 }
 
 type elemBase struct {
@@ -28,9 +29,23 @@ type elemBase struct {
 		for _, a := range me.atts { a.beforeMakePkg(bag) }
 	}
 
+	func (me *elemBase) base () *elemBase { return me }
+
 	func (me *elemBase) init (parent, self element, xsdName xsdt.NCName, atts ... beforeAfterMake) {
 		me.parent, me.self, me.xsdName, me.atts = parent, self, xsdName, atts
 		for _, a := range atts { if _, me.hasNameAttr = a.(*hasAttrName); me.hasNameAttr { break } }
+	}
+
+	func (me *elemBase) longSafeName (bag *PkgBag) (ln string) {
+		var els = []element {}
+		for el := me.self; (el != nil) && (el != bag.Schema); el = el.Parent() { els = append(els, el) }
+		for i := len(els) - 1; i >= 0; i-- { ln += bag.safeName(els[i].base().selfName().String()) }
+		return
+	}
+
+	func (me *elemBase) selfName () xsdt.NCName {
+		if me.hasNameAttr { for _, at := range me.atts { if an, ok := at.(*hasAttrName); ok { return an.Name } } }
+		return me.xsdName
 	}
 
 	func (me *elemBase) Parent () element { return me.parent }
