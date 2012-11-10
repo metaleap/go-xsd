@@ -82,8 +82,8 @@ type Schema struct {
 			}
 			if sd = loadedSchemas[tmpUrl]; sd == nil {
 				if sd, err = LoadSchema(tmpUrl, len(localPath) > 0); err != nil { return }
-				sd.XSDParentSchema = me
 			}
+			sd.XSDParentSchema = me
 			me.XMLIncludedSchemas = append(me.XMLIncludedSchemas, sd)
 		}
 		me.initElement(nil)
@@ -98,12 +98,13 @@ type Schema struct {
 
 	func (me *Schema) MakeGoPkgSrcFile () (goOutFilePath string, err error) {
 		var goOutDirPath = filepath.Join(filepath.Dir(me.loadLocalPath), goPkgPrefix + filepath.Base(me.loadLocalPath) + goPkgSuffix)
-		for _, inc := range me.XMLIncludedSchemas {
-			var s = strings.Replace(inc.loadUri, strings.Trim(path.Dir(me.loadUri), "/") + "/", "", -1)
-			inc.MakeGoPkgSrcFileAt(filepath.Join(goOutDirPath, ustr.Replace(s, map[string]string { "/": "_", ":": "_", "..": "__" }) + ".go"))
-		}
 		goOutFilePath = filepath.Join(goOutDirPath, path.Base(me.loadUri) + ".go")
-		err = me.MakeGoPkgSrcFileAt(goOutFilePath)
+		if err = me.MakeGoPkgSrcFileAt(goOutFilePath); err == nil {
+			for _, inc := range me.XMLIncludedSchemas {
+				var s = strings.Replace(inc.loadUri, strings.Trim(path.Dir(me.loadUri), "/") + "/", "", -1)
+				if err = inc.MakeGoPkgSrcFileAt(filepath.Join(goOutDirPath, ustr.Replace(s, map[string]string { "/": "_", ":": "_", "..": "__" }) + ".go")); err != nil { break }
+			}
+		}
 		return
 	}
 
@@ -112,6 +113,11 @@ type Schema struct {
 			err = uio.WriteTextFile(goOutFilePath, me.MakeGoPkgSrc())
 		}
 		return
+	}
+
+	func (me *Schema) RootSchema () *Schema {
+		if me.XSDParentSchema != nil { return me.XSDParentSchema.RootSchema() }
+		return me
 	}
 
 func ClearLoadedSchemasCache () {
@@ -158,9 +164,4 @@ func LoadSchema (uri string, localCopy bool) (sd *Schema, err error) {
 		sd, err = loadSchema(rc, uri, "")
 	}
 	return
-}
-
-func (me *Schema) RootSchema () *Schema {
-	if me.XSDParentSchema != nil { return me.XSDParentSchema.RootSchema() }
-	return me
 }

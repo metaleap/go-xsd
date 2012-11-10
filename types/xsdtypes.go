@@ -4,10 +4,6 @@ import (
 	"strconv"
 )
 
-var (
-	ParseTypes = []string { "Boolean", "Bool", "Byte", "Double", "Float", "Int", "Integer", "Long", "NegativeInteger", "NonNegativeInteger", "NonPositiveInteger", "PositiveInteger", "Short", "UnsignedByte", "UnsignedInt", "UnsignedLong", "UnsignedShort" }
-)
-
 type AnyURI string
 
 	func (me *AnyURI) SetFromString (v string) {
