@@ -1,8 +1,6 @@
 package xsd
 
 import (
-	"encoding/xml"
-
 	xsdt "github.com/metaleap/go-xsd/types"
 )
 
@@ -52,7 +50,7 @@ type elemBase struct {
 
 type All struct {
 	elemBase
-	XMLName xml.Name `xml:"all"`
+//	XMLName xml.Name `xml:"all"`
 	hasAttrId
 	hasAttrMaxOccurs
 	hasAttrMinOccurs
@@ -62,14 +60,14 @@ type All struct {
 
 type Annotation struct {
 	elemBase
-	XMLName xml.Name `xml:"annotation"`
+//	XMLName xml.Name `xml:"annotation"`
 	hasElemsAppInfo
 	hasElemsDocumentation
 }
 
 type Any struct {
 	elemBase
-	XMLName xml.Name `xml:"any"`
+//	XMLName xml.Name `xml:"any"`
 	hasAttrId
 	hasAttrMaxOccurs
 	hasAttrMinOccurs
@@ -80,7 +78,7 @@ type Any struct {
 
 type AnyAttribute struct {
 	elemBase
-	XMLName xml.Name `xml:"anyAttribute"`
+//	XMLName xml.Name `xml:"anyAttribute"`
 	hasAttrId
 	hasAttrNamespace
 	hasAttrProcessContents
@@ -89,14 +87,14 @@ type AnyAttribute struct {
 
 type AppInfo struct {
 	elemBase
-	XMLName xml.Name `xml:"appinfo"`
+//	XMLName xml.Name `xml:"appinfo"`
 	hasAttrSource
 	hasCdata
 }
 
 type Attribute struct {
 	elemBase
-	XMLName xml.Name `xml:"attribute"`
+//	XMLName xml.Name `xml:"attribute"`
 	hasAttrDefault
 	hasAttrFixed
 	hasAttrForm
@@ -111,7 +109,7 @@ type Attribute struct {
 
 type AttributeGroup struct {
 	elemBase
-	XMLName xml.Name `xml:"attributeGroup"`
+//	XMLName xml.Name `xml:"attributeGroup"`
 	hasAttrId
 	hasAttrName
 	hasAttrRef
@@ -123,7 +121,7 @@ type AttributeGroup struct {
 
 type Choice struct {
 	elemBase
-	XMLName xml.Name `xml:"choice"`
+//	XMLName xml.Name `xml:"choice"`
 	hasAttrId
 	hasAttrMaxOccurs
 	hasAttrMinOccurs
@@ -137,7 +135,7 @@ type Choice struct {
 
 type ComplexContent struct {
 	elemBase
-	XMLName xml.Name `xml:"complexContent"`
+//	XMLName xml.Name `xml:"complexContent"`
 	hasAttrId
 	hasAttrMixed
 	hasElemAnnotation
@@ -147,7 +145,7 @@ type ComplexContent struct {
 
 type ComplexType struct {
 	elemBase
-	XMLName xml.Name `xml:"complexType"`
+//	XMLName xml.Name `xml:"complexType"`
 	hasAttrAbstract
 	hasAttrBlock
 	hasAttrFinal
@@ -168,7 +166,7 @@ type ComplexType struct {
 
 type Documentation struct {
 	elemBase
-	XMLName xml.Name `xml:"documentation"`
+//	XMLName xml.Name `xml:"documentation"`
 	hasAttrLang
 	hasAttrSource
 	hasCdata
@@ -176,7 +174,7 @@ type Documentation struct {
 
 type Element struct {
 	elemBase
-	XMLName xml.Name `xml:"element"`
+//	XMLName xml.Name `xml:"element"`
 	hasAttrAbstract
 	hasAttrBlock
 	hasAttrDefault
@@ -201,7 +199,7 @@ type Element struct {
 
 type ExtensionComplexContent struct {
 	elemBase
-	XMLName xml.Name `xml:"extension"`
+//	XMLName xml.Name `xml:"extension"`
 	hasAttrBase
 	hasAttrId
 	hasElemAll
@@ -216,7 +214,7 @@ type ExtensionComplexContent struct {
 
 type ExtensionSimpleContent struct {
 	elemBase
-	XMLName xml.Name `xml:"extension"`
+//	XMLName xml.Name `xml:"extension"`
 	hasAttrBase
 	hasAttrId
 	hasElemAnnotation
@@ -227,7 +225,7 @@ type ExtensionSimpleContent struct {
 
 type Field struct {
 	elemBase
-	XMLName xml.Name `xml:"field"`
+//	XMLName xml.Name `xml:"field"`
 	hasAttrId
 	hasAttrXpath
 	hasElemAnnotation
@@ -235,7 +233,7 @@ type Field struct {
 
 type Group struct {
 	elemBase
-	XMLName xml.Name `xml:"group"`
+//	XMLName xml.Name `xml:"group"`
 	hasAttrId
 	hasAttrMaxOccurs
 	hasAttrMinOccurs
@@ -249,7 +247,7 @@ type Group struct {
 
 type Include struct {
 	elemBase
-	XMLName xml.Name `xml:"include"`
+//	XMLName xml.Name `xml:"include"`
 	hasAttrId
 	hasAttrSchemaLocation
 	hasElemAnnotation
@@ -257,7 +255,7 @@ type Include struct {
 
 type Import struct {
 	elemBase
-	XMLName xml.Name `xml:"import"`
+//	XMLName xml.Name `xml:"import"`
 	hasAttrId
 	hasAttrNamespace
 	hasAttrSchemaLocation
@@ -266,7 +264,7 @@ type Import struct {
 
 type Key struct {
 	elemBase
-	XMLName xml.Name `xml:"key"`
+//	XMLName xml.Name `xml:"key"`
 	hasAttrId
 	hasAttrName
 	hasElemAnnotation
@@ -276,7 +274,7 @@ type Key struct {
 
 type KeyRef struct {
 	elemBase
-	XMLName xml.Name `xml:"keyref"`
+//	XMLName xml.Name `xml:"keyref"`
 	hasAttrId
 	hasAttrName
 	hasAttrRefer
@@ -287,7 +285,7 @@ type KeyRef struct {
 
 type List struct {
 	elemBase
-	XMLName xml.Name `xml:"list"`
+//	XMLName xml.Name `xml:"list"`
 	hasAttrId
 	hasAttrItemType
 	hasElemAnnotation
@@ -296,7 +294,7 @@ type List struct {
 
 type Notation struct {
 	elemBase
-	XMLName xml.Name `xml:"notation"`
+//	XMLName xml.Name `xml:"notation"`
 	hasAttrId
 	hasAttrName
 	hasAttrPublic
@@ -306,7 +304,7 @@ type Notation struct {
 
 type Redefine struct {
 	elemBase
-	XMLName xml.Name `xml:"redefine"`
+//	XMLName xml.Name `xml:"redefine"`
 	hasAttrId
 	hasAttrSchemaLocation
 	hasElemAnnotation
@@ -318,7 +316,7 @@ type Redefine struct {
 
 type RestrictionComplexContent struct {
 	elemBase
-	XMLName xml.Name `xml:"restriction"`
+//	XMLName xml.Name `xml:"restriction"`
 	hasAttrBase
 	hasAttrId
 	hasElemAll
@@ -332,7 +330,7 @@ type RestrictionComplexContent struct {
 
 type RestrictionSimpleContent struct {
 	elemBase
-	XMLName xml.Name `xml:"restriction"`
+//	XMLName xml.Name `xml:"restriction"`
 	hasAttrBase
 	hasAttrId
 	hasElemAnnotation
@@ -356,73 +354,73 @@ type RestrictionSimpleContent struct {
 
 type RestrictionSimpleEnumeration struct {
 	elemBase
-	XMLName xml.Name `xml:"enumeration"`
+//	XMLName xml.Name `xml:"enumeration"`
 	hasAttrValue
 }
 
 type RestrictionSimpleFractionDigits struct {
 	elemBase
-	XMLName xml.Name `xml:"fractionDigits"`
+//	XMLName xml.Name `xml:"fractionDigits"`
 	hasAttrValue
 }
 
 type RestrictionSimpleLength struct {
 	elemBase
-	XMLName xml.Name `xml:"length"`
+//	XMLName xml.Name `xml:"length"`
 	hasAttrValue
 }
 
 type RestrictionSimpleMaxExclusive struct {
 	elemBase
-	XMLName xml.Name `xml:"maxExclusive"`
+//	XMLName xml.Name `xml:"maxExclusive"`
 	hasAttrValue
 }
 
 type RestrictionSimpleMaxInclusive struct {
 	elemBase
-	XMLName xml.Name `xml:"maxInclusive"`
+//	XMLName xml.Name `xml:"maxInclusive"`
 	hasAttrValue
 }
 
 type RestrictionSimpleMaxLength struct {
 	elemBase
-	XMLName xml.Name `xml:"maxLength"`
+//	XMLName xml.Name `xml:"maxLength"`
 	hasAttrValue
 }
 
 type RestrictionSimpleMinExclusive struct {
 	elemBase
-	XMLName xml.Name `xml:"minExclusive"`
+//	XMLName xml.Name `xml:"minExclusive"`
 	hasAttrValue
 }
 
 type RestrictionSimpleMinInclusive struct {
 	elemBase
-	XMLName xml.Name `xml:"minInclusive"`
+//	XMLName xml.Name `xml:"minInclusive"`
 	hasAttrValue
 }
 
 type RestrictionSimpleMinLength struct {
 	elemBase
-	XMLName xml.Name `xml:"minLength"`
+//	XMLName xml.Name `xml:"minLength"`
 	hasAttrValue
 }
 
 type RestrictionSimplePattern struct {
 	elemBase
-	XMLName xml.Name `xml:"pattern"`
+//	XMLName xml.Name `xml:"pattern"`
 	hasAttrValue
 }
 
 type RestrictionSimpleTotalDigits struct {
 	elemBase
-	XMLName xml.Name `xml:"totalDigits"`
+//	XMLName xml.Name `xml:"totalDigits"`
 	hasAttrValue
 }
 
 type RestrictionSimpleType struct {
 	elemBase
-	XMLName xml.Name `xml:"restriction"`
+//	XMLName xml.Name `xml:"restriction"`
 	hasAttrBase
 	hasAttrId
 	hasElemAnnotation
@@ -443,13 +441,13 @@ type RestrictionSimpleType struct {
 
 type RestrictionSimpleWhiteSpace struct {
 	elemBase
-	XMLName xml.Name `xml:"whiteSpace"`
+//	XMLName xml.Name `xml:"whiteSpace"`
 	hasAttrValue
 }
 
 type Selector struct {
 	elemBase
-	XMLName xml.Name `xml:"selector"`
+//	XMLName xml.Name `xml:"selector"`
 	hasAttrId
 	hasAttrXpath
 	hasElemAnnotation
@@ -457,7 +455,7 @@ type Selector struct {
 
 type Sequence struct {
 	elemBase
-	XMLName xml.Name `xml:"sequence"`
+//	XMLName xml.Name `xml:"sequence"`
 	hasAttrId
 	hasAttrMaxOccurs
 	hasAttrMinOccurs
@@ -471,7 +469,7 @@ type Sequence struct {
 
 type SimpleContent struct {
 	elemBase
-	XMLName xml.Name `xml:"simpleContent"`
+//	XMLName xml.Name `xml:"simpleContent"`
 	hasAttrId
 	hasElemAnnotation
 	hasElemExtensionSimpleContent
@@ -480,7 +478,7 @@ type SimpleContent struct {
 
 type SimpleType struct {
 	elemBase
-	XMLName xml.Name `xml:"simpleType"`
+//	XMLName xml.Name `xml:"simpleType"`
 	hasAttrFinal
 	hasAttrId
 	hasAttrName
@@ -492,7 +490,7 @@ type SimpleType struct {
 
 type Union struct {
 	elemBase
-	XMLName xml.Name `xml:"union"`
+//	XMLName xml.Name `xml:"union"`
 	hasAttrId
 	hasAttrMemberTypes
 	hasElemAnnotation
@@ -501,7 +499,7 @@ type Union struct {
 
 type Unique struct {
 	elemBase
-	XMLName xml.Name `xml:"unique"`
+//	XMLName xml.Name `xml:"unique"`
 	hasAttrId
 	hasAttrName
 	hasElemAnnotation

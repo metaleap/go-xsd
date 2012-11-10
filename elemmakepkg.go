@@ -133,9 +133,9 @@ func (me *Choice) makePkg (bag *PkgBag) {
 	me.hasElemAnnotation.makePkg(bag)
 	me.hasElemsAny.makePkg(bag)
 	me.hasElemsChoice.makePkg(bag)
-	me.hasElemsElement.makePkg(bag)
 	me.hasElemsGroup.makePkg(bag)
 	me.hasElemsSequence.makePkg(bag)
+	me.hasElemsElement.makePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
@@ -161,7 +161,7 @@ func (me *ComplexType) makePkg (bag *PkgBag) {
 	me.hasElemAnnotation.makePkg(bag)
 	if len(me.Name) == 0 { me.Name = bag.AnonName(me.longSafeName(bag)) }
 	bag.appendFmt(false, "type %v struct {", bag.safeName(ustr.PrependIf(me.Name.String(), "T")))
-	if me.Mixed { bag.appendFmt(true, "\t%vHasCdata", idPrefix) }
+	if me.Mixed && (me.hasElemSimpleContent.SimpleContent == nil) { bag.appendFmt(true, "\t%vHasCdata", idPrefix) }
 	for _, ag := range me.AttributeGroups {
 		ag.hasElemAnnotation.makePkg(bag)
 		bag.appendFmt(true, "\t%v", ustr.PrefixWithSep(perPkgState.attGroupRefImps[ag], ".", perPkgState.attGroups[ag][(strings.Index(perPkgState.attGroups[ag], ".") + 1) :]))
@@ -187,13 +187,61 @@ func (me *Documentation) makePkg (bag *PkgBag) {
 }
 
 func (me *Element) makePkg (bag *PkgBag) {
+	var safeName, typeName, tmp, key, defVal, impName string
+	var asterisk, defName = "", "Default"
 	me.elemBase.beforeMakePkg(bag)
-	me.hasElemAnnotation.makePkg(bag)
+	if len(me.Form) == 0 { me.Form = bag.Schema.ElementFormDefault }
 	me.hasElemsSimpleType.makePkg(bag)
-	me.hasElemUnique.makePkg(bag)
-	me.hasElemsKey.makePkg(bag)
 	me.hasElemComplexType.makePkg(bag)
-	me.hasElemKeyRef.makePkg(bag)
+	if len(me.Ref) > 0 {
+		key = bag.resolveQnameRef(me.Ref.String(), "", &impName)
+		for pref, cache := range map[string]map[string]string { "HasElem_": perPkgState.elemsCacheOnce, "HasElems": perPkgState.elemsCacheMult } {
+			tmp = ustr.PrefixWithSep(impName, ".", idPrefix + pref + bag.safeName(me.Ref.String()[(strings.Index(me.Ref.String(), ":") + 1) :]))
+			if perPkgState.elemRefImps[me], perPkgState.elemKeys[me] = impName, key; len(cache[key]) == 0 { cache[key] = tmp }
+		}
+	} else {
+		safeName = bag.safeName(me.Name.String())
+		if typeName = me.Type.String(); (len(typeName) == 0) && ((me.ComplexType != nil) || (len(me.SimpleTypes) > 0)) {
+			if me.ComplexType != nil { asterisk, typeName = "*", me.ComplexType.Name.String() } else { typeName = me.SimpleTypes[0].Name.String() }
+		} else {
+			if len(typeName) == 0 { typeName = bag.xsdStringTypeRef() }
+			if typeName = bag.resolveQnameRef(typeName, "T", &impName); bag.Schema.globalComplexType(typeName) != nil { asterisk = "*" }
+		}
+		if defVal = me.Default; len(defVal) == 0 { defName, defVal = "Fixed", me.Fixed }
+		if me.Parent() == bag.Schema { key = safeName } else { key = safeName + "_" + bag.safeName(typeName) + "_" + bag.safeName(defVal) }
+		for pref, cache := range map[string]map[string]string { "HasElem_": perPkgState.elemsCacheOnce, "HasElems_": perPkgState.elemsCacheMult } {
+			if len(cache[key]) == 0 {
+				perPkgState.elemKeys[me] = key
+				bag.impsUsed[impName] = true
+				tmp = idPrefix + pref + key
+				cache[key] = tmp
+				me.hasElemAnnotation.makePkg(bag)
+				{	//	these constraints aren't interpreted for makePkg() but their doc annotations might be worth including
+					me.hasElemUnique.makePkg(bag)
+					me.hasElemsKey.makePkg(bag)
+					me.hasElemKeyRef.makePkg(bag)
+				}
+				bag.appendFmt(false, "type %v struct {", tmp)
+				me.hasElemAnnotation.makePkg(bag)
+				bag.appendFmt(false, "\t%v %v `xml:\"%v\"`", safeName, util.Ifs(pref == "HasElems_", "[]" + asterisk + typeName, asterisk + typeName), util.Ifs(len(bag.Schema.TargetNamespace) > 0, bag.Schema.TargetNamespace.String() + " ", "") + me.Name.String())
+				bag.appendFmt(true, "}")
+				fmt.Sprintf(defName)
+				/*
+				if isPt := bag.isParseType(typeName); len(defVal) > 0 {
+					bag.appendFmt(false, "//\tReturns the %v value for %v -- " + util.Ifs(isPt, "%v", "%#v"), defName, safeName, defVal)
+					if isPt {
+						bag.appendFmt(true, "func (me *%v) %v%v () %v { return %v(%v) }", tmp, safeName, defName, typeName, typeName, defVal)
+					} else {
+						bag.appendFmt(true, "func (me *%v) %v%v () %v { return %v(%#v) }", tmp, safeName, defName, typeName, typeName, defVal)
+					}
+				}
+				*/
+			}
+		}
+	}
+
+
+
 	me.elemBase.afterMakePkg(bag)
 }
 
@@ -277,7 +325,7 @@ func (me *List) makePkg (bag *PkgBag) {
 	if len(rtr) == 0 {
 		rtr = me.SimpleTypes[0].Name.String()
 		if len(rtr) == 0 {
-			rtr = bag.safeName(bag.Stacks.CurSimpleType().Name.String() + "SubList")
+			rtr = bag.safeName(bag.AnonName(bag.Stacks.CurSimpleType().Name.String()).String())
 			me.SimpleTypes[0].Name = xsdt.NCName(rtr)
 		}
 	}
@@ -455,21 +503,21 @@ func (me *Schema) makePkg (bag *PkgBag) {
 	bag.append("import (", ")", "")
 	if me.XSDParentSchema == nil {
 		perPkgState.anonCounts = map[string]uint64 {}
-		perPkgState.attGroups = map[*AttributeGroup]string {}
-		perPkgState.attGroupRefImps = map[*AttributeGroup]string {}
-		perPkgState.attsCache = map[string]string {}
-		perPkgState.attsKeys = map[*Attribute]string {}
-		perPkgState.attRefImps = map[*Attribute]string {}
-		bag.appendFmt(true, "type %vHasCdata struct { CDATA string `xml:\",chardata\"` }", idPrefix)
+		perPkgState.attsCache, perPkgState.elemsCacheOnce, perPkgState.elemsCacheMult = map[string]string {}, map[string]string {}, map[string]string {}
+		perPkgState.attGroups, perPkgState.attGroupRefImps = map[*AttributeGroup]string {}, map[*AttributeGroup]string {}
+		perPkgState.attsKeys, perPkgState.attRefImps = map[*Attribute]string {}, map[*Attribute]string {}
+		perPkgState.elemGroups, perPkgState.elemGroupRefImps = map[*Group]string {}, map[*Group]string {}
+		perPkgState.elemKeys, perPkgState.elemRefImps = map[*Element]string {}, map[*Element]string {}
+		bag.appendFmt(true, "type %vHasCdata struct { CombinedCharDatas string `xml:\",chardata\"` }", idPrefix)
 	}
 	me.hasElemsNotation.makePkg(bag)
 	me.hasElemsSimpleType.makePkg(bag)
 	me.hasElemsAttribute.makePkg(bag)
 	me.hasElemsAttributeGroup.makePkg(bag)
-	me.hasElemsElement.makePkg(bag)
 	me.hasElemsGroup.makePkg(bag)
 	me.hasElemsRedefine.makePkg(bag)
 	me.hasElemsComplexType.makePkg(bag)
+	me.hasElemsElement.makePkg(bag)
 	for impName, impPath := range bag.imports {
 		if bag.impsUsed[impName] {
 			if len(impPath) > 0 {
@@ -493,9 +541,9 @@ func (me *Sequence) makePkg (bag *PkgBag) {
 	me.hasElemAnnotation.makePkg(bag)
 	me.hasElemsAny.makePkg(bag)
 	me.hasElemsChoice.makePkg(bag)
-	me.hasElemsElement.makePkg(bag)
 	me.hasElemsGroup.makePkg(bag)
 	me.hasElemsSequence.makePkg(bag)
+	me.hasElemsElement.makePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 

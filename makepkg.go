@@ -17,11 +17,11 @@ var (
 	}
 	perPkgState struct {
 		anonCounts map[string]uint64
-		attsCache map[string]string
-		attGroups map[*AttributeGroup]string
-		attsKeys map[*Attribute]string
-		attRefImps map[*Attribute]string
-		attGroupRefImps map[*AttributeGroup]string
+		attsCache, elemsCacheOnce, elemsCacheMult map[string]string
+		attGroups, attGroupRefImps map[*AttributeGroup]string
+		attsKeys, attRefImps map[*Attribute]string
+		elemGroups, elemGroupRefImps map[*Group]string
+		elemKeys, elemRefImps map[*Element]string
 	}
 )
 

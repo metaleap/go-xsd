@@ -58,6 +58,12 @@ type Schema struct {
 	loadLocalPath, loadUri string
 }
 
+	func (me *Schema) globalComplexType (name string) (ct *ComplexType) {
+		for _, ct = range me.ComplexTypes { if ct.Name.String() == name { return } }
+		for _, ss := range me.XMLIncludedSchemas { if ct = ss.globalComplexType(name); ct != nil { return } }
+		ct = nil; return
+	}
+
 	func (me *Schema) onLoad (rootAtts []xml.Attr, loadUri, localPath string) (err error) {
 		var tmpUrl string
 		var sd *Schema
