@@ -148,6 +148,12 @@ func (me *ComplexContent) makePkg (bag *PkgBag) {
 }
 
 func (me *ComplexType) makePkg (bag *PkgBag) {
+	var att *Attribute
+	var attGroup *AttributeGroup
+	var ctBaseType, ctValueType, typeSafeName string
+	var allAtts = map[*Attribute]bool {}
+	var allAttGroups = map[*AttributeGroup]bool {}
+	var mixed = false
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsAttribute.makePkg(bag)
 	me.hasElemsAnyAttribute.makePkg(bag)
@@ -160,18 +166,58 @@ func (me *ComplexType) makePkg (bag *PkgBag) {
 	me.hasElemSimpleContent.makePkg(bag)
 	me.hasElemAnnotation.makePkg(bag)
 	if len(me.Name) == 0 { me.Name = bag.AnonName(me.longSafeName(bag)) }
-	bag.appendFmt(false, "type %v struct {", bag.safeName(ustr.PrependIf(me.Name.String(), "T")))
-	if me.Mixed && (me.hasElemSimpleContent.SimpleContent == nil) { bag.appendFmt(true, "\t%vHasCdata", idPrefix) }
-	for _, ag := range me.AttributeGroups {
-		ag.hasElemAnnotation.makePkg(bag)
-		bag.appendFmt(true, "\t%v", ustr.PrefixWithSep(perPkgState.attGroupRefImps[ag], ".", perPkgState.attGroups[ag][(strings.Index(perPkgState.attGroups[ag], ".") + 1) :]))
-		bag.impsUsed[perPkgState.attGroupRefImps[ag]] = true
+	typeSafeName = bag.safeName(ustr.PrependIf(me.Name.String(), "T"))
+	bag.appendFmt(false, "type %v struct {", typeSafeName)
+	for _, att = range me.Attributes { allAtts[att] = true }
+	for _, attGroup = range me.AttributeGroups { allAttGroups[attGroup] = true }
+	if mixed = me.Mixed; me.ComplexContent != nil {
+		mixed = mixed || me.ComplexContent.Mixed
+		if me.ComplexContent.ExtensionComplexContent != nil {
+			for _, att = range me.ComplexContent.ExtensionComplexContent.Attributes { allAtts[att] = true }
+			for _, attGroup = range me.ComplexContent.ExtensionComplexContent.AttributeGroups { allAttGroups[attGroup] = true }
+			if len(me.ComplexContent.ExtensionComplexContent.Base) > 0 { ctBaseType = me.ComplexContent.ExtensionComplexContent.Base.String() }
+		}
+		if me.ComplexContent.RestrictionComplexContent != nil {
+			for _, att = range me.ComplexContent.RestrictionComplexContent.Attributes { allAtts[att] = true }
+			for _, attGroup = range me.ComplexContent.RestrictionComplexContent.AttributeGroups { allAttGroups[attGroup] = true }
+			if len(me.ComplexContent.RestrictionComplexContent.Base) > 0 { ctBaseType = me.ComplexContent.RestrictionComplexContent.Base.String() }
+		}
 	}
-	for _, at := range me.Attributes {
-		if key := perPkgState.attsKeys[at]; len(key) > 0 {
-			at.hasElemAnnotation.makePkg(bag)
-			bag.appendFmt(true, "\t%v", ustr.PrefixWithSep(perPkgState.attRefImps[at], ".", perPkgState.attsCache[key][(strings.Index(perPkgState.attsCache[key], ".") + 1) :]))
-			bag.impsUsed[perPkgState.attRefImps[at]] = true
+	if me.SimpleContent != nil {
+		if me.SimpleContent.ExtensionSimpleContent != nil {
+			for _, att = range me.SimpleContent.ExtensionSimpleContent.Attributes { allAtts[att] = true }
+			for _, attGroup = range me.SimpleContent.ExtensionSimpleContent.AttributeGroups { allAttGroups[attGroup] = true }
+			if (len(ctValueType) == 0) && (len(me.SimpleContent.ExtensionSimpleContent.Base) > 0) { ctValueType = me.SimpleContent.ExtensionSimpleContent.Base.String() }
+		}
+		if me.SimpleContent.RestrictionSimpleContent != nil {
+			for _, att = range me.SimpleContent.RestrictionSimpleContent.Attributes { allAtts[att] = true }
+			for _, attGroup = range me.SimpleContent.RestrictionSimpleContent.AttributeGroups { allAttGroups[attGroup] = true }
+			if (len(ctValueType) == 0) && (len(me.SimpleContent.RestrictionSimpleContent.Base) > 0) { ctValueType = me.SimpleContent.RestrictionSimpleContent.Base.String() }
+			if (len(ctValueType) == 0) && (len(me.SimpleContent.RestrictionSimpleContent.SimpleTypes) > 0) { ctValueType = me.SimpleContent.RestrictionSimpleContent.SimpleTypes[0].Name.String() }
+			for _, enum := range me.SimpleContent.RestrictionSimpleContent.Enumerations {
+				println("ENUMTODO " + enum.selfName().String())
+			}
+		}
+	}
+	if ctBaseType = bag.resolveQnameRef(ctBaseType, "T", nil); len(ctBaseType) > 0 {
+		bag.appendFmt(true, "\t%v", bag.safeName(ctBaseType))
+	}
+	if ctValueType = bag.resolveQnameRef(ctValueType, "T", nil); len(ctValueType) > 0 {
+		perPkgState.simpleContentValueTypes[typeSafeName] = ctValueType
+		bag.appendFmt(true, "\t%vValue %v `xml:\",chardata\"`", idPrefix, ctValueType)
+	} else if mixed {
+		bag.appendFmt(true, "\t%vHasCdata", idPrefix)
+	}
+	for attGroup, _ = range allAttGroups {
+		attGroup.hasElemAnnotation.makePkg(bag)
+		bag.appendFmt(true, "\t%v", ustr.PrefixWithSep(perPkgState.attGroupRefImps[attGroup], ".", perPkgState.attGroups[attGroup][(strings.Index(perPkgState.attGroups[attGroup], ".") + 1) :]))
+		bag.impsUsed[perPkgState.attGroupRefImps[attGroup]] = true
+	}
+	for att, _ = range allAtts {
+		if key := perPkgState.attsKeys[att]; len(key) > 0 {
+			att.hasElemAnnotation.makePkg(bag)
+			bag.appendFmt(true, "\t%v", ustr.PrefixWithSep(perPkgState.attRefImps[att], ".", perPkgState.attsCache[key][(strings.Index(perPkgState.attsCache[key], ".") + 1) :]))
+			bag.impsUsed[perPkgState.attRefImps[att]] = true
 		}
 	}
 	bag.appendFmt(true, "}")
@@ -187,7 +233,7 @@ func (me *Documentation) makePkg (bag *PkgBag) {
 }
 
 func (me *Element) makePkg (bag *PkgBag) {
-	var safeName, typeName, tmp, key, defVal, impName string
+	var safeName, typeName, valueType, tmp, key, defVal, impName string
 	var asterisk, defName = "", "Default"
 	me.elemBase.beforeMakePkg(bag)
 	if len(me.Form) == 0 { me.Form = bag.Schema.ElementFormDefault }
@@ -209,6 +255,7 @@ func (me *Element) makePkg (bag *PkgBag) {
 		}
 		if defVal = me.Default; len(defVal) == 0 { defName, defVal = "Fixed", me.Fixed }
 		if me.Parent() == bag.Schema { key = safeName } else { key = safeName + "_" + bag.safeName(typeName) + "_" + bag.safeName(defVal) }
+		if valueType = perPkgState.simpleContentValueTypes[typeName]; len(valueType) == 0 { valueType = typeName }
 		for pref, cache := range map[string]map[string]string { "HasElem_": perPkgState.elemsCacheOnce, "HasElems_": perPkgState.elemsCacheMult } {
 			if len(cache[key]) == 0 {
 				perPkgState.elemKeys[me] = key
@@ -226,16 +273,15 @@ func (me *Element) makePkg (bag *PkgBag) {
 				bag.appendFmt(false, "\t%v %v `xml:\"%v\"`", safeName, util.Ifs(pref == "HasElems_", "[]" + asterisk + typeName, asterisk + typeName), util.Ifs(len(bag.Schema.TargetNamespace) > 0, bag.Schema.TargetNamespace.String() + " ", "") + me.Name.String())
 				bag.appendFmt(true, "}")
 				fmt.Sprintf(defName)
-				/*
-				if isPt := bag.isParseType(typeName); len(defVal) > 0 {
+				if len(defVal) > 0 {
+					isPt := bag.isParseType(valueType)
 					bag.appendFmt(false, "//\tReturns the %v value for %v -- " + util.Ifs(isPt, "%v", "%#v"), defName, safeName, defVal)
 					if isPt {
-						bag.appendFmt(true, "func (me *%v) %v%v () %v { return %v(%v) }", tmp, safeName, defName, typeName, typeName, defVal)
+						bag.appendFmt(true, "func (me *%v) %v%v () %v { return %v(%v) }", tmp, safeName, defName, valueType, valueType, defVal)
 					} else {
-						bag.appendFmt(true, "func (me *%v) %v%v () %v { return %v(%#v) }", tmp, safeName, defName, typeName, typeName, defVal)
+						bag.appendFmt(true, "func (me *%v) %v%v () %v { return %v(%#v) }", tmp, safeName, defName, valueType, valueType, defVal)
 					}
 				}
-				*/
 			}
 		}
 	}
@@ -503,7 +549,7 @@ func (me *Schema) makePkg (bag *PkgBag) {
 	bag.append("import (", ")", "")
 	if me.XSDParentSchema == nil {
 		perPkgState.anonCounts = map[string]uint64 {}
-		perPkgState.attsCache, perPkgState.elemsCacheOnce, perPkgState.elemsCacheMult = map[string]string {}, map[string]string {}, map[string]string {}
+		perPkgState.simpleContentValueTypes, perPkgState.attsCache, perPkgState.elemsCacheOnce, perPkgState.elemsCacheMult = map[string]string {}, map[string]string {}, map[string]string {}, map[string]string {}
 		perPkgState.attGroups, perPkgState.attGroupRefImps = map[*AttributeGroup]string {}, map[*AttributeGroup]string {}
 		perPkgState.attsKeys, perPkgState.attRefImps = map[*Attribute]string {}, map[*Attribute]string {}
 		perPkgState.elemGroups, perPkgState.elemGroupRefImps = map[*Group]string {}, map[*Group]string {}

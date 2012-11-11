@@ -22,6 +22,7 @@ var (
 		attsKeys, attRefImps map[*Attribute]string
 		elemGroups, elemGroupRefImps map[*Group]string
 		elemKeys, elemRefImps map[*Element]string
+		simpleContentValueTypes map[string]string
 	}
 )
 
