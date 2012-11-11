@@ -29,9 +29,10 @@ var (
 type Schema struct {
 	elemBase
 	XMLName xml.Name `xml:"schema"`
+	XMLNamespacePrefix string `xml:"-"`
 	XMLNamespaces map[string]string `xml:"-"`
 	XMLIncludedSchemas []*Schema `xml:"-"`
-	XSDNamespace string `xml:"-"`
+	XSDNamespacePrefix string `xml:"-"`
 	XSDParentSchema *Schema `xml:"-"`
 
 	hasAttrAttributeFormDefault
@@ -58,9 +59,13 @@ type Schema struct {
 	loadLocalPath, loadUri string
 }
 
-	func (me *Schema) globalComplexType (name string) (ct *ComplexType) {
-		for _, ct = range me.ComplexTypes { if ct.Name.String() == name { return } }
-		for _, ss := range me.XMLIncludedSchemas { if ct = ss.globalComplexType(name); ct != nil { return } }
+	func (me *Schema) globalComplexType (bag *PkgBag, name string) (ct *ComplexType) {
+		var imp string
+		for _, ct = range me.ComplexTypes {
+			// println("TEST " + bag.resolveQnameRef(ustr.PrefixWithSep(me.XMLNamespacePrefix, ":", ct.Name.String()), "T", &imp) + " for " + name)
+			if bag.resolveQnameRef(ustr.PrefixWithSep(me.XMLNamespacePrefix, ":", ct.Name.String()), "T", &imp) == name { return }
+		}
+		for _, ss := range me.XMLIncludedSchemas { if ct = ss.globalComplexType(bag, name); ct != nil { return } }
 		ct = nil; return
 	}
 
@@ -79,7 +84,7 @@ type Schema struct {
 				me.XMLNamespaces[""] = att.Value
 			}
 		}
-		for k, v := range me.XMLNamespaces { if v == xsdNamespaceUri { me.XSDNamespace = k } }
+		for k, v := range me.XMLNamespaces { if v == xsdNamespaceUri { me.XSDNamespacePrefix = k } else if v == me.TargetNamespace.String() { me.XMLNamespacePrefix = k } }
 		if len(me.XMLNamespaces["xml"]) == 0 { me.XMLNamespaces["xml"] = "http://www.w3.org/XML/1998/namespace" }
 		me.XMLIncludedSchemas = []*Schema {}
 		for _, inc := range me.Includes {

@@ -25,6 +25,7 @@ var (
 		elemChoices, elemChoiceRefImps map[*Choice]string
 		elemSeqs, elemSeqRefImps map[*Sequence]string
 		elemKeys, elemRefImps map[*Element]string
+		elemsWritten map[string]bool
 		simpleContentValueTypes map[string]string
 	}
 )
@@ -121,5 +122,5 @@ type PkgBag struct {
 	}
 
 	func (me *PkgBag) xsdStringTypeRef () string {
-		return ustr.PrefixWithSep(me.Schema.XSDNamespace, ":", "string")
+		return ustr.PrefixWithSep(me.Schema.XSDNamespacePrefix, ":", "string")
 	}

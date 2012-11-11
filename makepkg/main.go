@@ -38,7 +38,7 @@ func main () {
 		} else if sd != nil {
 			xsd.PkgGen.ForceParseForDefaults = (s == kmlSchema) // KML schema uses 0 and 1 as defaults for booleans...
 			if outFilePath, err = sd.MakeGoPkgSrcFile(); err == nil {
-				fmt.Printf("\tGEN: %v\n", outFilePath)
+				fmt.Printf("\tGEN: %v (%v root-level elems)\n", outFilePath, len(sd.Elements))
 			} else {
 				panic(err)
 			}

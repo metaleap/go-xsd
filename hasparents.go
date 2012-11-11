@@ -76,6 +76,10 @@ func (me *hasElemFractionDigits) initChildren (p element) {
 	if me.FractionDigits != nil { me.FractionDigits.initElement(p) }
 }
 
+func (me *hasElemGroup) initChildren (p element) {
+	if me.Group != nil { me.Group.initElement(p) }
+}
+
 func (me *hasElemsGroup) initChildren (p element) {
 	for _, gr := range me.Groups { gr.initElement(p) }
 }

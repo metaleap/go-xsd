@@ -76,6 +76,10 @@ func (me *hasElemFractionDigits) makePkg (bag *PkgBag) {
 	if me.FractionDigits != nil { me.FractionDigits.makePkg(bag) }
 }
 
+func (me *hasElemGroup) makePkg (bag *PkgBag) {
+	if me.Group != nil { me.Group.makePkg(bag) }
+}
+
 func (me *hasElemsGroup) makePkg (bag *PkgBag) {
 	for _, gr := range me.Groups { gr.makePkg(bag) }
 }

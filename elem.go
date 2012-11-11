@@ -159,8 +159,8 @@ type ComplexType struct {
 	hasElemsAttributeGroup
 	hasElemChoice
 	hasElemComplexContent
-	hasElemsGroup
-	hasElemsSequence
+	hasElemGroup
+	hasElemSequence
 	hasElemSimpleContent
 }
 

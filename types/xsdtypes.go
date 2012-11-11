@@ -4,6 +4,8 @@ import (
 	"strconv"
 )
 
+// var KnownTypeNames = []string { "AnySimpleType", "AnyType", "AnyURI", "Base64Binary", "Boolean", "Byte", "Date", "DateTime", "Decimal", "Double", "Duration", "Entities", "Entity", "Float", "GDay", "GMonth", "GMonthDay", "GYear", "GYearMonth", "HexBinary", "Id", "Idref", "Idrefs", "Int", "Integer", "Language", "Long", "Name", "NCName", "NegativeInteger", "Nmtoken", "Nmtokens", "NonNegativeInteger", "NonPositiveInteger", "NormalizedString", "Notation", "PositiveInteger", "Qname", "Short", "String", "Token", "UnsignedByte", "UnsignedInt", "UnsignedLong", "UnsignedShort" }
+
 type AnySimpleType string
 
 	func (me *AnySimpleType) SetFromString (v string) {
@@ -163,26 +165,6 @@ type GDay string
 		return string(me)
 	}
 
-type GYear string
-
-	func (me *GYear) SetFromString (v string) {
-		*me = GYear(v)
-	}
-
-	func (me GYear) String () string {
-		return string(me)
-	}
-
-type GYearMonth string
-
-	func (me *GYearMonth) SetFromString (v string) {
-		*me = GYearMonth(v)
-	}
-
-	func (me GYearMonth) String () string {
-		return string(me)
-	}
-
 type GMonth string
 
 	func (me *GMonth) SetFromString (v string) {
@@ -200,6 +182,26 @@ type GMonthDay string
 	}
 
 	func (me GMonthDay) String () string {
+		return string(me)
+	}
+
+type GYear string
+
+	func (me *GYear) SetFromString (v string) {
+		*me = GYear(v)
+	}
+
+	func (me GYear) String () string {
+		return string(me)
+	}
+
+type GYearMonth string
+
+	func (me *GYearMonth) SetFromString (v string) {
+		*me = GYearMonth(v)
+	}
+
+	func (me GYearMonth) String () string {
 		return string(me)
 	}
 
@@ -502,3 +504,8 @@ func ListValues (v string) (spl []string) {
 	}
 	return
 }
+
+// func IsKnownTypeName (tn string) bool {
+// 	for _, ktn := range KnownTypeNames { if ktn == tn { return true } }
+// 	return false
+// }

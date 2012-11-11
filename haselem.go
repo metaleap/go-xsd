@@ -80,6 +80,10 @@ type hasElemFractionDigits struct {
 	FractionDigits *RestrictionSimpleFractionDigits `xml:"fractionDigits"`
 }
 
+type hasElemGroup struct {
+	Group *Group `xml:"group"`
+}
+
 type hasElemsGroup struct {
 	Groups []*Group `xml:"group"`
 }
