@@ -506,3 +506,25 @@ type Unique struct {
 	hasElemField
 	hasElemSelector
 }
+
+func Flattened (choices []*Choice, seqs []*Sequence) (allChoices []*Choice, allSeqs []*Sequence) {
+	var tmpChoices []*Choice
+	var tmpSeqs []*Sequence
+	for _, ch := range choices {
+		if ch != nil {
+			allChoices = append(allChoices, ch)
+			tmpChoices, tmpSeqs = Flattened(ch.Choices, ch.Sequences)
+			allChoices = append(allChoices, tmpChoices ...)
+			allSeqs = append(allSeqs, tmpSeqs ...)
+		}
+	}
+	for _, seq := range seqs {
+		if seq != nil {
+			allSeqs = append(allSeqs, seq)
+			tmpChoices, tmpSeqs = Flattened(seq.Choices, seq.Sequences)
+			allChoices = append(allChoices, tmpChoices ...)
+			allSeqs = append(allSeqs, tmpSeqs ...)
+		}
+	}
+	return
+}

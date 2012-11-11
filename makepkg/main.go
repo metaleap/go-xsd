@@ -10,6 +10,7 @@ func main () {
 	var sd *xsd.Schema
 	var err error
 	var outFilePath string
+	var kmlSchema = "schemas.opengis.net/kml/2.2.0/ogckml22.xsd"
 	var schemas = []string {
 		"www.w3.org/2001/xml.xsd",
 		"www.w3.org/2001/03/xml.xsd",
@@ -27,14 +28,15 @@ func main () {
 		"thearchitect.co.uk/schemas/rss-2_0.xsd",
 		"khronos.org/files/collada_schema_1_4",
 		"khronos.org/files/collada_schema_1_5",
-		"schemas.opengis.net/kml/2.2.0/ogckml22.xsd",
 		"schemas.opengis.net/kml/2.2.0/atom-author-link.xsd",
+		kmlSchema,
 	}
 	for _, s := range schemas {
 		fmt.Printf("LOAD: %v\n", s)
 		if sd, err = xsd.LoadSchema(s, true); err != nil {
 			panic(err)
 		} else if sd != nil {
+			xsd.PkgGen.ForceParseForDefaults = (s == kmlSchema) // KML schema uses 0 and 1 as defaults for booleans...
 			if outFilePath, err = sd.MakeGoPkgSrcFile(); err == nil {
 				fmt.Printf("\tGEN: %v\n", outFilePath)
 			} else {

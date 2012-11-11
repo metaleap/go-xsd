@@ -14,6 +14,7 @@ var (
 	PkgGen = &pkgGen {
 		BaseCodePath: util.BaseCodePath("metaleap", "go-xsd-pkg"),
 		BasePath: "github.com/metaleap/go-xsd-pkg",
+		ForceParseForDefaults: false,
 	}
 	perPkgState struct {
 		anonCounts map[string]uint64
@@ -21,6 +22,8 @@ var (
 		attGroups, attGroupRefImps map[*AttributeGroup]string
 		attsKeys, attRefImps map[*Attribute]string
 		elemGroups, elemGroupRefImps map[*Group]string
+		elemChoices, elemChoiceRefImps map[*Choice]string
+		elemSeqs, elemSeqRefImps map[*Sequence]string
 		elemKeys, elemRefImps map[*Element]string
 		simpleContentValueTypes map[string]string
 	}
@@ -28,6 +31,7 @@ var (
 
 type pkgGen struct {
 	BaseCodePath, BasePath string
+	ForceParseForDefaults bool
 }
 
 type beforeAfterMake interface {

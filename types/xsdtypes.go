@@ -4,6 +4,26 @@ import (
 	"strconv"
 )
 
+type AnySimpleType string
+
+	func (me *AnySimpleType) SetFromString (v string) {
+		*me = AnySimpleType(v)
+	}
+
+	func (me AnySimpleType) String () string {
+		return string(me)
+	}
+
+type AnyType string
+
+	func (me *AnyType) SetFromString (v string) {
+		*me = AnyType(v)
+	}
+
+	func (me AnyType) String () string {
+		return string(me)
+	}
+
 type AnyURI string
 
 	func (me *AnyURI) SetFromString (v string) {
@@ -27,7 +47,8 @@ type Base64Binary string // []byte
 type Boolean bool
 
 	func (me *Boolean) SetFromString (v string) {
-		b, _ := strconv.ParseBool(v); *me = Boolean(b)
+		//	most schemas use true and false but sadly, some do use 0 and 1...
+		if v == "1" { *me = true } else if v == "0" { *me = false } else { b, _ := strconv.ParseBool(v); *me = Boolean(b) }
 	}
 
 	func (me Boolean) String () string {
