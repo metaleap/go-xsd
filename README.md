@@ -35,7 +35,7 @@ Each generated wrapper package contains the type structures required to easily *
 
 **XSD includes** are represented as separate .go source files compiled into a single package. If main.xsd includes some/sub/topic.xsd, then both main.xsd.go and some_sub_topic.xsd.go are generated and will compile into a single Go package.
 
-**XSD imports** are rewritten as Go imports but not otherwise auto-magically processed. If you see the generated .go package importing another XSD _gopkg that will cause a "package not found" compiler error, you'll first need to generate that one with makepkg yourself for the import to work.
+**XSD imports** are rewritten as Go imports but not otherwise auto-magically processed. If you see the generated .go package importing another XSD _gopkg that will cause a "package not found" compiler error, then to make that import work, you'll first need to also auto-generate that package with makepkg yourself as well.
 
 Regarding the auto-generated code:
 
