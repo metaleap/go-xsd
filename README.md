@@ -17,7 +17,7 @@ If no arguments are specified, this tool proceeds to (re)generate all Go package
 
 
     Usage of makepkg.exe:
-      -basepath="": Defaults to github.com/metaleap/go-xsd/pkg. A $GOPATH/src/-relative path (always a slash-style path, even on Windows) where XSD files are downloaded to / loaded from and generated Go wrapper packages are created. Any XSD imports are also rewritten as Go imports from that path (but are not otherwise auto-magically processed in any way).
+      -basepath="": Defaults to github.com/metaleap/go-xsd-pkg. A $GOPATH/src/-relative path (always a slash-style path, even on Windows) where XSD files are downloaded to / loaded from and generated Go wrapper packages are created. Any XSD imports are also rewritten as Go imports from that path (but are not otherwise auto-magically processed in any way).
       -local=true: Local copy: only downloads if file does not exist locally
       -parse=false: Not necessary unless the generated Go wrapper package won't compile.
       -uri="": The XML Schema Definition file URIs to generate a Go wrapper packages from, whitespace-separated. (For each, the protocol prefix can be omitted, it then defaults to http://. Only protocols understood by the net/http package are supported.)
