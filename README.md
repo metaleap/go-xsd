@@ -2,7 +2,7 @@ go-xsd
 ======
 
 
-A Go package for loading (**xml.Unmarshal()**ing) an XML Schema Definition (XSD) document into an **xsd.Schema** structure.
+A Go package for loading ( **xml.Unmarshal()**ing ) an XML Schema Definition (XSD) document into an **xsd.Schema** structure.
 
 You could probably write an XML validator with that, or otherwise process the loaded XSD --- but the main use-case here was this:
 
@@ -95,5 +95,5 @@ Ultimately, to find out the proper name to embed you'll have to dig a bit inside
 
 - suppose you have an XML format where the root element, and only that one, is known to be named **<gopher>**
 - open the generated Go package source files under **$GOPATH/src/github.com/metaleap/go-xsd/pkg/yourdomain.org/xsd/gopher.xsd_gopkg** (unless you used custom paths when you ran the **go-xsd/makepkg** tool)
-- search for an occurence of either: **"gopher"`** (quote, gopher, quote, backtick) or ** gopher"`** (whitespace, gopher, quote, backtick)
+- search for an occurence of either: **"gopher"'** ( quote, gopher, quote, *backtick* -- not apostrophe! ) or ** gopher"'** ( whitespace, gopher, quote, *backtick* )
 - the found occurence is likely part of a field in a type named something like **XsdGoPkgHasElem_Gopher** or **XsdGoPkgHasElems_Gopher**. Ignore that type, instead focus on the type of the field itself. That's the one you were looking for, that's the one to embed in your tiny custom struct.
