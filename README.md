@@ -92,7 +92,7 @@ A) Suppose you have an XML format where the root element (and only that one) is 
     <gopher>
 
 
-B) Open the generated Go package source files under **$GOPATH/src/github.com/metaleap/go-xsd/pkg/yourdomain.org/xsd/gopher.xsd_go** (unless you used custom paths when you ran the **go-xsd/makepkg** tool)
+B) Open the generated Go package source files under **$GOPATH/src/github.com/metaleap/go-xsd-pkg/yourdomain.org/xsd/gopher.xsd_go** (unless you used custom paths when you ran the **go-xsd/makepkg** tool)
 
 C) Search for an occurence of either:
 
