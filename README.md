@@ -93,9 +93,11 @@ The second part is the only tricky part. XML Schema Definition has no real conce
 
 Ultimately, to find out the proper name to embed you'll have to dig a bit inside the generated package. Here's how you do it:
 
-- suppose you have an XML format where the root element, and only that one, is known to be named **<gopher>**
-- open the generated Go package source files under **$GOPATH/src/github.com/metaleap/go-xsd/pkg/yourdomain.org/xsd/gopher.xsd_gopkg** (unless you used custom paths when you ran the **go-xsd/makepkg** tool)
-- search for an occurence of either:
+A) Suppose you have an XML format where the root element, and only that one, is known to be named **<gopher>**.
+
+B) Open the generated Go package source files under **$GOPATH/src/github.com/metaleap/go-xsd/pkg/yourdomain.org/xsd/gopher.xsd_gopkg** (unless you used custom paths when you ran the **go-xsd/makepkg** tool)
+
+C) Search for an occurence of either:
 
 
     "gopher"`
@@ -109,4 +111,4 @@ Ultimately, to find out the proper name to embed you'll have to dig a bit inside
 
 ( whitespace, gopher, quote, *backtick* )
 
-The found occurence is likely part of a field in a type named something like **XsdGoPkgHasElem_Gopher** or **XsdGoPkgHasElems_Gopher**. Ignore that type, instead focus on the type of the field itself. That's the one you were looking for, that's the one to embed in your tiny custom struct.
+D) The found occurence is likely part of a field in a type named something like **XsdGoPkgHasElem_Gopher** or **XsdGoPkgHasElems_Gopher**. Ignore that type, instead focus on the type of the field itself. That's the one you were looking for, that's the one to embed in your tiny custom struct.
