@@ -25,7 +25,7 @@ XSD complex-types, attribute-groups, element-groups, elements etc. are ultimatel
 
 Regarding the auto-generated code:
 
-- it's **by necessity not idiomatic** and most likely not as terse/slim as manually-written structs would be. For very simplistic XML formats, writing your own 3 or 4 custom structs might be a tiny bit more efficient. **For highly intricate, wieldy XML formats, the auto-generated packages beat hand-writing 100s of custom structs, however.**
+- it's **by necessity not idiomatic** and most likely not as terse/slim as manually-written structs would be. For very simplistic XML formats, writing your own 3 or 4 custom structs might be a tiny bit more efficient. **For highly intricate, wieldy XML formats, the auto-generated packages beat hand-writing 100s of custom structs, however.** Auto-generated code will never win a code-beauty contest, you're expected to simply import the compiled package rather than having to work inside its generated source files.
 
 - most types are prefixed with T -- thanks to the SVG schema which taught me that in XSD, "scriptType" and "ScriptType" are two valid and uniquely different type names. To have all types exported from the generated Go package, then, some kind of prefix is indeed needed.
 
