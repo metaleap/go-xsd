@@ -13,7 +13,7 @@ go-xsd/makepkg
 
 A command-line tool to generate Go XML wrapper packages for specified XSD schema URIs.
 
-If no arguments are specified, this tool proceeds to (re)generate all Go packages for github.com/metaleap/go-xsd-pkg
+If no arguments are specified, this tool proceeds to (re)generate all Go packages at **github.com/metaleap/go-xsd-pkg**
 
 
     Usage of makepkg.exe:
