@@ -108,4 +108,4 @@ C) Search for an occurence of either:
 
 ( *whitespace*, gopher, quote, backtick )
 
-D) The found occurence is likely part of a field in a type named something like **XsdGoPkgHasElem_Gopher** or **XsdGoPkgHasElems_Gopher**. Ignore that type, instead focus on the type of the field itself. That's the one you're looking for, the one to embed in your tiny custom struct.
+D) The found occurence is likely the tag for a field in a type named something like **XsdGoPkgHasElem_Gopher** or **XsdGoPkgHasElems_Gopher**. Ignore that type, instead focus on the type of the field itself. That's the one you're looking for, the one to embed in your tiny custom struct.
