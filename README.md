@@ -64,10 +64,12 @@ How to use auto-generated packages:
 
 Take a look at the "test progs" under **makepkg/tests**, they're basically simple usage examples. For unmarshal you need to define just one small custom struct like this --- using the rss package as a simple example, as demonstrated in **makepkg/tests/rss/main.go**:
 
-  type MyRssDoc struct {
-    XMLName xml.Name `xml:"rss"`
-    rss.TxsdRss
-  }
+
+    type MyRssDoc struct {
+        XMLName xml.Name `xml:"rss"`
+        rss.TxsdRss
+    }
+
 
 So your custom struct specifies two things:
 
