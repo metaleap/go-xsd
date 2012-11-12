@@ -93,7 +93,11 @@ The second part is the only tricky part. XML Schema Definition has no real conce
 
 Ultimately, to find out the proper name to embed you'll have to dig a bit inside the generated package. Here's how you do it:
 
-A) Suppose you have an XML format where the root element, and only that one, is known to be named **<gopher>**.
+A) Suppose you have an XML format where the root element, and only that one, is known to be named:
+
+
+    <gopher>
+
 
 B) Open the generated Go package source files under **$GOPATH/src/github.com/metaleap/go-xsd/pkg/yourdomain.org/xsd/gopher.xsd_gopkg** (unless you used custom paths when you ran the **go-xsd/makepkg** tool)
 
