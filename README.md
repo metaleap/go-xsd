@@ -15,7 +15,13 @@ A command-line tool to generate Go XML wrapper packages for specified XSD schema
 
 If no arguments are specified, this tool proceeds to (re)generate all Go packages found under go-xsd/pkg.
 
-How to use: check out the 4 *flagXyz* vars declared at the top of makepkg/main.go.
+
+    Usage of makepkg.exe:
+      -basepath="": Defaults to github.com/metaleap/go-xsd/pkg. A $GOPATH/src/-relative path (always a slash-style path, even on Windows) where XSD files are downloaded to / loaded from and generated Go wrapper packages are created. Any XSD imports are also rewritten as Go imports from that path (but are not otherwise auto-magically processed in any way).
+      -local=true: Local copy: only downloads if file does not exist locally
+      -parse=false: Not necessary unless the generated Go wrapper package won't compile.
+      -uri="": The XML Schema Definition file URIs to generate a Go wrapper packages from, whitespace-separated. (For each, the protocol prefix can be omitted, it then defaults to http://. Only protocols understood by the net/http package are supported.)
+
 
 Each generated wrapper package contains the type structures required to easily **xml.Unmarshal()** an XML document based on that XSD.
 
