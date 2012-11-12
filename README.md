@@ -37,6 +37,8 @@ Each generated wrapper package contains the type structures required to easily *
 
 **XSD imports** are rewritten as Go imports but not otherwise auto-magically processed. If you see the generated .go package importing another XSD _gopkg that will cause a "package not found" compiler error, then to make that import work, you'll first need to also auto-generate that package with makepkg yourself as well.
 
+**XSD documentation annotation** is rewritten as Go // code comments. Yeah, that's rather neat.
+
 Regarding the auto-generated code:
 
 - it's **by necessity not idiomatic** and most likely not as terse/slim as manually-written structs would be. For very simplistic XML formats, writing your own 3 or 4 custom structs might be a tiny bit more efficient. **For highly intricate, wieldy XML formats, the auto-generated packages beat hand-writing 100s of custom structs, however.** Auto-generated code will never win a code-beauty contest, you're expected to simply import the compiled package rather than having to work inside its generated source files.
