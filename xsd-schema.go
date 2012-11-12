@@ -17,7 +17,7 @@ import (
 
 const (
 	goPkgPrefix = ""
-	goPkgSuffix = "_gopkg"
+	goPkgSuffix = "_go"
 	protSep = "://"
 	xsdNamespaceUri = "http://www.w3.org/2001/XMLSchema"
 )

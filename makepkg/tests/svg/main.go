@@ -7,7 +7,7 @@ import (
 
 	util "github.com/metaleap/go-util"
 
-	svg "github.com/metaleap/go-xsd/pkg/www.w3.org/TR/2002/WD-SVG11-20020108/SVG.xsd_gopkg"
+	svg "github.com/metaleap/go-xsd-pkg/www.w3.org/TR/2002/WD-SVG11-20020108/SVG.xsd_go"
 )
 
 type SvgDoc struct {

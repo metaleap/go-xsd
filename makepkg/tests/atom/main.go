@@ -7,7 +7,7 @@ import (
 
 	util "github.com/metaleap/go-util"
 
-	atom "github.com/metaleap/go-xsd/pkg/kbcafe.com/rss/atom.xsd.xml_gopkg"
+	atom "github.com/metaleap/go-xsd-pkg/kbcafe.com/rss/atom.xsd.xml_go"
 )
 
 type AtomEntryDoc struct {

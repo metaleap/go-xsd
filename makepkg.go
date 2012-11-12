@@ -12,8 +12,8 @@ import (
 
 var (
 	PkgGen = &pkgGen {
-		BaseCodePath: util.BaseCodePathGithub("metaleap", "go-xsd", "pkg"),
-		BasePath: "github.com/metaleap/go-xsd/pkg",
+		BaseCodePath: util.BaseCodePathGithub("metaleap", "go-xsd-pkg"),
+		BasePath: "github.com/metaleap/go-xsd-pkg",
 		ForceParseForDefaults: false,
 	}
 	perPkgState struct {
