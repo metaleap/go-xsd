@@ -97,11 +97,15 @@ Ultimately, to find out the proper name to embed you'll have to dig a bit inside
 - open the generated Go package source files under **$GOPATH/src/github.com/metaleap/go-xsd/pkg/yourdomain.org/xsd/gopher.xsd_gopkg** (unless you used custom paths when you ran the **go-xsd/makepkg** tool)
 - search for an occurence of either:
 
+
     "gopher"`
+
 
 ( quote, gopher, quote, backtick ), or:
 
+
      gopher"`
+
 
 ( whitespace, gopher, quote, *backtick* )
 
