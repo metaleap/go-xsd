@@ -45,12 +45,12 @@ type TsemanticsType struct {
 
 }
 
-type XsdGoPkgHasElems_Annotation struct {
-	Annotations []*TannotationType `xml:"http://www.w3.org/1998/Math/MathML annotation"`
-}
-
 type XsdGoPkgHasElem_Annotation struct {
 	Annotation *TannotationType `xml:"http://www.w3.org/1998/Math/MathML annotation"`
+}
+
+type XsdGoPkgHasElems_Annotation struct {
+	Annotations []*TannotationType `xml:"http://www.w3.org/1998/Math/MathML annotation"`
 }
 
 type XsdGoPkgHasElems_AnnotationXml struct {
@@ -73,9 +73,9 @@ type XsdGoPkgHasGroup_AnnotationXmlContent struct {
 }
 
 type XsdGoPkgHasGroup_AnnotationClass struct {
-	XsdGoPkgHasElems_Annotation
+	XsdGoPkgHasElem_Annotation
 
-	XsdGoPkgHasElems_AnnotationXml
+	XsdGoPkgHasElem_AnnotationXml
 
 }
 

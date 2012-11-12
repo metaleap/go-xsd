@@ -123,12 +123,12 @@ type TmathType struct {
 
 }
 
-type XsdGoPkgHasElem_Math struct {
-	Math *TmathType `xml:"http://www.w3.org/1998/Math/MathML math"`
-}
-
 type XsdGoPkgHasElems_Math struct {
 	Maths []*TmathType `xml:"http://www.w3.org/1998/Math/MathML math"`
+}
+
+type XsdGoPkgHasElem_Math struct {
+	Math *TmathType `xml:"http://www.w3.org/1998/Math/MathML math"`
 }
 
 type XsdGoPkgHasGroup_PresentationExprClass struct {
@@ -146,13 +146,13 @@ type XsdGoPkgHasGroup_ContentExprClass struct {
 }
 
 type XsdGoPkgHasGroup_PresExprClass struct {
-	XsdGoPkgHasElems_Mspace
+	XsdGoPkgHasElem_Mspace
 
-	XsdGoPkgHasElems_Maction
+	XsdGoPkgHasElem_Maction
 
-	XsdGoPkgHasElems_Merror
+	XsdGoPkgHasElem_Merror
 
-	XsdGoPkgHasElems_Mstyle
+	XsdGoPkgHasElem_Mstyle
 
 	XsdGoPkgHasGroup_PresentationTokenClass
 
@@ -165,7 +165,7 @@ type XsdGoPkgHasGroup_PresExprClass struct {
 }
 
 type XsdGoPkgHasGroup_ContExprClass struct {
-	XsdGoPkgHasElems_Semantics
+	XsdGoPkgHasElem_Semantics
 
 	XsdGoPkgHasGroup_ContentTokensClass
 

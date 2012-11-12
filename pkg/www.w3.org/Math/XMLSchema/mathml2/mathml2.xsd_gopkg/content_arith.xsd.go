@@ -25,12 +25,12 @@ type XsdGoPkgHasElem_Abs struct {
 	Abs *TArithType `xml:"http://www.w3.org/1998/Math/MathML abs"`
 }
 
-type XsdGoPkgHasElems_Conjugate struct {
-	Conjugates []*TArithType `xml:"http://www.w3.org/1998/Math/MathML conjugate"`
-}
-
 type XsdGoPkgHasElem_Conjugate struct {
 	Conjugate *TArithType `xml:"http://www.w3.org/1998/Math/MathML conjugate"`
+}
+
+type XsdGoPkgHasElems_Conjugate struct {
+	Conjugates []*TArithType `xml:"http://www.w3.org/1998/Math/MathML conjugate"`
 }
 
 type XsdGoPkgHasElems_Arg struct {
@@ -57,20 +57,20 @@ type XsdGoPkgHasElem_Imaginary struct {
 	Imaginary *TArithType `xml:"http://www.w3.org/1998/Math/MathML imaginary"`
 }
 
-type XsdGoPkgHasElem_Floor struct {
-	Floor *TArithType `xml:"http://www.w3.org/1998/Math/MathML floor"`
-}
-
 type XsdGoPkgHasElems_Floor struct {
 	Floors []*TArithType `xml:"http://www.w3.org/1998/Math/MathML floor"`
 }
 
-type XsdGoPkgHasElem_Ceiling struct {
-	Ceiling *TArithType `xml:"http://www.w3.org/1998/Math/MathML ceiling"`
+type XsdGoPkgHasElem_Floor struct {
+	Floor *TArithType `xml:"http://www.w3.org/1998/Math/MathML floor"`
 }
 
 type XsdGoPkgHasElems_Ceiling struct {
 	Ceilings []*TArithType `xml:"http://www.w3.org/1998/Math/MathML ceiling"`
+}
+
+type XsdGoPkgHasElem_Ceiling struct {
+	Ceiling *TArithType `xml:"http://www.w3.org/1998/Math/MathML ceiling"`
 }
 
 type XsdGoPkgHasElem_Power struct {
@@ -89,36 +89,36 @@ type XsdGoPkgHasElem_Root struct {
 	Root *TArithType `xml:"http://www.w3.org/1998/Math/MathML root"`
 }
 
-type XsdGoPkgHasElem_Minus struct {
-	Minus *TArithType `xml:"http://www.w3.org/1998/Math/MathML minus"`
-}
-
 type XsdGoPkgHasElems_Minus struct {
 	Minuses []*TArithType `xml:"http://www.w3.org/1998/Math/MathML minus"`
 }
 
-type XsdGoPkgHasElems_Plus struct {
-	Pluses []*TArithType `xml:"http://www.w3.org/1998/Math/MathML plus"`
+type XsdGoPkgHasElem_Minus struct {
+	Minus *TArithType `xml:"http://www.w3.org/1998/Math/MathML minus"`
 }
 
 type XsdGoPkgHasElem_Plus struct {
 	Plus *TArithType `xml:"http://www.w3.org/1998/Math/MathML plus"`
 }
 
-type XsdGoPkgHasElem_Sum struct {
-	Sum *TArithType `xml:"http://www.w3.org/1998/Math/MathML sum"`
+type XsdGoPkgHasElems_Plus struct {
+	Pluses []*TArithType `xml:"http://www.w3.org/1998/Math/MathML plus"`
 }
 
 type XsdGoPkgHasElems_Sum struct {
 	Sums []*TArithType `xml:"http://www.w3.org/1998/Math/MathML sum"`
 }
 
-type XsdGoPkgHasElem_Times struct {
-	Times *TArithType `xml:"http://www.w3.org/1998/Math/MathML times"`
+type XsdGoPkgHasElem_Sum struct {
+	Sum *TArithType `xml:"http://www.w3.org/1998/Math/MathML sum"`
 }
 
 type XsdGoPkgHasElems_Times struct {
 	Timeses []*TArithType `xml:"http://www.w3.org/1998/Math/MathML times"`
+}
+
+type XsdGoPkgHasElem_Times struct {
+	Times *TArithType `xml:"http://www.w3.org/1998/Math/MathML times"`
 }
 
 type XsdGoPkgHasElem_Product struct {
@@ -129,12 +129,12 @@ type XsdGoPkgHasElems_Product struct {
 	Products []*TArithType `xml:"http://www.w3.org/1998/Math/MathML product"`
 }
 
-type XsdGoPkgHasElems_Max struct {
-	Maxs []*TArithType `xml:"http://www.w3.org/1998/Math/MathML max"`
-}
-
 type XsdGoPkgHasElem_Max struct {
 	Max *TArithType `xml:"http://www.w3.org/1998/Math/MathML max"`
+}
+
+type XsdGoPkgHasElems_Max struct {
+	Maxs []*TArithType `xml:"http://www.w3.org/1998/Math/MathML max"`
 }
 
 type XsdGoPkgHasElems_Min struct {
@@ -161,81 +161,81 @@ type XsdGoPkgHasElems_Quotient struct {
 	Quotients []*TArithType `xml:"http://www.w3.org/1998/Math/MathML quotient"`
 }
 
-type XsdGoPkgHasElem_Divide struct {
-	Divide *TArithType `xml:"http://www.w3.org/1998/Math/MathML divide"`
-}
-
 type XsdGoPkgHasElems_Divide struct {
 	Divides []*TArithType `xml:"http://www.w3.org/1998/Math/MathML divide"`
 }
 
-type XsdGoPkgHasElem_Rem struct {
-	Rem *TArithType `xml:"http://www.w3.org/1998/Math/MathML rem"`
+type XsdGoPkgHasElem_Divide struct {
+	Divide *TArithType `xml:"http://www.w3.org/1998/Math/MathML divide"`
 }
 
 type XsdGoPkgHasElems_Rem struct {
 	Rems []*TArithType `xml:"http://www.w3.org/1998/Math/MathML rem"`
 }
 
-type XsdGoPkgHasElem_Gcd struct {
-	Gcd *TArithType `xml:"http://www.w3.org/1998/Math/MathML gcd"`
+type XsdGoPkgHasElem_Rem struct {
+	Rem *TArithType `xml:"http://www.w3.org/1998/Math/MathML rem"`
 }
 
 type XsdGoPkgHasElems_Gcd struct {
 	Gcds []*TArithType `xml:"http://www.w3.org/1998/Math/MathML gcd"`
 }
 
-type XsdGoPkgHasElems_Lcm struct {
-	Lcms []*TArithType `xml:"http://www.w3.org/1998/Math/MathML lcm"`
+type XsdGoPkgHasElem_Gcd struct {
+	Gcd *TArithType `xml:"http://www.w3.org/1998/Math/MathML gcd"`
 }
 
 type XsdGoPkgHasElem_Lcm struct {
 	Lcm *TArithType `xml:"http://www.w3.org/1998/Math/MathML lcm"`
 }
 
+type XsdGoPkgHasElems_Lcm struct {
+	Lcms []*TArithType `xml:"http://www.w3.org/1998/Math/MathML lcm"`
+}
+
 type XsdGoPkgHasGroup_ContentArithClass struct {
-	XsdGoPkgHasElems_Abs
+	XsdGoPkgHasElem_Abs
 
-	XsdGoPkgHasElems_Conjugate
+	XsdGoPkgHasElem_Conjugate
 
-	XsdGoPkgHasElems_Factorial
+	XsdGoPkgHasElem_Factorial
 
-	XsdGoPkgHasElems_Arg
+	XsdGoPkgHasElem_Arg
 
-	XsdGoPkgHasElems_Real
+	XsdGoPkgHasElem_Real
 
-	XsdGoPkgHasElems_Imaginary
+	XsdGoPkgHasElem_Imaginary
 
-	XsdGoPkgHasElems_Floor
+	XsdGoPkgHasElem_Floor
 
-	XsdGoPkgHasElems_Ceiling
+	XsdGoPkgHasElem_Ceiling
 
-	XsdGoPkgHasElems_Quotient
+	XsdGoPkgHasElem_Quotient
 
-	XsdGoPkgHasElems_Divide
+	XsdGoPkgHasElem_Divide
 
-	XsdGoPkgHasElems_Rem
+	XsdGoPkgHasElem_Rem
 
-	XsdGoPkgHasElems_Minus
+	XsdGoPkgHasElem_Minus
 
-	XsdGoPkgHasElems_Plus
+	XsdGoPkgHasElem_Plus
 
-	XsdGoPkgHasElems_Times
+	XsdGoPkgHasElem_Times
 
-	XsdGoPkgHasElems_Power
+	XsdGoPkgHasElem_Power
 
-	XsdGoPkgHasElems_Root
+	XsdGoPkgHasElem_Root
 
-	XsdGoPkgHasElems_Max
+	XsdGoPkgHasElem_Max
 
-	XsdGoPkgHasElems_Min
+	XsdGoPkgHasElem_Min
 
-	XsdGoPkgHasElems_Gcd
+	XsdGoPkgHasElem_Gcd
 
-	XsdGoPkgHasElems_Lcm
+	XsdGoPkgHasElem_Lcm
 
-	XsdGoPkgHasElems_Sum
+	XsdGoPkgHasElem_Sum
 
-	XsdGoPkgHasElems_Product
+	XsdGoPkgHasElem_Product
 
 }

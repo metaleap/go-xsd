@@ -98,28 +98,28 @@ type TtendstoType struct {
 
 }
 
-type XsdGoPkgHasElem_Int struct {
-	Int *TintType `xml:"http://www.w3.org/1998/Math/MathML int"`
-}
-
 type XsdGoPkgHasElems_Int struct {
 	Ints []*TintType `xml:"http://www.w3.org/1998/Math/MathML int"`
 }
 
-type XsdGoPkgHasElems_Diff struct {
-	Diffs []*TdiffType `xml:"http://www.w3.org/1998/Math/MathML diff"`
+type XsdGoPkgHasElem_Int struct {
+	Int *TintType `xml:"http://www.w3.org/1998/Math/MathML int"`
 }
 
 type XsdGoPkgHasElem_Diff struct {
 	Diff *TdiffType `xml:"http://www.w3.org/1998/Math/MathML diff"`
 }
 
-type XsdGoPkgHasElems_Partialdiff struct {
-	Partialdiffs []*TpartialdiffType `xml:"http://www.w3.org/1998/Math/MathML partialdiff"`
+type XsdGoPkgHasElems_Diff struct {
+	Diffs []*TdiffType `xml:"http://www.w3.org/1998/Math/MathML diff"`
 }
 
 type XsdGoPkgHasElem_Partialdiff struct {
 	Partialdiff *TpartialdiffType `xml:"http://www.w3.org/1998/Math/MathML partialdiff"`
+}
+
+type XsdGoPkgHasElems_Partialdiff struct {
+	Partialdiffs []*TpartialdiffType `xml:"http://www.w3.org/1998/Math/MathML partialdiff"`
 }
 
 type XsdGoPkgHasElems_Limit struct {
@@ -165,18 +165,18 @@ type XsdGoPkgHasGroup_UplimitContent struct {
 }
 
 type XsdGoPkgHasGroup_ContentCalculusClass struct {
-	XsdGoPkgHasElems_Int
+	XsdGoPkgHasElem_Int
 
-	XsdGoPkgHasElems_Diff
+	XsdGoPkgHasElem_Diff
 
-	XsdGoPkgHasElems_Partialdiff
+	XsdGoPkgHasElem_Partialdiff
 
-	XsdGoPkgHasElems_Limit
+	XsdGoPkgHasElem_Limit
 
-	XsdGoPkgHasElems_Lowlimit
+	XsdGoPkgHasElem_Lowlimit
 
-	XsdGoPkgHasElems_Uplimit
+	XsdGoPkgHasElem_Uplimit
 
-	XsdGoPkgHasElems_Tendsto
+	XsdGoPkgHasElem_Tendsto
 
 }

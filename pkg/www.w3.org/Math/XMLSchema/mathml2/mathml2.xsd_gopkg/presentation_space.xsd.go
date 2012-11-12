@@ -98,10 +98,10 @@ type TmspaceType struct {
 
 }
 
-type XsdGoPkgHasElems_Mspace struct {
-	Mspaces []*TmspaceType `xml:"http://www.w3.org/1998/Math/MathML mspace"`
-}
-
 type XsdGoPkgHasElem_Mspace struct {
 	Mspace *TmspaceType `xml:"http://www.w3.org/1998/Math/MathML mspace"`
+}
+
+type XsdGoPkgHasElems_Mspace struct {
+	Mspaces []*TmspaceType `xml:"http://www.w3.org/1998/Math/MathML mspace"`
 }

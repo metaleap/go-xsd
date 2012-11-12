@@ -132,410 +132,485 @@ func (me TRfc822FormatDate) String () string { return xsdt.String(me).String() }
 func (me TRfc822FormatDate) ToXsdtString () xsdt.String { return xsdt.String(me) }
 
 //	The title of the item.
-type XsdGoPkgHasElem_Title_XsdtString_ struct {
+type XsdGoPkgHasElem_titlechoicesequenceRssItemschema_Title_XsdtString_ struct {
 //	The title of the item.
 	Title xsdt.String `xml:"title"`
 }
 
 //	The title of the item.
-type XsdGoPkgHasElems_Title_XsdtString_ struct {
+type XsdGoPkgHasElems_titlechoicesequenceRssItemschema_Title_XsdtString_ struct {
 //	The title of the item.
 	Titles []xsdt.String `xml:"title"`
 }
 
 //	The item synopsis.
-type XsdGoPkgHasElems_Description_XsdtString_ struct {
+type XsdGoPkgHasElems_descriptionchoicesequenceRssItemschema_Description_XsdtString_ struct {
 //	The item synopsis.
 	Descriptions []xsdt.String `xml:"description"`
 }
 
 //	The item synopsis.
-type XsdGoPkgHasElem_Description_XsdtString_ struct {
+type XsdGoPkgHasElem_descriptionchoicesequenceRssItemschema_Description_XsdtString_ struct {
 //	The item synopsis.
 	Description xsdt.String `xml:"description"`
 }
 
 //	The URL of the item.
-type XsdGoPkgHasElems_Link_XsdtAnyURI_ struct {
+type XsdGoPkgHasElems_linkchoicesequenceRssItemschema_Link_XsdtAnyURI_ struct {
 //	The URL of the item.
 	Links []xsdt.AnyURI `xml:"link"`
 }
 
 //	The URL of the item.
-type XsdGoPkgHasElem_Link_XsdtAnyURI_ struct {
+type XsdGoPkgHasElem_linkchoicesequenceRssItemschema_Link_XsdtAnyURI_ struct {
 //	The URL of the item.
 	Link xsdt.AnyURI `xml:"link"`
 }
 
 //	Email address of the author of the item.
-type XsdGoPkgHasElems_Author_TEmailAddress_ struct {
+type XsdGoPkgHasElems_authorchoicesequenceRssItemschema_Author_TEmailAddress_ struct {
 //	Email address of the author of the item.
 	Authors []TEmailAddress `xml:"author"`
 }
 
 //	Email address of the author of the item.
-type XsdGoPkgHasElem_Author_TEmailAddress_ struct {
+type XsdGoPkgHasElem_authorchoicesequenceRssItemschema_Author_TEmailAddress_ struct {
 //	Email address of the author of the item.
 	Author TEmailAddress `xml:"author"`
 }
 
 //	Includes the item in one or more categories.
-type XsdGoPkgHasElem_Category_TCategory_ struct {
+type XsdGoPkgHasElem_categorychoicesequenceRssItemschema_Category_TCategory_ struct {
 //	Includes the item in one or more categories.
 	Category *TCategory `xml:"category"`
 }
 
 //	Includes the item in one or more categories.
-type XsdGoPkgHasElems_Category_TCategory_ struct {
+type XsdGoPkgHasElems_categorychoicesequenceRssItemschema_Category_TCategory_ struct {
 //	Includes the item in one or more categories.
 	Categories []*TCategory `xml:"category"`
 }
 
 //	URL of a page for comments relating to the item.
-type XsdGoPkgHasElems_Comments_XsdtAnyURI_ struct {
-//	URL of a page for comments relating to the item.
-	Commentses []xsdt.AnyURI `xml:"comments"`
-}
-
-//	URL of a page for comments relating to the item.
-type XsdGoPkgHasElem_Comments_XsdtAnyURI_ struct {
+type XsdGoPkgHasElem_commentschoicesequenceRssItemschema_Comments_XsdtAnyURI_ struct {
 //	URL of a page for comments relating to the item.
 	Comments xsdt.AnyURI `xml:"comments"`
 }
 
-//	Describes a media object that is attached to the item.
-type XsdGoPkgHasElems_Enclosure_TEnclosure_ struct {
-//	Describes a media object that is attached to the item.
-	Enclosures []*TEnclosure `xml:"enclosure"`
+//	URL of a page for comments relating to the item.
+type XsdGoPkgHasElems_commentschoicesequenceRssItemschema_Comments_XsdtAnyURI_ struct {
+//	URL of a page for comments relating to the item.
+	Commentses []xsdt.AnyURI `xml:"comments"`
 }
 
 //	Describes a media object that is attached to the item.
-type XsdGoPkgHasElem_Enclosure_TEnclosure_ struct {
+type XsdGoPkgHasElem_enclosurechoicesequenceRssItemschema_Enclosure_TEnclosure_ struct {
 //	Describes a media object that is attached to the item.
 	Enclosure *TEnclosure `xml:"enclosure"`
 }
 
+//	Describes a media object that is attached to the item.
+type XsdGoPkgHasElems_enclosurechoicesequenceRssItemschema_Enclosure_TEnclosure_ struct {
+//	Describes a media object that is attached to the item.
+	Enclosures []*TEnclosure `xml:"enclosure"`
+}
+
 //	guid or permalink URL for this entry
-type XsdGoPkgHasElems_Guid_TGuid_ struct {
+type XsdGoPkgHasElems_guidchoicesequenceRssItemschema_Guid_TGuid_ struct {
 //	guid or permalink URL for this entry
 	Guids []*TGuid `xml:"guid"`
 }
 
 //	guid or permalink URL for this entry
-type XsdGoPkgHasElem_Guid_TGuid_ struct {
+type XsdGoPkgHasElem_guidchoicesequenceRssItemschema_Guid_TGuid_ struct {
 //	guid or permalink URL for this entry
 	Guid *TGuid `xml:"guid"`
 }
 
 //	Indicates when the item was published.
-type XsdGoPkgHasElem_PubDate_TRfc822FormatDate_ struct {
+type XsdGoPkgHasElem_pubDatechoicesequenceRssItemschema_PubDate_TRfc822FormatDate_ struct {
 //	Indicates when the item was published.
 	PubDate TRfc822FormatDate `xml:"pubDate"`
 }
 
 //	Indicates when the item was published.
-type XsdGoPkgHasElems_PubDate_TRfc822FormatDate_ struct {
+type XsdGoPkgHasElems_pubDatechoicesequenceRssItemschema_PubDate_TRfc822FormatDate_ struct {
 //	Indicates when the item was published.
 	PubDates []TRfc822FormatDate `xml:"pubDate"`
 }
 
 //	The RSS channel that the item came from.
-type XsdGoPkgHasElems_Source_TSource_ struct {
+type XsdGoPkgHasElem_sourcechoicesequenceRssItemschema_Source_TSource_ struct {
 //	The RSS channel that the item came from.
-	Sources []*TSource `xml:"source"`
+	Source *TSource `xml:"source"`
 }
 
 //	The RSS channel that the item came from.
-type XsdGoPkgHasElem_Source_TSource_ struct {
+type XsdGoPkgHasElems_sourcechoicesequenceRssItemschema_Source_TSource_ struct {
 //	The RSS channel that the item came from.
-	Source *TSource `xml:"source"`
+	Sources []*TSource `xml:"source"`
 }
 
 //	An item may represent a "story" -- much like a story in a newspaper or magazine; if so its description is a synopsis of the story, and the link points to the full story. An item may also be complete in itself, if so, the description contains the text (entity-encoded HTML is allowed), and the link and title may be omitted.
 type TRssItem struct {
 //	The title of the item.
-	XsdGoPkgHasElems_Title_XsdtString_
+	XsdGoPkgHasElems_titlechoicesequenceRssItemschema_Title_XsdtString_
 
 //	The item synopsis.
-	XsdGoPkgHasElems_Description_XsdtString_
+	XsdGoPkgHasElems_descriptionchoicesequenceRssItemschema_Description_XsdtString_
 
 //	The URL of the item.
-	XsdGoPkgHasElems_Link_XsdtAnyURI_
+	XsdGoPkgHasElems_linkchoicesequenceRssItemschema_Link_XsdtAnyURI_
 
 //	Email address of the author of the item.
-	XsdGoPkgHasElems_Author_TEmailAddress_
+	XsdGoPkgHasElems_authorchoicesequenceRssItemschema_Author_TEmailAddress_
 
 //	Includes the item in one or more categories.
-	XsdGoPkgHasElems_Category_TCategory_
+	XsdGoPkgHasElems_categorychoicesequenceRssItemschema_Category_TCategory_
 
 //	URL of a page for comments relating to the item.
-	XsdGoPkgHasElems_Comments_XsdtAnyURI_
+	XsdGoPkgHasElems_commentschoicesequenceRssItemschema_Comments_XsdtAnyURI_
 
 //	Describes a media object that is attached to the item.
-	XsdGoPkgHasElems_Enclosure_TEnclosure_
+	XsdGoPkgHasElems_enclosurechoicesequenceRssItemschema_Enclosure_TEnclosure_
 
 //	guid or permalink URL for this entry
-	XsdGoPkgHasElems_Guid_TGuid_
+	XsdGoPkgHasElems_guidchoicesequenceRssItemschema_Guid_TGuid_
 
 //	Indicates when the item was published.
-	XsdGoPkgHasElems_PubDate_TRfc822FormatDate_
+	XsdGoPkgHasElems_pubDatechoicesequenceRssItemschema_PubDate_TRfc822FormatDate_
 
 //	The RSS channel that the item came from.
-	XsdGoPkgHasElems_Source_TSource_
+	XsdGoPkgHasElems_sourcechoicesequenceRssItemschema_Source_TSource_
 
 }
 
-//	The language the channel is written in. This allows aggregators to group all Italian language sites, for example, on a single page. A list of allowable values for this element, as provided by Netscape, is here. You may also use values defined by the W3C.
-type XsdGoPkgHasElem_Language_XsdtLanguage_ struct {
-//	The language the channel is written in. This allows aggregators to group all Italian language sites, for example, on a single page. A list of allowable values for this element, as provided by Netscape, is here. You may also use values defined by the W3C.
-	Language xsdt.Language `xml:"language"`
+//	The name of the channel. It's how people refer to your service. If you have an HTML website that contains the same information as your RSS file, the title of your channel should be the same as the title of your website.
+type XsdGoPkgHasElems_titlechoicesequenceRssChannelschema_Title_XsdtString_ struct {
+//	The name of the channel. It's how people refer to your service. If you have an HTML website that contains the same information as your RSS file, the title of your channel should be the same as the title of your website.
+	Titles []xsdt.String `xml:"title"`
+}
+
+//	The name of the channel. It's how people refer to your service. If you have an HTML website that contains the same information as your RSS file, the title of your channel should be the same as the title of your website.
+type XsdGoPkgHasElem_titlechoicesequenceRssChannelschema_Title_XsdtString_ struct {
+//	The name of the channel. It's how people refer to your service. If you have an HTML website that contains the same information as your RSS file, the title of your channel should be the same as the title of your website.
+	Title xsdt.String `xml:"title"`
+}
+
+//	The URL to the HTML website corresponding to the channel.
+type XsdGoPkgHasElems_linkchoicesequenceRssChannelschema_Link_XsdtAnyURI_ struct {
+//	The URL to the HTML website corresponding to the channel.
+	Links []xsdt.AnyURI `xml:"link"`
+}
+
+//	The URL to the HTML website corresponding to the channel.
+type XsdGoPkgHasElem_linkchoicesequenceRssChannelschema_Link_XsdtAnyURI_ struct {
+//	The URL to the HTML website corresponding to the channel.
+	Link xsdt.AnyURI `xml:"link"`
+}
+
+//	Phrase or sentence describing the channel.
+type XsdGoPkgHasElem_descriptionchoicesequenceRssChannelschema_Description_XsdtString_ struct {
+//	Phrase or sentence describing the channel.
+	Description xsdt.String `xml:"description"`
+}
+
+//	Phrase or sentence describing the channel.
+type XsdGoPkgHasElems_descriptionchoicesequenceRssChannelschema_Description_XsdtString_ struct {
+//	Phrase or sentence describing the channel.
+	Descriptions []xsdt.String `xml:"description"`
 }
 
 //	The language the channel is written in. This allows aggregators to group all Italian language sites, for example, on a single page. A list of allowable values for this element, as provided by Netscape, is here. You may also use values defined by the W3C.
-type XsdGoPkgHasElems_Language_XsdtLanguage_ struct {
+type XsdGoPkgHasElems_languagechoicesequenceRssChannelschema_Language_XsdtLanguage_ struct {
 //	The language the channel is written in. This allows aggregators to group all Italian language sites, for example, on a single page. A list of allowable values for this element, as provided by Netscape, is here. You may also use values defined by the W3C.
 	Languages []xsdt.Language `xml:"language"`
 }
 
-//	Copyright notice for content in the channel.
-type XsdGoPkgHasElems_Copyright_XsdtString_ struct {
-//	Copyright notice for content in the channel.
-	Copyrights []xsdt.String `xml:"copyright"`
+//	The language the channel is written in. This allows aggregators to group all Italian language sites, for example, on a single page. A list of allowable values for this element, as provided by Netscape, is here. You may also use values defined by the W3C.
+type XsdGoPkgHasElem_languagechoicesequenceRssChannelschema_Language_XsdtLanguage_ struct {
+//	The language the channel is written in. This allows aggregators to group all Italian language sites, for example, on a single page. A list of allowable values for this element, as provided by Netscape, is here. You may also use values defined by the W3C.
+	Language xsdt.Language `xml:"language"`
 }
 
 //	Copyright notice for content in the channel.
-type XsdGoPkgHasElem_Copyright_XsdtString_ struct {
+type XsdGoPkgHasElem_copyrightchoicesequenceRssChannelschema_Copyright_XsdtString_ struct {
 //	Copyright notice for content in the channel.
 	Copyright xsdt.String `xml:"copyright"`
 }
 
+//	Copyright notice for content in the channel.
+type XsdGoPkgHasElems_copyrightchoicesequenceRssChannelschema_Copyright_XsdtString_ struct {
+//	Copyright notice for content in the channel.
+	Copyrights []xsdt.String `xml:"copyright"`
+}
+
 //	Email address for person responsible for editorial content.
-type XsdGoPkgHasElems_ManagingEditor_TEmailAddress_ struct {
+type XsdGoPkgHasElems_managingEditorchoicesequenceRssChannelschema_ManagingEditor_TEmailAddress_ struct {
 //	Email address for person responsible for editorial content.
 	ManagingEditors []TEmailAddress `xml:"managingEditor"`
 }
 
 //	Email address for person responsible for editorial content.
-type XsdGoPkgHasElem_ManagingEditor_TEmailAddress_ struct {
+type XsdGoPkgHasElem_managingEditorchoicesequenceRssChannelschema_ManagingEditor_TEmailAddress_ struct {
 //	Email address for person responsible for editorial content.
 	ManagingEditor TEmailAddress `xml:"managingEditor"`
 }
 
 //	Email address for person responsible for technical issues relating to channel.
-type XsdGoPkgHasElem_WebMaster_TEmailAddress_ struct {
-//	Email address for person responsible for technical issues relating to channel.
-	WebMaster TEmailAddress `xml:"webMaster"`
-}
-
-//	Email address for person responsible for technical issues relating to channel.
-type XsdGoPkgHasElems_WebMaster_TEmailAddress_ struct {
+type XsdGoPkgHasElems_webMasterchoicesequenceRssChannelschema_WebMaster_TEmailAddress_ struct {
 //	Email address for person responsible for technical issues relating to channel.
 	WebMasters []TEmailAddress `xml:"webMaster"`
 }
 
+//	Email address for person responsible for technical issues relating to channel.
+type XsdGoPkgHasElem_webMasterchoicesequenceRssChannelschema_WebMaster_TEmailAddress_ struct {
+//	Email address for person responsible for technical issues relating to channel.
+	WebMaster TEmailAddress `xml:"webMaster"`
+}
+
+//	The publication date for the content in the channel. All date-times in RSS conform to the Date and Time Specification of RFC 822, with the exception that the year may be expressed with two characters or four characters (four preferred).
+type XsdGoPkgHasElems_pubDatechoicesequenceRssChannelschema_PubDate_TRfc822FormatDate_ struct {
+//	The publication date for the content in the channel. All date-times in RSS conform to the Date and Time Specification of RFC 822, with the exception that the year may be expressed with two characters or four characters (four preferred).
+	PubDates []TRfc822FormatDate `xml:"pubDate"`
+}
+
+//	The publication date for the content in the channel. All date-times in RSS conform to the Date and Time Specification of RFC 822, with the exception that the year may be expressed with two characters or four characters (four preferred).
+type XsdGoPkgHasElem_pubDatechoicesequenceRssChannelschema_PubDate_TRfc822FormatDate_ struct {
+//	The publication date for the content in the channel. All date-times in RSS conform to the Date and Time Specification of RFC 822, with the exception that the year may be expressed with two characters or four characters (four preferred).
+	PubDate TRfc822FormatDate `xml:"pubDate"`
+}
+
 //	The last time the content of the channel changed.
-type XsdGoPkgHasElems_LastBuildDate_TRfc822FormatDate_ struct {
+type XsdGoPkgHasElems_lastBuildDatechoicesequenceRssChannelschema_LastBuildDate_TRfc822FormatDate_ struct {
 //	The last time the content of the channel changed.
 	LastBuildDates []TRfc822FormatDate `xml:"lastBuildDate"`
 }
 
 //	The last time the content of the channel changed.
-type XsdGoPkgHasElem_LastBuildDate_TRfc822FormatDate_ struct {
+type XsdGoPkgHasElem_lastBuildDatechoicesequenceRssChannelschema_LastBuildDate_TRfc822FormatDate_ struct {
 //	The last time the content of the channel changed.
 	LastBuildDate TRfc822FormatDate `xml:"lastBuildDate"`
 }
 
-//	A string indicating the program used to generate the channel.
-type XsdGoPkgHasElem_Generator_XsdtString_ struct {
-//	A string indicating the program used to generate the channel.
-	Generator xsdt.String `xml:"generator"`
+//	Specify one or more categories that the channel belongs to.
+type XsdGoPkgHasElem_categorychoicesequenceRssChannelschema_Category_TCategory_ struct {
+//	Specify one or more categories that the channel belongs to.
+	Category *TCategory `xml:"category"`
+}
+
+//	Specify one or more categories that the channel belongs to.
+type XsdGoPkgHasElems_categorychoicesequenceRssChannelschema_Category_TCategory_ struct {
+//	Specify one or more categories that the channel belongs to.
+	Categories []*TCategory `xml:"category"`
 }
 
 //	A string indicating the program used to generate the channel.
-type XsdGoPkgHasElems_Generator_XsdtString_ struct {
+type XsdGoPkgHasElems_generatorchoicesequenceRssChannelschema_Generator_XsdtString_ struct {
 //	A string indicating the program used to generate the channel.
 	Generators []xsdt.String `xml:"generator"`
 }
 
+//	A string indicating the program used to generate the channel.
+type XsdGoPkgHasElem_generatorchoicesequenceRssChannelschema_Generator_XsdtString_ struct {
+//	A string indicating the program used to generate the channel.
+	Generator xsdt.String `xml:"generator"`
+}
+
 //	A URL that points to the documentation for the format used in the RSS file. It's probably a pointer to this page. It's for people who might stumble across an RSS file on a Web server 25 years from now and wonder what it is.
-type XsdGoPkgHasElems_Docs_XsdtAnyURI_ struct {
+type XsdGoPkgHasElems_docschoicesequenceRssChannelschema_Docs_XsdtAnyURI_ struct {
 //	A URL that points to the documentation for the format used in the RSS file. It's probably a pointer to this page. It's for people who might stumble across an RSS file on a Web server 25 years from now and wonder what it is.
 	Docses []xsdt.AnyURI `xml:"docs"`
 }
 
 //	A URL that points to the documentation for the format used in the RSS file. It's probably a pointer to this page. It's for people who might stumble across an RSS file on a Web server 25 years from now and wonder what it is.
-type XsdGoPkgHasElem_Docs_XsdtAnyURI_ struct {
+type XsdGoPkgHasElem_docschoicesequenceRssChannelschema_Docs_XsdtAnyURI_ struct {
 //	A URL that points to the documentation for the format used in the RSS file. It's probably a pointer to this page. It's for people who might stumble across an RSS file on a Web server 25 years from now and wonder what it is.
 	Docs xsdt.AnyURI `xml:"docs"`
 }
 
 //	Allows processes to register with a cloud to be notified of updates to the channel, implementing a lightweight publish-subscribe protocol for RSS feeds.
-type XsdGoPkgHasElem_Cloud_TCloud_ struct {
+type XsdGoPkgHasElem_cloudchoicesequenceRssChannelschema_Cloud_TCloud_ struct {
 //	Allows processes to register with a cloud to be notified of updates to the channel, implementing a lightweight publish-subscribe protocol for RSS feeds.
 	Cloud *TCloud `xml:"cloud"`
 }
 
 //	Allows processes to register with a cloud to be notified of updates to the channel, implementing a lightweight publish-subscribe protocol for RSS feeds.
-type XsdGoPkgHasElems_Cloud_TCloud_ struct {
+type XsdGoPkgHasElems_cloudchoicesequenceRssChannelschema_Cloud_TCloud_ struct {
 //	Allows processes to register with a cloud to be notified of updates to the channel, implementing a lightweight publish-subscribe protocol for RSS feeds.
 	Clouds []*TCloud `xml:"cloud"`
 }
 
 //	ttl stands for time to live. It's a number of minutes that indicates how long a channel can be cached before refreshing from the source.
-type XsdGoPkgHasElems_Ttl_XsdtNonNegativeInteger_ struct {
-//	ttl stands for time to live. It's a number of minutes that indicates how long a channel can be cached before refreshing from the source.
-	Ttls []xsdt.NonNegativeInteger `xml:"ttl"`
-}
-
-//	ttl stands for time to live. It's a number of minutes that indicates how long a channel can be cached before refreshing from the source.
-type XsdGoPkgHasElem_Ttl_XsdtNonNegativeInteger_ struct {
+type XsdGoPkgHasElem_ttlchoicesequenceRssChannelschema_Ttl_XsdtNonNegativeInteger_ struct {
 //	ttl stands for time to live. It's a number of minutes that indicates how long a channel can be cached before refreshing from the source.
 	Ttl xsdt.NonNegativeInteger `xml:"ttl"`
 }
 
+//	ttl stands for time to live. It's a number of minutes that indicates how long a channel can be cached before refreshing from the source.
+type XsdGoPkgHasElems_ttlchoicesequenceRssChannelschema_Ttl_XsdtNonNegativeInteger_ struct {
+//	ttl stands for time to live. It's a number of minutes that indicates how long a channel can be cached before refreshing from the source.
+	Ttls []xsdt.NonNegativeInteger `xml:"ttl"`
+}
+
 //	Specifies a GIF, JPEG or PNG image that can be displayed with the channel.
-type XsdGoPkgHasElem_Image_TImage_ struct {
+type XsdGoPkgHasElem_imagechoicesequenceRssChannelschema_Image_TImage_ struct {
 //	Specifies a GIF, JPEG or PNG image that can be displayed with the channel.
 	Image *TImage `xml:"image"`
 }
 
 //	Specifies a GIF, JPEG or PNG image that can be displayed with the channel.
-type XsdGoPkgHasElems_Image_TImage_ struct {
+type XsdGoPkgHasElems_imagechoicesequenceRssChannelschema_Image_TImage_ struct {
 //	Specifies a GIF, JPEG or PNG image that can be displayed with the channel.
 	Images []*TImage `xml:"image"`
 }
 
 //	The PICS rating for the channel.
-type XsdGoPkgHasElem_Rating_XsdtString_ struct {
+type XsdGoPkgHasElem_ratingchoicesequenceRssChannelschema_Rating_XsdtString_ struct {
 //	The PICS rating for the channel.
 	Rating xsdt.String `xml:"rating"`
 }
 
 //	The PICS rating for the channel.
-type XsdGoPkgHasElems_Rating_XsdtString_ struct {
+type XsdGoPkgHasElems_ratingchoicesequenceRssChannelschema_Rating_XsdtString_ struct {
 //	The PICS rating for the channel.
 	Ratings []xsdt.String `xml:"rating"`
 }
 
 //	Specifies a text input box that can be displayed with the channel.
-type XsdGoPkgHasElems_TextInput_TextInput_ struct {
-//	Specifies a text input box that can be displayed with the channel.
-	TextInputs []*TextInput `xml:"textInput"`
-}
-
-//	Specifies a text input box that can be displayed with the channel.
-type XsdGoPkgHasElem_TextInput_TextInput_ struct {
+type XsdGoPkgHasElem_textInputchoicesequenceRssChannelschema_TextInput_TextInput_ struct {
 //	Specifies a text input box that can be displayed with the channel.
 	TextInput *TextInput `xml:"textInput"`
 }
 
-//	A hint for aggregators telling them which hours they can skip.
-type XsdGoPkgHasElem_SkipHours_TSkipHoursList_ struct {
-//	A hint for aggregators telling them which hours they can skip.
-	SkipHours *TSkipHoursList `xml:"skipHours"`
+//	Specifies a text input box that can be displayed with the channel.
+type XsdGoPkgHasElems_textInputchoicesequenceRssChannelschema_TextInput_TextInput_ struct {
+//	Specifies a text input box that can be displayed with the channel.
+	TextInputs []*TextInput `xml:"textInput"`
 }
 
 //	A hint for aggregators telling them which hours they can skip.
-type XsdGoPkgHasElems_SkipHours_TSkipHoursList_ struct {
+type XsdGoPkgHasElems_skipHourschoicesequenceRssChannelschema_SkipHours_TSkipHoursList_ struct {
 //	A hint for aggregators telling them which hours they can skip.
 	SkipHourses []*TSkipHoursList `xml:"skipHours"`
 }
 
+//	A hint for aggregators telling them which hours they can skip.
+type XsdGoPkgHasElem_skipHourschoicesequenceRssChannelschema_SkipHours_TSkipHoursList_ struct {
+//	A hint for aggregators telling them which hours they can skip.
+	SkipHours *TSkipHoursList `xml:"skipHours"`
+}
+
 //	A hint for aggregators telling them which days they can skip.
-type XsdGoPkgHasElems_SkipDays_TSkipDaysList_ struct {
+type XsdGoPkgHasElems_skipDayschoicesequenceRssChannelschema_SkipDays_TSkipDaysList_ struct {
 //	A hint for aggregators telling them which days they can skip.
 	SkipDayses []*TSkipDaysList `xml:"skipDays"`
 }
 
 //	A hint for aggregators telling them which days they can skip.
-type XsdGoPkgHasElem_SkipDays_TSkipDaysList_ struct {
+type XsdGoPkgHasElem_skipDayschoicesequenceRssChannelschema_SkipDays_TSkipDaysList_ struct {
 //	A hint for aggregators telling them which days they can skip.
 	SkipDays *TSkipDaysList `xml:"skipDays"`
 }
 
-type XsdGoPkgHasElems_Item_TRssItem_ struct {
+type XsdGoPkgHasElems_itemsequenceRssChannelschema_Item_TRssItem_ struct {
 	Items []*TRssItem `xml:"item"`
 }
 
-type XsdGoPkgHasElem_Item_TRssItem_ struct {
+type XsdGoPkgHasElem_itemsequenceRssChannelschema_Item_TRssItem_ struct {
 	Item *TRssItem `xml:"item"`
 }
 
 type TRssChannel struct {
+//	The name of the channel. It's how people refer to your service. If you have an HTML website that contains the same information as your RSS file, the title of your channel should be the same as the title of your website.
+	XsdGoPkgHasElems_titlechoicesequenceRssChannelschema_Title_XsdtString_
+
+//	The URL to the HTML website corresponding to the channel.
+	XsdGoPkgHasElems_linkchoicesequenceRssChannelschema_Link_XsdtAnyURI_
+
+//	Phrase or sentence describing the channel.
+	XsdGoPkgHasElems_descriptionchoicesequenceRssChannelschema_Description_XsdtString_
+
 //	The language the channel is written in. This allows aggregators to group all Italian language sites, for example, on a single page. A list of allowable values for this element, as provided by Netscape, is here. You may also use values defined by the W3C.
-	XsdGoPkgHasElems_Language_XsdtLanguage_
+	XsdGoPkgHasElems_languagechoicesequenceRssChannelschema_Language_XsdtLanguage_
 
 //	Copyright notice for content in the channel.
-	XsdGoPkgHasElems_Copyright_XsdtString_
+	XsdGoPkgHasElems_copyrightchoicesequenceRssChannelschema_Copyright_XsdtString_
 
 //	Email address for person responsible for editorial content.
-	XsdGoPkgHasElems_ManagingEditor_TEmailAddress_
+	XsdGoPkgHasElems_managingEditorchoicesequenceRssChannelschema_ManagingEditor_TEmailAddress_
 
 //	Email address for person responsible for technical issues relating to channel.
-	XsdGoPkgHasElems_WebMaster_TEmailAddress_
+	XsdGoPkgHasElems_webMasterchoicesequenceRssChannelschema_WebMaster_TEmailAddress_
+
+//	The publication date for the content in the channel. All date-times in RSS conform to the Date and Time Specification of RFC 822, with the exception that the year may be expressed with two characters or four characters (four preferred).
+	XsdGoPkgHasElems_pubDatechoicesequenceRssChannelschema_PubDate_TRfc822FormatDate_
 
 //	The last time the content of the channel changed.
-	XsdGoPkgHasElems_LastBuildDate_TRfc822FormatDate_
+	XsdGoPkgHasElems_lastBuildDatechoicesequenceRssChannelschema_LastBuildDate_TRfc822FormatDate_
+
+//	Specify one or more categories that the channel belongs to.
+	XsdGoPkgHasElems_categorychoicesequenceRssChannelschema_Category_TCategory_
 
 //	A string indicating the program used to generate the channel.
-	XsdGoPkgHasElems_Generator_XsdtString_
+	XsdGoPkgHasElems_generatorchoicesequenceRssChannelschema_Generator_XsdtString_
 
 //	A URL that points to the documentation for the format used in the RSS file. It's probably a pointer to this page. It's for people who might stumble across an RSS file on a Web server 25 years from now and wonder what it is.
-	XsdGoPkgHasElems_Docs_XsdtAnyURI_
+	XsdGoPkgHasElems_docschoicesequenceRssChannelschema_Docs_XsdtAnyURI_
 
 //	Allows processes to register with a cloud to be notified of updates to the channel, implementing a lightweight publish-subscribe protocol for RSS feeds.
-	XsdGoPkgHasElems_Cloud_TCloud_
+	XsdGoPkgHasElems_cloudchoicesequenceRssChannelschema_Cloud_TCloud_
 
 //	ttl stands for time to live. It's a number of minutes that indicates how long a channel can be cached before refreshing from the source.
-	XsdGoPkgHasElems_Ttl_XsdtNonNegativeInteger_
+	XsdGoPkgHasElems_ttlchoicesequenceRssChannelschema_Ttl_XsdtNonNegativeInteger_
 
 //	Specifies a GIF, JPEG or PNG image that can be displayed with the channel.
-	XsdGoPkgHasElems_Image_TImage_
+	XsdGoPkgHasElems_imagechoicesequenceRssChannelschema_Image_TImage_
 
 //	The PICS rating for the channel.
-	XsdGoPkgHasElems_Rating_XsdtString_
+	XsdGoPkgHasElems_ratingchoicesequenceRssChannelschema_Rating_XsdtString_
 
 //	Specifies a text input box that can be displayed with the channel.
-	XsdGoPkgHasElems_TextInput_TextInput_
+	XsdGoPkgHasElems_textInputchoicesequenceRssChannelschema_TextInput_TextInput_
 
 //	A hint for aggregators telling them which hours they can skip.
-	XsdGoPkgHasElems_SkipHours_TSkipHoursList_
+	XsdGoPkgHasElems_skipHourschoicesequenceRssChannelschema_SkipHours_TSkipHoursList_
 
 //	A hint for aggregators telling them which days they can skip.
-	XsdGoPkgHasElems_SkipDays_TSkipDaysList_
+	XsdGoPkgHasElems_skipDayschoicesequenceRssChannelschema_SkipDays_TSkipDaysList_
 
-	XsdGoPkgHasElems_Item_TRssItem_
+	XsdGoPkgHasElems_itemsequenceRssChannelschema_Item_TRssItem_
 
 }
 
-type XsdGoPkgHasElem_Hour_TSkipHour_ struct {
+type XsdGoPkgHasElem_hoursequenceSkipHoursListschema_Hour_TSkipHour_ struct {
 	Hour TSkipHour `xml:"hour"`
 }
 
-type XsdGoPkgHasElems_Hour_TSkipHour_ struct {
+type XsdGoPkgHasElems_hoursequenceSkipHoursListschema_Hour_TSkipHour_ struct {
 	Hours []TSkipHour `xml:"hour"`
 }
 
 type TSkipHoursList struct {
-	XsdGoPkgHasElems_Hour_TSkipHour_
+	XsdGoPkgHasElems_hoursequenceSkipHoursListschema_Hour_TSkipHour_
 
 }
 
 //	A time in GMT, when aggregators should not request the channel data. The hour beginning at midnight is hour zero.
-type XsdGoPkgHasElems_Day_TSkipDay_ struct {
+type XsdGoPkgHasElems_daysequenceSkipDaysListschema_Day_TSkipDay_ struct {
 //	A time in GMT, when aggregators should not request the channel data. The hour beginning at midnight is hour zero.
 	Days []TSkipDay `xml:"day"`
 }
 
 //	A time in GMT, when aggregators should not request the channel data. The hour beginning at midnight is hour zero.
-type XsdGoPkgHasElem_Day_TSkipDay_ struct {
+type XsdGoPkgHasElem_daysequenceSkipDaysListschema_Day_TSkipDay_ struct {
 //	A time in GMT, when aggregators should not request the channel data. The hour beginning at midnight is hour zero.
 	Day TSkipDay `xml:"day"`
 }
 
 type TSkipDaysList struct {
 //	A time in GMT, when aggregators should not request the channel data. The hour beginning at midnight is hour zero.
-	XsdGoPkgHasElems_Day_TSkipDay_
+	XsdGoPkgHasElems_daysequenceSkipDaysListschema_Day_TSkipDay_
 
 }
 
@@ -551,62 +626,107 @@ type TCategory struct {
 }
 
 //	The URL of the image file.
-type XsdGoPkgHasElem_Url_XsdtAnyURI_ struct {
-//	The URL of the image file.
-	Url xsdt.AnyURI `xml:"url"`
-}
-
-//	The URL of the image file.
-type XsdGoPkgHasElems_Url_XsdtAnyURI_ struct {
+type XsdGoPkgHasElems_urlallImageschema_Url_XsdtAnyURI_ struct {
 //	The URL of the image file.
 	Urls []xsdt.AnyURI `xml:"url"`
 }
 
-//	The width of the image in pixels.
-type XsdGoPkgHasElem_Width_TImageWidth_88 struct {
-//	The width of the image in pixels.
-	Width TImageWidth `xml:"width"`
+//	The URL of the image file.
+type XsdGoPkgHasElem_urlallImageschema_Url_XsdtAnyURI_ struct {
+//	The URL of the image file.
+	Url xsdt.AnyURI `xml:"url"`
 }
 
-//	Returns the Default value for Width -- 88
-func (me *XsdGoPkgHasElem_Width_TImageWidth_88) WidthDefault () TImageWidth { return TImageWidth(88) }
+//	Describes the image, it's used in the ALT attribute of the HTML <img> tag when the channel is rendered in HTML.
+type XsdGoPkgHasElem_titleallImageschema_Title_XsdtString_ struct {
+//	Describes the image, it's used in the ALT attribute of the HTML <img> tag when the channel is rendered in HTML.
+	Title xsdt.String `xml:"title"`
+}
+
+//	Describes the image, it's used in the ALT attribute of the HTML <img> tag when the channel is rendered in HTML.
+type XsdGoPkgHasElems_titleallImageschema_Title_XsdtString_ struct {
+//	Describes the image, it's used in the ALT attribute of the HTML <img> tag when the channel is rendered in HTML.
+	Titles []xsdt.String `xml:"title"`
+}
+
+//	The URL of the site, when the channel is rendered, the image is a link to the site. (Note, in practice the image <title> and <link> should have the same value as the channel's <title> and <link>.
+type XsdGoPkgHasElems_linkallImageschema_Link_XsdtAnyURI_ struct {
+//	The URL of the site, when the channel is rendered, the image is a link to the site. (Note, in practice the image <title> and <link> should have the same value as the channel's <title> and <link>.
+	Links []xsdt.AnyURI `xml:"link"`
+}
+
+//	The URL of the site, when the channel is rendered, the image is a link to the site. (Note, in practice the image <title> and <link> should have the same value as the channel's <title> and <link>.
+type XsdGoPkgHasElem_linkallImageschema_Link_XsdtAnyURI_ struct {
+//	The URL of the site, when the channel is rendered, the image is a link to the site. (Note, in practice the image <title> and <link> should have the same value as the channel's <title> and <link>.
+	Link xsdt.AnyURI `xml:"link"`
+}
 
 //	The width of the image in pixels.
-type XsdGoPkgHasElems_Width_TImageWidth_88 struct {
+type XsdGoPkgHasElems_widthallImageschema_Width_TImageWidth_88 struct {
 //	The width of the image in pixels.
 	Widths []TImageWidth `xml:"width"`
 }
 
 //	Returns the Default value for Width -- 88
-func (me *XsdGoPkgHasElems_Width_TImageWidth_88) WidthDefault () TImageWidth { return TImageWidth(88) }
+func (me *XsdGoPkgHasElems_widthallImageschema_Width_TImageWidth_88) WidthDefault () TImageWidth { return TImageWidth(88) }
+
+//	The width of the image in pixels.
+type XsdGoPkgHasElem_widthallImageschema_Width_TImageWidth_88 struct {
+//	The width of the image in pixels.
+	Width TImageWidth `xml:"width"`
+}
+
+//	Returns the Default value for Width -- 88
+func (me *XsdGoPkgHasElem_widthallImageschema_Width_TImageWidth_88) WidthDefault () TImageWidth { return TImageWidth(88) }
 
 //	The height of the image in pixels.
-type XsdGoPkgHasElems_Height_TImageHeight_31 struct {
+type XsdGoPkgHasElems_heightallImageschema_Height_TImageHeight_31 struct {
 //	The height of the image in pixels.
 	Heights []TImageHeight `xml:"height"`
 }
 
 //	Returns the Default value for Height -- 31
-func (me *XsdGoPkgHasElems_Height_TImageHeight_31) HeightDefault () TImageHeight { return TImageHeight(31) }
+func (me *XsdGoPkgHasElems_heightallImageschema_Height_TImageHeight_31) HeightDefault () TImageHeight { return TImageHeight(31) }
 
 //	The height of the image in pixels.
-type XsdGoPkgHasElem_Height_TImageHeight_31 struct {
+type XsdGoPkgHasElem_heightallImageschema_Height_TImageHeight_31 struct {
 //	The height of the image in pixels.
 	Height TImageHeight `xml:"height"`
 }
 
 //	Returns the Default value for Height -- 31
-func (me *XsdGoPkgHasElem_Height_TImageHeight_31) HeightDefault () TImageHeight { return TImageHeight(31) }
+func (me *XsdGoPkgHasElem_heightallImageschema_Height_TImageHeight_31) HeightDefault () TImageHeight { return TImageHeight(31) }
+
+//	Text that is included in the TITLE attribute of the link formed around the image in the HTML rendering.
+type XsdGoPkgHasElem_descriptionallImageschema_Description_XsdtString_ struct {
+//	Text that is included in the TITLE attribute of the link formed around the image in the HTML rendering.
+	Description xsdt.String `xml:"description"`
+}
+
+//	Text that is included in the TITLE attribute of the link formed around the image in the HTML rendering.
+type XsdGoPkgHasElems_descriptionallImageschema_Description_XsdtString_ struct {
+//	Text that is included in the TITLE attribute of the link formed around the image in the HTML rendering.
+	Descriptions []xsdt.String `xml:"description"`
+}
 
 type TImage struct {
-//	The URL of the image file.
-	XsdGoPkgHasElem_Url_XsdtAnyURI_
+//	The width of the image in pixels.
+	XsdGoPkgHasElem_widthallImageschema_Width_TImageWidth_88
+
+//	Text that is included in the TITLE attribute of the link formed around the image in the HTML rendering.
+	XsdGoPkgHasElem_descriptionallImageschema_Description_XsdtString_
+
+//	Describes the image, it's used in the ALT attribute of the HTML <img> tag when the channel is rendered in HTML.
+	XsdGoPkgHasElem_titleallImageschema_Title_XsdtString_
 
 //	The height of the image in pixels.
-	XsdGoPkgHasElem_Height_TImageHeight_31
+	XsdGoPkgHasElem_heightallImageschema_Height_TImageHeight_31
 
-//	The width of the image in pixels.
-	XsdGoPkgHasElem_Width_TImageWidth_88
+//	The URL of the image file.
+	XsdGoPkgHasElem_urlallImageschema_Url_XsdtAnyURI_
+
+//	The URL of the site, when the channel is rendered, the image is a link to the site. (Note, in practice the image <title> and <link> should have the same value as the channel's <title> and <link>.
+	XsdGoPkgHasElem_linkallImageschema_Link_XsdtAnyURI_
 
 }
 
@@ -630,30 +750,75 @@ type XsdGoPkgHasAttr_Protocol_TCloudProtocol_ struct {
 type TCloud struct {
 	XsdGoPkgHasAttr_Port_XsdtPositiveInteger_
 
-	XsdGoPkgHasAttr_RegisterProcedure_XsdtString_
-
 	XsdGoPkgHasAttr_Protocol_TCloudProtocol_
+
+	XsdGoPkgHasAttr_RegisterProcedure_XsdtString_
 
 	XsdGoPkgHasAttr_Path_XsdtString_
 
 }
 
+//	The label of the Submit button in the text input area.
+type XsdGoPkgHasElems_titleallTextInputschema_Title_XsdtString_ struct {
+//	The label of the Submit button in the text input area.
+	Titles []xsdt.String `xml:"title"`
+}
+
+//	The label of the Submit button in the text input area.
+type XsdGoPkgHasElem_titleallTextInputschema_Title_XsdtString_ struct {
+//	The label of the Submit button in the text input area.
+	Title xsdt.String `xml:"title"`
+}
+
+//	Explains the text input area.
+type XsdGoPkgHasElem_descriptionallTextInputschema_Description_XsdtString_ struct {
+//	Explains the text input area.
+	Description xsdt.String `xml:"description"`
+}
+
+//	Explains the text input area.
+type XsdGoPkgHasElems_descriptionallTextInputschema_Description_XsdtString_ struct {
+//	Explains the text input area.
+	Descriptions []xsdt.String `xml:"description"`
+}
+
 //	The name of the text object in the text input area.
-type XsdGoPkgHasElems_Name_XsdtString_ struct {
+type XsdGoPkgHasElem_nameallTextInputschema_Name_XsdtString_ struct {
+//	The name of the text object in the text input area.
+	Name xsdt.String `xml:"name"`
+}
+
+//	The name of the text object in the text input area.
+type XsdGoPkgHasElems_nameallTextInputschema_Name_XsdtString_ struct {
 //	The name of the text object in the text input area.
 	Names []xsdt.String `xml:"name"`
 }
 
-//	The name of the text object in the text input area.
-type XsdGoPkgHasElem_Name_XsdtString_ struct {
-//	The name of the text object in the text input area.
-	Name xsdt.String `xml:"name"`
+//	The URL of the CGI script that processes text input requests.
+type XsdGoPkgHasElem_linkallTextInputschema_Link_XsdtAnyURI_ struct {
+//	The URL of the CGI script that processes text input requests.
+	Link xsdt.AnyURI `xml:"link"`
+}
+
+//	The URL of the CGI script that processes text input requests.
+type XsdGoPkgHasElems_linkallTextInputschema_Link_XsdtAnyURI_ struct {
+//	The URL of the CGI script that processes text input requests.
+	Links []xsdt.AnyURI `xml:"link"`
 }
 
 //	The purpose of this element is something of a mystery! You can use it to specify a search engine box. Or to allow a reader to provide feedback. Most aggregators ignore it.
 type TextInput struct {
 //	The name of the text object in the text input area.
-	XsdGoPkgHasElem_Name_XsdtString_
+	XsdGoPkgHasElem_nameallTextInputschema_Name_XsdtString_
+
+//	The URL of the CGI script that processes text input requests.
+	XsdGoPkgHasElem_linkallTextInputschema_Link_XsdtAnyURI_
+
+//	The label of the Submit button in the text input area.
+	XsdGoPkgHasElem_titleallTextInputschema_Title_XsdtString_
+
+//	Explains the text input area.
+	XsdGoPkgHasElem_descriptionallTextInputschema_Description_XsdtString_
 
 }
 
@@ -683,11 +848,11 @@ type XsdGoPkgHasAttr_Type_XsdtString_ struct {
 type TEnclosure struct {
 	XsdGoPkgValue xsdt.String `xml:",chardata"`
 
-//	Size in bytes
-	XsdGoPkgHasAttr_Length_XsdtNonNegativeInteger_
-
 //	MIME media-type of the enclosure
 	XsdGoPkgHasAttr_Type_XsdtString_
+
+//	Size in bytes
+	XsdGoPkgHasAttr_Length_XsdtNonNegativeInteger_
 
 }
 
@@ -712,16 +877,16 @@ type XsdGoPkgHasAttr_Version_XsdtDecimal_20 struct {
 //	Returns the Fixed value for Version -- "2.0"
 func (me *XsdGoPkgHasAttr_Version_XsdtDecimal_20) VersionFixed () xsdt.Decimal { return xsdt.Decimal("2.0") }
 
-type XsdGoPkgHasElems_Channel_TRssChannel_ struct {
-	Channels []*TRssChannel `xml:"channel"`
-}
-
-type XsdGoPkgHasElem_Channel_TRssChannel_ struct {
+type XsdGoPkgHasElem_channelsequencerssschema_Channel_TRssChannel_ struct {
 	Channel *TRssChannel `xml:"channel"`
 }
 
+type XsdGoPkgHasElems_channelsequencerssschema_Channel_TRssChannel_ struct {
+	Channels []*TRssChannel `xml:"channel"`
+}
+
 type TxsdRss struct {
-	XsdGoPkgHasElems_Channel_TRssChannel_
+	XsdGoPkgHasElem_channelsequencerssschema_Channel_TRssChannel_
 
 	XsdGoPkgHasAttr_Version_XsdtDecimal_20
 

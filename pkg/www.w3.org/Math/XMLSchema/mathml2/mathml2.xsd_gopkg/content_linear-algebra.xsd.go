@@ -133,12 +133,12 @@ type XsdGoPkgHasElems_Matrix struct {
 	Matrixs []*TmatrixType `xml:"http://www.w3.org/1998/Math/MathML matrix"`
 }
 
-type XsdGoPkgHasElem_Matrixrow struct {
-	Matrixrow *TmatrixrowType `xml:"http://www.w3.org/1998/Math/MathML matrixrow"`
-}
-
 type XsdGoPkgHasElems_Matrixrow struct {
 	Matrixrows []*TmatrixrowType `xml:"http://www.w3.org/1998/Math/MathML matrixrow"`
+}
+
+type XsdGoPkgHasElem_Matrixrow struct {
+	Matrixrow *TmatrixrowType `xml:"http://www.w3.org/1998/Math/MathML matrixrow"`
 }
 
 type XsdGoPkgHasElems_Determinant struct {
@@ -149,12 +149,12 @@ type XsdGoPkgHasElem_Determinant struct {
 	Determinant *TdeterminantType `xml:"http://www.w3.org/1998/Math/MathML determinant"`
 }
 
-type XsdGoPkgHasElem_Transpose struct {
-	Transpose *TtransposeType `xml:"http://www.w3.org/1998/Math/MathML transpose"`
-}
-
 type XsdGoPkgHasElems_Transpose struct {
 	Transposes []*TtransposeType `xml:"http://www.w3.org/1998/Math/MathML transpose"`
+}
+
+type XsdGoPkgHasElem_Transpose struct {
+	Transpose *TtransposeType `xml:"http://www.w3.org/1998/Math/MathML transpose"`
 }
 
 type XsdGoPkgHasElem_Selector struct {
@@ -195,7 +195,7 @@ type XsdGoPkgHasGroup_VectorContent struct {
 }
 
 type XsdGoPkgHasGroup_MatrixContent struct {
-	XsdGoPkgHasElems_Matrixrow
+	XsdGoPkgHasElem_Matrixrow
 
 }
 
@@ -205,20 +205,20 @@ type XsdGoPkgHasGroup_MatrixrowContent struct {
 }
 
 type XsdGoPkgHasGroup_ContentLinearAlgebraClass struct {
-	XsdGoPkgHasElems_Vector
+	XsdGoPkgHasElem_Vector
 
-	XsdGoPkgHasElems_Matrix
+	XsdGoPkgHasElem_Matrix
 
-	XsdGoPkgHasElems_Determinant
+	XsdGoPkgHasElem_Determinant
 
-	XsdGoPkgHasElems_Transpose
+	XsdGoPkgHasElem_Transpose
 
-	XsdGoPkgHasElems_Selector
+	XsdGoPkgHasElem_Selector
 
-	XsdGoPkgHasElems_Vectorproduct
+	XsdGoPkgHasElem_Vectorproduct
 
-	XsdGoPkgHasElems_Scalarproduct
+	XsdGoPkgHasElem_Scalarproduct
 
-	XsdGoPkgHasElems_Outerproduct
+	XsdGoPkgHasElem_Outerproduct
 
 }

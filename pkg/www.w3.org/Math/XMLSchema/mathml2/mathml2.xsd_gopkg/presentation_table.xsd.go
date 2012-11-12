@@ -375,12 +375,12 @@ type TmalignmarkType struct {
 
 }
 
-type XsdGoPkgHasElem_Mtr struct {
-	Mtr *TmtrType `xml:"http://www.w3.org/1998/Math/MathML mtr"`
-}
-
 type XsdGoPkgHasElems_Mtr struct {
 	Mtrs []*TmtrType `xml:"http://www.w3.org/1998/Math/MathML mtr"`
+}
+
+type XsdGoPkgHasElem_Mtr struct {
+	Mtr *TmtrType `xml:"http://www.w3.org/1998/Math/MathML mtr"`
 }
 
 type XsdGoPkgHasElems_Mlabeledtr struct {
@@ -407,29 +407,29 @@ type XsdGoPkgHasElem_Mtable struct {
 	Mtable *TmtableType `xml:"http://www.w3.org/1998/Math/MathML mtable"`
 }
 
-type XsdGoPkgHasElem_Maligngroup struct {
-	Maligngroup *TmaligngroupType `xml:"http://www.w3.org/1998/Math/MathML maligngroup"`
-}
-
 type XsdGoPkgHasElems_Maligngroup struct {
 	Maligngroups []*TmaligngroupType `xml:"http://www.w3.org/1998/Math/MathML maligngroup"`
 }
 
-type XsdGoPkgHasElems_Malignmark struct {
-	Malignmarks []*TmalignmarkType `xml:"http://www.w3.org/1998/Math/MathML malignmark"`
+type XsdGoPkgHasElem_Maligngroup struct {
+	Maligngroup *TmaligngroupType `xml:"http://www.w3.org/1998/Math/MathML maligngroup"`
 }
 
 type XsdGoPkgHasElem_Malignmark struct {
 	Malignmark *TmalignmarkType `xml:"http://www.w3.org/1998/Math/MathML malignmark"`
 }
 
+type XsdGoPkgHasElems_Malignmark struct {
+	Malignmarks []*TmalignmarkType `xml:"http://www.w3.org/1998/Math/MathML malignmark"`
+}
+
 type XsdGoPkgHasGroup_MtrContent struct {
-	XsdGoPkgHasElems_Mtd
+	XsdGoPkgHasElem_Mtd
 
 }
 
 type XsdGoPkgHasGroup_MlabeledtrContent struct {
-	XsdGoPkgHasElems_Mtd
+	XsdGoPkgHasElem_Mtd
 
 }
 
@@ -439,17 +439,17 @@ type XsdGoPkgHasGroup_MtdContent struct {
 }
 
 type XsdGoPkgHasGroup_MtableContent struct {
-	XsdGoPkgHasElems_Mtr
+	XsdGoPkgHasElem_Mtr
 
-	XsdGoPkgHasElems_Mlabeledtr
+	XsdGoPkgHasElem_Mlabeledtr
 
 }
 
 type XsdGoPkgHasGroup_PresentationTableClass struct {
-	XsdGoPkgHasElems_Mtable
+	XsdGoPkgHasElem_Mtable
 
-	XsdGoPkgHasElems_Maligngroup
+	XsdGoPkgHasElem_Maligngroup
 
-	XsdGoPkgHasElems_Malignmark
+	XsdGoPkgHasElem_Malignmark
 
 }

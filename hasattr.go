@@ -61,8 +61,13 @@ type hasAttrLang struct {
 }
 
 type hasAttrMaxOccurs struct {
-	MaxOccurs uint64 `xml:"maxOccurs,attr"`
+	MaxOccurs string `xml:"maxOccurs,attr"`
 }
+
+	func (me *hasAttrMaxOccurs) Value () (l xsdt.Long) {
+		if len(me.MaxOccurs) == 0 { l = 1 } else if me.MaxOccurs == "unbounded" { l = -1 } else { l.SetFromString(me.MaxOccurs) }
+		return
+	}
 
 type hasAttrMemberTypes struct {
 	MemberTypes string `xml:"memberTypes,attr"`

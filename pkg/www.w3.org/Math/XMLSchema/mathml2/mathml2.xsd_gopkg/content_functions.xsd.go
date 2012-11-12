@@ -11,9 +11,9 @@ import (
 )
 
 type TFunctionsType struct {
-	XsdGoPkgHasAtts_DefinitionAttrib
-
 	XsdGoPkgHasAtts_CommonAttrib
+
+	XsdGoPkgHasAtts_DefinitionAttrib
 
 }
 
@@ -26,12 +26,12 @@ type TdomainofapplicationType struct {
 
 }
 
-type XsdGoPkgHasElem_Compose struct {
-	Compose *TFunctionsType `xml:"http://www.w3.org/1998/Math/MathML compose"`
-}
-
 type XsdGoPkgHasElems_Compose struct {
 	Composes []*TFunctionsType `xml:"http://www.w3.org/1998/Math/MathML compose"`
+}
+
+type XsdGoPkgHasElem_Compose struct {
+	Compose *TFunctionsType `xml:"http://www.w3.org/1998/Math/MathML compose"`
 }
 
 type XsdGoPkgHasElem_Domain struct {
@@ -42,12 +42,12 @@ type XsdGoPkgHasElems_Domain struct {
 	Domains []*TFunctionsType `xml:"http://www.w3.org/1998/Math/MathML domain"`
 }
 
-type XsdGoPkgHasElems_Codomain struct {
-	Codomains []*TFunctionsType `xml:"http://www.w3.org/1998/Math/MathML codomain"`
-}
-
 type XsdGoPkgHasElem_Codomain struct {
 	Codomain *TFunctionsType `xml:"http://www.w3.org/1998/Math/MathML codomain"`
+}
+
+type XsdGoPkgHasElems_Codomain struct {
+	Codomains []*TFunctionsType `xml:"http://www.w3.org/1998/Math/MathML codomain"`
 }
 
 type XsdGoPkgHasElem_Image struct {
@@ -80,16 +80,16 @@ type XsdGoPkgHasGroup_DomainofapplicationContent struct {
 }
 
 type XsdGoPkgHasGroup_ContentFunctionsClass struct {
-	XsdGoPkgHasElems_Compose
+	XsdGoPkgHasElem_Compose
 
-	XsdGoPkgHasElems_Domain
+	XsdGoPkgHasElem_Domain
 
-	XsdGoPkgHasElems_Codomain
+	XsdGoPkgHasElem_Codomain
 
-	XsdGoPkgHasElems_Image
+	XsdGoPkgHasElem_Image
 
-	XsdGoPkgHasElems_Domainofapplication
+	XsdGoPkgHasElem_Domainofapplication
 
-	XsdGoPkgHasElems_Ident
+	XsdGoPkgHasElem_Ident
 
 }

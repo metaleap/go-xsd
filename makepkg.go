@@ -12,7 +12,7 @@ import (
 
 var (
 	PkgGen = &pkgGen {
-		BaseCodePath: util.BaseCodePath("metaleap", "go-xsd", "pkg"),
+		BaseCodePath: util.BaseCodePathGithub("metaleap", "go-xsd", "pkg"),
 		BasePath: "github.com/metaleap/go-xsd/pkg",
 		ForceParseForDefaults: false,
 	}
@@ -56,6 +56,11 @@ type pkgStacks struct {
 
 	func (me *pkgStacks) CurSimpleType () (r *SimpleType) {
 		if len(me.SimpleType) > 0 { r = me.SimpleType[0].(*SimpleType) }; return
+	}
+
+	func (me *pkgStacks) FullName () (r string) {
+		for _, name := range me.Name { r += name.(xsdt.NCName).String() }
+		return
 	}
 
 type PkgBag struct {

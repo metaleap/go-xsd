@@ -197,36 +197,36 @@ type XsdGoPkgHasElem_Set struct {
 	Set *TsetType `xml:"http://www.w3.org/1998/Math/MathML set"`
 }
 
-type XsdGoPkgHasElems_List struct {
-	Lists []*TlistType `xml:"http://www.w3.org/1998/Math/MathML list"`
-}
-
 type XsdGoPkgHasElem_List struct {
 	List *TlistType `xml:"http://www.w3.org/1998/Math/MathML list"`
 }
 
-type XsdGoPkgHasElems_Union struct {
-	Unions []*TunionType `xml:"http://www.w3.org/1998/Math/MathML union"`
+type XsdGoPkgHasElems_List struct {
+	Lists []*TlistType `xml:"http://www.w3.org/1998/Math/MathML list"`
 }
 
 type XsdGoPkgHasElem_Union struct {
 	Union *TunionType `xml:"http://www.w3.org/1998/Math/MathML union"`
 }
 
-type XsdGoPkgHasElem_Intersect struct {
-	Intersect *TintersectType `xml:"http://www.w3.org/1998/Math/MathML intersect"`
+type XsdGoPkgHasElems_Union struct {
+	Unions []*TunionType `xml:"http://www.w3.org/1998/Math/MathML union"`
 }
 
 type XsdGoPkgHasElems_Intersect struct {
 	Intersects []*TintersectType `xml:"http://www.w3.org/1998/Math/MathML intersect"`
 }
 
-type XsdGoPkgHasElem_In struct {
-	In *TinType `xml:"http://www.w3.org/1998/Math/MathML in"`
+type XsdGoPkgHasElem_Intersect struct {
+	Intersect *TintersectType `xml:"http://www.w3.org/1998/Math/MathML intersect"`
 }
 
 type XsdGoPkgHasElems_In struct {
 	Ins []*TinType `xml:"http://www.w3.org/1998/Math/MathML in"`
+}
+
+type XsdGoPkgHasElem_In struct {
+	In *TinType `xml:"http://www.w3.org/1998/Math/MathML in"`
 }
 
 type XsdGoPkgHasElem_Notin struct {
@@ -245,28 +245,28 @@ type XsdGoPkgHasElems_Subset struct {
 	Subsets []*TsubsetType `xml:"http://www.w3.org/1998/Math/MathML subset"`
 }
 
-type XsdGoPkgHasElems_Prsubset struct {
-	Prsubsets []*TprsubsetType `xml:"http://www.w3.org/1998/Math/MathML prsubset"`
-}
-
 type XsdGoPkgHasElem_Prsubset struct {
 	Prsubset *TprsubsetType `xml:"http://www.w3.org/1998/Math/MathML prsubset"`
 }
 
-type XsdGoPkgHasElem_Notsubset struct {
-	Notsubset *TnotsubsetType `xml:"http://www.w3.org/1998/Math/MathML notsubset"`
+type XsdGoPkgHasElems_Prsubset struct {
+	Prsubsets []*TprsubsetType `xml:"http://www.w3.org/1998/Math/MathML prsubset"`
 }
 
 type XsdGoPkgHasElems_Notsubset struct {
 	Notsubsets []*TnotsubsetType `xml:"http://www.w3.org/1998/Math/MathML notsubset"`
 }
 
-type XsdGoPkgHasElems_Notprsubset struct {
-	Notprsubsets []*TnotprsubsetType `xml:"http://www.w3.org/1998/Math/MathML notprsubset"`
+type XsdGoPkgHasElem_Notsubset struct {
+	Notsubset *TnotsubsetType `xml:"http://www.w3.org/1998/Math/MathML notsubset"`
 }
 
 type XsdGoPkgHasElem_Notprsubset struct {
 	Notprsubset *TnotprsubsetType `xml:"http://www.w3.org/1998/Math/MathML notprsubset"`
+}
+
+type XsdGoPkgHasElems_Notprsubset struct {
+	Notprsubsets []*TnotprsubsetType `xml:"http://www.w3.org/1998/Math/MathML notprsubset"`
 }
 
 type XsdGoPkgHasElem_Setdiff struct {
@@ -285,12 +285,12 @@ type XsdGoPkgHasElem_Card struct {
 	Card *TcardType `xml:"http://www.w3.org/1998/Math/MathML card"`
 }
 
-type XsdGoPkgHasElem_Cartesianproduct struct {
-	Cartesianproduct *TcartesianproductType `xml:"http://www.w3.org/1998/Math/MathML cartesianproduct"`
-}
-
 type XsdGoPkgHasElems_Cartesianproduct struct {
 	Cartesianproducts []*TcartesianproductType `xml:"http://www.w3.org/1998/Math/MathML cartesianproduct"`
+}
+
+type XsdGoPkgHasElem_Cartesianproduct struct {
+	Cartesianproduct *TcartesianproductType `xml:"http://www.w3.org/1998/Math/MathML cartesianproduct"`
 }
 
 type XsdGoPkgHasGroup_SetContent struct {
@@ -304,30 +304,30 @@ type XsdGoPkgHasGroup_ListContent struct {
 }
 
 type XsdGoPkgHasGroup_ContentSetsClass struct {
-	XsdGoPkgHasElems_Set
+	XsdGoPkgHasElem_Set
 
-	XsdGoPkgHasElems_List
+	XsdGoPkgHasElem_List
 
-	XsdGoPkgHasElems_Union
+	XsdGoPkgHasElem_Union
 
-	XsdGoPkgHasElems_Intersect
+	XsdGoPkgHasElem_Intersect
 
-	XsdGoPkgHasElems_In
+	XsdGoPkgHasElem_In
 
-	XsdGoPkgHasElems_Notin
+	XsdGoPkgHasElem_Notin
 
-	XsdGoPkgHasElems_Subset
+	XsdGoPkgHasElem_Subset
 
-	XsdGoPkgHasElems_Prsubset
+	XsdGoPkgHasElem_Prsubset
 
-	XsdGoPkgHasElems_Notsubset
+	XsdGoPkgHasElem_Notsubset
 
-	XsdGoPkgHasElems_Notprsubset
+	XsdGoPkgHasElem_Notprsubset
 
-	XsdGoPkgHasElems_Setdiff
+	XsdGoPkgHasElem_Setdiff
 
-	XsdGoPkgHasElems_Card
+	XsdGoPkgHasElem_Card
 
-	XsdGoPkgHasElems_Cartesianproduct
+	XsdGoPkgHasElem_Cartesianproduct
 
 }

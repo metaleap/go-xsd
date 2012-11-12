@@ -280,12 +280,12 @@ type TmencloseType struct {
 
 }
 
-type XsdGoPkgHasElems_Mrow struct {
-	Mrows []*TmrowType `xml:"http://www.w3.org/1998/Math/MathML mrow"`
-}
-
 type XsdGoPkgHasElem_Mrow struct {
 	Mrow *TmrowType `xml:"http://www.w3.org/1998/Math/MathML mrow"`
+}
+
+type XsdGoPkgHasElems_Mrow struct {
+	Mrows []*TmrowType `xml:"http://www.w3.org/1998/Math/MathML mrow"`
 }
 
 type XsdGoPkgHasElem_Mfrac struct {
@@ -345,20 +345,20 @@ type XsdGoPkgHasElem_Menclose struct {
 }
 
 type XsdGoPkgHasGroup_PresentationLayoutClass struct {
-	XsdGoPkgHasElems_Mrow
+	XsdGoPkgHasElem_Mrow
 
-	XsdGoPkgHasElems_Mfrac
+	XsdGoPkgHasElem_Mfrac
 
-	XsdGoPkgHasElems_Msqrt
+	XsdGoPkgHasElem_Msqrt
 
-	XsdGoPkgHasElems_Mroot
+	XsdGoPkgHasElem_Mroot
 
-	XsdGoPkgHasElems_Mpadded
+	XsdGoPkgHasElem_Mpadded
 
-	XsdGoPkgHasElems_Mphantom
+	XsdGoPkgHasElem_Mphantom
 
-	XsdGoPkgHasElems_Mfenced
+	XsdGoPkgHasElem_Mfenced
 
-	XsdGoPkgHasElems_Menclose
+	XsdGoPkgHasElem_Menclose
 
 }

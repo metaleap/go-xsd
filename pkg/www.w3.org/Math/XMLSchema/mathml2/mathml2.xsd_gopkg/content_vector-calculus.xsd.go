@@ -66,12 +66,12 @@ type XsdGoPkgHasElems_Divergence struct {
 	Divergences []*TdivergenceType `xml:"http://www.w3.org/1998/Math/MathML divergence"`
 }
 
-type XsdGoPkgHasElems_Grad struct {
-	Grads []*TgradType `xml:"http://www.w3.org/1998/Math/MathML grad"`
-}
-
 type XsdGoPkgHasElem_Grad struct {
 	Grad *TgradType `xml:"http://www.w3.org/1998/Math/MathML grad"`
+}
+
+type XsdGoPkgHasElems_Grad struct {
+	Grads []*TgradType `xml:"http://www.w3.org/1998/Math/MathML grad"`
 }
 
 type XsdGoPkgHasElem_Curl struct {
@@ -91,12 +91,12 @@ type XsdGoPkgHasElem_Laplacian struct {
 }
 
 type XsdGoPkgHasGroup_ContentVectorCalculusClass struct {
-	XsdGoPkgHasElems_Divergence
+	XsdGoPkgHasElem_Divergence
 
-	XsdGoPkgHasElems_Grad
+	XsdGoPkgHasElem_Grad
 
-	XsdGoPkgHasElems_Curl
+	XsdGoPkgHasElem_Curl
 
-	XsdGoPkgHasElems_Laplacian
+	XsdGoPkgHasElem_Laplacian
 
 }

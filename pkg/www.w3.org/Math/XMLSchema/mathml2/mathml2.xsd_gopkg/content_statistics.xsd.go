@@ -103,20 +103,20 @@ type XsdGoPkgHasElem_Mean struct {
 	Mean *TmeanType `xml:"http://www.w3.org/1998/Math/MathML mean"`
 }
 
-type XsdGoPkgHasElem_Sdev struct {
-	Sdev *TsdevType `xml:"http://www.w3.org/1998/Math/MathML sdev"`
-}
-
 type XsdGoPkgHasElems_Sdev struct {
 	Sdevs []*TsdevType `xml:"http://www.w3.org/1998/Math/MathML sdev"`
 }
 
-type XsdGoPkgHasElems_Variance struct {
-	Variances []*TvarianceType `xml:"http://www.w3.org/1998/Math/MathML variance"`
+type XsdGoPkgHasElem_Sdev struct {
+	Sdev *TsdevType `xml:"http://www.w3.org/1998/Math/MathML sdev"`
 }
 
 type XsdGoPkgHasElem_Variance struct {
 	Variance *TvarianceType `xml:"http://www.w3.org/1998/Math/MathML variance"`
+}
+
+type XsdGoPkgHasElems_Variance struct {
+	Variances []*TvarianceType `xml:"http://www.w3.org/1998/Math/MathML variance"`
 }
 
 type XsdGoPkgHasElems_Median struct {
@@ -127,12 +127,12 @@ type XsdGoPkgHasElem_Median struct {
 	Median *TmedianType `xml:"http://www.w3.org/1998/Math/MathML median"`
 }
 
-type XsdGoPkgHasElems_Mode struct {
-	Modes []*TmodeType `xml:"http://www.w3.org/1998/Math/MathML mode"`
-}
-
 type XsdGoPkgHasElem_Mode struct {
 	Mode *TmodeType `xml:"http://www.w3.org/1998/Math/MathML mode"`
+}
+
+type XsdGoPkgHasElems_Mode struct {
+	Modes []*TmodeType `xml:"http://www.w3.org/1998/Math/MathML mode"`
 }
 
 type XsdGoPkgHasElem_Moment struct {
@@ -157,18 +157,18 @@ type XsdGoPkgHasGroup_MomentaboutContent struct {
 }
 
 type XsdGoPkgHasGroup_ContentStatisticsClass struct {
-	XsdGoPkgHasElems_Mean
+	XsdGoPkgHasElem_Mean
 
-	XsdGoPkgHasElems_Sdev
+	XsdGoPkgHasElem_Sdev
 
-	XsdGoPkgHasElems_Variance
+	XsdGoPkgHasElem_Variance
 
-	XsdGoPkgHasElems_Median
+	XsdGoPkgHasElem_Median
 
-	XsdGoPkgHasElems_Mode
+	XsdGoPkgHasElem_Mode
 
-	XsdGoPkgHasElems_Moment
+	XsdGoPkgHasElem_Moment
 
-	XsdGoPkgHasElems_Momentabout
+	XsdGoPkgHasElem_Momentabout
 
 }

@@ -48,28 +48,28 @@ type XsdGoPkgHasElem_Lt struct {
 	Lt *TRelationsType `xml:"http://www.w3.org/1998/Math/MathML lt"`
 }
 
-type XsdGoPkgHasElem_Geq struct {
-	Geq *TRelationsType `xml:"http://www.w3.org/1998/Math/MathML geq"`
-}
-
 type XsdGoPkgHasElems_Geq struct {
 	Geqs []*TRelationsType `xml:"http://www.w3.org/1998/Math/MathML geq"`
 }
 
-type XsdGoPkgHasElem_Gt struct {
-	Gt *TRelationsType `xml:"http://www.w3.org/1998/Math/MathML gt"`
+type XsdGoPkgHasElem_Geq struct {
+	Geq *TRelationsType `xml:"http://www.w3.org/1998/Math/MathML geq"`
 }
 
 type XsdGoPkgHasElems_Gt struct {
 	Gts []*TRelationsType `xml:"http://www.w3.org/1998/Math/MathML gt"`
 }
 
-type XsdGoPkgHasElem_Equivalent struct {
-	Equivalent *TRelationsType `xml:"http://www.w3.org/1998/Math/MathML equivalent"`
+type XsdGoPkgHasElem_Gt struct {
+	Gt *TRelationsType `xml:"http://www.w3.org/1998/Math/MathML gt"`
 }
 
 type XsdGoPkgHasElems_Equivalent struct {
 	Equivalents []*TRelationsType `xml:"http://www.w3.org/1998/Math/MathML equivalent"`
+}
+
+type XsdGoPkgHasElem_Equivalent struct {
+	Equivalent *TRelationsType `xml:"http://www.w3.org/1998/Math/MathML equivalent"`
 }
 
 type XsdGoPkgHasElem_Approx struct {
@@ -89,22 +89,22 @@ type XsdGoPkgHasElems_Factorof struct {
 }
 
 type XsdGoPkgHasGroup_ContentRelationsClass struct {
-	XsdGoPkgHasElems_Eq
+	XsdGoPkgHasElem_Eq
 
-	XsdGoPkgHasElems_Neq
+	XsdGoPkgHasElem_Neq
 
-	XsdGoPkgHasElems_Leq
+	XsdGoPkgHasElem_Leq
 
-	XsdGoPkgHasElems_Lt
+	XsdGoPkgHasElem_Lt
 
-	XsdGoPkgHasElems_Geq
+	XsdGoPkgHasElem_Geq
 
-	XsdGoPkgHasElems_Gt
+	XsdGoPkgHasElem_Gt
 
-	XsdGoPkgHasElems_Equivalent
+	XsdGoPkgHasElem_Equivalent
 
-	XsdGoPkgHasElems_Approx
+	XsdGoPkgHasElem_Approx
 
-	XsdGoPkgHasElems_Factorof
+	XsdGoPkgHasElem_Factorof
 
 }

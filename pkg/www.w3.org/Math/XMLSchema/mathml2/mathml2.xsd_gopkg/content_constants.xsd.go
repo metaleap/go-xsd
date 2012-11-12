@@ -16,28 +16,28 @@ type TConstantType struct {
 
 }
 
-type XsdGoPkgHasElem_Naturalnumbers struct {
-	Naturalnumbers *TConstantType `xml:"http://www.w3.org/1998/Math/MathML naturalnumbers"`
-}
-
 type XsdGoPkgHasElems_Naturalnumbers struct {
 	Naturalnumberses []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML naturalnumbers"`
 }
 
-type XsdGoPkgHasElems_Primes struct {
-	Primeses []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML primes"`
+type XsdGoPkgHasElem_Naturalnumbers struct {
+	Naturalnumbers *TConstantType `xml:"http://www.w3.org/1998/Math/MathML naturalnumbers"`
 }
 
 type XsdGoPkgHasElem_Primes struct {
 	Primes *TConstantType `xml:"http://www.w3.org/1998/Math/MathML primes"`
 }
 
-type XsdGoPkgHasElems_Integers struct {
-	Integerses []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML integers"`
+type XsdGoPkgHasElems_Primes struct {
+	Primeses []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML primes"`
 }
 
 type XsdGoPkgHasElem_Integers struct {
 	Integers *TConstantType `xml:"http://www.w3.org/1998/Math/MathML integers"`
+}
+
+type XsdGoPkgHasElems_Integers struct {
+	Integerses []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML integers"`
 }
 
 type XsdGoPkgHasElem_Rationals struct {
@@ -48,20 +48,20 @@ type XsdGoPkgHasElems_Rationals struct {
 	Rationalses []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML rationals"`
 }
 
-type XsdGoPkgHasElems_Reals struct {
-	Realses []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML reals"`
-}
-
 type XsdGoPkgHasElem_Reals struct {
 	Reals *TConstantType `xml:"http://www.w3.org/1998/Math/MathML reals"`
 }
 
-type XsdGoPkgHasElems_Complexes struct {
-	Complexeses []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML complexes"`
+type XsdGoPkgHasElems_Reals struct {
+	Realses []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML reals"`
 }
 
 type XsdGoPkgHasElem_Complexes struct {
 	Complexes *TConstantType `xml:"http://www.w3.org/1998/Math/MathML complexes"`
+}
+
+type XsdGoPkgHasElems_Complexes struct {
+	Complexeses []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML complexes"`
 }
 
 type XsdGoPkgHasElems_Emptyset struct {
@@ -104,12 +104,12 @@ type XsdGoPkgHasElem_Eulergamma struct {
 	Eulergamma *TConstantType `xml:"http://www.w3.org/1998/Math/MathML eulergamma"`
 }
 
-type XsdGoPkgHasElems_True struct {
-	Trues []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML true"`
-}
-
 type XsdGoPkgHasElem_True struct {
 	True *TConstantType `xml:"http://www.w3.org/1998/Math/MathML true"`
+}
+
+type XsdGoPkgHasElems_True struct {
+	Trues []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML true"`
 }
 
 type XsdGoPkgHasElems_False struct {
@@ -128,43 +128,43 @@ type XsdGoPkgHasElems_Infinity struct {
 	Infinities []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML infinity"`
 }
 
-type XsdGoPkgHasElems_Notanumber struct {
-	Notanumbers []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML notanumber"`
-}
-
 type XsdGoPkgHasElem_Notanumber struct {
 	Notanumber *TConstantType `xml:"http://www.w3.org/1998/Math/MathML notanumber"`
 }
 
+type XsdGoPkgHasElems_Notanumber struct {
+	Notanumbers []*TConstantType `xml:"http://www.w3.org/1998/Math/MathML notanumber"`
+}
+
 type XsdGoPkgHasGroup_ContentConstantsClass struct {
-	XsdGoPkgHasElems_Naturalnumbers
+	XsdGoPkgHasElem_Naturalnumbers
 
-	XsdGoPkgHasElems_Primes
+	XsdGoPkgHasElem_Primes
 
-	XsdGoPkgHasElems_Integers
+	XsdGoPkgHasElem_Integers
 
-	XsdGoPkgHasElems_Rationals
+	XsdGoPkgHasElem_Rationals
 
-	XsdGoPkgHasElems_Reals
+	XsdGoPkgHasElem_Reals
 
-	XsdGoPkgHasElems_Complexes
+	XsdGoPkgHasElem_Complexes
 
-	XsdGoPkgHasElems_Emptyset
+	XsdGoPkgHasElem_Emptyset
 
-	XsdGoPkgHasElems_Exponentiale
+	XsdGoPkgHasElem_Exponentiale
 
-	XsdGoPkgHasElems_Imaginaryi
+	XsdGoPkgHasElem_Imaginaryi
 
-	XsdGoPkgHasElems_Pi
+	XsdGoPkgHasElem_Pi
 
-	XsdGoPkgHasElems_Eulergamma
+	XsdGoPkgHasElem_Eulergamma
 
-	XsdGoPkgHasElems_True
+	XsdGoPkgHasElem_True
 
-	XsdGoPkgHasElems_False
+	XsdGoPkgHasElem_False
 
-	XsdGoPkgHasElems_Infinity
+	XsdGoPkgHasElem_Infinity
 
-	XsdGoPkgHasElems_Notanumber
+	XsdGoPkgHasElem_Notanumber
 
 }

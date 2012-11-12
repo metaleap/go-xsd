@@ -1,10 +1,12 @@
+//	A tiny package imported by all "go-xsd"-generated packages.
+//	Maps all XSD built-in simple-types to Go types, which affords us easy mapping of any XSD type references in the schema to Go imports: every xs:string and xs:boolean automatically becomes xsdt.String and xsdt.Boolean etc.
+//	Types are mapped to Go types depending on how encoding/xml.Unmarshal() can handle them: ie. it parses bools and numbers, but dates/durations have too many format mismatches and thus are just declared string types.
+//	Same for base64- and hex-encoded binary data: since Unmarshal() won't decode them, we leave them as strings. If you need their binary data, your code needs to import Go's base64/hex codec packages and use them as necessary.
 package xsdt
 
 import (
 	"strconv"
 )
-
-// var KnownTypeNames = []string { "AnySimpleType", "AnyType", "AnyURI", "Base64Binary", "Boolean", "Byte", "Date", "DateTime", "Decimal", "Double", "Duration", "Entities", "Entity", "Float", "GDay", "GMonth", "GMonthDay", "GYear", "GYearMonth", "HexBinary", "Id", "Idref", "Idrefs", "Int", "Integer", "Language", "Long", "Name", "NCName", "NegativeInteger", "Nmtoken", "Nmtokens", "NonNegativeInteger", "NonPositiveInteger", "NormalizedString", "Notation", "PositiveInteger", "Qname", "Short", "String", "Token", "UnsignedByte", "UnsignedInt", "UnsignedLong", "UnsignedShort" }
 
 type AnySimpleType string
 
@@ -49,7 +51,7 @@ type Base64Binary string // []byte
 type Boolean bool
 
 	func (me *Boolean) SetFromString (v string) {
-		//	most schemas use true and false but sadly, some do use 0 and 1...
+		//	most schemas use true and false but sadly, a very few rare ones *do* use 0 and 1...
 		if v == "1" { *me = true } else if v == "0" { *me = false } else { b, _ := strconv.ParseBool(v); *me = Boolean(b) }
 	}
 
@@ -491,7 +493,7 @@ type UnsignedShort uint16
 		return strconv.FormatUint(uint64(me), 10)
 	}
 
-// why import "strings" just for this one need to Split()...
+// XSD "list" types are always space-separated strings. All generated Go types based on any XSD's list types automatically gets a smart Values() method, which will always resort to this function.
 func ListValues (v string) (spl []string) {
 	var cur = ""
 	for _, r := range v {
@@ -504,8 +506,3 @@ func ListValues (v string) (spl []string) {
 	}
 	return
 }
-
-// func IsKnownTypeName (tn string) bool {
-// 	for _, ktn := range KnownTypeNames { if ktn == tn { return true } }
-// 	return false
-// }

@@ -116,12 +116,12 @@ type TnoneType struct {
 type TmprescriptsType struct {
 }
 
-type XsdGoPkgHasElems_Msub struct {
-	Msubs []*TmsubType `xml:"http://www.w3.org/1998/Math/MathML msub"`
-}
-
 type XsdGoPkgHasElem_Msub struct {
 	Msub *TmsubType `xml:"http://www.w3.org/1998/Math/MathML msub"`
+}
+
+type XsdGoPkgHasElems_Msub struct {
+	Msubs []*TmsubType `xml:"http://www.w3.org/1998/Math/MathML msub"`
 }
 
 type XsdGoPkgHasElems_Msup struct {
@@ -140,12 +140,12 @@ type XsdGoPkgHasElems_Msubsup struct {
 	Msubsups []*TmsubsupType `xml:"http://www.w3.org/1998/Math/MathML msubsup"`
 }
 
-type XsdGoPkgHasElem_Munder struct {
-	Munder *TmunderType `xml:"http://www.w3.org/1998/Math/MathML munder"`
-}
-
 type XsdGoPkgHasElems_Munder struct {
 	Munders []*TmunderType `xml:"http://www.w3.org/1998/Math/MathML munder"`
+}
+
+type XsdGoPkgHasElem_Munder struct {
+	Munder *TmunderType `xml:"http://www.w3.org/1998/Math/MathML munder"`
 }
 
 type XsdGoPkgHasElems_Mover struct {
@@ -156,20 +156,20 @@ type XsdGoPkgHasElem_Mover struct {
 	Mover *TmoverType `xml:"http://www.w3.org/1998/Math/MathML mover"`
 }
 
-type XsdGoPkgHasElem_Munderover struct {
-	Munderover *TmunderoverType `xml:"http://www.w3.org/1998/Math/MathML munderover"`
-}
-
 type XsdGoPkgHasElems_Munderover struct {
 	Munderovers []*TmunderoverType `xml:"http://www.w3.org/1998/Math/MathML munderover"`
 }
 
-type XsdGoPkgHasElem_Mmultiscripts struct {
-	Mmultiscripts *TmmultiscriptsType `xml:"http://www.w3.org/1998/Math/MathML mmultiscripts"`
+type XsdGoPkgHasElem_Munderover struct {
+	Munderover *TmunderoverType `xml:"http://www.w3.org/1998/Math/MathML munderover"`
 }
 
 type XsdGoPkgHasElems_Mmultiscripts struct {
 	Mmultiscriptses []*TmmultiscriptsType `xml:"http://www.w3.org/1998/Math/MathML mmultiscripts"`
+}
+
+type XsdGoPkgHasElem_Mmultiscripts struct {
+	Mmultiscripts *TmmultiscriptsType `xml:"http://www.w3.org/1998/Math/MathML mmultiscripts"`
 }
 
 type XsdGoPkgHasElems_None struct {
@@ -189,7 +189,7 @@ type XsdGoPkgHasElems_Mprescripts struct {
 }
 
 type XsdGoPkgHasGroup_PresentationExprOrNoneClass struct {
-	XsdGoPkgHasElems_None
+	XsdGoPkgHasElem_None
 
 	XsdGoPkgHasGroup_PresentationExprClass
 
@@ -200,23 +200,23 @@ type XsdGoPkgHasGroup_MmultiscriptsContent struct {
 
 	XsdGoPkgHasGroup_PresentationExprOrNoneClass
 
-	XsdGoPkgHasElems_Mprescripts
+	XsdGoPkgHasElem_Mprescripts
 
 }
 
 type XsdGoPkgHasGroup_PresentationScriptClass struct {
-	XsdGoPkgHasElems_Msub
+	XsdGoPkgHasElem_Msub
 
-	XsdGoPkgHasElems_Msup
+	XsdGoPkgHasElem_Msup
 
-	XsdGoPkgHasElems_Msubsup
+	XsdGoPkgHasElem_Msubsup
 
-	XsdGoPkgHasElems_Munder
+	XsdGoPkgHasElem_Munder
 
-	XsdGoPkgHasElems_Mover
+	XsdGoPkgHasElem_Mover
 
-	XsdGoPkgHasElems_Munderover
+	XsdGoPkgHasElem_Munderover
 
-	XsdGoPkgHasElems_Mmultiscripts
+	XsdGoPkgHasElem_Mmultiscripts
 
 }

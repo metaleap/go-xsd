@@ -109,20 +109,20 @@ type TmsType struct {
 
 }
 
-type XsdGoPkgHasElems_Mi struct {
-	Mis []*TmiType `xml:"http://www.w3.org/1998/Math/MathML mi"`
-}
-
 type XsdGoPkgHasElem_Mi struct {
 	Mi *TmiType `xml:"http://www.w3.org/1998/Math/MathML mi"`
 }
 
-type XsdGoPkgHasElems_Mo struct {
-	Mos []*TmoType `xml:"http://www.w3.org/1998/Math/MathML mo"`
+type XsdGoPkgHasElems_Mi struct {
+	Mis []*TmiType `xml:"http://www.w3.org/1998/Math/MathML mi"`
 }
 
 type XsdGoPkgHasElem_Mo struct {
 	Mo *TmoType `xml:"http://www.w3.org/1998/Math/MathML mo"`
+}
+
+type XsdGoPkgHasElems_Mo struct {
+	Mos []*TmoType `xml:"http://www.w3.org/1998/Math/MathML mo"`
 }
 
 type XsdGoPkgHasElem_Mn struct {
@@ -133,12 +133,12 @@ type XsdGoPkgHasElems_Mn struct {
 	Mns []*TmnType `xml:"http://www.w3.org/1998/Math/MathML mn"`
 }
 
-type XsdGoPkgHasElems_Mtext struct {
-	Mtexts []*TmtextType `xml:"http://www.w3.org/1998/Math/MathML mtext"`
-}
-
 type XsdGoPkgHasElem_Mtext struct {
 	Mtext *TmtextType `xml:"http://www.w3.org/1998/Math/MathML mtext"`
+}
+
+type XsdGoPkgHasElems_Mtext struct {
+	Mtexts []*TmtextType `xml:"http://www.w3.org/1998/Math/MathML mtext"`
 }
 
 type XsdGoPkgHasElem_Ms struct {
@@ -150,21 +150,21 @@ type XsdGoPkgHasElems_Ms struct {
 }
 
 type XsdGoPkgHasGroup_GlyphAlignmarkClass struct {
-	XsdGoPkgHasElems_Malignmark
+	XsdGoPkgHasElem_Malignmark
 
-	XsdGoPkgHasElems_Mglyph
+	XsdGoPkgHasElem_Mglyph
 
 }
 
 type XsdGoPkgHasGroup_PresentationTokenClass struct {
-	XsdGoPkgHasElems_Mi
+	XsdGoPkgHasElem_Mi
 
-	XsdGoPkgHasElems_Mo
+	XsdGoPkgHasElem_Mo
 
-	XsdGoPkgHasElems_Mn
+	XsdGoPkgHasElem_Mn
 
-	XsdGoPkgHasElems_Mtext
+	XsdGoPkgHasElem_Mtext
 
-	XsdGoPkgHasElems_Ms
+	XsdGoPkgHasElem_Ms
 
 }

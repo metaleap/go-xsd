@@ -763,20 +763,20 @@ type TtransformElementBaseType struct {
 
 }
 
-type XsdGoPkgHasElems_Declaration struct {
-	Declarations []*TgenericElementType `xml:"http://www.w3.org/1999/XSL/Transform declaration"`
-}
-
 type XsdGoPkgHasElem_Declaration struct {
 	Declaration *TgenericElementType `xml:"http://www.w3.org/1999/XSL/Transform declaration"`
 }
 
-type XsdGoPkgHasElems_Instruction struct {
-	Instructions []*TversionedElementType `xml:"http://www.w3.org/1999/XSL/Transform instruction"`
+type XsdGoPkgHasElems_Declaration struct {
+	Declarations []*TgenericElementType `xml:"http://www.w3.org/1999/XSL/Transform declaration"`
 }
 
 type XsdGoPkgHasElem_Instruction struct {
 	Instruction *TversionedElementType `xml:"http://www.w3.org/1999/XSL/Transform instruction"`
+}
+
+type XsdGoPkgHasElems_Instruction struct {
+	Instructions []*TversionedElementType `xml:"http://www.w3.org/1999/XSL/Transform instruction"`
 }
 
 type XsdGoPkgHasAttr_Select_Texpression_ struct {
@@ -794,26 +794,26 @@ type XsdGoPkgHasAttr_Flags_Tavt_ struct {
 type TxsdAnalyzeString struct {
 	TelementOnlyVersionedElementType
 
-	XsdGoPkgHasElems_MatchingSubstring
+	XsdGoPkgHasElem_MatchingSubstring
 
-	XsdGoPkgHasElems_NonMatchingSubstring
+	XsdGoPkgHasElem_NonMatchingSubstring
 
 	XsdGoPkgHasElems_Fallback
 
 	XsdGoPkgHasAttr_Select_Texpression_
 
-	XsdGoPkgHasAttr_Flags_Tavt_
-
 	XsdGoPkgHasAttr_Regex_Tavt_
 
-}
+	XsdGoPkgHasAttr_Flags_Tavt_
 
-type XsdGoPkgHasElem_AnalyzeString struct {
-	AnalyzeString *TxsdAnalyzeString `xml:"http://www.w3.org/1999/XSL/Transform analyze-string"`
 }
 
 type XsdGoPkgHasElems_AnalyzeString struct {
 	AnalyzeStrings []*TxsdAnalyzeString `xml:"http://www.w3.org/1999/XSL/Transform analyze-string"`
+}
+
+type XsdGoPkgHasElem_AnalyzeString struct {
+	AnalyzeString *TxsdAnalyzeString `xml:"http://www.w3.org/1999/XSL/Transform analyze-string"`
 }
 
 type TxsdApplyImports struct {
@@ -823,12 +823,12 @@ type TxsdApplyImports struct {
 
 }
 
-type XsdGoPkgHasElems_ApplyImports struct {
-	ApplyImportses []*TxsdApplyImports `xml:"http://www.w3.org/1999/XSL/Transform apply-imports"`
-}
-
 type XsdGoPkgHasElem_ApplyImports struct {
 	ApplyImports *TxsdApplyImports `xml:"http://www.w3.org/1999/XSL/Transform apply-imports"`
+}
+
+type XsdGoPkgHasElems_ApplyImports struct {
+	ApplyImportses []*TxsdApplyImports `xml:"http://www.w3.org/1999/XSL/Transform apply-imports"`
 }
 
 type XsdGoPkgHasAttr_Select_Texpression_ChildNode struct {
@@ -849,9 +849,9 @@ type TxsdApplyTemplates struct {
 
 	XsdGoPkgHasElems_WithParam
 
-	XsdGoPkgHasAttr_Select_Texpression_ChildNode
-
 	XsdGoPkgHasAttr_Mode_Tmode_
+
+	XsdGoPkgHasAttr_Select_Texpression_ChildNode
 
 }
 
@@ -880,11 +880,11 @@ type TxsdAttribute struct {
 
 	XsdGoPkgHasCdata
 
-	XsdGoPkgHasAttr_Name_Tavt_
+	XsdGoPkgHasAttr_Separator_Tavt_
 
 	XsdGoPkgHasAttr_Namespace_Tavt_
 
-	XsdGoPkgHasAttr_Separator_Tavt_
+	XsdGoPkgHasAttr_Name_Tavt_
 
 }
 
@@ -958,16 +958,16 @@ type TxsdChoose struct {
 
 	XsdGoPkgHasElems_When
 
-	XsdGoPkgHasElems_Otherwise
+	XsdGoPkgHasElem_Otherwise
 
-}
-
-type XsdGoPkgHasElems_Choose struct {
-	Chooses []*TxsdChoose `xml:"http://www.w3.org/1999/XSL/Transform choose"`
 }
 
 type XsdGoPkgHasElem_Choose struct {
 	Choose *TxsdChoose `xml:"http://www.w3.org/1999/XSL/Transform choose"`
+}
+
+type XsdGoPkgHasElems_Choose struct {
+	Chooses []*TxsdChoose `xml:"http://www.w3.org/1999/XSL/Transform choose"`
 }
 
 type TxsdComment struct {
@@ -1016,12 +1016,12 @@ type TxsdCopyOf struct {
 
 }
 
-type XsdGoPkgHasElem_CopyOf struct {
-	CopyOf *TxsdCopyOf `xml:"http://www.w3.org/1999/XSL/Transform copy-of"`
-}
-
 type XsdGoPkgHasElems_CopyOf struct {
 	CopyOfs []*TxsdCopyOf `xml:"http://www.w3.org/1999/XSL/Transform copy-of"`
+}
+
+type XsdGoPkgHasElem_CopyOf struct {
+	CopyOf *TxsdCopyOf `xml:"http://www.w3.org/1999/XSL/Transform copy-of"`
 }
 
 type TxsdDocument struct {
@@ -1112,34 +1112,34 @@ func (me *XsdGoPkgHasAttr_PatternSeparator_Tchar_) PatternSeparatorDefault () Tc
 type TxsdDecimalFormat struct {
 	TelementOnlyVersionedElementType
 
-	XsdGoPkgHasAttr_DecimalSeparator_Tchar_
-
-	XsdGoPkgHasAttr_NaN_XsdtString_NaN
-
 	XsdGoPkgHasAttr_GroupingSeparator_Tchar_
 
 	XsdGoPkgHasAttr_MinusSign_Tchar_
 
-	XsdGoPkgHasAttr_Infinity_XsdtString_Infinity
-
-	XsdGoPkgHasAttr_Percent_Tchar_
-
-	XsdGoPkgHasAttr_PatternSeparator_Tchar_
+	XsdGoPkgHasAttr_NaN_XsdtString_NaN
 
 	XsdGoPkgHasAttr_PerMille_Tchar_
 
+	XsdGoPkgHasAttr_Infinity_XsdtString_Infinity
+
 	XsdGoPkgHasAttr_Digit_Tchar_
+
+	XsdGoPkgHasAttr_PatternSeparator_Tchar_
+
+	XsdGoPkgHasAttr_DecimalSeparator_Tchar_
+
+	XsdGoPkgHasAttr_Percent_Tchar_
 
 	XsdGoPkgHasAttr_ZeroDigit_Tchar_0
 
 }
 
-type XsdGoPkgHasElem_DecimalFormat struct {
-	DecimalFormat *TxsdDecimalFormat `xml:"http://www.w3.org/1999/XSL/Transform decimal-format"`
-}
-
 type XsdGoPkgHasElems_DecimalFormat struct {
 	DecimalFormats []*TxsdDecimalFormat `xml:"http://www.w3.org/1999/XSL/Transform decimal-format"`
+}
+
+type XsdGoPkgHasElem_DecimalFormat struct {
+	DecimalFormat *TxsdDecimalFormat `xml:"http://www.w3.org/1999/XSL/Transform decimal-format"`
 }
 
 type TxsdElement struct {
@@ -1149,12 +1149,12 @@ type TxsdElement struct {
 
 }
 
-type XsdGoPkgHasElems_Element struct {
-	Elements []*TxsdElement `xml:"http://www.w3.org/1999/XSL/Transform element"`
-}
-
 type XsdGoPkgHasElem_Element struct {
 	Element *TxsdElement `xml:"http://www.w3.org/1999/XSL/Transform element"`
+}
+
+type XsdGoPkgHasElems_Element struct {
+	Elements []*TxsdElement `xml:"http://www.w3.org/1999/XSL/Transform element"`
 }
 
 type XsdGoPkgHasElem_Fallback struct {
@@ -1176,12 +1176,12 @@ type TxsdForEach struct {
 
 }
 
-type XsdGoPkgHasElems_ForEach struct {
-	ForEachs []*TxsdForEach `xml:"http://www.w3.org/1999/XSL/Transform for-each"`
-}
-
 type XsdGoPkgHasElem_ForEach struct {
 	ForEach *TxsdForEach `xml:"http://www.w3.org/1999/XSL/Transform for-each"`
+}
+
+type XsdGoPkgHasElems_ForEach struct {
+	ForEachs []*TxsdForEach `xml:"http://www.w3.org/1999/XSL/Transform for-each"`
 }
 
 type XsdGoPkgHasAttr_GroupBy_Texpression_ struct {
@@ -1215,13 +1215,13 @@ type TxsdForEachGroup struct {
 
 	XsdGoPkgHasAttr_GroupAdjacent_Texpression_
 
-	XsdGoPkgHasAttr_GroupBy_Texpression_
-
-	XsdGoPkgHasAttr_Collation_XsdtAnyURI_
-
 	XsdGoPkgHasAttr_GroupEndingWith_Tpattern_
 
 	XsdGoPkgHasAttr_GroupStartingWith_Tpattern_
+
+	XsdGoPkgHasAttr_GroupBy_Texpression_
+
+	XsdGoPkgHasAttr_Collation_XsdtAnyURI_
 
 }
 
@@ -1256,18 +1256,18 @@ type TxsdFunction struct {
 
 	XsdGoPkgHasGroup_SequenceConstructorGroup
 
-	XsdGoPkgHasAttr_As_TsequenceType_Item
-
 	XsdGoPkgHasAttr_Override_TyesOrNo_Yes
 
-}
+	XsdGoPkgHasAttr_As_TsequenceType_Item
 
-type XsdGoPkgHasElems_Function struct {
-	Functions []*TxsdFunction `xml:"http://www.w3.org/1999/XSL/Transform function"`
 }
 
 type XsdGoPkgHasElem_Function struct {
 	Function *TxsdFunction `xml:"http://www.w3.org/1999/XSL/Transform function"`
+}
+
+type XsdGoPkgHasElems_Function struct {
+	Functions []*TxsdFunction `xml:"http://www.w3.org/1999/XSL/Transform function"`
 }
 
 type XsdGoPkgHasAttr_Test_Texpression_ struct {
@@ -1283,12 +1283,12 @@ type TxsdIf struct {
 
 }
 
-type XsdGoPkgHasElems_If struct {
-	Ifs []*TxsdIf `xml:"http://www.w3.org/1999/XSL/Transform if"`
-}
-
 type XsdGoPkgHasElem_If struct {
 	If *TxsdIf `xml:"http://www.w3.org/1999/XSL/Transform if"`
+}
+
+type XsdGoPkgHasElems_If struct {
+	Ifs []*TxsdIf `xml:"http://www.w3.org/1999/XSL/Transform if"`
 }
 
 type XsdGoPkgHasAttr_Href_XsdtAnyURI_ struct {
@@ -1327,12 +1327,12 @@ type TxsdImportSchema struct {
 
 }
 
-type XsdGoPkgHasElems_ImportSchema struct {
-	ImportSchemas []*TxsdImportSchema `xml:"http://www.w3.org/1999/XSL/Transform import-schema"`
-}
-
 type XsdGoPkgHasElem_ImportSchema struct {
 	ImportSchema *TxsdImportSchema `xml:"http://www.w3.org/1999/XSL/Transform import-schema"`
+}
+
+type XsdGoPkgHasElems_ImportSchema struct {
+	ImportSchemas []*TxsdImportSchema `xml:"http://www.w3.org/1999/XSL/Transform import-schema"`
 }
 
 type TxsdInclude struct {
@@ -1340,12 +1340,12 @@ type TxsdInclude struct {
 
 }
 
-type XsdGoPkgHasElem_Include struct {
-	Include *TxsdInclude `xml:"http://www.w3.org/1999/XSL/Transform include"`
-}
-
 type XsdGoPkgHasElems_Include struct {
 	Includes []*TxsdInclude `xml:"http://www.w3.org/1999/XSL/Transform include"`
+}
+
+type XsdGoPkgHasElem_Include struct {
+	Include *TxsdInclude `xml:"http://www.w3.org/1999/XSL/Transform include"`
 }
 
 type XsdGoPkgHasAttr_Match_Tpattern_ struct {
@@ -1367,12 +1367,12 @@ type TxsdKey struct {
 
 }
 
-type XsdGoPkgHasElem_Key struct {
-	Key *TxsdKey `xml:"http://www.w3.org/1999/XSL/Transform key"`
-}
-
 type XsdGoPkgHasElems_Key struct {
 	Keys []*TxsdKey `xml:"http://www.w3.org/1999/XSL/Transform key"`
+}
+
+type XsdGoPkgHasElem_Key struct {
+	Key *TxsdKey `xml:"http://www.w3.org/1999/XSL/Transform key"`
 }
 
 type XsdGoPkgHasElem_MatchingSubstring struct {
@@ -1414,12 +1414,12 @@ type TxsdNamespace struct {
 
 }
 
-type XsdGoPkgHasElem_Namespace struct {
-	Namespace *TxsdNamespace `xml:"http://www.w3.org/1999/XSL/Transform namespace"`
-}
-
 type XsdGoPkgHasElems_Namespace struct {
 	Namespaces []*TxsdNamespace `xml:"http://www.w3.org/1999/XSL/Transform namespace"`
+}
+
+type XsdGoPkgHasElem_Namespace struct {
+	Namespace *TxsdNamespace `xml:"http://www.w3.org/1999/XSL/Transform namespace"`
 }
 
 type XsdGoPkgHasAttr_StylesheetPrefix_TprefixOrDefault_ struct {
@@ -1433,9 +1433,9 @@ type XsdGoPkgHasAttr_ResultPrefix_TprefixOrDefault_ struct {
 type TxsdNamespaceAlias struct {
 	TelementOnlyVersionedElementType
 
-	XsdGoPkgHasAttr_StylesheetPrefix_TprefixOrDefault_
-
 	XsdGoPkgHasAttr_ResultPrefix_TprefixOrDefault_
+
+	XsdGoPkgHasAttr_StylesheetPrefix_TprefixOrDefault_
 
 }
 
@@ -1456,12 +1456,12 @@ type TxsdNextMatch struct {
 
 }
 
-type XsdGoPkgHasElems_NextMatch struct {
-	NextMatchs []*TxsdNextMatch `xml:"http://www.w3.org/1999/XSL/Transform next-match"`
-}
-
 type XsdGoPkgHasElem_NextMatch struct {
 	NextMatch *TxsdNextMatch `xml:"http://www.w3.org/1999/XSL/Transform next-match"`
+}
+
+type XsdGoPkgHasElems_NextMatch struct {
+	NextMatchs []*TxsdNextMatch `xml:"http://www.w3.org/1999/XSL/Transform next-match"`
 }
 
 type XsdGoPkgHasElem_NonMatchingSubstring struct {
@@ -1523,11 +1523,17 @@ type TxsdNumber struct {
 
 	XsdGoPkgHasCdata
 
-	XsdGoPkgHasAttr_Level_Tlevel_Single
-
-	XsdGoPkgHasAttr_Format_Tavt_1
+	XsdGoPkgHasAttr_From_Tpattern_
 
 	XsdGoPkgHasAttr_Ordinal_Tavt_
+
+	XsdGoPkgHasAttr_Count_Tpattern_
+
+	XsdGoPkgHasAttr_Level_Tlevel_Single
+
+	XsdGoPkgHasAttr_Lang_Tavt_
+
+	XsdGoPkgHasAttr_Value_Texpression_
 
 	XsdGoPkgHasAttr_GroupingSeparator_Tavt_
 
@@ -1535,13 +1541,7 @@ type TxsdNumber struct {
 
 	XsdGoPkgHasAttr_LetterValue_Tavt_
 
-	XsdGoPkgHasAttr_Count_Tpattern_
-
-	XsdGoPkgHasAttr_Lang_Tavt_
-
-	XsdGoPkgHasAttr_Value_Texpression_
-
-	XsdGoPkgHasAttr_From_Tpattern_
+	XsdGoPkgHasAttr_Format_Tavt_1
 
 }
 
@@ -1626,44 +1626,44 @@ type TxsdOutput struct {
 
 	XsdGoPkgHasCdata
 
-	XsdGoPkgHasAttr_OmitXmlDeclaration_TyesOrNo_
+	XsdGoPkgHasAttr_Encoding_XsdtString_
 
 	XsdGoPkgHasAttr_EscapeUriAttributes_TyesOrNo_
 
-	XsdGoPkgHasAttr_Standalone_TyesOrNoOrOmit_
-
 	XsdGoPkgHasAttr_DoctypeSystem_XsdtString_
-
-	XsdGoPkgHasAttr_Indent_TyesOrNo_
-
-	XsdGoPkgHasAttr_IncludeContentType_TyesOrNo_
-
-	XsdGoPkgHasAttr_Encoding_XsdtString_
-
-	XsdGoPkgHasAttr_NormalizationForm_XsdtNmtoken_
-
-	XsdGoPkgHasAttr_Method_Tmethod_
 
 	XsdGoPkgHasAttr_ByteOrderMark_TyesOrNo_
 
+	XsdGoPkgHasAttr_Standalone_TyesOrNoOrOmit_
+
 	XsdGoPkgHasAttr_Version_XsdtNmtoken_
-
-	XsdGoPkgHasAttr_CdataSectionElements_TQNames_
-
-	XsdGoPkgHasAttr_UndeclarePrefixes_TyesOrNo_
-
-	XsdGoPkgHasAttr_MediaType_XsdtString_
 
 	XsdGoPkgHasAttr_DoctypePublic_XsdtString_
 
-}
+	XsdGoPkgHasAttr_IncludeContentType_TyesOrNo_
 
-type XsdGoPkgHasElems_Output struct {
-	Outputs []*TxsdOutput `xml:"http://www.w3.org/1999/XSL/Transform output"`
+	XsdGoPkgHasAttr_OmitXmlDeclaration_TyesOrNo_
+
+	XsdGoPkgHasAttr_Method_Tmethod_
+
+	XsdGoPkgHasAttr_UndeclarePrefixes_TyesOrNo_
+
+	XsdGoPkgHasAttr_CdataSectionElements_TQNames_
+
+	XsdGoPkgHasAttr_Indent_TyesOrNo_
+
+	XsdGoPkgHasAttr_MediaType_XsdtString_
+
+	XsdGoPkgHasAttr_NormalizationForm_XsdtNmtoken_
+
 }
 
 type XsdGoPkgHasElem_Output struct {
 	Output *TxsdOutput `xml:"http://www.w3.org/1999/XSL/Transform output"`
+}
+
+type XsdGoPkgHasElems_Output struct {
+	Outputs []*TxsdOutput `xml:"http://www.w3.org/1999/XSL/Transform output"`
 }
 
 type XsdGoPkgHasAttr_Character_Tchar_ struct {
@@ -1677,18 +1677,18 @@ type XsdGoPkgHasAttr_String_XsdtString_ struct {
 type TxsdOutputCharacter struct {
 	TelementOnlyVersionedElementType
 
-	XsdGoPkgHasAttr_Character_Tchar_
-
 	XsdGoPkgHasAttr_String_XsdtString_
 
-}
+	XsdGoPkgHasAttr_Character_Tchar_
 
-type XsdGoPkgHasElem_OutputCharacter struct {
-	OutputCharacter *TxsdOutputCharacter `xml:"http://www.w3.org/1999/XSL/Transform output-character"`
 }
 
 type XsdGoPkgHasElems_OutputCharacter struct {
 	OutputCharacters []*TxsdOutputCharacter `xml:"http://www.w3.org/1999/XSL/Transform output-character"`
+}
+
+type XsdGoPkgHasElem_OutputCharacter struct {
+	OutputCharacter *TxsdOutputCharacter `xml:"http://www.w3.org/1999/XSL/Transform output-character"`
 }
 
 type XsdGoPkgHasAttr_As_TsequenceType_ struct {
@@ -1708,20 +1708,20 @@ type TxsdParam struct {
 
 	XsdGoPkgHasCdata
 
-	XsdGoPkgHasAttr_As_TsequenceType_
+	XsdGoPkgHasAttr_Tunnel_TyesOrNo_
 
 	XsdGoPkgHasAttr_Required_TyesOrNo_
 
-	XsdGoPkgHasAttr_Tunnel_TyesOrNo_
+	XsdGoPkgHasAttr_As_TsequenceType_
 
-}
-
-type XsdGoPkgHasElems_Param struct {
-	Params []*TxsdParam `xml:"http://www.w3.org/1999/XSL/Transform param"`
 }
 
 type XsdGoPkgHasElem_Param struct {
 	Param *TxsdParam `xml:"http://www.w3.org/1999/XSL/Transform param"`
+}
+
+type XsdGoPkgHasElems_Param struct {
+	Params []*TxsdParam `xml:"http://www.w3.org/1999/XSL/Transform param"`
 }
 
 type TxsdPerformSort struct {
@@ -1735,12 +1735,12 @@ type TxsdPerformSort struct {
 
 }
 
-type XsdGoPkgHasElem_PerformSort struct {
-	PerformSort *TxsdPerformSort `xml:"http://www.w3.org/1999/XSL/Transform perform-sort"`
-}
-
 type XsdGoPkgHasElems_PerformSort struct {
 	PerformSorts []*TxsdPerformSort `xml:"http://www.w3.org/1999/XSL/Transform perform-sort"`
+}
+
+type XsdGoPkgHasElem_PerformSort struct {
+	PerformSort *TxsdPerformSort `xml:"http://www.w3.org/1999/XSL/Transform perform-sort"`
 }
 
 type XsdGoPkgHasAttr_Elements_Tnametests_ struct {
@@ -1850,48 +1850,48 @@ type TxsdResultDocument struct {
 
 	XsdGoPkgHasCdata
 
-	XsdGoPkgHasAttr_Href_Tavt_
-
-	XsdGoPkgHasAttr_IncludeContentType_Tavt_
-
-	XsdGoPkgHasAttr_Format_Tavt_
+	XsdGoPkgHasAttr_CdataSectionElements_Tavt_
 
 	XsdGoPkgHasAttr_DoctypePublic_Tavt_
 
-	XsdGoPkgHasAttr_Standalone_Tavt_
-
-	XsdGoPkgHasAttr_CdataSectionElements_Tavt_
-
 	XsdGoPkgHasAttr_NormalizationForm_Tavt_
-
-	XsdGoPkgHasAttr_EscapeUriAttributes_Tavt_
-
-	XsdGoPkgHasAttr_Method_Tavt_
 
 	XsdGoPkgHasAttr_OmitXmlDeclaration_Tavt_
 
-	XsdGoPkgHasAttr_DoctypeSystem_Tavt_
-
-	XsdGoPkgHasAttr_Indent_Tavt_
-
 	XsdGoPkgHasAttr_Encoding_Tavt_
+
+	XsdGoPkgHasAttr_Href_Tavt_
+
+	XsdGoPkgHasAttr_OutputVersion_Tavt_
+
+	XsdGoPkgHasAttr_Method_Tavt_
+
+	XsdGoPkgHasAttr_IncludeContentType_Tavt_
 
 	XsdGoPkgHasAttr_UndeclarePrefixes_Tavt_
 
-	XsdGoPkgHasAttr_OutputVersion_Tavt_
+	XsdGoPkgHasAttr_EscapeUriAttributes_Tavt_
 
 	XsdGoPkgHasAttr_ByteOrderMark_Tavt_
 
 	XsdGoPkgHasAttr_MediaType_Tavt_
 
-}
+	XsdGoPkgHasAttr_Format_Tavt_
 
-type XsdGoPkgHasElems_ResultDocument struct {
-	ResultDocuments []*TxsdResultDocument `xml:"http://www.w3.org/1999/XSL/Transform result-document"`
+	XsdGoPkgHasAttr_Standalone_Tavt_
+
+	XsdGoPkgHasAttr_DoctypeSystem_Tavt_
+
+	XsdGoPkgHasAttr_Indent_Tavt_
+
 }
 
 type XsdGoPkgHasElem_ResultDocument struct {
 	ResultDocument *TxsdResultDocument `xml:"http://www.w3.org/1999/XSL/Transform result-document"`
+}
+
+type XsdGoPkgHasElems_ResultDocument struct {
+	ResultDocuments []*TxsdResultDocument `xml:"http://www.w3.org/1999/XSL/Transform result-document"`
 }
 
 type TxsdSequence struct {
@@ -1944,13 +1944,13 @@ type TxsdSort struct {
 
 	XsdGoPkgHasAttr_Stable_TyesOrNo_
 
-	XsdGoPkgHasAttr_DataType_Tavt_Text
+	XsdGoPkgHasAttr_CaseOrder_Tavt_
 
 	XsdGoPkgHasAttr_Order_Tavt_Ascending
 
-	XsdGoPkgHasAttr_CaseOrder_Tavt_
-
 	XsdGoPkgHasAttr_Collation_Tavt_
+
+	XsdGoPkgHasAttr_DataType_Tavt_Text
 
 }
 
@@ -2000,18 +2000,18 @@ type TxsdTemplate struct {
 
 	XsdGoPkgHasGroup_SequenceConstructorGroup
 
-	XsdGoPkgHasAttr_Priority_XsdtDecimal_
-
 	XsdGoPkgHasAttr_Mode_Tmodes_
 
-}
+	XsdGoPkgHasAttr_Priority_XsdtDecimal_
 
-type XsdGoPkgHasElems_Template struct {
-	Templates []*TxsdTemplate `xml:"http://www.w3.org/1999/XSL/Transform template"`
 }
 
 type XsdGoPkgHasElem_Template struct {
 	Template *TxsdTemplate `xml:"http://www.w3.org/1999/XSL/Transform template"`
+}
+
+type XsdGoPkgHasElems_Template struct {
+	Templates []*TxsdTemplate `xml:"http://www.w3.org/1999/XSL/Transform template"`
 }
 
 type XsdGoPkgHasAttr_DisableOutputEscaping_TyesOrNo_No struct {
@@ -2141,24 +2141,24 @@ type XsdGoPkgHasElem_WithParam struct {
 	WithParam *TxsdWithParam `xml:"http://www.w3.org/1999/XSL/Transform with-param"`
 }
 
-type XsdGoPkgHasElem_LiteralResultElement struct {
-	LiteralResultElement xsdt.AnyType `xml:"http://www.w3.org/1999/XSL/Transform literal-result-element"`
-}
-
 type XsdGoPkgHasElems_LiteralResultElement struct {
 	LiteralResultElements []xsdt.AnyType `xml:"http://www.w3.org/1999/XSL/Transform literal-result-element"`
 }
 
-type XsdGoPkgHasGroup_SequenceConstructorGroup struct {
-	XsdGoPkgHasElems_Variable
+type XsdGoPkgHasElem_LiteralResultElement struct {
+	LiteralResultElement xsdt.AnyType `xml:"http://www.w3.org/1999/XSL/Transform literal-result-element"`
+}
 
-	XsdGoPkgHasElems_Instruction
+type XsdGoPkgHasGroup_SequenceConstructorGroup struct {
+	XsdGoPkgHasElem_Variable
+
+	XsdGoPkgHasElem_Instruction
 
 	XsdGoPkgHasGroup_ResultElements
 
 }
 
 type XsdGoPkgHasGroup_ResultElements struct {
-	XsdGoPkgHasElems_LiteralResultElement
+	XsdGoPkgHasElem_LiteralResultElement
 
 }

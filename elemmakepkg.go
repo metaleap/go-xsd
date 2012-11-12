@@ -236,13 +236,19 @@ func (me *ComplexType) makePkg (bag *PkgBag) {
 	for elGr, _ = range allElemGroups { subMakeElemGroup(bag, elGr, grsDone) }
 	for el, _ = range allElems { subMakeElem(bag, el, elsDone, elCache) }
 	for _, ch := range allChoices {
-		if ch.MaxOccurs == 1 { elCache = perPkgState.elemsCacheOnce } else { elCache = perPkgState.elemsCacheMult }
-		ch.hasElemAnnotation.makePkg(bag); for _, el = range ch.Elements { subMakeElem(bag, el, elsDone, elCache) }
+		ch.hasElemAnnotation.makePkg(bag)
+		for _, el = range ch.Elements {
+			if (ch.hasAttrMaxOccurs.Value() == 1) && (el.hasAttrMaxOccurs.Value() == 1) { elCache = perPkgState.elemsCacheOnce } else { elCache = perPkgState.elemsCacheMult }
+			subMakeElem(bag, el, elsDone, elCache)
+		}
 		for _, elGr = range ch.Groups { subMakeElemGroup(bag, elGr, grsDone) }
 	}
 	for _, seq := range allSeqs {
-		if seq.MaxOccurs == 1 { elCache = perPkgState.elemsCacheOnce } else { elCache = perPkgState.elemsCacheMult }
-		seq.hasElemAnnotation.makePkg(bag); for _, el = range seq.Elements { subMakeElem(bag, el, elsDone, elCache) }
+		seq.hasElemAnnotation.makePkg(bag)
+		for _, el = range seq.Elements {
+			if (seq.hasAttrMaxOccurs.Value() == 1) && (el.hasAttrMaxOccurs.Value() == 1) { elCache = perPkgState.elemsCacheOnce } else { elCache = perPkgState.elemsCacheMult }
+			subMakeElem(bag, el, elsDone, elCache)
+		}
 		for _, elGr = range seq.Groups { subMakeElemGroup(bag, elGr, grsDone) }
 	}
 	for attGroup, _ = range allAttGroups {
@@ -291,7 +297,7 @@ func (me *Element) makePkg (bag *PkgBag) {
 			if typeName = bag.resolveQnameRef(typeName, "T", &impName); bag.Schema.globalComplexType(bag, typeName) != nil { asterisk = "*" }
 		}
 		if defVal = me.Default; len(defVal) == 0 { defName, defVal = "Fixed", me.Fixed }
-		if me.Parent() == bag.Schema { key = safeName } else { key = safeName + "_" + bag.safeName(typeName) + "_" + bag.safeName(defVal) }
+		if me.Parent() == bag.Schema { key = safeName } else { key = bag.Stacks.FullName() + "_" + safeName + "_" + bag.safeName(typeName) + "_" + bag.safeName(defVal) }
 		if valueType = perPkgState.simpleContentValueTypes[typeName]; len(valueType) == 0 { valueType = typeName }
 		for pref, cache := range map[string]map[string]string { "HasElem_": perPkgState.elemsCacheOnce, "HasElems_": perPkgState.elemsCacheMult } {
 			if tmp = idPrefix + pref + key; !perPkgState.elemsWritten[tmp] {
@@ -385,13 +391,19 @@ func (me *Group) makePkg (bag *PkgBag) {
 		elCache = perPkgState.elemsCacheOnce
 		if me.All != nil { me.All.hasElemAnnotation.makePkg(bag); for _, el = range me.All.Elements { subMakeElem(bag, el, elsDone, elCache) } }
 		for _, ch := range choices {
-			if ch.MaxOccurs == 1 { elCache = perPkgState.elemsCacheOnce } else { elCache = perPkgState.elemsCacheMult }
-			ch.hasElemAnnotation.makePkg(bag); for _, el = range ch.Elements { subMakeElem(bag, el, elsDone, elCache) }
+			ch.hasElemAnnotation.makePkg(bag)
+			for _, el = range ch.Elements {
+				if (ch.hasAttrMaxOccurs.Value() == 1) && (el.hasAttrMaxOccurs.Value() == 1) { elCache = perPkgState.elemsCacheOnce } else { elCache = perPkgState.elemsCacheMult }
+				subMakeElem(bag, el, elsDone, elCache)
+			}
 			for _, gr = range ch.Groups { subMakeElemGroup(bag, gr, grsDone) }
 		}
 		for _, seq := range seqs {
-			if seq.MaxOccurs == 1 { elCache = perPkgState.elemsCacheOnce } else { elCache = perPkgState.elemsCacheMult }
-			seq.hasElemAnnotation.makePkg(bag); for _, el = range seq.Elements { subMakeElem(bag, el, elsDone, elCache) }
+			seq.hasElemAnnotation.makePkg(bag)
+			for _, el = range seq.Elements {
+				if (seq.hasAttrMaxOccurs.Value() == 1) && (el.hasAttrMaxOccurs.Value() == 1) { elCache = perPkgState.elemsCacheOnce } else { elCache = perPkgState.elemsCacheMult }
+				subMakeElem(bag, el, elsDone, elCache)
+			}
 			for _, gr = range seq.Groups { subMakeElemGroup(bag, gr, grsDone) }
 		}
 		bag.appendFmt(true, "}")

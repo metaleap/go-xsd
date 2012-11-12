@@ -7,8 +7,8 @@ package gopkg_WwwW3OrgMathXMLSchemaMathml2Mathml2Xsd
 //	This is the common attributes module for MathML.
 //	Author: Stéphane Dalmas, INRIA.
 import (
-	xlink "github.com/metaleap/go-xsd/pkg/www.w3.org/Math/XMLSchema/mathml2/common/xlink-href.xsd_gopkg"
 	xsdt "github.com/metaleap/go-xsd/types"
+	xlink "github.com/metaleap/go-xsd/pkg/www.w3.org/Math/XMLSchema/mathml2/common/xlink-href.xsd_gopkg"
 )
 
 type XsdGoPkgHasAttr_Class_XsdtNmtokens_ struct {
