@@ -12,12 +12,12 @@ import (
 )
 
 type Col14Doc struct {
-	XMLName xml.Name `xml:"entry"`
+	XMLName xml.Name `xml:"COLLADA"`
 	collada14.TxsdCollada
 }
 
 type Col15Doc struct {
-	XMLName xml.Name `xml:"feed"`
+	XMLName xml.Name `xml:"COLLADA"`
 	collada15.TxsdCollada
 }
 

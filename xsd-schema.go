@@ -62,11 +62,36 @@ type Schema struct {
 	func (me *Schema) globalComplexType (bag *PkgBag, name string) (ct *ComplexType) {
 		var imp string
 		for _, ct = range me.ComplexTypes {
-			// println("TEST " + bag.resolveQnameRef(ustr.PrefixWithSep(me.XMLNamespacePrefix, ":", ct.Name.String()), "T", &imp) + " for " + name)
 			if bag.resolveQnameRef(ustr.PrefixWithSep(me.XMLNamespacePrefix, ":", ct.Name.String()), "T", &imp) == name { return }
 		}
 		for _, ss := range me.XMLIncludedSchemas { if ct = ss.globalComplexType(bag, name); ct != nil { return } }
 		ct = nil; return
+	}
+
+	func (me *Schema) globalElement (bag *PkgBag, name string) (el *Element) {
+		var imp string
+		if len(name) > 0 {
+			var rname = bag.resolveQnameRef(name, "", &imp)
+			for _, el = range me.Elements {
+				if bag.resolveQnameRef(ustr.PrefixWithSep(me.XMLNamespacePrefix, ":", el.Name.String()), "", &imp) == rname { return }
+			}
+			for _, ss := range me.XMLIncludedSchemas { if el = ss.globalElement(bag, name); el != nil { return } }
+		}
+		el = nil; return
+	}
+
+	func (me *Schema) globalSubstitutionElems (el *Element) (els []*Element) {
+		var elName = el.Ref.String()
+		if len(elName) == 0 { elName = el.Name.String() }
+		for _, tle := range me.Elements {
+			if (tle != el) && (len(tle.SubstitutionGroup) > 0) {
+				if (tle.SubstitutionGroup.String()[(strings.Index(tle.SubstitutionGroup.String(), ":") + 1) :] == elName) {
+					els = append(els, tle)
+				}
+			}
+		}
+		for _, inc := range me.XMLIncludedSchemas { els = append(els, inc.globalSubstitutionElems(el) ...) }
+		return
 	}
 
 	func (me *Schema) onLoad (rootAtts []xml.Attr, loadUri, localPath string) (err error) {
