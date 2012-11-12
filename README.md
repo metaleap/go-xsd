@@ -15,7 +15,7 @@ A command-line tool to generate Go XML wrapper packages for specified XSD schema
 
 If no arguments are specified, this tool proceeds to (re)generate all Go packages found under go-xsd/pkg.
 
-How to use: check out the 4 **flagXyz** *var*s declared at the top of makepkg/main.go.
+How to use: check out the 4 **flagXyz** _var_s declared at the top of makepkg/main.go.
 
 Each generated wrapper package contains the type structures required to easily **xml.Unmarshal()** an XML document based on that XSD.
 
