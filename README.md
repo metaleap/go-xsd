@@ -73,7 +73,7 @@ How to use auto-generated packages:
 
 Take a look at the "test progs" under **makepkg/tests**, they're basically examples for usage. For unmarshal you need to define just one small custom struct like this, using the rss package as a simple example, as demonstrated in **makepkg/tests/rss/main.go**:
 
-	type RssDoc struct {
+	type MyRssDoc struct {
 		XMLName xml.Name `xml:"rss"`
 		rss.TxsdRss
 	}
@@ -82,9 +82,9 @@ So your custom struct specifies two things:
 
 - the XML name of the root element in your XML file, as is typical when working with **encoding/xml.Unmarshal()**.
 
-- the auto-generated Go type from the auto-generated package to embed.
+- the auto-generated Go type from the auto-generated package to **embed** right inside your custom struct.
 
-The second part is the only tricky part. XML Schema Definition has no real concept of "root element", partly because they're designed to support use-cases where you embed a full document defined in one XSD deep inside a full document defined in another XSD. So a Collada document may contain a full or partial MathML document somewhere inside it. Some well-designed XSDs define a single top-level element, so we could infer "this is the root element" and generate a "XyzDoc" struct (like the RssDoc above) for you. But many don't. Some formats may legally have one of two or more possible "root" elements, ie. Atom may have either a "feed" root element or an "entry" root element. So **go-xsd** does not magically infer which of the XSDs top-level elements might be the root element, you define this by writing a small struct as shown above. The naming of the root element Go type to be embedded is not consistent across different packages, because their naming is directly based on the XSD that was used to generate the package. So for example...
+The second part is the only tricky part. XML Schema Definition has no real concept of "root element", partly because they're designed to support use-cases where you embed a full document defined in one XSD deep inside a full document defined in another XSD. So a Collada document may contain a full or partial MathML document somewhere inside it. Some well-designed XSDs define a single top-level element, so we could infer "this is the root element" and generate a "XyzDoc" struct (like the MyRssDoc above) for you. But many don't. Some formats may legally have one of two or more possible "root" elements, ie. Atom may have either a "feed" root element or an "entry" root element. So **go-xsd** does not magically infer which of the XSDs top-level elements might be the root element, you define this by writing a small struct as shown above. The naming of the root element Go type to be embedded is not consistent across different packages, because their naming is directly based on the XSD that was used to generate the package. So for example...
 
 - for rss we have *rss.TxsdRss*
 - for atom: *atom.TentryType* and *atom.TfeedType*
