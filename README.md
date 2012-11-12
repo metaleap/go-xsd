@@ -25,13 +25,17 @@ If no arguments are specified, this tool proceeds to (re)generate all Go package
 
 Each generated wrapper package contains the type structures required to easily **xml.Unmarshal()** an XML document based on that XSD.
 
-XSD simple-types are represented by the corresponding native Go scalar data type, augmented by utility methods where applicable:
+**XSD simple-types** are represented by the corresponding native Go scalar data type, augmented by utility methods where applicable:
 
 - enumerated simple-types get corresponding **IsXyz() bool** methods
 
 - simple-types that define a whitespace-separated list of scalar values get a corresponding, properly typed **Values()** method
 
-XSD complex-types, attribute-groups, element-groups, elements etc. are ultimately represented by corresponding generated Go struct types.
+**XSD complex-types**, attribute-groups, element-groups, elements etc. are ultimately represented by corresponding generated Go struct types.
+
+**XSD includes** are represented as separate .go source files compiled into a single package. If main.xsd includes some/sub/topic.xsd, then both main.xsd.go and some_sub_topic.xsd.go are generated and will compile into a single Go package.
+
+**XSD imports** are rewritten as Go imports but not otherwise auto-magically processed. If you see the generated .go package importing another XSD _gopkg that will cause a "package not found" compiler error, you'll first need to generate that one with makepkg yourself for the import to work.
 
 Regarding the auto-generated code:
 
