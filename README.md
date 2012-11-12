@@ -71,7 +71,7 @@ How to use auto-generated packages:
 ===================================
 
 
-Take a look at the "test progs" under **makepkg/tests**, they're basically examples for usage. For unmarshal you need to define just one small custom struct like this, using the rss package as a simple example, as demonstrated in **makepkg/tests/rss/main.go**:
+Take a look at the "test progs" under **makepkg/tests**, they're basically simple usage examples. For unmarshal you need to define just one small custom struct like this --- using the rss package as a simple example, as demonstrated in **makepkg/tests/rss/main.go**:
 
 	type MyRssDoc struct {
 		XMLName xml.Name `xml:"rss"`
@@ -84,16 +84,16 @@ So your custom struct specifies two things:
 
 - the auto-generated Go type from the auto-generated package to **embed** right inside your custom struct.
 
-The second part is the only tricky part. XML Schema Definition has no real concept of "root element", partly because they're designed to support use-cases where you embed a full document defined in one XSD deep inside a full document defined in another XSD. So a Collada document may contain a full or partial MathML document somewhere inside it. Some well-designed XSDs define a single top-level element, so we could infer "this is the root element" and generate a "XyzDoc" struct (like the MyRssDoc above) for you. But many don't. Some formats may legally have one of two or more possible "root" elements, ie. Atom may have either a "feed" root element or an "entry" root element. So **go-xsd** does not magically infer which of the XSDs top-level elements might be the root element, you define this by writing a small struct as shown above. The naming of the root element Go type to be embedded is not consistent across different packages, because their naming is directly based on the XSD that was used to generate the package. So for example...
+The second part is the only tricky part. XML Schema Definition has no real concept of "root element", partly because they're designed to support use-cases where you embed a full document defined in one XSD deep inside a full document defined in another XSD. So a Collada document may contain a full or partial MathML document somewhere inside it. Some well-designed XSDs define a single top-level element, so we could infer "this is the root element" and generate a "XyzDoc" struct (like the MyRssDoc above) for you. But many don't. Some formats may legally have one of two or more possible "root" elements, ie. Atom may have either a "feed" root element or an "entry" root element. So **go-xsd** does not magically infer which of the XSD's top-level elements might be the root element, you define this by writing a small struct as shown above. The naming of the root element Go type to be embedded is not consistent across different packages, because their naming is directly based on the XSD that was used to generate the package. So for example...
 
 - for rss we have *rss.TxsdRss*
 - for atom: *atom.TentryType* and *atom.TfeedType*
 - for svg: *svg.TsvgType*
 - for Collada: *collada.TxsdCollada*
 
-Ultimately, to find out the proper name to embed you'll have to dig a bit inside the generated package. Here's how you do it:
+Seems like Collada and RSS share a certain naming pattern, and yet Atom/SVG share another one? Mere coincidence, the naming is completely arbitrary and up to the XSD author. Ultimately, to find out the proper Go type name to embed, you'll have to dig a bit inside the generated package. That's actually pretty straightforward, here's how you do it:
 
-A) Suppose you have an XML format where the root element, and only that one, is known to be named:
+A) Suppose you have an XML format where the root element (and only that one) is known to be named:
 
 
     <gopher>
@@ -113,6 +113,6 @@ C) Search for an occurence of either:
      gopher"`
 
 
-( whitespace, gopher, quote, *backtick* )
+( *whitespace*, gopher, quote, backtick )
 
-D) The found occurence is likely part of a field in a type named something like **XsdGoPkgHasElem_Gopher** or **XsdGoPkgHasElems_Gopher**. Ignore that type, instead focus on the type of the field itself. That's the one you were looking for, that's the one to embed in your tiny custom struct.
+D) The found occurence is likely part of a field in a type named something like **XsdGoPkgHasElem_Gopher** or **XsdGoPkgHasElems_Gopher**. Ignore that type, instead focus on the type of the field itself. That's the one you're looking for, the one to embed in your tiny custom struct.
