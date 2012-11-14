@@ -283,7 +283,7 @@ func (me *Element) makePkg (bag *PkgBag) {
 				bag.elemsWritten[tmp], bag.elemKeys[me] = true, key
 				cache[key] = tmp
 				var td = bag.addType(me, tmp, "", me.Annotation)
-				td.addField(me, util.Ifs(pref == "HasElems_", ustr.Pluralize(safeName), safeName), util.Ifs(pref == "HasElems_", "[]" + asterisk + typeName, asterisk + typeName), util.Ifs(len(bag.Schema.TargetNamespace) > 0, bag.Schema.TargetNamespace.String() + " ", "") + me.Name.String(), me.Annotation)
+				td.addField(me, util.Ifs(pref == "HasElems_", pluralize(safeName), safeName), util.Ifs(pref == "HasElems_", "[]" + asterisk + typeName, asterisk + typeName), util.Ifs(len(bag.Schema.TargetNamespace) > 0, bag.Schema.TargetNamespace.String() + " ", "") + me.Name.String(), me.Annotation)
 				if me.parent == bag.Schema {
 					for _, subEl := range bag.Schema.RootSchema().globalSubstitutionElems(me) {
 						td.addEmbed(subEl, idPrefix + pref + bag.safeName(subEl.Name.String()), subEl.Annotation)
@@ -656,6 +656,13 @@ func anns (a *All, cc *ComplexContent) (anns []*Annotation) {
 		if ecc := cc.ExtensionComplexContent; (ecc != nil) && (ecc.Annotation != nil) { anns = append(anns, ecc.Annotation) }
 	}
 	return
+}
+
+func pluralize (s string) string {
+	const lib, inst = "Library", "Instance"
+	if strings.HasPrefix(s, lib) { return ustr.Pluralize(s[len(lib) :] + s[: len(lib)]) }
+	if strings.HasPrefix(s, inst) { return ustr.Pluralize(s[len(inst) :] + s[: len(inst)]) }
+	return ustr.Pluralize(s)
 }
 
 func sfmt (s string, a ... interface{}) string {
