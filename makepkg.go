@@ -67,6 +67,7 @@ type PkgBag struct {
 	ctd *declType
 	lines []string
 	impName string
+	debug bool
 	imports map[string]string
 	impsUsed map[string]bool
 	anonCounts map[string]uint64

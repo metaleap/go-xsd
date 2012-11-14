@@ -81,6 +81,8 @@ func (me *Attribute) makePkg (bag *PkgBag) {
 					td.addMethod(nil, tmp, safeName + defName, typeName, sfmt("return %v(%#v)", typeName, defVal), doc)
 				}
 			}
+		} else {
+			bag.attsKeys[me] = key
 		}
 	}
 	me.elemBase.afterMakePkg(bag)
@@ -233,6 +235,7 @@ func (me *ComplexType) makePkg (bag *PkgBag) {
 	for attGroup, _ = range allAttGroups {
 		td.addEmbed(attGroup, ustr.PrefixWithSep(bag.attGroupRefImps[attGroup], ".", bag.attGroups[attGroup][(strings.Index(bag.attGroups[attGroup], ".") + 1) :]), attGroup.Annotation)
 	}
+
 	for att, _ = range allAtts {
 		if key := bag.attsKeys[att]; len(key) > 0 {
 			td.addEmbed(att, ustr.PrefixWithSep(bag.attRefImps[att], ".", bag.attsCache[key][(strings.Index(bag.attsCache[key], ".") + 1) :]), att.Annotation)
