@@ -15,7 +15,6 @@ var (
 	flagLocalCopy = flag.Bool("local", true, "Local copy: only downloads if file does not exist locally")
 	flagForceParse = flag.Bool("parse", false, "Not necessary unless the generated Go wrapper package won't compile.")
 	flagBasePath = flag.String("basepath", "", "Defaults to " + xsd.PkgGen.BasePath + ". A $GOPATH/src/-relative path (always a slash-style path, even on Windows) where XSD files are downloaded to / loaded from and generated Go wrapper packages are created. Any XSD imports are also rewritten as Go imports from that path (but are not otherwise auto-magically processed in any way).")
-//	flagExportHelperTypes = flag.String("exporthelpers", "some", "Specifies how to export generated helper types (any type not explicitly declared with a name in the XSD). Can be none, all or some, which is the default and means: only export helper types directly related to the XSD's top-level declarations, as those may be designed to be imported by other schemas.")
 
 	sd *xsd.Schema
 	err error

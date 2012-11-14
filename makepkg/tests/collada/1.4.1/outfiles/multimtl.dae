@@ -1,39 +1,184 @@
 <COLLADA base="" version="1.4.1">
+	<scene xmlns="http://www.collada.org/2005/11/COLLADASchema">
+		<instance_visual_scene xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" url="#VisualSceneNode" sid=""></instance_visual_scene>
+	</scene>
+	<library_lights xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" id="">
+		<light xmlns="http://www.collada.org/2005/11/COLLADASchema" name="Lt_Light" id="Lt_Light-lib">
+			<technique_common xmlns="http://www.collada.org/2005/11/COLLADASchema">
+				<point xmlns="http://www.collada.org/2005/11/COLLADASchema">
+					<constant_attenuation xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></constant_attenuation>
+					<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">1 1 1</color>
+					<quadratic_attenuation xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></quadratic_attenuation>
+					<linear_attenuation xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></linear_attenuation>
+				</point>
+			</technique_common>
+		</light>
+		<light xmlns="http://www.collada.org/2005/11/COLLADASchema" name="pointLightShape1" id="pointLightShape1-lib">
+			<technique_common xmlns="http://www.collada.org/2005/11/COLLADASchema">
+				<point xmlns="http://www.collada.org/2005/11/COLLADASchema">
+					<constant_attenuation xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></constant_attenuation>
+					<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">1 1 1</color>
+					<quadratic_attenuation xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></quadratic_attenuation>
+					<linear_attenuation xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></linear_attenuation>
+				</point>
+			</technique_common>
+		</light>
+	</library_lights>
+	<library_materials xmlns="http://www.collada.org/2005/11/COLLADASchema" id="" name="">
+		<material xmlns="http://www.collada.org/2005/11/COLLADASchema" id="Blue" name="Blue">
+			<instance_effect xmlns="http://www.collada.org/2005/11/COLLADASchema" url="#Blue-fx" name="" sid=""></instance_effect>
+		</material>
+		<material xmlns="http://www.collada.org/2005/11/COLLADASchema" id="Red" name="Red">
+			<instance_effect xmlns="http://www.collada.org/2005/11/COLLADASchema" url="#Red-fx" name="" sid=""></instance_effect>
+		</material>
+	</library_materials>
+	<library_geometries xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" id="">
+		<geometry xmlns="http://www.collada.org/2005/11/COLLADASchema" name="box" id="box-lib">
+			<mesh xmlns="http://www.collada.org/2005/11/COLLADASchema">
+				<polylist xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" material="BlueSG" count="5">
+					<vcount xmlns="http://www.collada.org/2005/11/COLLADASchema">4 4 4 4 4</vcount>
+					<input xmlns="http://www.collada.org/2005/11/COLLADASchema" source="#box-lib-vertices" set="0" semantic="VERTEX" offset="0"></input>
+					<input xmlns="http://www.collada.org/2005/11/COLLADASchema" source="#box-lib-normals" set="0" semantic="NORMAL" offset="1"></input>
+					<p xmlns="http://www.collada.org/2005/11/COLLADASchema">0 0 1 1 5 2 4 3 6 4 7 5 3 6 2 7 0 8 4 9 6 10 2 11 3 12 7 13 5 14 1 15 5 16 7 17 6 18 4 19</p>
+				</polylist>
+				<polylist xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" material="RedSG" count="1">
+					<vcount xmlns="http://www.collada.org/2005/11/COLLADASchema">4</vcount>
+					<input xmlns="http://www.collada.org/2005/11/COLLADASchema" source="#box-lib-vertices" set="0" semantic="VERTEX" offset="0"></input>
+					<input xmlns="http://www.collada.org/2005/11/COLLADASchema" source="#box-lib-normals" set="0" semantic="NORMAL" offset="1"></input>
+					<p xmlns="http://www.collada.org/2005/11/COLLADASchema">0 20 2 21 3 22 1 23</p>
+				</polylist>
+				<vertices xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" id="box-lib-vertices">
+					<input xmlns="http://www.collada.org/2005/11/COLLADASchema" source="#box-lib-positions" semantic="POSITION"></input>
+				</vertices>
+				<source xmlns="http://www.collada.org/2005/11/COLLADASchema" name="position" id="box-lib-positions">
+					<float_array xmlns="http://www.collada.org/2005/11/COLLADASchema" id="box-lib-positions-array" count="24" magnitude="0" name="" digits="0">-50 50 50 50 50 50 -50 -50 50 50 -50 50 -50 50 -50 50 50 -50 -50 -50 -50 50 -50 -50</float_array>
+					<technique_common xmlns="http://www.collada.org/2005/11/COLLADASchema">
+						<accessor xmlns="http://www.collada.org/2005/11/COLLADASchema" count="8" offset="0" source="#box-lib-positions-array" stride="3">
+							<param xmlns="http://www.collada.org/2005/11/COLLADASchema" type="float" sid="" name="X" semantic=""></param>
+							<param xmlns="http://www.collada.org/2005/11/COLLADASchema" type="float" sid="" name="Y" semantic=""></param>
+							<param xmlns="http://www.collada.org/2005/11/COLLADASchema" type="float" sid="" name="Z" semantic=""></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source xmlns="http://www.collada.org/2005/11/COLLADASchema" name="normal" id="box-lib-normals">
+					<float_array xmlns="http://www.collada.org/2005/11/COLLADASchema" id="box-lib-normals-array" count="72" magnitude="0" name="" digits="0">0 1 0 0 1 0 0 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1</float_array>
+					<technique_common xmlns="http://www.collada.org/2005/11/COLLADASchema">
+						<accessor xmlns="http://www.collada.org/2005/11/COLLADASchema" count="24" offset="0" source="#box-lib-normals-array" stride="3">
+							<param xmlns="http://www.collada.org/2005/11/COLLADASchema" type="float" sid="" name="X" semantic=""></param>
+							<param xmlns="http://www.collada.org/2005/11/COLLADASchema" type="float" sid="" name="Y" semantic=""></param>
+							<param xmlns="http://www.collada.org/2005/11/COLLADASchema" type="float" sid="" name="Z" semantic=""></param>
+						</accessor>
+					</technique_common>
+				</source>
+			</mesh>
+		</geometry>
+	</library_geometries>
+	<library_visual_scenes xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" id="">
+		<visual_scene xmlns="http://www.collada.org/2005/11/COLLADASchema" name="untitled" id="VisualSceneNode">
+			<node xmlns="http://www.collada.org/2005/11/COLLADASchema" id="Camera" sid="" type="" layer="" name="Camera">
+				<translate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="translate">-141.666 92.4958 296.3</translate>
+				<instance_camera xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" url="#cl_unnamed_1" sid=""></instance_camera>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateY">0 1 0 -26</rotate>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateX">1 0 0 -15.1954</rotate>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateZ">0 0 1 0</rotate>
+			</node>
+			<node xmlns="http://www.collada.org/2005/11/COLLADASchema" id="Light" sid="" type="" layer="" name="Light">
+				<translate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="translate">-325 225 400</translate>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateZ">0 0 1 0</rotate>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateY">0 1 0 0</rotate>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateX">1 0 0 0</rotate>
+				<instance_light xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" url="#Lt_Light-lib" sid=""></instance_light>
+			</node>
+			<node xmlns="http://www.collada.org/2005/11/COLLADASchema" id="Box" sid="" type="" layer="" name="Box">
+				<instance_geometry xmlns="http://www.collada.org/2005/11/COLLADASchema" url="#box-lib" name="" sid="">
+					<bind_material xmlns="http://www.collada.org/2005/11/COLLADASchema">
+						<technique_common xmlns="http://www.collada.org/2005/11/COLLADASchema">
+							<instance_material xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" sid="" symbol="BlueSG" target="#Blue"></instance_material>
+							<instance_material xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" sid="" symbol="RedSG" target="#Red"></instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateZ">0 0 1 0</rotate>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateY">0 1 0 0</rotate>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateX">1 0 0 0</rotate>
+			</node>
+			<node xmlns="http://www.collada.org/2005/11/COLLADASchema" id="testCamera" sid="" type="" layer="" name="testCamera">
+				<translate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="translate">-141.666 92.4958 296.3</translate>
+				<instance_camera xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" url="#testCameraShape" sid=""></instance_camera>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateY">0 1 0 -26</rotate>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateX">1 0 0 -15.1954</rotate>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateZ">0 0 1 0</rotate>
+			</node>
+			<node xmlns="http://www.collada.org/2005/11/COLLADASchema" id="pointLight1" sid="" type="" layer="" name="pointLight1">
+				<translate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="translate">3 4 10</translate>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateZ">0 0 1 0</rotate>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateY">0 1 0 0</rotate>
+				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateX">1 0 0 0</rotate>
+				<instance_light xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" url="#pointLightShape1-lib" sid=""></instance_light>
+			</node>
+		</visual_scene>
+	</library_visual_scenes>
+	<library_cameras xmlns="http://www.collada.org/2005/11/COLLADASchema" id="" name="">
+		<camera xmlns="http://www.collada.org/2005/11/COLLADASchema" id="cl_unnamed_1" name="cl_unnamed_1">
+			<optics xmlns="http://www.collada.org/2005/11/COLLADASchema">
+				<technique_common xmlns="http://www.collada.org/2005/11/COLLADASchema">
+					<perspective xmlns="http://www.collada.org/2005/11/COLLADASchema">
+						<yfov xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></yfov>
+						<znear xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></znear>
+						<aspect_ratio xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></aspect_ratio>
+						<zfar xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></zfar>
+					</perspective>
+				</technique_common>
+			</optics>
+		</camera>
+		<camera xmlns="http://www.collada.org/2005/11/COLLADASchema" id="testCameraShape" name="testCameraShape">
+			<optics xmlns="http://www.collada.org/2005/11/COLLADASchema">
+				<technique_common xmlns="http://www.collada.org/2005/11/COLLADASchema">
+					<perspective xmlns="http://www.collada.org/2005/11/COLLADASchema">
+						<yfov xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></yfov>
+						<znear xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></znear>
+						<aspect_ratio xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></aspect_ratio>
+						<zfar xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></zfar>
+					</perspective>
+				</technique_common>
+			</optics>
+		</camera>
+	</library_cameras>
 	<library_effects xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" id="">
 		<effect xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" id="Blue-fx">
 			<profile_COMMON xmlns="http://www.collada.org/2005/11/COLLADASchema" id="">
 				<technique xmlns="http://www.collada.org/2005/11/COLLADASchema" id="" sid="common">
 					<phong xmlns="http://www.collada.org/2005/11/COLLADASchema">
-						<diffuse xmlns="http://www.collada.org/2005/11/COLLADASchema">
-							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0.137255 0.403922 0.870588 1</color>
-						</diffuse>
-						<shininess xmlns="http://www.collada.org/2005/11/COLLADASchema">
-							<float xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></float>
-						</shininess>
-						<transparency xmlns="http://www.collada.org/2005/11/COLLADASchema">
-							<float xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></float>
-						</transparency>
 						<index_of_refraction xmlns="http://www.collada.org/2005/11/COLLADASchema">
 							<float xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></float>
 						</index_of_refraction>
+						<ambient xmlns="http://www.collada.org/2005/11/COLLADASchema">
+							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0 0 0 1</color>
+						</ambient>
 						<emission xmlns="http://www.collada.org/2005/11/COLLADASchema">
 							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0 0 0 1</color>
 						</emission>
 						<specular xmlns="http://www.collada.org/2005/11/COLLADASchema">
 							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0.5 0.5 0.5 1</color>
 						</specular>
-						<reflective xmlns="http://www.collada.org/2005/11/COLLADASchema">
-							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0 0 0 1</color>
-						</reflective>
-						<ambient xmlns="http://www.collada.org/2005/11/COLLADASchema">
-							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0 0 0 1</color>
-						</ambient>
-						<transparent xmlns="http://www.collada.org/2005/11/COLLADASchema" opaque="">
-							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0 0 0 1</color>
-						</transparent>
 						<reflectivity xmlns="http://www.collada.org/2005/11/COLLADASchema">
 							<float xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></float>
 						</reflectivity>
+						<transparency xmlns="http://www.collada.org/2005/11/COLLADASchema">
+							<float xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></float>
+						</transparency>
+						<reflective xmlns="http://www.collada.org/2005/11/COLLADASchema">
+							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0 0 0 1</color>
+						</reflective>
+						<transparent xmlns="http://www.collada.org/2005/11/COLLADASchema" opaque="">
+							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0 0 0 1</color>
+						</transparent>
+						<shininess xmlns="http://www.collada.org/2005/11/COLLADASchema">
+							<float xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></float>
+						</shininess>
+						<diffuse xmlns="http://www.collada.org/2005/11/COLLADASchema">
+							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0.137255 0.403922 0.870588 1</color>
+						</diffuse>
 					</phong>
 				</technique>
 			</profile_COMMON>
@@ -42,151 +187,44 @@
 			<profile_COMMON xmlns="http://www.collada.org/2005/11/COLLADASchema" id="">
 				<technique xmlns="http://www.collada.org/2005/11/COLLADASchema" id="" sid="common">
 					<phong xmlns="http://www.collada.org/2005/11/COLLADASchema">
-						<diffuse xmlns="http://www.collada.org/2005/11/COLLADASchema">
-							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0.658824 0.101961 0.109804 1</color>
-						</diffuse>
-						<shininess xmlns="http://www.collada.org/2005/11/COLLADASchema">
-							<float xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></float>
-						</shininess>
-						<transparency xmlns="http://www.collada.org/2005/11/COLLADASchema">
-							<float xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></float>
-						</transparency>
 						<index_of_refraction xmlns="http://www.collada.org/2005/11/COLLADASchema">
 							<float xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></float>
 						</index_of_refraction>
+						<ambient xmlns="http://www.collada.org/2005/11/COLLADASchema">
+							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0 0 0 1</color>
+						</ambient>
 						<emission xmlns="http://www.collada.org/2005/11/COLLADASchema">
 							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0 0 0 1</color>
 						</emission>
 						<specular xmlns="http://www.collada.org/2005/11/COLLADASchema">
 							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0.368627 0.368627 0.368627 1</color>
 						</specular>
-						<reflective xmlns="http://www.collada.org/2005/11/COLLADASchema">
-							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0 0 0 1</color>
-						</reflective>
-						<ambient xmlns="http://www.collada.org/2005/11/COLLADASchema">
-							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0 0 0 1</color>
-						</ambient>
-						<transparent xmlns="http://www.collada.org/2005/11/COLLADASchema" opaque="">
-							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0 0 0 1</color>
-						</transparent>
 						<reflectivity xmlns="http://www.collada.org/2005/11/COLLADASchema">
 							<float xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></float>
 						</reflectivity>
+						<transparency xmlns="http://www.collada.org/2005/11/COLLADASchema">
+							<float xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></float>
+						</transparency>
+						<reflective xmlns="http://www.collada.org/2005/11/COLLADASchema">
+							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0 0 0 1</color>
+						</reflective>
+						<transparent xmlns="http://www.collada.org/2005/11/COLLADASchema" opaque="">
+							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0 0 0 1</color>
+						</transparent>
+						<shininess xmlns="http://www.collada.org/2005/11/COLLADASchema">
+							<float xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></float>
+						</shininess>
+						<diffuse xmlns="http://www.collada.org/2005/11/COLLADASchema">
+							<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">0.658824 0.101961 0.109804 1</color>
+						</diffuse>
 					</phong>
 				</technique>
 			</profile_COMMON>
 		</effect>
 	</library_effects>
-	<library_visual_scenes xmlns="http://www.collada.org/2005/11/COLLADASchema" id="" name="">
-		<visual_scene xmlns="http://www.collada.org/2005/11/COLLADASchema" name="untitled" id="VisualSceneNode">
-			<node xmlns="http://www.collada.org/2005/11/COLLADASchema" type="" layer="" name="Camera" sid="" id="Camera">
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateY">0 1 0 -26</rotate>
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateX">1 0 0 -15.1954</rotate>
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateZ">0 0 1 0</rotate>
-				<instance_camera xmlns="http://www.collada.org/2005/11/COLLADASchema" url="#cl_unnamed_1" sid="" name=""></instance_camera>
-				<translate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="translate">-141.666 92.4958 296.3</translate>
-			</node>
-			<node xmlns="http://www.collada.org/2005/11/COLLADASchema" type="" layer="" name="Light" sid="" id="Light">
-				<instance_light xmlns="http://www.collada.org/2005/11/COLLADASchema" url="#Lt_Light-lib" sid="" name=""></instance_light>
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateZ">0 0 1 0</rotate>
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateY">0 1 0 0</rotate>
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateX">1 0 0 0</rotate>
-				<translate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="translate">-325 225 400</translate>
-			</node>
-			<node xmlns="http://www.collada.org/2005/11/COLLADASchema" type="" layer="" name="Box" sid="" id="Box">
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateZ">0 0 1 0</rotate>
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateY">0 1 0 0</rotate>
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateX">1 0 0 0</rotate>
-				<instance_geometry xmlns="http://www.collada.org/2005/11/COLLADASchema" url="#box-lib" name="" sid="">
-					<bind_material xmlns="http://www.collada.org/2005/11/COLLADASchema">
-						<technique_common xmlns="http://www.collada.org/2005/11/COLLADASchema">
-							<instance_material xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="" symbol="BlueSG" name="" target="#Blue"></instance_material>
-							<instance_material xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="" symbol="RedSG" name="" target="#Red"></instance_material>
-						</technique_common>
-					</bind_material>
-				</instance_geometry>
-			</node>
-			<node xmlns="http://www.collada.org/2005/11/COLLADASchema" type="" layer="" name="testCamera" sid="" id="testCamera">
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateY">0 1 0 -26</rotate>
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateX">1 0 0 -15.1954</rotate>
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateZ">0 0 1 0</rotate>
-				<instance_camera xmlns="http://www.collada.org/2005/11/COLLADASchema" url="#testCameraShape" sid="" name=""></instance_camera>
-				<translate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="translate">-141.666 92.4958 296.3</translate>
-			</node>
-			<node xmlns="http://www.collada.org/2005/11/COLLADASchema" type="" layer="" name="pointLight1" sid="" id="pointLight1">
-				<instance_light xmlns="http://www.collada.org/2005/11/COLLADASchema" url="#pointLightShape1-lib" sid="" name=""></instance_light>
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateZ">0 0 1 0</rotate>
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateY">0 1 0 0</rotate>
-				<rotate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="rotateX">1 0 0 0</rotate>
-				<translate xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="translate">3 4 10</translate>
-			</node>
-		</visual_scene>
-	</library_visual_scenes>
-	<library_lights xmlns="http://www.collada.org/2005/11/COLLADASchema" id="" name="">
-		<light xmlns="http://www.collada.org/2005/11/COLLADASchema" name="Lt_Light" id="Lt_Light-lib">
-			<technique_common xmlns="http://www.collada.org/2005/11/COLLADASchema">
-				<point xmlns="http://www.collada.org/2005/11/COLLADASchema">
-					<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">1 1 1</color>
-					<linear_attenuation xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></linear_attenuation>
-					<constant_attenuation xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></constant_attenuation>
-					<quadratic_attenuation xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></quadratic_attenuation>
-				</point>
-			</technique_common>
-		</light>
-		<light xmlns="http://www.collada.org/2005/11/COLLADASchema" name="pointLightShape1" id="pointLightShape1-lib">
-			<technique_common xmlns="http://www.collada.org/2005/11/COLLADASchema">
-				<point xmlns="http://www.collada.org/2005/11/COLLADASchema">
-					<color xmlns="http://www.collada.org/2005/11/COLLADASchema" sid="">1 1 1</color>
-					<linear_attenuation xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></linear_attenuation>
-					<constant_attenuation xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></constant_attenuation>
-					<quadratic_attenuation xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></quadratic_attenuation>
-				</point>
-			</technique_common>
-		</light>
-	</library_lights>
-	<library_cameras xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" id="">
-		<camera xmlns="http://www.collada.org/2005/11/COLLADASchema" name="cl_unnamed_1" id="cl_unnamed_1">
-			<optics xmlns="http://www.collada.org/2005/11/COLLADASchema">
-				<technique_common xmlns="http://www.collada.org/2005/11/COLLADASchema">
-					<perspective xmlns="http://www.collada.org/2005/11/COLLADASchema">
-						<zfar xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></zfar>
-						<aspect_ratio xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></aspect_ratio>
-						<yfov xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></yfov>
-						<znear xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></znear>
-					</perspective>
-				</technique_common>
-			</optics>
-		</camera>
-		<camera xmlns="http://www.collada.org/2005/11/COLLADASchema" name="testCameraShape" id="testCameraShape">
-			<optics xmlns="http://www.collada.org/2005/11/COLLADASchema">
-				<technique_common xmlns="http://www.collada.org/2005/11/COLLADASchema">
-					<perspective xmlns="http://www.collada.org/2005/11/COLLADASchema">
-						<zfar xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></zfar>
-						<aspect_ratio xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></aspect_ratio>
-						<yfov xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></yfov>
-						<znear xmlns="http://www.collada.org/2005/11/COLLADASchema" sid=""></znear>
-					</perspective>
-				</technique_common>
-			</optics>
-		</camera>
-	</library_cameras>
-	<library_materials xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" id="">
-		<material xmlns="http://www.collada.org/2005/11/COLLADASchema" id="Blue" name="Blue">
-			<instance_effect xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" sid="" url="#Blue-fx"></instance_effect>
-		</material>
-		<material xmlns="http://www.collada.org/2005/11/COLLADASchema" id="Red" name="Red">
-			<instance_effect xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" sid="" url="#Red-fx"></instance_effect>
-		</material>
-	</library_materials>
 	<asset xmlns="http://www.collada.org/2005/11/COLLADASchema">
-		<subject xmlns="http://www.collada.org/2005/11/COLLADASchema"></subject>
-		<up_axis xmlns="http://www.collada.org/2005/11/COLLADASchema">Y_UP</up_axis>
 		<unit xmlns="http://www.collada.org/2005/11/COLLADASchema" name="centimeter" meter="0.01"></unit>
-		<created xmlns="http://www.collada.org/2005/11/COLLADASchema">2006-06-21T21:25:37Z</created>
-		<modified xmlns="http://www.collada.org/2005/11/COLLADASchema">2006-06-21T21:25:37Z</modified>
 		<title xmlns="http://www.collada.org/2005/11/COLLADASchema"></title>
-		<revision xmlns="http://www.collada.org/2005/11/COLLADASchema"></revision>
-		<keywords xmlns="http://www.collada.org/2005/11/COLLADASchema"></keywords>
 		<contributor xmlns="http://www.collada.org/2005/11/COLLADASchema">
 			<copyright xmlns="http://www.collada.org/2005/11/COLLADASchema">
 Copyright 2006 Sony Computer Entertainment Inc.
@@ -200,8 +238,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 </copyright>
-			<author xmlns="http://www.collada.org/2005/11/COLLADASchema">alorino</author>
-			<source_data xmlns="http://www.collada.org/2005/11/COLLADASchema"></source_data>
 			<authoring_tool xmlns="http://www.collada.org/2005/11/COLLADASchema">Maya 7.0 | ColladaMaya v2.01 Jun  9 2006 at 16:08:19 | FCollada v1.11</authoring_tool>
 			<comments xmlns="http://www.collada.org/2005/11/COLLADASchema">Collada Maya Export Options: bakeTransforms=0;exportPolygonMeshes=1;bakeLighting=0;isSampling=0;
 curveConstrainSampling=0;exportCameraAsLookat=0;
@@ -210,50 +246,14 @@ exportAnimations=1;exportTriangles=0;exportInvisibleNodes=0;
 exportNormals=1;exportTexCoords=1;exportVertexColors=1;exportTangents=0;
 exportTexTangents=0;exportConstraints=0;exportPhysics=0;exportXRefs=1;
 dereferenceXRefs=0;cameraXFov=0;cameraYFov=1</comments>
+			<author xmlns="http://www.collada.org/2005/11/COLLADASchema">alorino</author>
+			<source_data xmlns="http://www.collada.org/2005/11/COLLADASchema"></source_data>
 		</contributor>
+		<created xmlns="http://www.collada.org/2005/11/COLLADASchema">2006-06-21T21:25:37Z</created>
+		<subject xmlns="http://www.collada.org/2005/11/COLLADASchema"></subject>
+		<revision xmlns="http://www.collada.org/2005/11/COLLADASchema"></revision>
+		<keywords xmlns="http://www.collada.org/2005/11/COLLADASchema"></keywords>
+		<modified xmlns="http://www.collada.org/2005/11/COLLADASchema">2006-06-21T21:25:37Z</modified>
+		<up_axis xmlns="http://www.collada.org/2005/11/COLLADASchema">Y_UP</up_axis>
 	</asset>
-	<scene xmlns="http://www.collada.org/2005/11/COLLADASchema">
-		<instance_visual_scene xmlns="http://www.collada.org/2005/11/COLLADASchema" url="#VisualSceneNode" sid="" name=""></instance_visual_scene>
-	</scene>
-	<library_geometries xmlns="http://www.collada.org/2005/11/COLLADASchema" id="" name="">
-		<geometry xmlns="http://www.collada.org/2005/11/COLLADASchema" id="box-lib" name="box">
-			<mesh xmlns="http://www.collada.org/2005/11/COLLADASchema">
-				<source xmlns="http://www.collada.org/2005/11/COLLADASchema" id="box-lib-positions" name="position">
-					<technique_common xmlns="http://www.collada.org/2005/11/COLLADASchema">
-						<accessor xmlns="http://www.collada.org/2005/11/COLLADASchema" source="#box-lib-positions-array" count="8" offset="0" stride="3">
-							<param xmlns="http://www.collada.org/2005/11/COLLADASchema" type="float" sid="" name="X" semantic=""></param>
-							<param xmlns="http://www.collada.org/2005/11/COLLADASchema" type="float" sid="" name="Y" semantic=""></param>
-							<param xmlns="http://www.collada.org/2005/11/COLLADASchema" type="float" sid="" name="Z" semantic=""></param>
-						</accessor>
-					</technique_common>
-					<float_array xmlns="http://www.collada.org/2005/11/COLLADASchema" digits="0" id="box-lib-positions-array" count="24" name="" magnitude="0">-50 50 50 50 50 50 -50 -50 50 50 -50 50 -50 50 -50 50 50 -50 -50 -50 -50 50 -50 -50</float_array>
-				</source>
-				<source xmlns="http://www.collada.org/2005/11/COLLADASchema" id="box-lib-normals" name="normal">
-					<technique_common xmlns="http://www.collada.org/2005/11/COLLADASchema">
-						<accessor xmlns="http://www.collada.org/2005/11/COLLADASchema" source="#box-lib-normals-array" count="24" offset="0" stride="3">
-							<param xmlns="http://www.collada.org/2005/11/COLLADASchema" type="float" sid="" name="X" semantic=""></param>
-							<param xmlns="http://www.collada.org/2005/11/COLLADASchema" type="float" sid="" name="Y" semantic=""></param>
-							<param xmlns="http://www.collada.org/2005/11/COLLADASchema" type="float" sid="" name="Z" semantic=""></param>
-						</accessor>
-					</technique_common>
-					<float_array xmlns="http://www.collada.org/2005/11/COLLADASchema" digits="0" id="box-lib-normals-array" count="72" name="" magnitude="0">0 1 0 0 1 0 0 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1</float_array>
-				</source>
-				<vertices xmlns="http://www.collada.org/2005/11/COLLADASchema" id="box-lib-vertices" name="">
-					<input xmlns="http://www.collada.org/2005/11/COLLADASchema" source="#box-lib-positions" semantic="POSITION"></input>
-				</vertices>
-				<polylist xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" count="5" material="BlueSG">
-					<vcount xmlns="http://www.collada.org/2005/11/COLLADASchema">4 4 4 4 4</vcount>
-					<p xmlns="http://www.collada.org/2005/11/COLLADASchema">0 0 1 1 5 2 4 3 6 4 7 5 3 6 2 7 0 8 4 9 6 10 2 11 3 12 7 13 5 14 1 15 5 16 7 17 6 18 4 19</p>
-					<input xmlns="http://www.collada.org/2005/11/COLLADASchema" source="#box-lib-vertices" semantic="VERTEX" set="0" offset="0"></input>
-					<input xmlns="http://www.collada.org/2005/11/COLLADASchema" source="#box-lib-normals" semantic="NORMAL" set="0" offset="1"></input>
-				</polylist>
-				<polylist xmlns="http://www.collada.org/2005/11/COLLADASchema" name="" count="1" material="RedSG">
-					<vcount xmlns="http://www.collada.org/2005/11/COLLADASchema">4</vcount>
-					<p xmlns="http://www.collada.org/2005/11/COLLADASchema">0 20 2 21 3 22 1 23</p>
-					<input xmlns="http://www.collada.org/2005/11/COLLADASchema" source="#box-lib-vertices" semantic="VERTEX" set="0" offset="0"></input>
-					<input xmlns="http://www.collada.org/2005/11/COLLADASchema" source="#box-lib-normals" semantic="NORMAL" set="0" offset="1"></input>
-				</polylist>
-			</mesh>
-		</geometry>
-	</library_geometries>
 </COLLADA>
