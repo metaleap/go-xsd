@@ -59,6 +59,21 @@ type Schema struct {
 	loadLocalPath, loadUri string
 }
 
+	func (me *Schema) allSchemas () (schemas []*Schema) {
+		schemas = append(schemas, me)
+		for _, ss := range me.XMLIncludedSchemas { schemas = append(schemas, ss.allSchemas() ...) }
+		return
+	}
+
+	func (me *Schema) collectGlobals (bag *PkgBag) () {
+		for _, att := range me.Attributes { bag.allAtts = append(bag.allAtts, att) }
+		for _, agr := range me.AttributeGroups { bag.allAttGroups = append(bag.allAttGroups, agr) }
+		for _, el := range me.Elements { bag.allElems = append(bag.allElems, el) }
+		for _, egr := range me.Groups { bag.allElemGroups = append(bag.allElemGroups, egr) }
+		for _, not := range me.Notations { bag.allNotations = append(bag.allNotations, not) }
+		for _, ss := range me.XMLIncludedSchemas { ss.collectGlobals(bag) }
+	}
+
 	func (me *Schema) globalComplexType (bag *PkgBag, name string) (ct *ComplexType) {
 		var imp string
 		for _, ct = range me.ComplexTypes {
@@ -94,6 +109,24 @@ type Schema struct {
 		return
 	}
 
+	func (me *Schema) MakeGoPkgSrcFile () (goOutFilePath string, err error) {
+		var goOutDirPath = filepath.Join(filepath.Dir(me.loadLocalPath), goPkgPrefix + filepath.Base(me.loadLocalPath) + goPkgSuffix)
+		goOutFilePath = filepath.Join(goOutDirPath, path.Base(me.loadUri) + ".go")
+		var bag = newPkgBag(me)
+		for _, inc := range me.XMLIncludedSchemas {
+			bag.Schema = inc
+			inc.makePkg(bag)
+		}
+		bag.Schema = me
+		me.hasElemAnnotation.makePkg(bag)
+		bag.appendFmt(true, "")
+		me.makePkg(bag)
+		if err = uio.EnsureDirExists(filepath.Dir(goOutFilePath)); err == nil {
+			err = uio.WriteTextFile(goOutFilePath, bag.assembleSource())
+		}
+		return
+	}
+
 	func (me *Schema) onLoad (rootAtts []xml.Attr, loadUri, localPath string) (err error) {
 		var tmpUrl string
 		var sd *Schema
@@ -123,31 +156,6 @@ type Schema struct {
 			me.XMLIncludedSchemas = append(me.XMLIncludedSchemas, sd)
 		}
 		me.initElement(nil)
-		return
-	}
-
-	func (me *Schema) MakeGoPkgSrc () string {
-		var bag = &PkgBag { Schema: me }
-		me.makePkg(bag)
-		return strings.Join(bag.lines, "\n")
-	}
-
-	func (me *Schema) MakeGoPkgSrcFile () (goOutFilePath string, err error) {
-		var goOutDirPath = filepath.Join(filepath.Dir(me.loadLocalPath), goPkgPrefix + filepath.Base(me.loadLocalPath) + goPkgSuffix)
-		goOutFilePath = filepath.Join(goOutDirPath, path.Base(me.loadUri) + ".go")
-		if err = me.MakeGoPkgSrcFileAt(goOutFilePath); err == nil {
-			for _, inc := range me.XMLIncludedSchemas {
-				var s = strings.Replace(inc.loadUri, strings.Trim(path.Dir(me.loadUri), "/") + "/", "", -1)
-				if err = inc.MakeGoPkgSrcFileAt(filepath.Join(goOutDirPath, ustr.Replace(s, map[string]string { "/": "_", ":": "_", "..": "__" }) + ".go")); err != nil { break }
-			}
-		}
-		return
-	}
-
-	func (me *Schema) MakeGoPkgSrcFileAt (goOutFilePath string) (err error) {
-		if err = uio.EnsureDirExists(filepath.Dir(goOutFilePath)); err == nil {
-			err = uio.WriteTextFile(goOutFilePath, me.MakeGoPkgSrc())
-		}
 		return
 	}
 

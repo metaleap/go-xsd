@@ -129,12 +129,7 @@ func (me *hasElemMinLength) makePkg (bag *PkgBag) {
 }
 
 func (me *hasElemsNotation) makePkg (bag *PkgBag) {
-	if len(me.Notations) > 0 {
-		bag.impsUsed[bag.impName] = true
-		bag.appendFmt(false, "var Notations = new(%v.Notations)\n\nfunc init () {", bag.impName)
-		for _, not := range me.Notations { not.makePkg(bag) }
-		bag.appendFmt(true, "}")
-	}
+	for _, not := range me.Notations { not.makePkg(bag) }
 }
 
 func (me *hasElemPattern) makePkg (bag *PkgBag) {

@@ -1,16 +1,16 @@
 <feed base="" lang="">
+	<link xmlns="http://www.w3.org/2005/Atom" title="" length="0" href="http://example.org/" rel="" hreflang="" base="" lang=""></link>
+	<updated xmlns="http://www.w3.org/2005/Atom" base="" lang="">2003-12-13T18:30:02Z</updated>
+	<title xmlns="http://www.w3.org/2005/Atom" base="" lang="" type="">Example Feed</title>
+	<entry xmlns="http://www.w3.org/2005/Atom" base="" lang="">
+		<updated xmlns="http://www.w3.org/2005/Atom" base="" lang="">2003-12-13T18:30:02Z</updated>
+		<summary xmlns="http://www.w3.org/2005/Atom" base="" lang="" type="">Some text.</summary>
+		<link xmlns="http://www.w3.org/2005/Atom" title="" length="0" href="http://example.org/2003/12/13/atom03" rel="" hreflang="" base="" lang=""></link>
+		<id xmlns="http://www.w3.org/2005/Atom" base="" lang="">urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
+		<title xmlns="http://www.w3.org/2005/Atom" base="" lang="" type="">Atom-Powered Robots Run Amok</title>
+	</entry>
 	<author xmlns="http://www.w3.org/2005/Atom" base="" lang="">
 		<name xmlns="http://www.w3.org/2005/Atom">John Doe</name>
 	</author>
 	<id xmlns="http://www.w3.org/2005/Atom" base="" lang="">urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
-	<link xmlns="http://www.w3.org/2005/Atom" base="" lang="" title="" hreflang="" length="0" rel="" href="http://example.org/"></link>
-	<title xmlns="http://www.w3.org/2005/Atom" base="" lang="" type="">Example Feed</title>
-	<updated xmlns="http://www.w3.org/2005/Atom" base="" lang="">2003-12-13T18:30:02Z</updated>
-	<entry xmlns="http://www.w3.org/2005/Atom" base="" lang="">
-		<id xmlns="http://www.w3.org/2005/Atom" base="" lang="">urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
-		<link xmlns="http://www.w3.org/2005/Atom" base="" lang="" title="" hreflang="" length="0" rel="" href="http://example.org/2003/12/13/atom03"></link>
-		<summary xmlns="http://www.w3.org/2005/Atom" base="" lang="" type="">Some text.</summary>
-		<title xmlns="http://www.w3.org/2005/Atom" base="" lang="" type="">Atom-Powered Robots Run Amok</title>
-		<updated xmlns="http://www.w3.org/2005/Atom" base="" lang="">2003-12-13T18:30:02Z</updated>
-	</entry>
 </feed>

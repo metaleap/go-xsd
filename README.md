@@ -27,7 +27,7 @@ Each generated wrapper package contains the type structures required to easily *
 
 **XSD complex-types**, attribute-groups, element-groups, elements etc. are ultimately represented by corresponding generated Go struct types.
 
-**XSD includes** are represented as separate .go source files compiled into a single package. If main.xsd includes some/sub/topic.xsd, then both main.xsd.go and some_sub_topic.xsd.go are generated and will compile into a single Go package.
+**XSD includes** are all loaded and processed together into a single output .go source file.
 
 **XSD imports** are rewritten as Go imports but not otherwise auto-magically processed. If you see the generated .go package importing another "some-xsd-xml-whatever-name-_go" package that will cause a "package not found" compiler error, then to make that import work, you'll first need to also auto-generate that package with makepkg yourself as well.
 
@@ -37,7 +37,7 @@ Regarding the auto-generated code:
 
 - it's **by necessity not idiomatic** and most likely not as terse/slim as manually-written structs would be. For very simplistic XML formats, writing your own 3 or 4 custom structs might be a tiny bit more efficient. **For highly intricate, unwieldy XML formats, the auto-generated packages beat hand-writing 100s of custom structs, however.** Auto-generated code will never win a code-beauty contest, you're expected to simply import the compiled package rather than having to work inside its generated source files.
 
-- most types are prefixed with T -- thanks to the SVG schema which taught me that in XSD, "scriptType" and "ScriptType" are two valid and uniquely different type names. To have all types exported from the generated Go package, then, some kind of prefix is indeed needed.
+- most (XSD-declared) types are prefixed with T -- thanks to the SVG schema which taught me that in XSD, "scriptType" and "ScriptType" are two valid and uniquely different type names. To have all types exported from the generated Go package, then, some kind of prefix is indeed needed.
 
 - most XSDs are chock-full of anonymous types, as well as implicit ones (unions, restrictions, extensions...) Go does support "anonymous types" per se, but I decided against using them. Every type is declared and exported, no anonymous magic. This makes most auto-generated packages "look" even more confusing than their XSD counterparts at first glance. Indeed they may appear quite bloated, and when coding with the imported generated package you'll probably be better off working with the particular XML format's specification document rather than the **godoc** for the generated package... this is not a perfect situation but at least for now I can work with this for the few XML formats I occasionally need to "parse, convert and forget" -- ultimately, most XML formats at my end are mere interchange or legacy formats, and never really the "main topic" at hand.
 
