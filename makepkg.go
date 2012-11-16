@@ -349,7 +349,13 @@ type declType struct {
 						var ec, fc = 0, 0
 						bag.walkerTypes[myName] = true
 						for _, e := range me.Embeds { if bag.walkerTypes[e.finalTypeName] { ec++; walkBody += sfmt("\tme.%v.Walk()\n", e.finalTypeName) } }
-						for _, f := range me.Fields { if bag.walkerTypes[f.finalTypeName] { fc++; walkBody += sfmt("\tme.%v.Walk()\n", f.finalTypeName) } }
+						for _, f := range me.Fields {
+							if bag.walkerTypes[strings.Replace(f.finalTypeName, "*", "", -1)] {
+								fc++; walkBody += sfmt("\tme.%v.Walk()\n", f.Name)
+							} else if strings.HasPrefix(f.finalTypeName, "[]") && bag.walkerTypes[ustr.Replace(f.finalTypeName, typeRenderRepls)] {
+								walkBody += sfmt("\tfor _, x := range me.%v { x.Walk() }\n", f.Name)
+							}
+						}
 						me.addMethod(nil, "*" + myName, "Walk", "", walkBody, sfmt("If the WalkHandlers.%v function is not nil (ie. was set by outside code), calls it with this %v instance as the single argument. Then calls the Walk() method on %v/%v embed(s) and %v/%v field(s) belonging to this %v instance.", myName, myName, ec, len(me.Embeds), fc, len(me.Fields), myName))
 					}
 				}
