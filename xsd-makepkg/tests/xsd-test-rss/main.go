@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/xml"
 
-	"github.com/metaleap/go-xsd/makepkg/tests"
+	"github.com/metaleap/go-xsd/xsd-makepkg/tests"
 
 	util "github.com/metaleap/go-util"
 
