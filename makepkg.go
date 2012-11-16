@@ -157,11 +157,12 @@ type PkgBag struct {
 		for _, gr := range me.allElemGroups { render(gr) }
 		if len(me.walkerTypes) > 0 {
 			me.appendFmt(false, "//\tProvides %v strong-typed hooks for your own custom handler functions to be invoked when the Walk() method is called on any instance of any (non-attribute-related) struct type defined in this package.", len(me.walkerTypes))
-			me.appendFmt(false, "var W = struct {")
+			me.appendFmt(true, "var WalkHandlers = &%vWalkHandlers {}", idPrefix)
+			me.appendFmt(false, "type %vWalkHandlers struct {", idPrefix)
 			for wt, _ := range me.walkerTypes {
 				me.appendFmt(false, "\t%v func (o *%v)", wt, wt)
 			}
-			me.appendFmt(true, "} {}")
+			me.appendFmt(true, "}")
 		}
 
 		initLines = append(initLines, "import (")
@@ -345,7 +346,7 @@ type declType struct {
 					for _, e := range me.Embeds { e.render(bag, me) }
 					bag.appendFmt(true, "}")
 					if PkgGen.AddWalkers && !strings.HasPrefix(myName, idPrefix + "HasAtt") {
-						var walkBody = sfmt("\n\tif fn := W.%v; fn != nil { fn(me) }\n", myName)
+						var walkBody = sfmt("\n\tif fn := WalkHandlers.%v; fn != nil { fn(me) }\n", myName)
 						var ec, fc = 0, 0
 						bag.walkerTypes[myName] = true
 						for _, e := range me.Embeds { if bag.walkerTypes[e.finalTypeName] { ec++; walkBody += sfmt("\tme.%v.Walk()\n", e.finalTypeName) } }
@@ -356,7 +357,7 @@ type declType struct {
 								walkBody += sfmt("\tfor _, x := range me.%v { x.Walk() }\n", f.Name)
 							}
 						}
-						me.addMethod(nil, "*" + myName, "Walk", "", walkBody, sfmt("If the W.%v function is not nil (ie. was set by outside code), calls it with this %v instance as the single argument. Then calls the Walk() method on %v/%v embed(s) and %v/%v field(s) belonging to this %v instance.", myName, myName, ec, len(me.Embeds), fc, len(me.Fields), myName))
+						me.addMethod(nil, "*" + myName, "Walk", "", walkBody, sfmt("If the WalkHandlers.%v function is not nil (ie. was set by outside code), calls it with this %v instance as the single argument. Then calls the Walk() method on %v/%v embed(s) and %v/%v field(s) belonging to this %v instance.", myName, myName, ec, len(me.Embeds), fc, len(me.Fields), myName))
 					}
 				}
 				bag.declWrittenTypes = append(bag.declWrittenTypes, me)
