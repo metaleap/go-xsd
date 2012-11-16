@@ -16,6 +16,8 @@ var (
 		BaseCodePath: util.BaseCodePathGithub("metaleap", "go-xsd-pkg"),
 		BasePath: "github.com/metaleap/go-xsd-pkg",
 		ForceParseForDefaults: false,
+		PluralizeSpecialPrefixes: []string { "Library", "Instance" },
+		AddWalkers: true,
 	}
 	typeRenderRepls = map[string]string { "*": "", "[": "", "]": "", "(list ": "", ")": "" }
 )
@@ -23,6 +25,8 @@ var (
 type pkgGen struct {
 	BaseCodePath, BasePath string
 	ForceParseForDefaults bool
+	PluralizeSpecialPrefixes []string
+	AddWalkers bool
 }
 
 type beforeAfterMake interface {
@@ -73,7 +77,6 @@ type PkgBag struct {
 	attsCache, elemsCacheOnce, elemsCacheMult map[string]string
 	attGroups, attGroupRefImps map[*AttributeGroup]string
 	attsKeys, attRefImps map[*Attribute]string
-	parseTypes map[string]bool
 	declTypes map[string]*declType
 	declElemTypes map[element][]*declType
 	declWrittenTypes []*declType
@@ -81,7 +84,7 @@ type PkgBag struct {
 	elemChoices, elemChoiceRefImps map[*Choice]string
 	elemSeqs, elemSeqRefImps map[*Sequence]string
 	elemKeys, elemRefImps map[*Element]string
-	elemsWritten map[string]bool
+	elemsWritten, parseTypes, walkerTypes map[string]bool
 	simpleContentValueTypes map[string]string
 }
 
@@ -102,7 +105,7 @@ type PkgBag struct {
 		bag.attsKeys, bag.attRefImps = map[*Attribute]string {}, map[*Attribute]string {}
 		bag.elemGroups, bag.elemGroupRefImps = map[*Group]string {}, map[*Group]string {}
 		bag.elemKeys, bag.elemRefImps = map[*Element]string {}, map[*Element]string {}
-		bag.elemsWritten, bag.parseTypes = map[string]bool {}, map[string]bool {}
+		bag.elemsWritten, bag.parseTypes, bag.walkerTypes = map[string]bool {}, map[string]bool {}, map[string]bool {}
 		for _, pt := range []string { "Boolean", "Byte", "Double", "Float", "Int", "Integer", "Long", "NegativeInteger", "NonNegativeInteger", "NonPositiveInteger", "PositiveInteger", "Short", "UnsignedByte", "UnsignedInt", "UnsignedLong", "UnsignedShort" } {
 			bag.parseTypes[bag.impName + "." + pt] = true
 		}
@@ -152,6 +155,14 @@ type PkgBag struct {
 		for _, attGr := range me.allAttGroups { render(attGr) }
 		for _, el := range me.allElems { render(el) }
 		for _, gr := range me.allElemGroups { render(gr) }
+		if len(me.walkerTypes) > 0 {
+			me.appendFmt(false, "//\tProvides %v strong-typed hooks for your own custom handler functions to be invoked when the Walk() method is called on any instance of any (non-attribute-related) struct type defined in this package.", len(me.walkerTypes))
+			me.appendFmt(false, "var WalkHandlers = struct {")
+			for wt, _ := range me.walkerTypes {
+				me.appendFmt(false, "\t%v func (o *%v)", wt, wt)
+			}
+			me.appendFmt(true, "} {}")
+		}
 
 		initLines = append(initLines, "import (")
 		for impName, impPath := range me.imports {
@@ -216,13 +227,15 @@ type declEmbed struct {
 	Name string
 	Annotations []*Annotation
 	elem element
+	finalTypeName string
 }
 
 	func (me *declEmbed) render (bag *PkgBag, dt *declType) {
 		if n := bag.rewriteTypeSpec(me.Name); !dt.memberWritten["E_" + n] {
 			dt.memberWritten["E_" + n] = true
 			for _, ann := range me.Annotations { if ann != nil { ann.makePkg(bag) } }
-			bag.appendFmt(true, "\t%s", bag.rewriteTypeSpec(n))
+			me.finalTypeName = bag.rewriteTypeSpec(n)
+			bag.appendFmt(true, "\t%s", me.finalTypeName)
 		}
 	}
 
@@ -230,11 +243,13 @@ type declField struct {
 	Name, Type, XmlTag string
 	Annotations []*Annotation
 	elem element
+	finalTypeName string
 }
 
 	func (me *declField) render (bag *PkgBag, dt *declType) {
 		for _, ann := range me.Annotations { if ann != nil { ann.makePkg(bag) } }
-		bag.appendFmt(true, "\t%s %s `xml:\"%s\"`", me.Name, bag.rewriteTypeSpec(me.Type), me.XmlTag)
+		me.finalTypeName = bag.rewriteTypeSpec(me.Type)
+		bag.appendFmt(true, "\t%s %s `xml:\"%s\"`", me.Name, me.finalTypeName, me.XmlTag)
 	}
 
 type declMethod struct {
@@ -329,6 +344,14 @@ type declType struct {
 					for _, f := range me.Fields { f.render(bag, me) }
 					for _, e := range me.Embeds { e.render(bag, me) }
 					bag.appendFmt(true, "}")
+					if PkgGen.AddWalkers && !strings.HasPrefix(myName, idPrefix + "HasAtt") {
+						var walkBody = sfmt("\n\tif fn := WalkHandlers.%v; fn != nil { fn(me) }\n", myName)
+						var ec, fc = 0, 0
+						bag.walkerTypes[myName] = true
+						for _, e := range me.Embeds { if bag.walkerTypes[e.finalTypeName] { ec++; walkBody += sfmt("\tme.%v.Walk()\n", e.finalTypeName) } }
+						for _, f := range me.Fields { if bag.walkerTypes[f.finalTypeName] { fc++; walkBody += sfmt("\tme.%v.Walk()\n", f.finalTypeName) } }
+						me.addMethod(nil, "*" + myName, "Walk", "", walkBody, sfmt("If the WalkHandlers.%v function is not nil (ie. was set by outside code), calls it with this %v instance as the single argument. Then calls the Walk() method on %v/%v embed(s) and %v/%v field(s) belonging to this %v instance.", myName, myName, ec, len(me.Embeds), fc, len(me.Fields), myName))
+					}
 				}
 				bag.declWrittenTypes = append(bag.declWrittenTypes, me)
 				for _, m := range me.Methods { m.render(bag, me) }

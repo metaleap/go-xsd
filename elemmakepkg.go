@@ -659,9 +659,9 @@ func anns (a *All, cc *ComplexContent) (anns []*Annotation) {
 }
 
 func pluralize (s string) string {
-	const lib, inst = "Library", "Instance"
-	if strings.HasPrefix(s, lib) { return ustr.Pluralize(s[len(lib) :] + s[: len(lib)]) }
-	if strings.HasPrefix(s, inst) { return ustr.Pluralize(s[len(inst) :] + s[: len(inst)]) }
+	for _, psp := range PkgGen.PluralizeSpecialPrefixes {
+		if strings.HasPrefix(s, psp) { return ustr.Pluralize(s[len(psp) :] + s[: len(psp)]) }
+	}
 	return ustr.Pluralize(s)
 }
 
