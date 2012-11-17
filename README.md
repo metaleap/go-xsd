@@ -7,13 +7,13 @@ A Go package for loading ( **xml.Unmarshal()**ing ) an XML Schema Definition (XS
 With this, you could probably write an XML validator, or otherwise utilize or further process the loaded XSD --- but the main use-case here was:
 
 
-go-xsd/makepkg
-==============
+go-xsd/xsd-makepkg
+==================
 
 
 A command-line tool to generate Go "XML wrapper" package sources for specified XSD schema URIs.
 
-If no arguments are specified, this tool proceeds to (re)generate all Go packages for various common XML formats in your local $GOPATH-relative directory corresponding to the **http://github.com/metaleap/go-xsd-pkg** repository. For more details on command-line arguments for *makepkg*: scroll down to the bottom of this readme.
+If no arguments are specified, this tool proceeds to (re)generate all Go packages for various common XML formats in your local $GOPATH-relative directory corresponding to the **http://github.com/metaleap/go-xsd-pkg** repository. For more details on command-line arguments for *xsd-makepkg*: scroll down to the bottom of this readme.
 
 Each generated wrapper package contains the type structures required to easily **xml.Unmarshal()** an XML document based on that XSD.
 
@@ -29,7 +29,7 @@ Each generated wrapper package contains the type structures required to easily *
 
 **XSD includes** are all loaded and processed together into a single output .go source file.
 
-**XSD imports** are rewritten as Go imports but not otherwise auto-magically processed. If you see the generated .go package importing another "some-xsd-xml-whatever-name-_go" package that will cause a "package not found" compiler error, then to make that import work, you'll first need to also auto-generate that package with makepkg yourself as well.
+**XSD imports** are rewritten as Go imports but not otherwise auto-magically processed. If you see the generated .go package importing another "some-xsd-xml-whatever-name-_go" package that will cause a "package not found" compiler error, then to make that import work, you'll first need to also auto-generate that package with *xsd-makepkg* yourself as well.
 
 **XSD documentation annotation** is rewritten as Go // code comments. Yeah, that's rather neat.
 
@@ -56,7 +56,7 @@ How to use auto-generated packages:
 ===================================
 
 
-Take a look at the "test progs" under **makepkg/tests**, they're basically simple usage examples. For unmarshal you need to define just one small custom struct like this --- using the rss package as a simple example, as demonstrated in **makepkg/tests/rss/main.go**:
+Take a look at the "test progs" under **xsd-makepkg/tests**, they're basically simple usage examples. For unmarshal you need to define just one small custom struct like this --- using the rss package as a simple example, as demonstrated in **xsd-makepkg/tests/xsd-test-rss/main.go**:
 
 
     type MyRssDoc struct {
@@ -86,7 +86,7 @@ A) Suppose you have an XML format where the root element (and only that one) is 
     <gopher>
 
 
-B) Open the generated Go package source files under **$GOPATH/src/github.com/metaleap/go-xsd-pkg/yourdomain.org/xsd/gopher.xsd_go/*.go** (unless you used custom paths when you ran the **go-xsd/makepkg** tool)
+B) Open the generated Go package source files under **$GOPATH/src/github.com/metaleap/go-xsd-pkg/yourdomain.org/xsd/gopher.xsd_go/*.go** (unless you used custom paths when you ran the **go-xsd/xsd-makepkg** tool)
 
 C) Search for an occurence of either:
 
@@ -105,8 +105,8 @@ C) Search for an occurence of either:
 D) The found occurence is likely the tag for a field in a type named something like **XsdGoPkgHasElem_Gopher** or **XsdGoPkgHasElems_Gopher**. Ignore that type, instead focus on the type of the field itself. That's the one you're looking for, the one to embed in your tiny custom doc struct.
 
 
-Command-line flags for *go-xsd/makepkg* tool:
-=============================================
+Command-line flags for *go-xsd/xsd-makepkg* tool:
+=================================================
 
 
 - **-basepath=""**: Defaults to github.com/metaleap/go-xsd-pkg. A $GOPATH/src/-relative path (always a slash-style path, even on Windows) where XSD files are downloaded to / loaded from and generated Go wrapper packages are created. Any XSD imports are also rewritten as Go imports from that path (but are not otherwise auto-magically processed in any way).

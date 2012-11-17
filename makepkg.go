@@ -311,7 +311,6 @@ type declType struct {
 		var sme, sdt []string
 		if me.Type != dt.Type { return false }
 		if len(me.Embeds) != len(dt.Embeds) { return false }
-		if len(me.Methods) != len(dt.Methods) { return false }
 		if len(me.Fields) != len(dt.Fields) { return false }
 		sme, sdt = []string {}, []string {}
 		for e, _ := range me.Embeds { sme = append(sme, e) }
@@ -322,8 +321,8 @@ type declType struct {
 		for _, f := range dt.Fields { sdt = append(sdt, f.Name + f.Type + f.XmlTag) }
 		if !ustr.Equivalent(sme, sdt) { return false }
 		sme, sdt = []string {}, []string {}
-		for _, m := range me.Methods { sme = append(sme, m.Name + m.ReturnType + m.Body) }
-		for _, m := range dt.Methods { sdt = append(sdt, m.Name + m.ReturnType + m.Body) }
+		for _, m := range me.Methods { if m.Name != "Walk" { sme = append(sme, m.Name + m.ReturnType + m.Body) } }
+		for _, m := range dt.Methods { if m.Name != "Walk" { sdt = append(sdt, m.Name + m.ReturnType + m.Body) } }
 		if !ustr.Equivalent(sme, sdt) { return false }
 		return true
 	}
