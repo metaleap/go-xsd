@@ -156,8 +156,10 @@ type PkgBag struct {
 		for _, el := range me.allElems { render(el) }
 		for _, gr := range me.allElemGroups { render(gr) }
 		if len(me.walkerTypes) > 0 {
-			me.appendFmt(false, "//\tProvides %v strong-typed hooks for your own custom handler functions to be invoked when the Walk() method is called on any instance of any (non-attribute-related) struct type defined in this package.", len(me.walkerTypes))
+			var doc = sfmt("//\tProvides %v strong-typed hooks for your own custom handler functions to be invoked when the Walk() method is called on any instance of any (non-attribute-related) struct type defined in this package.", len(me.walkerTypes))
+			me.appendFmt(false, doc)
 			me.appendFmt(true, "var WalkHandlers = &%vWalkHandlers {}", idPrefix)
+			me.appendFmt(false, doc)
 			me.appendFmt(false, "type %vWalkHandlers struct {", idPrefix)
 			for wt, _ := range me.walkerTypes {
 				me.appendFmt(false, "\t%v func (o *%v)", wt, wt)
