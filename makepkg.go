@@ -72,7 +72,7 @@ type PkgBag struct {
 	impName string
 	debug bool
 	imports map[string]string
-	impsUsed map[string]bool
+	impsUsed, elemsWritten, parseTypes, walkerTypes, declConvs map[string]bool
 	anonCounts map[string]uint64
 	attsCache, elemsCacheOnce, elemsCacheMult map[string]string
 	attGroups, attGroupRefImps map[*AttributeGroup]string
@@ -84,7 +84,6 @@ type PkgBag struct {
 	elemChoices, elemChoiceRefImps map[*Choice]string
 	elemSeqs, elemSeqRefImps map[*Sequence]string
 	elemKeys, elemRefImps map[*Element]string
-	elemsWritten, parseTypes, walkerTypes map[string]bool
 	simpleContentValueTypes map[string]string
 }
 
@@ -105,7 +104,7 @@ type PkgBag struct {
 		bag.attsKeys, bag.attRefImps = map[*Attribute]string {}, map[*Attribute]string {}
 		bag.elemGroups, bag.elemGroupRefImps = map[*Group]string {}, map[*Group]string {}
 		bag.elemKeys, bag.elemRefImps = map[*Element]string {}, map[*Element]string {}
-		bag.elemsWritten, bag.parseTypes, bag.walkerTypes = map[string]bool {}, map[string]bool {}, map[string]bool {}
+		bag.elemsWritten, bag.parseTypes, bag.walkerTypes, bag.declConvs = map[string]bool {}, map[string]bool {}, map[string]bool {}, map[string]bool {}
 		for _, pt := range []string { "Boolean", "Byte", "Double", "Float", "Int", "Integer", "Long", "NegativeInteger", "NonNegativeInteger", "NonPositiveInteger", "PositiveInteger", "Short", "UnsignedByte", "UnsignedInt", "UnsignedLong", "UnsignedShort" } {
 			bag.parseTypes[bag.impName + "." + pt] = true
 		}
@@ -140,9 +139,12 @@ type PkgBag struct {
 	}
 
 	func (me *PkgBag) assembleSource () string {
-		var dt *declType
-		var render = func (el element) { for _, dt = range me.declElemTypes[el] { if dt != nil { dt.render(me) } } }
-		var initLines = me.lines
+		var (
+			dt *declType
+			render = func (el element) { for _, dt = range me.declElemTypes[el] { if dt != nil { dt.render(me) } } }
+			initLines = me.lines
+			snConv string
+		)
 		me.lines = []string {}
 		me.Schema.collectGlobals(me)
 		if len(me.allNotations) > 0 {
@@ -156,7 +158,7 @@ type PkgBag struct {
 		for _, el := range me.allElems { render(el) }
 		for _, gr := range me.allElemGroups { render(gr) }
 		if len(me.walkerTypes) > 0 {
-			var doc = sfmt("//\tProvides %v strong-typed hooks for your own custom handler functions to be invoked when the Walk() method is called on any instance of any (non-attribute-related) struct type defined in this package.", len(me.walkerTypes))
+			doc := sfmt("//\tProvides %v strong-typed hooks for your own custom handler functions to be invoked when the Walk() method is called on any instance of any (non-attribute-related) struct type defined in this package.", len(me.walkerTypes))
 			me.appendFmt(false, doc)
 			me.appendFmt(true, "var WalkHandlers = &%vWalkHandlers {}", idPrefix)
 			me.appendFmt(false, doc)
@@ -165,6 +167,11 @@ type PkgBag struct {
 				me.appendFmt(false, "\t%v func (o *%v)", wt, wt)
 			}
 			me.appendFmt(true, "}")
+		}
+		for conv, _ := range me.declConvs {
+			snConv = me.safeName(conv)
+			me.appendFmt(false, "//\tA convenience interface that declares a type conversion to %v.", conv)
+			me.appendFmt(true, "type To%v interface { To%v () %v }", snConv, snConv, conv)
 		}
 
 		initLines = append(initLines, "import (")

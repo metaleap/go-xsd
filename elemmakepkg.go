@@ -219,6 +219,21 @@ func (me *ComplexType) makePkg (bag *PkgBag) {
 	if ctValueType = bag.resolveQnameRef(ctValueType, "T", nil); len(ctValueType) > 0 {
 		bag.simpleContentValueTypes[typeSafeName] = ctValueType
 		td.addField(nil, idPrefix + "Value", ctValueType, ",chardata")
+		chain := sfmt("me.%vValue", idPrefix)
+		td.addMethod(nil, "*" + typeSafeName, sfmt("To%v", bag.safeName(ctValueType)), ctValueType, sfmt("return %v", chain), sfmt("Simply returns the value of its %vValue field.", idPrefix))
+		ttn := ctValueType
+		for ttd := bag.declTypes[ctValueType]; ttd != nil; ttd = bag.declTypes[ttn] {
+			if ttd != nil { bag.declConvs[ttd.Name] = true }
+			if ttn = ttd.Type; len(ttn) > 0 {
+				chain += sfmt(".To%v()", bag.safeName(ttn))
+				td.addMethod(nil, "*" + typeSafeName, sfmt("To%v", bag.safeName(ttn)), ttn, sfmt("return %v", chain), sfmt("Returns the value of its %vValue field as a %v (which %v is just aliasing).", idPrefix, ttn, ctValueType))
+			} else {
+				break
+			}
+		}
+		if (!strings.HasPrefix(ctValueType, "xsdt.")) && (bag.declTypes[ctValueType] == nil) {
+			println("NOTFOUND: " + ctValueType)
+		}
 	} else if mixed {
 		td.addEmbed(nil, idPrefix + "HasCdata")
 	}

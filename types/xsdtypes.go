@@ -1,13 +1,16 @@
-//	A tiny package imported by all "go-xsd"-generated packages.
-//	Maps all XSD built-in simple-types to Go types, which affords us easy mapping of any XSD type references in the schema to Go imports: every xs:string and xs:boolean automatically becomes xsdt.String and xsdt.Boolean etc.
-//	Types are mapped to Go types depending on how encoding/xml.Unmarshal() can handle them: ie. it parses bools and numbers, but dates/durations have too many format mismatches and thus are just declared string types.
-//	Same for base64- and hex-encoded binary data: since Unmarshal() won't decode them, we leave them as strings. If you need their binary data, your code needs to import Go's base64/hex codec packages and use them as necessary.
 package xsdt
 
 import (
 	"strconv"
 )
 
+type Notations map[string]*notation
+
+	func (me Notations) Add (id, name, public, system string) {
+		me[name] = &notation { Id: id, Name: name, Public: public, System: system }
+	}
+
+//	In XSD, the type xsd:anySimpleType is the base type from which all other built-in types are derived.
 type AnySimpleType string
 
 	func (me *AnySimpleType) SetFromString (v string) {
@@ -18,6 +21,10 @@ type AnySimpleType string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to AnySimpleType.
+type ToXsdtAnySimpleType interface { ToXsdtAnySimpleType () AnySimpleType }
+
+//	In XSD, represents any simple or complex type. In Go, we hope no one schema ever uses it.
 type AnyType string
 
 	func (me *AnyType) SetFromString (v string) {
@@ -28,6 +35,10 @@ type AnyType string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to AnyType.
+type ToXsdtAnyType interface { ToXsdtAnyType () AnyType }
+
+//	Represents a URI as defined by RFC 2396. An anyURI value can be absolute or relative, and may have an optional fragment identifier.
 type AnyURI string
 
 	func (me *AnyURI) SetFromString (v string) {
@@ -38,6 +49,10 @@ type AnyURI string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to AnyURI.
+type ToXsdtAnyURI interface { ToXsdtAnyURI () AnyURI }
+
+//	Represents Base64-encoded arbitrary binary data. A base64Binary is the set of finite-length sequences of binary octets.
 type Base64Binary string // []byte
 
 	func (me *Base64Binary) SetFromString (v string) {
@@ -48,6 +63,10 @@ type Base64Binary string // []byte
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to Base64Binary.
+type ToXsdtBase64Binary interface { ToXsdtBase64Binary () Base64Binary }
+
+//	Represents Boolean values, which are either true or false.
 type Boolean bool
 
 	func (me *Boolean) SetFromString (v string) {
@@ -59,16 +78,25 @@ type Boolean bool
 		return strconv.FormatBool(bool(me))
 	}
 
-type Byte byte
+//	A convenience interface that declares a type conversion to Boolean.
+type ToXsdtBoolean interface { ToXsdtBoolean () Boolean }
+
+//	Represents an integer with a minimum value of -128 and maximum of 127. This data type is derived from short.
+type Byte int8
 
 	func (me *Byte) SetFromString (s string) {
-		v, _ := strconv.ParseUint(s, 0, 8); *me = Byte(v)
+		v, _ := strconv.ParseInt(s, 0, 8); *me = Byte(v)
 	}
 
 	func (me Byte) String () string {
-		return strconv.FormatUint(uint64(me), 10)
+		return strconv.FormatInt(int64(me), 10)
 	}
 
+//	A convenience interface that declares a type conversion to Byte.
+type ToXsdtByte interface { ToXsdtByte () Byte }
+
+//	Represents a calendar date.
+//	The pattern for date is CCYY-MM-DD with optional time zone indicator as allowed for dateTime.
 type Date string // time.Time
 
 	func (me *Date) SetFromString (v string) {
@@ -79,6 +107,10 @@ type Date string // time.Time
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to Date.
+type ToXsdtDate interface { ToXsdtDate () Date }
+
+//	Represents a specific instance of time.
 type DateTime string // time.Time
 
 	func (me *DateTime) SetFromString (v string) {
@@ -89,6 +121,10 @@ type DateTime string // time.Time
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to DateTime.
+type ToXsdtDateTime interface { ToXsdtDateTime () DateTime }
+
+//	Represents arbitrary precision numbers.
 type Decimal string // complex128
 
 	func (me *Decimal) SetFromString (v string) {
@@ -99,6 +135,10 @@ type Decimal string // complex128
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to Decimal.
+type ToXsdtDecimal interface { ToXsdtDecimal () Decimal }
+
+//	Represents double-precision 64-bit floating-point numbers.
 type Double float64
 
 	func (me *Double) SetFromString (s string) {
@@ -109,6 +149,10 @@ type Double float64
 		return strconv.FormatFloat(float64(me), 'f', 8, 64)
 	}
 
+//	A convenience interface that declares a type conversion to Double.
+type ToXsdtDouble interface { ToXsdtDouble () Double }
+
+//	Represents a duration of time.
 type Duration string // time.Duration
 
 	func (me *Duration) SetFromString (v string) {
@@ -119,6 +163,10 @@ type Duration string // time.Duration
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to Duration.
+type ToXsdtDuration interface { ToXsdtDuration () Duration }
+
+//	Represents the ENTITIES attribute type. Contains a set of values of type ENTITY.
 type Entities string
 
 	func (me *Entities) SetFromString (v string) {
@@ -137,7 +185,11 @@ type Entities string
 		return
 	}
 
-type Entity string
+//	A convenience interface that declares a type conversion to Entities.
+type ToXsdtEntities interface { ToXsdtEntities () Entities }
+
+//	This is a reference to an unparsed entity with a name that matches the specified name.
+type Entity NCName
 
 	func (me *Entity) SetFromString (v string) {
 		*me = Entity(v)
@@ -147,6 +199,10 @@ type Entity string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to Entity.
+type ToXsdtEntity interface { ToXsdtEntity () Entity }
+
+//	Represents single-precision 32-bit floating-point numbers.
 type Float float32
 
 	func (me *Float) SetFromString (s string) {
@@ -157,6 +213,10 @@ type Float float32
 		return strconv.FormatFloat(float64(me), 'f', 8, 32)
 	}
 
+//	A convenience interface that declares a type conversion to Float.
+type ToXsdtFloat interface { ToXsdtFloat () Float }
+
+//	Represents a Gregorian day that recurs, specifically a day of the month such as the fifth day of the month. A gDay is the space of a set of calendar dates. Specifically, it is a set of one-day long, monthly periodic instances.
 type GDay string
 
 	func (me *GDay) SetFromString (v string) {
@@ -167,6 +227,10 @@ type GDay string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to GDay.
+type ToXsdtGDay interface { ToXsdtGDay () GDay }
+
+//	Represents a Gregorian month that recurs every year. A gMonth is the space of a set of calendar months. Specifically, it is a set of one-month long, yearly periodic instances.
 type GMonth string
 
 	func (me *GMonth) SetFromString (v string) {
@@ -177,6 +241,10 @@ type GMonth string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to GMonth.
+type ToXsdtGMonth interface { ToXsdtGMonth () GMonth }
+
+//	Represents a specific Gregorian date that recurs, specifically a day of the year such as the third of May. A gMonthDay is the set of calendar dates. Specifically, it is a set of one-day long, annually periodic instances.
 type GMonthDay string
 
 	func (me *GMonthDay) SetFromString (v string) {
@@ -187,6 +255,10 @@ type GMonthDay string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to GMonthDay.
+type ToXsdtGMonthDay interface { ToXsdtGMonthDay () GMonthDay }
+
+//	Represents a Gregorian year. A set of one-year long, nonperiodic instances.
 type GYear string
 
 	func (me *GYear) SetFromString (v string) {
@@ -197,6 +269,10 @@ type GYear string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to GYear.
+type ToXsdtGYear interface { ToXsdtGYear () GYear }
+
+//	Represents a specific Gregorian month in a specific Gregorian year. A set of one-month long, nonperiodic instances.
 type GYearMonth string
 
 	func (me *GYearMonth) SetFromString (v string) {
@@ -207,6 +283,10 @@ type GYearMonth string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to GYearMonth.
+type ToXsdtGYearMonth interface { ToXsdtGYearMonth () GYearMonth }
+
+//	Represents arbitrary hex-encoded binary data. A hexBinary is the set of finite-length sequences of binary octets. Each binary octet is encoded as a character tuple, consisting of two hexadecimal digits ([0-9a-fA-F]) representing the octet code.
 type HexBinary string // []byte
 
 	func (me *HexBinary) SetFromString (v string) {
@@ -217,7 +297,11 @@ type HexBinary string // []byte
 		return string(me)
 	}
 
-type Id string
+//	A convenience interface that declares a type conversion to HexBinary.
+type ToXsdtHexBinary interface { ToXsdtHexBinary () HexBinary }
+
+//	The ID must be a no-colon-name (NCName) and must be unique within an XML document.
+type Id NCName
 
 	func (me *Id) SetFromString (v string) {
 		*me = Id(v)
@@ -227,7 +311,11 @@ type Id string
 		return string(me)
 	}
 
-type Idref string
+//	A convenience interface that declares a type conversion to Id.
+type ToXsdtId interface { ToXsdtId () Id }
+
+//	Represents a reference to an element that has an ID attribute that matches the specified ID. An IDREF must be an NCName and must be a value of an element or attribute of type ID within the XML document.
+type Idref NCName
 
 	func (me *Idref) SetFromString (v string) {
 		*me = Idref(v)
@@ -237,6 +325,10 @@ type Idref string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to Idref.
+type ToXsdtIdref interface { ToXsdtIdref () Idref }
+
+//	Contains a set of values of type IDREF.
 type Idrefs string
 
 	func (me *Idrefs) SetFromString (v string) {
@@ -255,6 +347,10 @@ type Idrefs string
 		return
 	}
 
+//	A convenience interface that declares a type conversion to Idrefs.
+type ToXsdtIdrefs interface { ToXsdtIdrefs () Idrefs }
+
+//	Represents an integer with a minimum value of -2147483648 and maximum of 2147483647.
 type Int int32
 
 	func (me *Int) SetFromString (s string) {
@@ -265,7 +361,11 @@ type Int int32
 		return strconv.FormatInt(int64(me), 10)
 	}
 
-type Integer int
+//	A convenience interface that declares a type conversion to Int.
+type ToXsdtInt interface { ToXsdtInt () Int }
+
+//	Represents a sequence of decimal digits with an optional leading sign (+ or -). 
+type Integer int64
 
 	func (me *Integer) SetFromString (s string) {
 		v, _ := strconv.ParseInt(s, 0, 64); *me = Integer(v)
@@ -275,7 +375,11 @@ type Integer int
 		return strconv.FormatInt(int64(me), 10)
 	}
 
-type Language string
+//	A convenience interface that declares a type conversion to Integer.
+type ToXsdtInteger interface { ToXsdtInteger () Integer }
+
+//	Represents natural language identifiers (defined by RFC 1766).
+type Language Token
 
 	func (me *Language) SetFromString (v string) {
 		*me = Language(v)
@@ -285,6 +389,10 @@ type Language string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to Language.
+type ToXsdtLanguage interface { ToXsdtLanguage () Language }
+
+//	Represents an integer with a minimum value of -9223372036854775808 and maximum of 9223372036854775807.
 type Long int64
 
 	func (me *Long) SetFromString (s string) {
@@ -295,7 +403,11 @@ type Long int64
 		return strconv.FormatInt(int64(me), 10)
 	}
 
-type Name string
+//	A convenience interface that declares a type conversion to Long.
+type ToXsdtLong interface { ToXsdtLong () Long }
+
+//	Represents names in XML. A Name is a token that begins with a letter, underscore, or colon and continues with name characters (letters, digits, and other characters).
+type Name Token
 
 	func (me *Name) SetFromString (v string) {
 		*me = Name(v)
@@ -305,7 +417,11 @@ type Name string
 		return string(me)
 	}
 
-type NCName string
+//	A convenience interface that declares a type conversion to Name.
+type ToXsdtName interface { ToXsdtName () Name }
+
+//	Represents noncolonized names. This data type is the same as Name, except it cannot begin with a colon.
+type NCName Name
 
 	func (me *NCName) SetFromString (v string) {
 		*me = NCName(v)
@@ -315,7 +431,11 @@ type NCName string
 		return string(me)
 	}
 
-type NegativeInteger int
+//	A convenience interface that declares a type conversion to NCName.
+type ToXsdtNCName interface { ToXsdtNCName () NCName }
+
+//	Represents an integer that is less than zero. Consists of a negative sign (-) and sequence of decimal digits.
+type NegativeInteger int64
 
 	func (me *NegativeInteger) SetFromString (s string) {
 		v, _ := strconv.ParseInt(s, 0, 64); *me = NegativeInteger(v)
@@ -325,7 +445,11 @@ type NegativeInteger int
 		return strconv.FormatInt(int64(me), 10)
 	}
 
-type Nmtoken string
+//	A convenience interface that declares a type conversion to NegativeInteger.
+type ToXsdtNegativeInteger interface { ToXsdtNegativeInteger () NegativeInteger }
+
+//	An NMTOKEN is set of name characters (letters, digits, and other characters) in any combination. Unlike Name and NCName, NMTOKEN has no restrictions on the starting character.
+type Nmtoken Token
 
 	func (me *Nmtoken) SetFromString (v string) {
 		*me = Nmtoken(v)
@@ -335,6 +459,10 @@ type Nmtoken string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to Nmtoken.
+type ToXsdtNmtoken interface { ToXsdtNmtoken () Nmtoken }
+
+//	Contains a set of values of type NMTOKEN.
 type Nmtokens string
 
 	func (me *Nmtokens) SetFromString (v string) {
@@ -353,7 +481,11 @@ type Nmtokens string
 		return
 	}
 
-type NonNegativeInteger uint
+//	A convenience interface that declares a type conversion to Nmtokens.
+type ToXsdtNmtokens interface { ToXsdtNmtokens () Nmtokens }
+
+//	Represents an integer that is greater than or equal to zero.
+type NonNegativeInteger uint64
 
 	func (me *NonNegativeInteger) SetFromString (s string) {
 		v, _ := strconv.ParseUint(s, 0, 64); *me = NonNegativeInteger(v)
@@ -363,7 +495,11 @@ type NonNegativeInteger uint
 		return strconv.FormatUint(uint64(me), 10)
 	}
 
-type NonPositiveInteger int
+//	A convenience interface that declares a type conversion to NonNegativeInteger.
+type ToXsdtNonNegativeInteger interface { ToXsdtNonNegativeInteger () NonNegativeInteger }
+
+//	Represents an integer that is less than or equal to zero. A nonPositiveIntegerconsists of a negative sign (-) and sequence of decimal digits.
+type NonPositiveInteger int64
 
 	func (me *NonPositiveInteger) SetFromString (s string) {
 		v, _ := strconv.ParseInt(s, 0, 64); *me = NonPositiveInteger(v)
@@ -373,7 +509,11 @@ type NonPositiveInteger int
 		return strconv.FormatInt(int64(me), 10)
 	}
 
-type NormalizedString string
+//	A convenience interface that declares a type conversion to NonPositiveInteger.
+type ToXsdtNonPositiveInteger interface { ToXsdtNonPositiveInteger () NonPositiveInteger }
+
+//	Represents white space normalized strings.
+type NormalizedString String
 
 	func (me *NormalizedString) SetFromString (v string) {
 		*me = NormalizedString(v)
@@ -383,10 +523,14 @@ type NormalizedString string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to NormalizedString.
+type ToXsdtNormalizedString interface { ToXsdtNormalizedString () NormalizedString }
+
 type notation struct {
 	Id, Name, Public, System string
 }
 
+//	A set of QNames.
 type Notation string
 
 	func (me *Notation) SetFromString (v string) {
@@ -397,13 +541,19 @@ type Notation string
 		return string(me)
 	}
 
-type Notations map[string]*notation
-
-	func (me Notations) Add (id, name, public, system string) {
-		me[name] = &notation { Id: id, Name: name, Public: public, System: system }
+	func (me Notation) Values () (list []Qname) {
+		var btv = new(Qname)
+		var spl = ListValues(string(me))
+		list = make([]Qname, len(spl))
+		for i, s := range spl { btv.SetFromString(s); list[i] = *btv }
+		return
 	}
 
-type PositiveInteger uint
+//	A convenience interface that declares a type conversion to Notation.
+type ToXsdtNotation interface { ToXsdtNotation () Notation }
+
+//	Represents an integer that is greater than zero.
+type PositiveInteger uint64
 
 	func (me *PositiveInteger) SetFromString (s string) {
 		v, _ := strconv.ParseUint(s, 0, 64); *me = PositiveInteger(v)
@@ -413,6 +563,10 @@ type PositiveInteger uint
 		return strconv.FormatUint(uint64(me), 10)
 	}
 
+//	A convenience interface that declares a type conversion to PositiveInteger.
+type ToXsdtPositiveInteger interface { ToXsdtPositiveInteger () PositiveInteger }
+
+//	Represents a qualified name. A qualified name is composed of a prefix and a local name separated by a colon. Both the prefix and local names must be an NCName. The prefix must be associated with a namespace URI reference, using a namespace declaration.
 type Qname string
 
 	func (me *Qname) SetFromString (v string) {
@@ -423,6 +577,10 @@ type Qname string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to Qname.
+type ToXsdtQname interface { ToXsdtQname () Qname }
+
+//	Represents an integer with a minimum value of -32768 and maximum of 32767.
 type Short int16
 
 	func (me *Short) SetFromString (s string) {
@@ -433,6 +591,10 @@ type Short int16
 		return strconv.FormatInt(int64(me), 10)
 	}
 
+//	A convenience interface that declares a type conversion to Short.
+type ToXsdtShort interface { ToXsdtShort () Short }
+
+//	Represents character strings.
 type String string
 
 	func (me *String) SetFromString (v string) {
@@ -443,7 +605,11 @@ type String string
 		return string(me)
 	}
 
-type Token string
+//	A convenience interface that declares a type conversion to String.
+type ToXsdtString interface { ToXsdtString () String }
+
+//	Represents tokenized strings.
+type Token NormalizedString
 
 	func (me *Token) SetFromString (v string) {
 		*me = Token(v)
@@ -453,6 +619,10 @@ type Token string
 		return string(me)
 	}
 
+//	A convenience interface that declares a type conversion to Token.
+type ToXsdtToken interface { ToXsdtToken () Token }
+
+//	Represents an integer with a minimum of zero and maximum of 255.
 type UnsignedByte uint8
 
 	func (me *UnsignedByte) SetFromString (s string) {
@@ -463,6 +633,10 @@ type UnsignedByte uint8
 		return strconv.FormatUint(uint64(me), 10)
 	}
 
+//	A convenience interface that declares a type conversion to UnsignedByte.
+type ToXsdtUnsignedByte interface { ToXsdtUnsignedByte () UnsignedByte }
+
+//	Represents an integer with a minimum of zero and maximum of 4294967295.
 type UnsignedInt uint32
 
 	func (me *UnsignedInt) SetFromString (s string) {
@@ -473,6 +647,10 @@ type UnsignedInt uint32
 		return strconv.FormatUint(uint64(me), 10)
 	}
 
+//	A convenience interface that declares a type conversion to UnsignedInt.
+type ToXsdtUnsignedInt interface { ToXsdtUnsignedInt () UnsignedInt }
+
+//	Represents an integer with a minimum of zero and maximum of 18446744073709551615.
 type UnsignedLong uint64
 
 	func (me *UnsignedLong) SetFromString (s string) {
@@ -483,6 +661,10 @@ type UnsignedLong uint64
 		return strconv.FormatUint(uint64(me), 10)
 	}
 
+//	A convenience interface that declares a type conversion to UnsignedLong.
+type ToXsdtUnsignedLong interface { ToXsdtUnsignedLong () UnsignedLong }
+
+//	Represents an integer with a minimum of zero and maximum of 65535.
 type UnsignedShort uint16
 
 	func (me *UnsignedShort) SetFromString (s string) {
@@ -493,7 +675,10 @@ type UnsignedShort uint16
 		return strconv.FormatUint(uint64(me), 10)
 	}
 
-// XSD "list" types are always space-separated strings. All generated Go types based on any XSD's list types automatically gets a smart Values() method, which will always resort to this function.
+//	A convenience interface that declares a type conversion to UnsignedShort.
+type ToXsdtUnsignedShort interface { ToXsdtUnsignedShort () UnsignedShort }
+
+// XSD "list" types are always space-separated strings. All generated Go types based on any XSD's list types get a Values() method, which will always resort to this function.
 func ListValues (v string) (spl []string) {
 	var cur = ""
 	for _, r := range v {
