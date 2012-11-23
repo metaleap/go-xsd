@@ -1,0 +1,174 @@
+<html>
+	<head>
+		<title>Package github.com/metaleap/go-xsd/xsd-makepkg/tests</title>
+		<meta charset="UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link type="text/css" rel="stylesheet" href="http://golang.org/doc/style.css" />
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://golang.org/doc/godocs.js"></script>
+	</head>
+	<body>
+		<div id="page" class="wide">
+		<div class="container">
+		<h1>Package github.com/metaleap/go-xsd/xsd-makepkg/tests</h1>
+		<div id="nav"></div>
+		<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/metaleap/go-xsd/xsd-makepkg/tests"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="#pkg-index">Index</a></dd>
+			
+			
+			
+				<dd><a href="#pkg-subdirectories">Subdirectories</a></dd>
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				<p>
+A simple test function shared by the various test programs inside this directory (rss, atom, collada, svg etc.)
+</p>
+
+			</div>
+		</div>
+		
+	
+		<h2 id="pkg-index">Index</h2>
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+		<div id="manual-nav">
+			<dl>
+			
+			
+			
+				
+				<dd><a href="#TestViaRemarshal">func TestViaRemarshal(dirPath string, makeEmptyDoc func() interface{})</a></dd>
+			
+			
+			
+		</dl>
+
+		
+
+		
+			<h4>Package files</h4>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="/target/doc.go">doc.go</a>
+			
+				<a href="/target/tests.go">tests.go</a>
+			
+			</span>
+			</p>
+		
+	
+		
+		
+		
+			
+			
+			<h2 id="TestViaRemarshal">func <a href="/target/tests.go?s=482:552#L3">TestViaRemarshal</a></h2>
+			<pre>func TestViaRemarshal(dirPath string, makeEmptyDoc func() interface{})</pre>
+			<p>
+Attempts to xml.Unmarshal() all files in the &#34;infiles&#34; sub-directory of the specified directory path into the interface{} structure returned by the specified constructor.
+For each such input file, then attempts to xml.MarshalIndent() said structure back into a new output XML file with the same name, in the &#34;outfiles&#34; sub-directory of the specified directory path.
+</p>
+
+			
+		
+		
+		</div>
+	
+
+	
+
+
+
+
+
+
+
+	
+	
+		<h2 id="pkg-subdirectories">Subdirectories</h2>
+	
+	<table class="dir">
+	<tr>
+	<th>Name</th>
+	<th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+	<th style="text-align: left; width: auto">Synopsis</th>
+	</tr>
+	
+		<tr>
+		<td><a href="..">..</a></td>
+		</tr>
+	
+	
+		
+			<tr>
+			<td class="name"><a href="xsd-test-atom/">xsd-test-atom</a></td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td style="width: auto"></td>
+			</tr>
+		
+	
+		
+			<tr>
+			<td class="name"><a href="xsd-test-collada/">xsd-test-collada</a></td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td style="width: auto"></td>
+			</tr>
+		
+	
+		
+			<tr>
+			<td class="name"><a href="xsd-test-kml/">xsd-test-kml</a></td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td style="width: auto"></td>
+			</tr>
+		
+	
+		
+			<tr>
+			<td class="name"><a href="xsd-test-rss/">xsd-test-rss</a></td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td style="width: auto"></td>
+			</tr>
+		
+	
+		
+			<tr>
+			<td class="name"><a href="xsd-test-svg/">xsd-test-svg</a></td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td style="width: auto"></td>
+			</tr>
+		
+	
+	</table>
+	
+
+
+		</div></div>
+	</body>
+</html>

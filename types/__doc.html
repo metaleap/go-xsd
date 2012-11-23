@@ -831,7 +831,7 @@ Same for base64- and hex-encoded binary data: since Unmarshal() won&#39;t decode
 		
 			
 			
-			<h2 id="ListValues">func <a href="/target/xsdtypes.go?s=20200:20241#L672">ListValues</a></h2>
+			<h2 id="ListValues">func <a href="/target/xsdtypes.go?s=29110:29150#L890">ListValues</a></h2>
 			<pre>func ListValues(v string) (spl []string)</pre>
 			<p>
 XSD &#34;list&#34; types are always space-separated strings. All generated Go types based on any XSD&#39;s list types get a Values() method, which will always resort to this function.
@@ -842,7 +842,7 @@ XSD &#34;list&#34; types are always space-separated strings. All generated Go ty
 		
 			
 			
-			<h2 id="AnySimpleType">type <a href="/target/xsdtypes.go?s=321:346#L4">AnySimpleType</a></h2>
+			<h2 id="AnySimpleType">type <a href="/target/xsdtypes.go?s=373:398#L8">AnySimpleType</a></h2>
 			<pre>type AnySimpleType string</pre>
 			<p>
 In XSD, the type xsd:anySimpleType is the base type from which all other built-in types are derived.
@@ -859,23 +859,29 @@ In XSD, the type xsd:anySimpleType is the base type from which all other built-i
 
 			
 				
-				<h3 id="AnySimpleType.SetFromString">func (*AnySimpleType) <a href="/target/xsdtypes.go?s=349:398#L6">SetFromString</a></h3>
+				<h3 id="AnySimpleType.SetFromString">func (*AnySimpleType) <a href="/target/xsdtypes.go?s=506:554#L11">SetFromString</a></h3>
 				<pre>func (me *AnySimpleType) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="AnySimpleType.String">func (AnySimpleType) <a href="/target/xsdtypes.go?s=431:471#L10">String</a></h3>
+				<h3 id="AnySimpleType.String">func (AnySimpleType) <a href="/target/xsdtypes.go?s=674:713#L16">String</a></h3>
 				<pre>func (me AnySimpleType) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="AnyType">type <a href="/target/xsdtypes.go?s=745:764#L18">AnyType</a></h2>
+			<h2 id="AnyType">type <a href="/target/xsdtypes.go?s=985:1004#L26">AnyType</a></h2>
 			<pre>type AnyType string</pre>
 			<p>
 In XSD, represents any simple or complex type. In Go, we hope no one schema ever uses it.
@@ -892,23 +898,29 @@ In XSD, represents any simple or complex type. In Go, we hope no one schema ever
 
 			
 				
-				<h3 id="AnyType.SetFromString">func (*AnyType) <a href="/target/xsdtypes.go?s=767:810#L20">SetFromString</a></h3>
+				<h3 id="AnyType.SetFromString">func (*AnyType) <a href="/target/xsdtypes.go?s=1112:1154#L29">SetFromString</a></h3>
 				<pre>func (me *AnyType) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="AnyType.String">func (AnyType) <a href="/target/xsdtypes.go?s=837:871#L24">String</a></h3>
+				<h3 id="AnyType.String">func (AnyType) <a href="/target/xsdtypes.go?s=1268:1301#L34">String</a></h3>
 				<pre>func (me AnyType) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="AnyURI">type <a href="/target/xsdtypes.go?s=1163:1181#L32">AnyURI</a></h2>
+			<h2 id="AnyURI">type <a href="/target/xsdtypes.go?s=1591:1609#L44">AnyURI</a></h2>
 			<pre>type AnyURI string</pre>
 			<p>
 Represents a URI as defined by RFC 2396. An anyURI value can be absolute or relative, and may have an optional fragment identifier.
@@ -925,23 +937,29 @@ Represents a URI as defined by RFC 2396. An anyURI value can be absolute or rela
 
 			
 				
-				<h3 id="AnyURI.SetFromString">func (*AnyURI) <a href="/target/xsdtypes.go?s=1184:1226#L34">SetFromString</a></h3>
+				<h3 id="AnyURI.SetFromString">func (*AnyURI) <a href="/target/xsdtypes.go?s=1717:1758#L47">SetFromString</a></h3>
 				<pre>func (me *AnyURI) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="AnyURI.String">func (AnyURI) <a href="/target/xsdtypes.go?s=1252:1285#L38">String</a></h3>
+				<h3 id="AnyURI.String">func (AnyURI) <a href="/target/xsdtypes.go?s=1871:1903#L52">String</a></h3>
 				<pre>func (me AnyURI) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Base64Binary">type <a href="/target/xsdtypes.go?s=1561:1585#L46">Base64Binary</a></h2>
+			<h2 id="Base64Binary">type <a href="/target/xsdtypes.go?s=2177:2201#L62">Base64Binary</a></h2>
 			<pre>type Base64Binary string <span class="comment">// []byte</span>
 </pre>
 			<p>
@@ -959,23 +977,29 @@ Represents Base64-encoded arbitrary binary data. A base64Binary is the set of fi
 
 			
 				
-				<h3 id="Base64Binary.SetFromString">func (*Base64Binary) <a href="/target/xsdtypes.go?s=1598:1646#L48">SetFromString</a></h3>
+				<h3 id="Base64Binary.SetFromString">func (*Base64Binary) <a href="/target/xsdtypes.go?s=2319:2366#L65">SetFromString</a></h3>
 				<pre>func (me *Base64Binary) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Base64Binary.String">func (Base64Binary) <a href="/target/xsdtypes.go?s=1678:1717#L52">String</a></h3>
+				<h3 id="Base64Binary.String">func (Base64Binary) <a href="/target/xsdtypes.go?s=2485:2523#L70">String</a></h3>
 				<pre>func (me Base64Binary) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Boolean">type <a href="/target/xsdtypes.go?s=1956:1973#L60">Boolean</a></h2>
+			<h2 id="Boolean">type <a href="/target/xsdtypes.go?s=2760:2777#L80">Boolean</a></h2>
 			<pre>type Boolean bool</pre>
 			<p>
 Represents Boolean values, which are either true or false.
@@ -992,23 +1016,29 @@ Represents Boolean values, which are either true or false.
 
 			
 				
-				<h3 id="Boolean.SetFromString">func (*Boolean) <a href="/target/xsdtypes.go?s=1976:2019#L62">SetFromString</a></h3>
+				<h3 id="Boolean.SetFromString">func (*Boolean) <a href="/target/xsdtypes.go?s=2889:2931#L83">SetFromString</a></h3>
 				<pre>func (me *Boolean) SetFromString(v string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Boolean.String">func (Boolean) <a href="/target/xsdtypes.go?s=2234:2268#L67">String</a></h3>
+				<h3 id="Boolean.String">func (Boolean) <a href="/target/xsdtypes.go?s=3227:3260#L96">String</a></h3>
 				<pre>func (me Boolean) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Byte">type <a href="/target/xsdtypes.go?s=2555:2569#L75">Byte</a></h2>
+			<h2 id="Byte">type <a href="/target/xsdtypes.go?s=3545:3559#L106">Byte</a></h2>
 			<pre>type Byte int8</pre>
 			<p>
 Represents an integer with a minimum value of -128 and maximum of 127. This data type is derived from short.
@@ -1025,23 +1055,29 @@ Represents an integer with a minimum value of -128 and maximum of 127. This data
 
 			
 				
-				<h3 id="Byte.SetFromString">func (*Byte) <a href="/target/xsdtypes.go?s=2572:2612#L77">SetFromString</a></h3>
+				<h3 id="Byte.SetFromString">func (*Byte) <a href="/target/xsdtypes.go?s=3671:3710#L109">SetFromString</a></h3>
 				<pre>func (me *Byte) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Byte.String">func (Byte) <a href="/target/xsdtypes.go?s=2671:2702#L81">String</a></h3>
+				<h3 id="Byte.String">func (Byte) <a href="/target/xsdtypes.go?s=3841:3871#L115">String</a></h3>
 				<pre>func (me Byte) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Date">type <a href="/target/xsdtypes.go?s=2997:3013#L90">Date</a></h2>
+			<h2 id="Date">type <a href="/target/xsdtypes.go?s=4164:4180#L126">Date</a></h2>
 			<pre>type Date string <span class="comment">// time.Time</span>
 </pre>
 			<p>
@@ -1060,23 +1096,29 @@ The pattern for date is CCYY-MM-DD with optional time zone indicator as allowed 
 
 			
 				
-				<h3 id="Date.SetFromString">func (*Date) <a href="/target/xsdtypes.go?s=3029:3069#L92">SetFromString</a></h3>
+				<h3 id="Date.SetFromString">func (*Date) <a href="/target/xsdtypes.go?s=4301:4340#L129">SetFromString</a></h3>
 				<pre>func (me *Date) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Date.String">func (Date) <a href="/target/xsdtypes.go?s=3093:3124#L96">String</a></h3>
+				<h3 id="Date.String">func (Date) <a href="/target/xsdtypes.go?s=4451:4481#L134">String</a></h3>
 				<pre>func (me Date) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="DateTime">type <a href="/target/xsdtypes.go?s=3312:3332#L104">DateTime</a></h2>
+			<h2 id="DateTime">type <a href="/target/xsdtypes.go?s=4667:4687#L144">DateTime</a></h2>
 			<pre>type DateTime string <span class="comment">// time.Time</span>
 </pre>
 			<p>
@@ -1094,23 +1136,29 @@ Represents a specific instance of time.
 
 			
 				
-				<h3 id="DateTime.SetFromString">func (*DateTime) <a href="/target/xsdtypes.go?s=3348:3392#L106">SetFromString</a></h3>
+				<h3 id="DateTime.SetFromString">func (*DateTime) <a href="/target/xsdtypes.go?s=4808:4851#L147">SetFromString</a></h3>
 				<pre>func (me *DateTime) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="DateTime.String">func (DateTime) <a href="/target/xsdtypes.go?s=3420:3455#L110">String</a></h3>
+				<h3 id="DateTime.String">func (DateTime) <a href="/target/xsdtypes.go?s=4966:5000#L152">String</a></h3>
 				<pre>func (me DateTime) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Decimal">type <a href="/target/xsdtypes.go?s=3659:3678#L118">Decimal</a></h2>
+			<h2 id="Decimal">type <a href="/target/xsdtypes.go?s=5202:5221#L162">Decimal</a></h2>
 			<pre>type Decimal string <span class="comment">// complex128</span>
 </pre>
 			<p>
@@ -1128,23 +1176,29 @@ Represents arbitrary precision numbers.
 
 			
 				
-				<h3 id="Decimal.SetFromString">func (*Decimal) <a href="/target/xsdtypes.go?s=3695:3738#L120">SetFromString</a></h3>
+				<h3 id="Decimal.SetFromString">func (*Decimal) <a href="/target/xsdtypes.go?s=5343:5385#L165">SetFromString</a></h3>
 				<pre>func (me *Decimal) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Decimal.String">func (Decimal) <a href="/target/xsdtypes.go?s=3765:3799#L124">String</a></h3>
+				<h3 id="Decimal.String">func (Decimal) <a href="/target/xsdtypes.go?s=5499:5532#L170">String</a></h3>
 				<pre>func (me Decimal) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Double">type <a href="/target/xsdtypes.go?s=4018:4037#L132">Double</a></h2>
+			<h2 id="Double">type <a href="/target/xsdtypes.go?s=5749:5768#L180">Double</a></h2>
 			<pre>type Double float64</pre>
 			<p>
 Represents double-precision 64-bit floating-point numbers.
@@ -1161,23 +1215,29 @@ Represents double-precision 64-bit floating-point numbers.
 
 			
 				
-				<h3 id="Double.SetFromString">func (*Double) <a href="/target/xsdtypes.go?s=4040:4082#L134">SetFromString</a></h3>
+				<h3 id="Double.SetFromString">func (*Double) <a href="/target/xsdtypes.go?s=5880:5921#L183">SetFromString</a></h3>
 				<pre>func (me *Double) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Double.String">func (Double) <a href="/target/xsdtypes.go?s=4143:4176#L138">String</a></h3>
+				<h3 id="Double.String">func (Double) <a href="/target/xsdtypes.go?s=6054:6086#L189">String</a></h3>
 				<pre>func (me Double) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Duration">type <a href="/target/xsdtypes.go?s=4397:4417#L146">Duration</a></h2>
+			<h2 id="Duration">type <a href="/target/xsdtypes.go?s=6305:6325#L199">Duration</a></h2>
 			<pre>type Duration string <span class="comment">// time.Duration</span>
 </pre>
 			<p>
@@ -1195,23 +1255,29 @@ Represents a duration of time.
 
 			
 				
-				<h3 id="Duration.SetFromString">func (*Duration) <a href="/target/xsdtypes.go?s=4437:4481#L148">SetFromString</a></h3>
+				<h3 id="Duration.SetFromString">func (*Duration) <a href="/target/xsdtypes.go?s=6450:6493#L202">SetFromString</a></h3>
 				<pre>func (me *Duration) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Duration.String">func (Duration) <a href="/target/xsdtypes.go?s=4509:4544#L152">String</a></h3>
+				<h3 id="Duration.String">func (Duration) <a href="/target/xsdtypes.go?s=6608:6642#L207">String</a></h3>
 				<pre>func (me Duration) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Entities">type <a href="/target/xsdtypes.go?s=4789:4809#L160">Entities</a></h2>
+			<h2 id="Entities">type <a href="/target/xsdtypes.go?s=6885:6905#L217">Entities</a></h2>
 			<pre>type Entities string</pre>
 			<p>
 Represents the ENTITIES attribute type. Contains a set of values of type ENTITY.
@@ -1228,30 +1294,39 @@ Represents the ENTITIES attribute type. Contains a set of values of type ENTITY.
 
 			
 				
-				<h3 id="Entities.SetFromString">func (*Entities) <a href="/target/xsdtypes.go?s=4812:4856#L162">SetFromString</a></h3>
+				<h3 id="Entities.SetFromString">func (*Entities) <a href="/target/xsdtypes.go?s=7013:7056#L220">SetFromString</a></h3>
 				<pre>func (me *Entities) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Entities.String">func (Entities) <a href="/target/xsdtypes.go?s=4884:4919#L166">String</a></h3>
+				<h3 id="Entities.String">func (Entities) <a href="/target/xsdtypes.go?s=7171:7205#L225">String</a></h3>
 				<pre>func (me Entities) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Entities.Values">func (Entities) <a href="/target/xsdtypes.go?s=4947:4991#L170">Values</a></h3>
+				<h3 id="Entities.Values">func (Entities) <a href="/target/xsdtypes.go?s=7390:7433#L230">Values</a></h3>
 				<pre>func (me Entities) Values() (list []Entity)</pre>
-				
+				<p>
+This type declares a String containing a whitespace-separated list of values. This Values() method creates and returns a slice of all elements in that list.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Entity">type <a href="/target/xsdtypes.go?s=5389:5407#L182">Entity</a></h2>
+			<h2 id="Entity">type <a href="/target/xsdtypes.go?s=7829:7847#L247">Entity</a></h2>
 			<pre>type Entity NCName</pre>
 			<p>
 This is a reference to an unparsed entity with a name that matches the specified name.
@@ -1268,23 +1343,29 @@ This is a reference to an unparsed entity with a name that matches the specified
 
 			
 				
-				<h3 id="Entity.SetFromString">func (*Entity) <a href="/target/xsdtypes.go?s=5410:5452#L184">SetFromString</a></h3>
+				<h3 id="Entity.SetFromString">func (*Entity) <a href="/target/xsdtypes.go?s=7955:7996#L250">SetFromString</a></h3>
 				<pre>func (me *Entity) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Entity.String">func (Entity) <a href="/target/xsdtypes.go?s=5478:5511#L188">String</a></h3>
+				<h3 id="Entity.String">func (Entity) <a href="/target/xsdtypes.go?s=8109:8141#L255">String</a></h3>
 				<pre>func (me Entity) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Float">type <a href="/target/xsdtypes.go?s=5726:5744#L196">Float</a></h2>
+			<h2 id="Float">type <a href="/target/xsdtypes.go?s=8354:8372#L265">Float</a></h2>
 			<pre>type Float float32</pre>
 			<p>
 Represents single-precision 32-bit floating-point numbers.
@@ -1301,23 +1382,29 @@ Represents single-precision 32-bit floating-point numbers.
 
 			
 				
-				<h3 id="Float.SetFromString">func (*Float) <a href="/target/xsdtypes.go?s=5747:5788#L198">SetFromString</a></h3>
+				<h3 id="Float.SetFromString">func (*Float) <a href="/target/xsdtypes.go?s=8484:8524#L268">SetFromString</a></h3>
 				<pre>func (me *Float) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Float.String">func (Float) <a href="/target/xsdtypes.go?s=5848:5880#L202">String</a></h3>
+				<h3 id="Float.String">func (Float) <a href="/target/xsdtypes.go?s=8656:8687#L274">String</a></h3>
 				<pre>func (me Float) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="GDay">type <a href="/target/xsdtypes.go?s=6293:6309#L210">GDay</a></h2>
+			<h2 id="GDay">type <a href="/target/xsdtypes.go?s=9098:9114#L284">GDay</a></h2>
 			<pre>type GDay string</pre>
 			<p>
 Represents a Gregorian day that recurs, specifically a day of the month such as the fifth day of the month. A gDay is the space of a set of calendar dates. Specifically, it is a set of one-day long, monthly periodic instances.
@@ -1334,23 +1421,29 @@ Represents a Gregorian day that recurs, specifically a day of the month such as 
 
 			
 				
-				<h3 id="GDay.SetFromString">func (*GDay) <a href="/target/xsdtypes.go?s=6312:6352#L212">SetFromString</a></h3>
+				<h3 id="GDay.SetFromString">func (*GDay) <a href="/target/xsdtypes.go?s=9222:9261#L287">SetFromString</a></h3>
 				<pre>func (me *GDay) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="GDay.String">func (GDay) <a href="/target/xsdtypes.go?s=6376:6407#L216">String</a></h3>
+				<h3 id="GDay.String">func (GDay) <a href="/target/xsdtypes.go?s=9372:9402#L292">String</a></h3>
 				<pre>func (me GDay) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="GMonth">type <a href="/target/xsdtypes.go?s=6731:6749#L224">GMonth</a></h2>
+			<h2 id="GMonth">type <a href="/target/xsdtypes.go?s=9724:9742#L302">GMonth</a></h2>
 			<pre>type GMonth string</pre>
 			<p>
 Represents a Gregorian month that recurs every year. A gMonth is the space of a set of calendar months. Specifically, it is a set of one-month long, yearly periodic instances.
@@ -1367,23 +1460,29 @@ Represents a Gregorian month that recurs every year. A gMonth is the space of a 
 
 			
 				
-				<h3 id="GMonth.SetFromString">func (*GMonth) <a href="/target/xsdtypes.go?s=6752:6794#L226">SetFromString</a></h3>
+				<h3 id="GMonth.SetFromString">func (*GMonth) <a href="/target/xsdtypes.go?s=9850:9891#L305">SetFromString</a></h3>
 				<pre>func (me *GMonth) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="GMonth.String">func (GMonth) <a href="/target/xsdtypes.go?s=6820:6853#L230">String</a></h3>
+				<h3 id="GMonth.String">func (GMonth) <a href="/target/xsdtypes.go?s=10004:10036#L310">String</a></h3>
 				<pre>func (me GMonth) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="GMonthDay">type <a href="/target/xsdtypes.go?s=7230:7251#L238">GMonthDay</a></h2>
+			<h2 id="GMonthDay">type <a href="/target/xsdtypes.go?s=10411:10432#L320">GMonthDay</a></h2>
 			<pre>type GMonthDay string</pre>
 			<p>
 Represents a specific Gregorian date that recurs, specifically a day of the year such as the third of May. A gMonthDay is the set of calendar dates. Specifically, it is a set of one-day long, annually periodic instances.
@@ -1400,23 +1499,29 @@ Represents a specific Gregorian date that recurs, specifically a day of the year
 
 			
 				
-				<h3 id="GMonthDay.SetFromString">func (*GMonthDay) <a href="/target/xsdtypes.go?s=7254:7299#L240">SetFromString</a></h3>
+				<h3 id="GMonthDay.SetFromString">func (*GMonthDay) <a href="/target/xsdtypes.go?s=10540:10584#L323">SetFromString</a></h3>
 				<pre>func (me *GMonthDay) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="GMonthDay.String">func (GMonthDay) <a href="/target/xsdtypes.go?s=7328:7364#L244">String</a></h3>
+				<h3 id="GMonthDay.String">func (GMonthDay) <a href="/target/xsdtypes.go?s=10700:10735#L328">String</a></h3>
 				<pre>func (me GMonthDay) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="GYear">type <a href="/target/xsdtypes.go?s=7608:7625#L252">GYear</a></h2>
+			<h2 id="GYear">type <a href="/target/xsdtypes.go?s=10977:10994#L338">GYear</a></h2>
 			<pre>type GYear string</pre>
 			<p>
 Represents a Gregorian year. A set of one-year long, nonperiodic instances.
@@ -1433,23 +1538,29 @@ Represents a Gregorian year. A set of one-year long, nonperiodic instances.
 
 			
 				
-				<h3 id="GYear.SetFromString">func (*GYear) <a href="/target/xsdtypes.go?s=7628:7669#L254">SetFromString</a></h3>
+				<h3 id="GYear.SetFromString">func (*GYear) <a href="/target/xsdtypes.go?s=11102:11142#L341">SetFromString</a></h3>
 				<pre>func (me *GYear) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="GYear.String">func (GYear) <a href="/target/xsdtypes.go?s=7694:7726#L258">String</a></h3>
+				<h3 id="GYear.String">func (GYear) <a href="/target/xsdtypes.go?s=11254:11285#L346">String</a></h3>
 				<pre>func (me GYear) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="GYearMonth">type <a href="/target/xsdtypes.go?s=7994:8016#L266">GYearMonth</a></h2>
+			<h2 id="GYearMonth">type <a href="/target/xsdtypes.go?s=11551:11573#L356">GYearMonth</a></h2>
 			<pre>type GYearMonth string</pre>
 			<p>
 Represents a specific Gregorian month in a specific Gregorian year. A set of one-month long, nonperiodic instances.
@@ -1466,23 +1577,29 @@ Represents a specific Gregorian month in a specific Gregorian year. A set of one
 
 			
 				
-				<h3 id="GYearMonth.SetFromString">func (*GYearMonth) <a href="/target/xsdtypes.go?s=8019:8065#L268">SetFromString</a></h3>
+				<h3 id="GYearMonth.SetFromString">func (*GYearMonth) <a href="/target/xsdtypes.go?s=11681:11726#L359">SetFromString</a></h3>
 				<pre>func (me *GYearMonth) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="GYearMonth.String">func (GYearMonth) <a href="/target/xsdtypes.go?s=8095:8132#L272">String</a></h3>
+				<h3 id="GYearMonth.String">func (GYearMonth) <a href="/target/xsdtypes.go?s=11843:11879#L364">String</a></h3>
 				<pre>func (me GYearMonth) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="HexBinary">type <a href="/target/xsdtypes.go?s=8549:8570#L280">HexBinary</a></h2>
+			<h2 id="HexBinary">type <a href="/target/xsdtypes.go?s=12294:12315#L374">HexBinary</a></h2>
 			<pre>type HexBinary string <span class="comment">// []byte</span>
 </pre>
 			<p>
@@ -1500,23 +1617,29 @@ Represents arbitrary hex-encoded binary data. A hexBinary is the set of finite-l
 
 			
 				
-				<h3 id="HexBinary.SetFromString">func (*HexBinary) <a href="/target/xsdtypes.go?s=8583:8628#L282">SetFromString</a></h3>
+				<h3 id="HexBinary.SetFromString">func (*HexBinary) <a href="/target/xsdtypes.go?s=12433:12477#L377">SetFromString</a></h3>
 				<pre>func (me *HexBinary) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="HexBinary.String">func (HexBinary) <a href="/target/xsdtypes.go?s=8657:8693#L286">String</a></h3>
+				<h3 id="HexBinary.String">func (HexBinary) <a href="/target/xsdtypes.go?s=12593:12628#L382">String</a></h3>
 				<pre>func (me HexBinary) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Id">type <a href="/target/xsdtypes.go?s=8944:8958#L294">Id</a></h2>
+			<h2 id="Id">type <a href="/target/xsdtypes.go?s=12877:12891#L392">Id</a></h2>
 			<pre>type Id NCName</pre>
 			<p>
 The ID must be a no-colon-name (NCName) and must be unique within an XML document.
@@ -1533,23 +1656,29 @@ The ID must be a no-colon-name (NCName) and must be unique within an XML documen
 
 			
 				
-				<h3 id="Id.SetFromString">func (*Id) <a href="/target/xsdtypes.go?s=8961:8999#L296">SetFromString</a></h3>
+				<h3 id="Id.SetFromString">func (*Id) <a href="/target/xsdtypes.go?s=12999:13036#L395">SetFromString</a></h3>
 				<pre>func (me *Id) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Id.String">func (Id) <a href="/target/xsdtypes.go?s=9021:9050#L300">String</a></h3>
+				<h3 id="Id.String">func (Id) <a href="/target/xsdtypes.go?s=13145:13173#L400">String</a></h3>
 				<pre>func (me Id) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Idref">type <a href="/target/xsdtypes.go?s=9393:9410#L308">Idref</a></h2>
+			<h2 id="Idref">type <a href="/target/xsdtypes.go?s=13514:13531#L410">Idref</a></h2>
 			<pre>type Idref NCName</pre>
 			<p>
 Represents a reference to an element that has an ID attribute that matches the specified ID. An IDREF must be an NCName and must be a value of an element or attribute of type ID within the XML document.
@@ -1566,23 +1695,29 @@ Represents a reference to an element that has an ID attribute that matches the s
 
 			
 				
-				<h3 id="Idref.SetFromString">func (*Idref) <a href="/target/xsdtypes.go?s=9413:9454#L310">SetFromString</a></h3>
+				<h3 id="Idref.SetFromString">func (*Idref) <a href="/target/xsdtypes.go?s=13639:13679#L413">SetFromString</a></h3>
 				<pre>func (me *Idref) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Idref.String">func (Idref) <a href="/target/xsdtypes.go?s=9479:9511#L314">String</a></h3>
+				<h3 id="Idref.String">func (Idref) <a href="/target/xsdtypes.go?s=13791:13822#L418">String</a></h3>
 				<pre>func (me Idref) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Idrefs">type <a href="/target/xsdtypes.go?s=9703:9721#L322">Idrefs</a></h2>
+			<h2 id="Idrefs">type <a href="/target/xsdtypes.go?s=14012:14030#L428">Idrefs</a></h2>
 			<pre>type Idrefs string</pre>
 			<p>
 Contains a set of values of type IDREF.
@@ -1599,30 +1734,39 @@ Contains a set of values of type IDREF.
 
 			
 				
-				<h3 id="Idrefs.SetFromString">func (*Idrefs) <a href="/target/xsdtypes.go?s=9724:9766#L324">SetFromString</a></h3>
+				<h3 id="Idrefs.SetFromString">func (*Idrefs) <a href="/target/xsdtypes.go?s=14138:14179#L431">SetFromString</a></h3>
 				<pre>func (me *Idrefs) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Idrefs.String">func (Idrefs) <a href="/target/xsdtypes.go?s=9792:9825#L328">String</a></h3>
+				<h3 id="Idrefs.String">func (Idrefs) <a href="/target/xsdtypes.go?s=14292:14324#L436">String</a></h3>
 				<pre>func (me Idrefs) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Idrefs.Values">func (Idrefs) <a href="/target/xsdtypes.go?s=9853:9894#L332">Values</a></h3>
+				<h3 id="Idrefs.Values">func (Idrefs) <a href="/target/xsdtypes.go?s=14509:14549#L441">Values</a></h3>
 				<pre>func (me Idrefs) Values() (list []Idref)</pre>
-				
+				<p>
+This type declares a String containing a whitespace-separated list of values. This Values() method creates and returns a slice of all elements in that list.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Int">type <a href="/target/xsdtypes.go?s=10280:10294#L344">Int</a></h2>
+			<h2 id="Int">type <a href="/target/xsdtypes.go?s=14933:14947#L458">Int</a></h2>
 			<pre>type Int int32</pre>
 			<p>
 Represents an integer with a minimum value of -2147483648 and maximum of 2147483647.
@@ -1639,23 +1783,29 @@ Represents an integer with a minimum value of -2147483648 and maximum of 2147483
 
 			
 				
-				<h3 id="Int.SetFromString">func (*Int) <a href="/target/xsdtypes.go?s=10297:10336#L346">SetFromString</a></h3>
+				<h3 id="Int.SetFromString">func (*Int) <a href="/target/xsdtypes.go?s=15059:15097#L461">SetFromString</a></h3>
 				<pre>func (me *Int) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Int.String">func (Int) <a href="/target/xsdtypes.go?s=10395:10425#L350">String</a></h3>
+				<h3 id="Int.String">func (Int) <a href="/target/xsdtypes.go?s=15228:15257#L467">String</a></h3>
 				<pre>func (me Int) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Integer">type <a href="/target/xsdtypes.go?s=10672:10690#L358">Integer</a></h2>
+			<h2 id="Integer">type <a href="/target/xsdtypes.go?s=15502:15520#L477">Integer</a></h2>
 			<pre>type Integer int64</pre>
 			<p>
 Represents a sequence of decimal digits with an optional leading sign (+ or -).
@@ -1672,23 +1822,29 @@ Represents a sequence of decimal digits with an optional leading sign (+ or -).
 
 			
 				
-				<h3 id="Integer.SetFromString">func (*Integer) <a href="/target/xsdtypes.go?s=10693:10736#L360">SetFromString</a></h3>
+				<h3 id="Integer.SetFromString">func (*Integer) <a href="/target/xsdtypes.go?s=15632:15674#L480">SetFromString</a></h3>
 				<pre>func (me *Integer) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Integer.String">func (Integer) <a href="/target/xsdtypes.go?s=10799:10833#L364">String</a></h3>
+				<h3 id="Integer.String">func (Integer) <a href="/target/xsdtypes.go?s=15809:15842#L486">String</a></h3>
 				<pre>func (me Integer) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Language">type <a href="/target/xsdtypes.go?s=11078:11097#L372">Language</a></h2>
+			<h2 id="Language">type <a href="/target/xsdtypes.go?s=16085:16104#L496">Language</a></h2>
 			<pre>type Language Token</pre>
 			<p>
 Represents natural language identifiers (defined by RFC 1766).
@@ -1705,23 +1861,29 @@ Represents natural language identifiers (defined by RFC 1766).
 
 			
 				
-				<h3 id="Language.SetFromString">func (*Language) <a href="/target/xsdtypes.go?s=11100:11144#L374">SetFromString</a></h3>
+				<h3 id="Language.SetFromString">func (*Language) <a href="/target/xsdtypes.go?s=16212:16255#L499">SetFromString</a></h3>
 				<pre>func (me *Language) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Language.String">func (Language) <a href="/target/xsdtypes.go?s=11172:11207#L378">String</a></h3>
+				<h3 id="Language.String">func (Language) <a href="/target/xsdtypes.go?s=16370:16404#L504">String</a></h3>
 				<pre>func (me Language) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Long">type <a href="/target/xsdtypes.go?s=11474:11489#L386">Long</a></h2>
+			<h2 id="Long">type <a href="/target/xsdtypes.go?s=16669:16684#L514">Long</a></h2>
 			<pre>type Long int64</pre>
 			<p>
 Represents an integer with a minimum value of -9223372036854775808 and maximum of 9223372036854775807.
@@ -1738,23 +1900,29 @@ Represents an integer with a minimum value of -9223372036854775808 and maximum o
 
 			
 				
-				<h3 id="Long.SetFromString">func (*Long) <a href="/target/xsdtypes.go?s=11492:11532#L388">SetFromString</a></h3>
+				<h3 id="Long.SetFromString">func (*Long) <a href="/target/xsdtypes.go?s=16796:16835#L517">SetFromString</a></h3>
 				<pre>func (me *Long) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Long.String">func (Long) <a href="/target/xsdtypes.go?s=11592:11623#L392">String</a></h3>
+				<h3 id="Long.String">func (Long) <a href="/target/xsdtypes.go?s=16967:16997#L523">String</a></h3>
 				<pre>func (me Long) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="NCName">type <a href="/target/xsdtypes.go?s=12325:12341#L414">NCName</a></h2>
+			<h2 id="NCName">type <a href="/target/xsdtypes.go?s=17885:17901#L551">NCName</a></h2>
 			<pre>type NCName Name</pre>
 			<p>
 Represents noncolonized names. This data type is the same as Name, except it cannot begin with a colon.
@@ -1771,23 +1939,29 @@ Represents noncolonized names. This data type is the same as Name, except it can
 
 			
 				
-				<h3 id="NCName.SetFromString">func (*NCName) <a href="/target/xsdtypes.go?s=12344:12386#L416">SetFromString</a></h3>
+				<h3 id="NCName.SetFromString">func (*NCName) <a href="/target/xsdtypes.go?s=18009:18050#L554">SetFromString</a></h3>
 				<pre>func (me *NCName) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="NCName.String">func (NCName) <a href="/target/xsdtypes.go?s=12412:12445#L420">String</a></h3>
+				<h3 id="NCName.String">func (NCName) <a href="/target/xsdtypes.go?s=18163:18195#L559">String</a></h3>
 				<pre>func (me NCName) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Name">type <a href="/target/xsdtypes.go?s=11960:11975#L400">Name</a></h2>
+			<h2 id="Name">type <a href="/target/xsdtypes.go?s=17332:17347#L533">Name</a></h2>
 			<pre>type Name Token</pre>
 			<p>
 Represents names in XML. A Name is a token that begins with a letter, underscore, or colon and continues with name characters (letters, digits, and other characters).
@@ -1804,23 +1978,29 @@ Represents names in XML. A Name is a token that begins with a letter, underscore
 
 			
 				
-				<h3 id="Name.SetFromString">func (*Name) <a href="/target/xsdtypes.go?s=11978:12018#L402">SetFromString</a></h3>
+				<h3 id="Name.SetFromString">func (*Name) <a href="/target/xsdtypes.go?s=17455:17494#L536">SetFromString</a></h3>
 				<pre>func (me *Name) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Name.String">func (Name) <a href="/target/xsdtypes.go?s=12042:12073#L406">String</a></h3>
+				<h3 id="Name.String">func (Name) <a href="/target/xsdtypes.go?s=17605:17635#L541">String</a></h3>
 				<pre>func (me Name) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="NegativeInteger">type <a href="/target/xsdtypes.go?s=12711:12737#L428">NegativeInteger</a></h2>
+			<h2 id="NegativeInteger">type <a href="/target/xsdtypes.go?s=18459:18485#L569">NegativeInteger</a></h2>
 			<pre>type NegativeInteger int64</pre>
 			<p>
 Represents an integer that is less than zero. Consists of a negative sign (-) and sequence of decimal digits.
@@ -1837,23 +2017,29 @@ Represents an integer that is less than zero. Consists of a negative sign (-) an
 
 			
 				
-				<h3 id="NegativeInteger.SetFromString">func (*NegativeInteger) <a href="/target/xsdtypes.go?s=12740:12791#L430">SetFromString</a></h3>
+				<h3 id="NegativeInteger.SetFromString">func (*NegativeInteger) <a href="/target/xsdtypes.go?s=18597:18647#L572">SetFromString</a></h3>
 				<pre>func (me *NegativeInteger) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="NegativeInteger.String">func (NegativeInteger) <a href="/target/xsdtypes.go?s=12862:12904#L434">String</a></h3>
+				<h3 id="NegativeInteger.String">func (NegativeInteger) <a href="/target/xsdtypes.go?s=18790:18831#L578">String</a></h3>
 				<pre>func (me NegativeInteger) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Nmtoken">type <a href="/target/xsdtypes.go?s=13294:13312#L442">Nmtoken</a></h2>
+			<h2 id="Nmtoken">type <a href="/target/xsdtypes.go?s=19219:19237#L588">Nmtoken</a></h2>
 			<pre>type Nmtoken Token</pre>
 			<p>
 An NMTOKEN is set of name characters (letters, digits, and other characters) in any combination. Unlike Name and NCName, NMTOKEN has no restrictions on the starting character.
@@ -1870,23 +2056,29 @@ An NMTOKEN is set of name characters (letters, digits, and other characters) in 
 
 			
 				
-				<h3 id="Nmtoken.SetFromString">func (*Nmtoken) <a href="/target/xsdtypes.go?s=13315:13358#L444">SetFromString</a></h3>
+				<h3 id="Nmtoken.SetFromString">func (*Nmtoken) <a href="/target/xsdtypes.go?s=19345:19387#L591">SetFromString</a></h3>
 				<pre>func (me *Nmtoken) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Nmtoken.String">func (Nmtoken) <a href="/target/xsdtypes.go?s=13385:13419#L448">String</a></h3>
+				<h3 id="Nmtoken.String">func (Nmtoken) <a href="/target/xsdtypes.go?s=19501:19534#L596">String</a></h3>
 				<pre>func (me Nmtoken) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Nmtokens">type <a href="/target/xsdtypes.go?s=13621:13641#L456">Nmtokens</a></h2>
+			<h2 id="Nmtokens">type <a href="/target/xsdtypes.go?s=19734:19754#L606">Nmtokens</a></h2>
 			<pre>type Nmtokens string</pre>
 			<p>
 Contains a set of values of type NMTOKEN.
@@ -1903,30 +2095,39 @@ Contains a set of values of type NMTOKEN.
 
 			
 				
-				<h3 id="Nmtokens.SetFromString">func (*Nmtokens) <a href="/target/xsdtypes.go?s=13644:13688#L458">SetFromString</a></h3>
+				<h3 id="Nmtokens.SetFromString">func (*Nmtokens) <a href="/target/xsdtypes.go?s=19862:19905#L609">SetFromString</a></h3>
 				<pre>func (me *Nmtokens) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Nmtokens.String">func (Nmtokens) <a href="/target/xsdtypes.go?s=13716:13751#L462">String</a></h3>
+				<h3 id="Nmtokens.String">func (Nmtokens) <a href="/target/xsdtypes.go?s=20020:20054#L614">String</a></h3>
 				<pre>func (me Nmtokens) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Nmtokens.Values">func (Nmtokens) <a href="/target/xsdtypes.go?s=13779:13824#L466">Values</a></h3>
+				<h3 id="Nmtokens.Values">func (Nmtokens) <a href="/target/xsdtypes.go?s=20239:20283#L619">Values</a></h3>
 				<pre>func (me Nmtokens) Values() (list []Nmtoken)</pre>
-				
+				<p>
+This type declares a String containing a whitespace-separated list of values. This Values() method creates and returns a slice of all elements in that list.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="NonNegativeInteger">type <a href="/target/xsdtypes.go?s=14198:14228#L478">NonNegativeInteger</a></h2>
+			<h2 id="NonNegativeInteger">type <a href="/target/xsdtypes.go?s=20655:20685#L636">NonNegativeInteger</a></h2>
 			<pre>type NonNegativeInteger uint64</pre>
 			<p>
 Represents an integer that is greater than or equal to zero.
@@ -1943,23 +2144,29 @@ Represents an integer that is greater than or equal to zero.
 
 			
 				
-				<h3 id="NonNegativeInteger.SetFromString">func (*NonNegativeInteger) <a href="/target/xsdtypes.go?s=14231:14285#L480">SetFromString</a></h3>
+				<h3 id="NonNegativeInteger.SetFromString">func (*NonNegativeInteger) <a href="/target/xsdtypes.go?s=20797:20850#L639">SetFromString</a></h3>
 				<pre>func (me *NonNegativeInteger) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="NonNegativeInteger.String">func (NonNegativeInteger) <a href="/target/xsdtypes.go?s=14360:14405#L484">String</a></h3>
+				<h3 id="NonNegativeInteger.String">func (NonNegativeInteger) <a href="/target/xsdtypes.go?s=20997:21041#L645">String</a></h3>
 				<pre>func (me NonNegativeInteger) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="NonPositiveInteger">type <a href="/target/xsdtypes.go?s=14775:14804#L492">NonPositiveInteger</a></h2>
+			<h2 id="NonPositiveInteger">type <a href="/target/xsdtypes.go?s=21409:21438#L655">NonPositiveInteger</a></h2>
 			<pre>type NonPositiveInteger int64</pre>
 			<p>
 Represents an integer that is less than or equal to zero. A nonPositiveIntegerconsists of a negative sign (-) and sequence of decimal digits.
@@ -1976,23 +2183,29 @@ Represents an integer that is less than or equal to zero. A nonPositiveIntegerco
 
 			
 				
-				<h3 id="NonPositiveInteger.SetFromString">func (*NonPositiveInteger) <a href="/target/xsdtypes.go?s=14807:14861#L494">SetFromString</a></h3>
+				<h3 id="NonPositiveInteger.SetFromString">func (*NonPositiveInteger) <a href="/target/xsdtypes.go?s=21550:21603#L658">SetFromString</a></h3>
 				<pre>func (me *NonPositiveInteger) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="NonPositiveInteger.String">func (NonPositiveInteger) <a href="/target/xsdtypes.go?s=14935:14980#L498">String</a></h3>
+				<h3 id="NonPositiveInteger.String">func (NonPositiveInteger) <a href="/target/xsdtypes.go?s=21749:21793#L664">String</a></h3>
 				<pre>func (me NonPositiveInteger) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="NormalizedString">type <a href="/target/xsdtypes.go?s=15249:15277#L506">NormalizedString</a></h2>
+			<h2 id="NormalizedString">type <a href="/target/xsdtypes.go?s=22060:22088#L674">NormalizedString</a></h2>
 			<pre>type NormalizedString String</pre>
 			<p>
 Represents white space normalized strings.
@@ -2009,23 +2222,29 @@ Represents white space normalized strings.
 
 			
 				
-				<h3 id="NormalizedString.SetFromString">func (*NormalizedString) <a href="/target/xsdtypes.go?s=15280:15332#L508">SetFromString</a></h3>
+				<h3 id="NormalizedString.SetFromString">func (*NormalizedString) <a href="/target/xsdtypes.go?s=22196:22247#L677">SetFromString</a></h3>
 				<pre>func (me *NormalizedString) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="NormalizedString.String">func (NormalizedString) <a href="/target/xsdtypes.go?s=15368:15411#L512">String</a></h3>
+				<h3 id="NormalizedString.String">func (NormalizedString) <a href="/target/xsdtypes.go?s=22370:22412#L682">String</a></h3>
 				<pre>func (me NormalizedString) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Notation">type <a href="/target/xsdtypes.go?s=15683:15703#L524">Notation</a></h2>
+			<h2 id="Notation">type <a href="/target/xsdtypes.go?s=22623:22643#L692">Notation</a></h2>
 			<pre>type Notation string</pre>
 			<p>
 A set of QNames.
@@ -2042,30 +2261,39 @@ A set of QNames.
 
 			
 				
-				<h3 id="Notation.SetFromString">func (*Notation) <a href="/target/xsdtypes.go?s=15706:15750#L526">SetFromString</a></h3>
+				<h3 id="Notation.SetFromString">func (*Notation) <a href="/target/xsdtypes.go?s=22751:22794#L695">SetFromString</a></h3>
 				<pre>func (me *Notation) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Notation.String">func (Notation) <a href="/target/xsdtypes.go?s=15778:15813#L530">String</a></h3>
+				<h3 id="Notation.String">func (Notation) <a href="/target/xsdtypes.go?s=22909:22943#L700">String</a></h3>
 				<pre>func (me Notation) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Notation.Values">func (Notation) <a href="/target/xsdtypes.go?s=15841:15884#L534">Values</a></h3>
+				<h3 id="Notation.Values">func (Notation) <a href="/target/xsdtypes.go?s=23128:23170#L705">Values</a></h3>
 				<pre>func (me Notation) Values() (list []Qname)</pre>
-				
+				<p>
+This type declares a String containing a whitespace-separated list of values. This Values() method creates and returns a slice of all elements in that list.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Notations">type <a href="/target/xsdtypes.go?s=37:72#L1">Notations</a></h2>
+			<h2 id="Notations">type <a href="/target/xsdtypes.go?s=96:131#L1">Notations</a></h2>
 			<pre>type Notations map[string]*notation</pre>
 			
 
@@ -2079,7 +2307,7 @@ A set of QNames.
 
 			
 				
-				<h3 id="Notations.Add">func (Notations) <a href="/target/xsdtypes.go?s=75:132#L1">Add</a></h3>
+				<h3 id="Notations.Add">func (Notations) <a href="/target/xsdtypes.go?s=133:189#L3">Add</a></h3>
 				<pre>func (me Notations) Add(id, name, public, system string)</pre>
 				
 				
@@ -2088,7 +2316,7 @@ A set of QNames.
 		
 			
 			
-			<h2 id="PositiveInteger">type <a href="/target/xsdtypes.go?s=16242:16269#L546">PositiveInteger</a></h2>
+			<h2 id="PositiveInteger">type <a href="/target/xsdtypes.go?s=23526:23553#L722">PositiveInteger</a></h2>
 			<pre>type PositiveInteger uint64</pre>
 			<p>
 Represents an integer that is greater than zero.
@@ -2105,23 +2333,29 @@ Represents an integer that is greater than zero.
 
 			
 				
-				<h3 id="PositiveInteger.SetFromString">func (*PositiveInteger) <a href="/target/xsdtypes.go?s=16272:16323#L548">SetFromString</a></h3>
+				<h3 id="PositiveInteger.SetFromString">func (*PositiveInteger) <a href="/target/xsdtypes.go?s=23665:23715#L725">SetFromString</a></h3>
 				<pre>func (me *PositiveInteger) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="PositiveInteger.String">func (PositiveInteger) <a href="/target/xsdtypes.go?s=16395:16437#L552">String</a></h3>
+				<h3 id="PositiveInteger.String">func (PositiveInteger) <a href="/target/xsdtypes.go?s=23859:23900#L731">String</a></h3>
 				<pre>func (me PositiveInteger) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Qname">type <a href="/target/xsdtypes.go?s=16906:16923#L560">Qname</a></h2>
+			<h2 id="Qname">type <a href="/target/xsdtypes.go?s=24367:24384#L741">Qname</a></h2>
 			<pre>type Qname string</pre>
 			<p>
 Represents a qualified name. A qualified name is composed of a prefix and a local name separated by a colon. Both the prefix and local names must be an NCName. The prefix must be associated with a namespace URI reference, using a namespace declaration.
@@ -2138,23 +2372,29 @@ Represents a qualified name. A qualified name is composed of a prefix and a loca
 
 			
 				
-				<h3 id="Qname.SetFromString">func (*Qname) <a href="/target/xsdtypes.go?s=16926:16967#L562">SetFromString</a></h3>
+				<h3 id="Qname.SetFromString">func (*Qname) <a href="/target/xsdtypes.go?s=24492:24532#L744">SetFromString</a></h3>
 				<pre>func (me *Qname) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Qname.String">func (Qname) <a href="/target/xsdtypes.go?s=16992:17024#L566">String</a></h3>
+				<h3 id="Qname.String">func (Qname) <a href="/target/xsdtypes.go?s=24644:24675#L749">String</a></h3>
 				<pre>func (me Qname) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="Short">type <a href="/target/xsdtypes.go?s=17251:17267#L574">Short</a></h2>
+			<h2 id="Short">type <a href="/target/xsdtypes.go?s=24900:24916#L759">Short</a></h2>
 			<pre>type Short int16</pre>
 			<p>
 Represents an integer with a minimum value of -32768 and maximum of 32767.
@@ -2171,23 +2411,29 @@ Represents an integer with a minimum value of -32768 and maximum of 32767.
 
 			
 				
-				<h3 id="Short.SetFromString">func (*Short) <a href="/target/xsdtypes.go?s=17270:17311#L576">SetFromString</a></h3>
+				<h3 id="Short.SetFromString">func (*Short) <a href="/target/xsdtypes.go?s=25028:25068#L762">SetFromString</a></h3>
 				<pre>func (me *Short) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Short.String">func (Short) <a href="/target/xsdtypes.go?s=17372:17404#L580">String</a></h3>
+				<h3 id="Short.String">func (Short) <a href="/target/xsdtypes.go?s=25201:25232#L768">String</a></h3>
 				<pre>func (me Short) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="String">type <a href="/target/xsdtypes.go?s=17608:17626#L588">String</a></h2>
+			<h2 id="String">type <a href="/target/xsdtypes.go?s=25434:25452#L778">String</a></h2>
 			<pre>type String string</pre>
 			<p>
 Represents character strings.
@@ -2204,23 +2450,29 @@ Represents character strings.
 
 			
 				
-				<h3 id="String.SetFromString">func (*String) <a href="/target/xsdtypes.go?s=17629:17671#L590">SetFromString</a></h3>
+				<h3 id="String.SetFromString">func (*String) <a href="/target/xsdtypes.go?s=25560:25601#L781">SetFromString</a></h3>
 				<pre>func (me *String) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="String.String">func (String) <a href="/target/xsdtypes.go?s=17697:17730#L594">String</a></h3>
+				<h3 id="String.String">func (String) <a href="/target/xsdtypes.go?s=25714:25746#L786">String</a></h3>
 				<pre>func (me String) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="ToXsdtAnySimpleType">type <a href="/target/xsdtypes.go?s=575:650#L15">ToXsdtAnySimpleType</a></h2>
+			<h2 id="ToXsdtAnySimpleType">type <a href="/target/xsdtypes.go?s=815:890#L21">ToXsdtAnySimpleType</a></h2>
 			<pre>type ToXsdtAnySimpleType interface {
     ToXsdtAnySimpleType() AnySimpleType
 }</pre>
@@ -2241,7 +2493,7 @@ A convenience interface that declares a type conversion to AnySimpleType.
 		
 			
 			
-			<h2 id="ToXsdtAnyType">type <a href="/target/xsdtypes.go?s=969:1026#L29">ToXsdtAnyType</a></h2>
+			<h2 id="ToXsdtAnyType">type <a href="/target/xsdtypes.go?s=1397:1454#L39">ToXsdtAnyType</a></h2>
 			<pre>type ToXsdtAnyType interface {
     ToXsdtAnyType() AnyType
 }</pre>
@@ -2262,7 +2514,7 @@ A convenience interface that declares a type conversion to AnyType.
 		
 			
 			
-			<h2 id="ToXsdtAnyURI">type <a href="/target/xsdtypes.go?s=1382:1436#L43">ToXsdtAnyURI</a></h2>
+			<h2 id="ToXsdtAnyURI">type <a href="/target/xsdtypes.go?s=1998:2052#L57">ToXsdtAnyURI</a></h2>
 			<pre>type ToXsdtAnyURI interface {
     ToXsdtAnyURI() AnyURI
 }</pre>
@@ -2283,7 +2535,7 @@ A convenience interface that declares a type conversion to AnyURI.
 		
 			
 			
-			<h2 id="ToXsdtBase64Binary">type <a href="/target/xsdtypes.go?s=1820:1892#L57">ToXsdtBase64Binary</a></h2>
+			<h2 id="ToXsdtBase64Binary">type <a href="/target/xsdtypes.go?s=2624:2696#L75">ToXsdtBase64Binary</a></h2>
 			<pre>type ToXsdtBase64Binary interface {
     ToXsdtBase64Binary() Base64Binary
 }</pre>
@@ -2304,7 +2556,7 @@ A convenience interface that declares a type conversion to Base64Binary.
 		
 			
 			
-			<h2 id="ToXsdtBoolean">type <a href="/target/xsdtypes.go?s=2384:2441#L72">ToXsdtBoolean</a></h2>
+			<h2 id="ToXsdtBoolean">type <a href="/target/xsdtypes.go?s=3374:3431#L101">ToXsdtBoolean</a></h2>
 			<pre>type ToXsdtBoolean interface {
     ToXsdtBoolean() Boolean
 }</pre>
@@ -2325,7 +2577,7 @@ A convenience interface that declares a type conversion to Boolean.
 		
 			
 			
-			<h2 id="ToXsdtByte">type <a href="/target/xsdtypes.go?s=2819:2867#L86">ToXsdtByte</a></h2>
+			<h2 id="ToXsdtByte">type <a href="/target/xsdtypes.go?s=3986:4034#L120">ToXsdtByte</a></h2>
 			<pre>type ToXsdtByte interface {
     ToXsdtByte() Byte
 }</pre>
@@ -2346,7 +2598,7 @@ A convenience interface that declares a type conversion to Byte.
 		
 			
 			
-			<h2 id="ToXsdtDate">type <a href="/target/xsdtypes.go?s=3219:3267#L101">ToXsdtDate</a></h2>
+			<h2 id="ToXsdtDate">type <a href="/target/xsdtypes.go?s=4574:4622#L139">ToXsdtDate</a></h2>
 			<pre>type ToXsdtDate interface {
     ToXsdtDate() Date
 }</pre>
@@ -2367,7 +2619,7 @@ A convenience interface that declares a type conversion to Date.
 		
 			
 			
-			<h2 id="ToXsdtDateTime">type <a href="/target/xsdtypes.go?s=3554:3614#L115">ToXsdtDateTime</a></h2>
+			<h2 id="ToXsdtDateTime">type <a href="/target/xsdtypes.go?s=5097:5157#L157">ToXsdtDateTime</a></h2>
 			<pre>type ToXsdtDateTime interface {
     ToXsdtDateTime() DateTime
 }</pre>
@@ -2388,7 +2640,7 @@ A convenience interface that declares a type conversion to DateTime.
 		
 			
 			
-			<h2 id="ToXsdtDecimal">type <a href="/target/xsdtypes.go?s=3897:3954#L129">ToXsdtDecimal</a></h2>
+			<h2 id="ToXsdtDecimal">type <a href="/target/xsdtypes.go?s=5628:5685#L175">ToXsdtDecimal</a></h2>
 			<pre>type ToXsdtDecimal interface {
     ToXsdtDecimal() Decimal
 }</pre>
@@ -2409,7 +2661,7 @@ A convenience interface that declares a type conversion to Decimal.
 		
 			
 			
-			<h2 id="ToXsdtDouble">type <a href="/target/xsdtypes.go?s=4307:4361#L143">ToXsdtDouble</a></h2>
+			<h2 id="ToXsdtDouble">type <a href="/target/xsdtypes.go?s=6215:6269#L194">ToXsdtDouble</a></h2>
 			<pre>type ToXsdtDouble interface {
     ToXsdtDouble() Double
 }</pre>
@@ -2430,7 +2682,7 @@ A convenience interface that declares a type conversion to Double.
 		
 			
 			
-			<h2 id="ToXsdtDuration">type <a href="/target/xsdtypes.go?s=4643:4703#L157">ToXsdtDuration</a></h2>
+			<h2 id="ToXsdtDuration">type <a href="/target/xsdtypes.go?s=6739:6799#L212">ToXsdtDuration</a></h2>
 			<pre>type ToXsdtDuration interface {
     ToXsdtDuration() Duration
 }</pre>
@@ -2451,7 +2703,7 @@ A convenience interface that declares a type conversion to Duration.
 		
 			
 			
-			<h2 id="ToXsdtEntities">type <a href="/target/xsdtypes.go?s=5237:5297#L179">ToXsdtEntities</a></h2>
+			<h2 id="ToXsdtEntities">type <a href="/target/xsdtypes.go?s=7677:7737#L242">ToXsdtEntities</a></h2>
 			<pre>type ToXsdtEntities interface {
     ToXsdtEntities() Entities
 }</pre>
@@ -2472,7 +2724,7 @@ A convenience interface that declares a type conversion to Entities.
 		
 			
 			
-			<h2 id="ToXsdtEntity">type <a href="/target/xsdtypes.go?s=5608:5662#L193">ToXsdtEntity</a></h2>
+			<h2 id="ToXsdtEntity">type <a href="/target/xsdtypes.go?s=8236:8290#L260">ToXsdtEntity</a></h2>
 			<pre>type ToXsdtEntity interface {
     ToXsdtEntity() Entity
 }</pre>
@@ -2493,7 +2745,7 @@ A convenience interface that declares a type conversion to Entity.
 		
 			
 			
-			<h2 id="ToXsdtFloat">type <a href="/target/xsdtypes.go?s=6010:6061#L207">ToXsdtFloat</a></h2>
+			<h2 id="ToXsdtFloat">type <a href="/target/xsdtypes.go?s=8815:8866#L279">ToXsdtFloat</a></h2>
 			<pre>type ToXsdtFloat interface {
     ToXsdtFloat() Float
 }</pre>
@@ -2514,7 +2766,7 @@ A convenience interface that declares a type conversion to Float.
 		
 			
 			
-			<h2 id="ToXsdtGDay">type <a href="/target/xsdtypes.go?s=6502:6550#L221">ToXsdtGDay</a></h2>
+			<h2 id="ToXsdtGDay">type <a href="/target/xsdtypes.go?s=9495:9543#L297">ToXsdtGDay</a></h2>
 			<pre>type ToXsdtGDay interface {
     ToXsdtGDay() GDay
 }</pre>
@@ -2535,7 +2787,7 @@ A convenience interface that declares a type conversion to GDay.
 		
 			
 			
-			<h2 id="ToXsdtGMonth">type <a href="/target/xsdtypes.go?s=6950:7004#L235">ToXsdtGMonth</a></h2>
+			<h2 id="ToXsdtGMonth">type <a href="/target/xsdtypes.go?s=10131:10185#L315">ToXsdtGMonth</a></h2>
 			<pre>type ToXsdtGMonth interface {
     ToXsdtGMonth() GMonth
 }</pre>
@@ -2556,7 +2808,7 @@ A convenience interface that declares a type conversion to GMonth.
 		
 			
 			
-			<h2 id="ToXsdtGMonthDay">type <a href="/target/xsdtypes.go?s=7464:7527#L249">ToXsdtGMonthDay</a></h2>
+			<h2 id="ToXsdtGMonthDay">type <a href="/target/xsdtypes.go?s=10833:10896#L333">ToXsdtGMonthDay</a></h2>
 			<pre>type ToXsdtGMonthDay interface {
     ToXsdtGMonthDay() GMonthDay
 }</pre>
@@ -2577,7 +2829,7 @@ A convenience interface that declares a type conversion to GMonthDay.
 		
 			
 			
-			<h2 id="ToXsdtGYear">type <a href="/target/xsdtypes.go?s=7822:7873#L263">ToXsdtGYear</a></h2>
+			<h2 id="ToXsdtGYear">type <a href="/target/xsdtypes.go?s=11379:11430#L351">ToXsdtGYear</a></h2>
 			<pre>type ToXsdtGYear interface {
     ToXsdtGYear() GYear
 }</pre>
@@ -2598,7 +2850,7 @@ A convenience interface that declares a type conversion to GYear.
 		
 			
 			
-			<h2 id="ToXsdtGYearMonth">type <a href="/target/xsdtypes.go?s=8233:8299#L277">ToXsdtGYearMonth</a></h2>
+			<h2 id="ToXsdtGYearMonth">type <a href="/target/xsdtypes.go?s=11978:12044#L369">ToXsdtGYearMonth</a></h2>
 			<pre>type ToXsdtGYearMonth interface {
     ToXsdtGYearMonth() GYearMonth
 }</pre>
@@ -2619,7 +2871,7 @@ A convenience interface that declares a type conversion to GYearMonth.
 		
 			
 			
-			<h2 id="ToXsdtHexBinary">type <a href="/target/xsdtypes.go?s=8793:8856#L291">ToXsdtHexBinary</a></h2>
+			<h2 id="ToXsdtHexBinary">type <a href="/target/xsdtypes.go?s=12726:12789#L387">ToXsdtHexBinary</a></h2>
 			<pre>type ToXsdtHexBinary interface {
     ToXsdtHexBinary() HexBinary
 }</pre>
@@ -2640,7 +2892,7 @@ A convenience interface that declares a type conversion to HexBinary.
 		
 			
 			
-			<h2 id="ToXsdtId">type <a href="/target/xsdtypes.go?s=9143:9185#L305">ToXsdtId</a></h2>
+			<h2 id="ToXsdtId">type <a href="/target/xsdtypes.go?s=13264:13306#L405">ToXsdtId</a></h2>
 			<pre>type ToXsdtId interface {
     ToXsdtId() Id
 }</pre>
@@ -2661,7 +2913,7 @@ A convenience interface that declares a type conversion to Id.
 		
 			
 			
-			<h2 id="ToXsdtIdref">type <a href="/target/xsdtypes.go?s=9607:9658#L319">ToXsdtIdref</a></h2>
+			<h2 id="ToXsdtIdref">type <a href="/target/xsdtypes.go?s=13916:13967#L423">ToXsdtIdref</a></h2>
 			<pre>type ToXsdtIdref interface {
     ToXsdtIdref() Idref
 }</pre>
@@ -2682,7 +2934,7 @@ A convenience interface that declares a type conversion to Idref.
 		
 			
 			
-			<h2 id="ToXsdtIdrefs">type <a href="/target/xsdtypes.go?s=10136:10190#L341">ToXsdtIdrefs</a></h2>
+			<h2 id="ToXsdtIdrefs">type <a href="/target/xsdtypes.go?s=14789:14843#L453">ToXsdtIdrefs</a></h2>
 			<pre>type ToXsdtIdrefs interface {
     ToXsdtIdrefs() Idrefs
 }</pre>
@@ -2703,7 +2955,7 @@ A convenience interface that declares a type conversion to Idrefs.
 		
 			
 			
-			<h2 id="ToXsdtInt">type <a href="/target/xsdtypes.go?s=10541:10586#L355">ToXsdtInt</a></h2>
+			<h2 id="ToXsdtInt">type <a href="/target/xsdtypes.go?s=15371:15416#L472">ToXsdtInt</a></h2>
 			<pre>type ToXsdtInt interface {
     ToXsdtInt() Int
 }</pre>
@@ -2724,7 +2976,7 @@ A convenience interface that declares a type conversion to Int.
 		
 			
 			
-			<h2 id="ToXsdtInteger">type <a href="/target/xsdtypes.go?s=10953:11010#L369">ToXsdtInteger</a></h2>
+			<h2 id="ToXsdtInteger">type <a href="/target/xsdtypes.go?s=15960:16017#L491">ToXsdtInteger</a></h2>
 			<pre>type ToXsdtInteger interface {
     ToXsdtInteger() Integer
 }</pre>
@@ -2745,7 +2997,7 @@ A convenience interface that declares a type conversion to Integer.
 		
 			
 			
-			<h2 id="ToXsdtLanguage">type <a href="/target/xsdtypes.go?s=11306:11366#L383">ToXsdtLanguage</a></h2>
+			<h2 id="ToXsdtLanguage">type <a href="/target/xsdtypes.go?s=16501:16561#L509">ToXsdtLanguage</a></h2>
 			<pre>type ToXsdtLanguage interface {
     ToXsdtLanguage() Language
 }</pre>
@@ -2766,7 +3018,7 @@ A convenience interface that declares a type conversion to Language.
 		
 			
 			
-			<h2 id="ToXsdtLong">type <a href="/target/xsdtypes.go?s=11740:11788#L397">ToXsdtLong</a></h2>
+			<h2 id="ToXsdtLong">type <a href="/target/xsdtypes.go?s=17112:17160#L528">ToXsdtLong</a></h2>
 			<pre>type ToXsdtLong interface {
     ToXsdtLong() Long
 }</pre>
@@ -2787,7 +3039,7 @@ A convenience interface that declares a type conversion to Long.
 		
 			
 			
-			<h2 id="ToXsdtNCName">type <a href="/target/xsdtypes.go?s=12542:12596#L425">ToXsdtNCName</a></h2>
+			<h2 id="ToXsdtNCName">type <a href="/target/xsdtypes.go?s=18290:18344#L564">ToXsdtNCName</a></h2>
 			<pre>type ToXsdtNCName interface {
     ToXsdtNCName() NCName
 }</pre>
@@ -2808,7 +3060,7 @@ A convenience interface that declares a type conversion to NCName.
 		
 			
 			
-			<h2 id="ToXsdtName">type <a href="/target/xsdtypes.go?s=12168:12216#L411">ToXsdtName</a></h2>
+			<h2 id="ToXsdtName">type <a href="/target/xsdtypes.go?s=17728:17776#L546">ToXsdtName</a></h2>
 			<pre>type ToXsdtName interface {
     ToXsdtName() Name
 }</pre>
@@ -2829,7 +3081,7 @@ A convenience interface that declares a type conversion to Name.
 		
 			
 			
-			<h2 id="ToXsdtNegativeInteger">type <a href="/target/xsdtypes.go?s=13032:13113#L439">ToXsdtNegativeInteger</a></h2>
+			<h2 id="ToXsdtNegativeInteger">type <a href="/target/xsdtypes.go?s=18957:19038#L583">ToXsdtNegativeInteger</a></h2>
 			<pre>type ToXsdtNegativeInteger interface {
     ToXsdtNegativeInteger() NegativeInteger
 }</pre>
@@ -2850,7 +3102,7 @@ A convenience interface that declares a type conversion to NegativeInteger.
 		
 			
 			
-			<h2 id="ToXsdtNmtoken">type <a href="/target/xsdtypes.go?s=13517:13574#L453">ToXsdtNmtoken</a></h2>
+			<h2 id="ToXsdtNmtoken">type <a href="/target/xsdtypes.go?s=19630:19687#L601">ToXsdtNmtoken</a></h2>
 			<pre>type ToXsdtNmtoken interface {
     ToXsdtNmtoken() Nmtoken
 }</pre>
@@ -2871,7 +3123,7 @@ A convenience interface that declares a type conversion to Nmtoken.
 		
 			
 			
-			<h2 id="ToXsdtNmtokens">type <a href="/target/xsdtypes.go?s=14072:14132#L475">ToXsdtNmtokens</a></h2>
+			<h2 id="ToXsdtNmtokens">type <a href="/target/xsdtypes.go?s=20529:20589#L631">ToXsdtNmtokens</a></h2>
 			<pre>type ToXsdtNmtokens interface {
     ToXsdtNmtokens() Nmtokens
 }</pre>
@@ -2892,7 +3144,7 @@ A convenience interface that declares a type conversion to Nmtokens.
 		
 			
 			
-			<h2 id="ToXsdtNonNegativeInteger">type <a href="/target/xsdtypes.go?s=14538:14628#L489">ToXsdtNonNegativeInteger</a></h2>
+			<h2 id="ToXsdtNonNegativeInteger">type <a href="/target/xsdtypes.go?s=21172:21262#L650">ToXsdtNonNegativeInteger</a></h2>
 			<pre>type ToXsdtNonNegativeInteger interface {
     ToXsdtNonNegativeInteger() NonNegativeInteger
 }</pre>
@@ -2913,7 +3165,7 @@ A convenience interface that declares a type conversion to NonNegativeInteger.
 		
 			
 			
-			<h2 id="ToXsdtNonPositiveInteger">type <a href="/target/xsdtypes.go?s=15111:15201#L503">ToXsdtNonPositiveInteger</a></h2>
+			<h2 id="ToXsdtNonPositiveInteger">type <a href="/target/xsdtypes.go?s=21922:22012#L669">ToXsdtNonPositiveInteger</a></h2>
 			<pre>type ToXsdtNonPositiveInteger interface {
     ToXsdtNonPositiveInteger() NonPositiveInteger
 }</pre>
@@ -2934,7 +3186,7 @@ A convenience interface that declares a type conversion to NonPositiveInteger.
 		
 			
 			
-			<h2 id="ToXsdtNormalizedString">type <a href="/target/xsdtypes.go?s=15518:15602#L517">ToXsdtNormalizedString</a></h2>
+			<h2 id="ToXsdtNormalizedString">type <a href="/target/xsdtypes.go?s=22517:22601#L687">ToXsdtNormalizedString</a></h2>
 			<pre>type ToXsdtNormalizedString interface {
     ToXsdtNormalizedString() NormalizedString
 }</pre>
@@ -2955,7 +3207,7 @@ A convenience interface that declares a type conversion to NormalizedString.
 		
 			
 			
-			<h2 id="ToXsdtNotation">type <a href="/target/xsdtypes.go?s=16128:16188#L543">ToXsdtNotation</a></h2>
+			<h2 id="ToXsdtNotation">type <a href="/target/xsdtypes.go?s=23412:23472#L717">ToXsdtNotation</a></h2>
 			<pre>type ToXsdtNotation interface {
     ToXsdtNotation() Notation
 }</pre>
@@ -2976,7 +3228,7 @@ A convenience interface that declares a type conversion to Notation.
 		
 			
 			
-			<h2 id="ToXsdtPositiveInteger">type <a href="/target/xsdtypes.go?s=16567:16648#L557">ToXsdtPositiveInteger</a></h2>
+			<h2 id="ToXsdtPositiveInteger">type <a href="/target/xsdtypes.go?s=24028:24109#L736">ToXsdtPositiveInteger</a></h2>
 			<pre>type ToXsdtPositiveInteger interface {
     ToXsdtPositiveInteger() PositiveInteger
 }</pre>
@@ -2997,7 +3249,7 @@ A convenience interface that declares a type conversion to PositiveInteger.
 		
 			
 			
-			<h2 id="ToXsdtQname">type <a href="/target/xsdtypes.go?s=17120:17171#L571">ToXsdtQname</a></h2>
+			<h2 id="ToXsdtQname">type <a href="/target/xsdtypes.go?s=24769:24820#L754">ToXsdtQname</a></h2>
 			<pre>type ToXsdtQname interface {
     ToXsdtQname() Qname
 }</pre>
@@ -3018,7 +3270,7 @@ A convenience interface that declares a type conversion to Qname.
 		
 			
 			
-			<h2 id="ToXsdtShort">type <a href="/target/xsdtypes.go?s=17522:17573#L585">ToXsdtShort</a></h2>
+			<h2 id="ToXsdtShort">type <a href="/target/xsdtypes.go?s=25348:25399#L773">ToXsdtShort</a></h2>
 			<pre>type ToXsdtShort interface {
     ToXsdtShort() Short
 }</pre>
@@ -3039,7 +3291,7 @@ A convenience interface that declares a type conversion to Short.
 		
 			
 			
-			<h2 id="ToXsdtString">type <a href="/target/xsdtypes.go?s=17827:17881#L599">ToXsdtString</a></h2>
+			<h2 id="ToXsdtString">type <a href="/target/xsdtypes.go?s=25841:25895#L791">ToXsdtString</a></h2>
 			<pre>type ToXsdtString interface {
     ToXsdtString() String
 }</pre>
@@ -3060,7 +3312,7 @@ A convenience interface that declares a type conversion to String.
 		
 			
 			
-			<h2 id="ToXsdtToken">type <a href="/target/xsdtypes.go?s=18140:18191#L613">ToXsdtToken</a></h2>
+			<h2 id="ToXsdtToken">type <a href="/target/xsdtypes.go?s=26342:26393#L809">ToXsdtToken</a></h2>
 			<pre>type ToXsdtToken interface {
     ToXsdtToken() Token
 }</pre>
@@ -3081,7 +3333,7 @@ A convenience interface that declares a type conversion to Token.
 		
 			
 			
-			<h2 id="ToXsdtUnsignedByte">type <a href="/target/xsdtypes.go?s=18569:18641#L627">ToXsdtUnsignedByte</a></h2>
+			<h2 id="ToXsdtUnsignedByte">type <a href="/target/xsdtypes.go?s=26948:27020#L828">ToXsdtUnsignedByte</a></h2>
 			<pre>type ToXsdtUnsignedByte interface {
     ToXsdtUnsignedByte() UnsignedByte
 }</pre>
@@ -3102,7 +3354,7 @@ A convenience interface that declares a type conversion to UnsignedByte.
 		
 			
 			
-			<h2 id="ToXsdtUnsignedInt">type <a href="/target/xsdtypes.go?s=19023:19092#L641">ToXsdtUnsignedInt</a></h2>
+			<h2 id="ToXsdtUnsignedInt">type <a href="/target/xsdtypes.go?s=27579:27648#L847">ToXsdtUnsignedInt</a></h2>
 			<pre>type ToXsdtUnsignedInt interface {
     ToXsdtUnsignedInt() UnsignedInt
 }</pre>
@@ -3123,7 +3375,7 @@ A convenience interface that declares a type conversion to UnsignedInt.
 		
 			
 			
-			<h2 id="ToXsdtUnsignedLong">type <a href="/target/xsdtypes.go?s=19489:19561#L655">ToXsdtUnsignedLong</a></h2>
+			<h2 id="ToXsdtUnsignedLong">type <a href="/target/xsdtypes.go?s=28222:28294#L866">ToXsdtUnsignedLong</a></h2>
 			<pre>type ToXsdtUnsignedLong interface {
     ToXsdtUnsignedLong() UnsignedLong
 }</pre>
@@ -3144,7 +3396,7 @@ A convenience interface that declares a type conversion to UnsignedLong.
 		
 			
 			
-			<h2 id="ToXsdtUnsignedShort">type <a href="/target/xsdtypes.go?s=19948:20023#L669">ToXsdtUnsignedShort</a></h2>
+			<h2 id="ToXsdtUnsignedShort">type <a href="/target/xsdtypes.go?s=28858:28933#L885">ToXsdtUnsignedShort</a></h2>
 			<pre>type ToXsdtUnsignedShort interface {
     ToXsdtUnsignedShort() UnsignedShort
 }</pre>
@@ -3165,7 +3417,7 @@ A convenience interface that declares a type conversion to UnsignedShort.
 		
 			
 			
-			<h2 id="Token">type <a href="/target/xsdtypes.go?s=17916:17943#L602">Token</a></h2>
+			<h2 id="Token">type <a href="/target/xsdtypes.go?s=25930:25957#L796">Token</a></h2>
 			<pre>type Token NormalizedString</pre>
 			<p>
 Represents tokenized strings.
@@ -3182,23 +3434,29 @@ Represents tokenized strings.
 
 			
 				
-				<h3 id="Token.SetFromString">func (*Token) <a href="/target/xsdtypes.go?s=17946:17987#L604">SetFromString</a></h3>
+				<h3 id="Token.SetFromString">func (*Token) <a href="/target/xsdtypes.go?s=26065:26105#L799">SetFromString</a></h3>
 				<pre>func (me *Token) SetFromString(v string)</pre>
-				
+				<p>
+Since this is just a simple String type, this merely sets the current value from the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="Token.String">func (Token) <a href="/target/xsdtypes.go?s=18012:18044#L608">String</a></h3>
+				<h3 id="Token.String">func (Token) <a href="/target/xsdtypes.go?s=26217:26248#L804">String</a></h3>
 				<pre>func (me Token) String() string</pre>
-				
+				<p>
+Since this is just a simple String type, this merely returns its current string value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="UnsignedByte">type <a href="/target/xsdtypes.go?s=18261:18284#L616">UnsignedByte</a></h2>
+			<h2 id="UnsignedByte">type <a href="/target/xsdtypes.go?s=26463:26486#L814">UnsignedByte</a></h2>
 			<pre>type UnsignedByte uint8</pre>
 			<p>
 Represents an integer with a minimum of zero and maximum of 255.
@@ -3215,23 +3473,29 @@ Represents an integer with a minimum of zero and maximum of 255.
 
 			
 				
-				<h3 id="UnsignedByte.SetFromString">func (*UnsignedByte) <a href="/target/xsdtypes.go?s=18287:18335#L618">SetFromString</a></h3>
+				<h3 id="UnsignedByte.SetFromString">func (*UnsignedByte) <a href="/target/xsdtypes.go?s=26598:26645#L817">SetFromString</a></h3>
 				<pre>func (me *UnsignedByte) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="UnsignedByte.String">func (UnsignedByte) <a href="/target/xsdtypes.go?s=18403:18442#L622">String</a></h3>
+				<h3 id="UnsignedByte.String">func (UnsignedByte) <a href="/target/xsdtypes.go?s=26785:26823#L823">String</a></h3>
 				<pre>func (me UnsignedByte) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="UnsignedInt">type <a href="/target/xsdtypes.go?s=18718:18741#L630">UnsignedInt</a></h2>
+			<h2 id="UnsignedInt">type <a href="/target/xsdtypes.go?s=27097:27120#L833">UnsignedInt</a></h2>
 			<pre>type UnsignedInt uint32</pre>
 			<p>
 Represents an integer with a minimum of zero and maximum of 4294967295.
@@ -3248,23 +3512,29 @@ Represents an integer with a minimum of zero and maximum of 4294967295.
 
 			
 				
-				<h3 id="UnsignedInt.SetFromString">func (*UnsignedInt) <a href="/target/xsdtypes.go?s=18744:18791#L632">SetFromString</a></h3>
+				<h3 id="UnsignedInt.SetFromString">func (*UnsignedInt) <a href="/target/xsdtypes.go?s=27232:27278#L836">SetFromString</a></h3>
 				<pre>func (me *UnsignedInt) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="UnsignedInt.String">func (UnsignedInt) <a href="/target/xsdtypes.go?s=18859:18897#L636">String</a></h3>
+				<h3 id="UnsignedInt.String">func (UnsignedInt) <a href="/target/xsdtypes.go?s=27418:27455#L842">String</a></h3>
 				<pre>func (me UnsignedInt) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="UnsignedLong">type <a href="/target/xsdtypes.go?s=19179:19203#L644">UnsignedLong</a></h2>
+			<h2 id="UnsignedLong">type <a href="/target/xsdtypes.go?s=27735:27759#L852">UnsignedLong</a></h2>
 			<pre>type UnsignedLong uint64</pre>
 			<p>
 Represents an integer with a minimum of zero and maximum of 18446744073709551615.
@@ -3281,23 +3551,29 @@ Represents an integer with a minimum of zero and maximum of 18446744073709551615
 
 			
 				
-				<h3 id="UnsignedLong.SetFromString">func (*UnsignedLong) <a href="/target/xsdtypes.go?s=19206:19254#L646">SetFromString</a></h3>
+				<h3 id="UnsignedLong.SetFromString">func (*UnsignedLong) <a href="/target/xsdtypes.go?s=27871:27918#L855">SetFromString</a></h3>
 				<pre>func (me *UnsignedLong) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="UnsignedLong.String">func (UnsignedLong) <a href="/target/xsdtypes.go?s=19323:19362#L650">String</a></h3>
+				<h3 id="UnsignedLong.String">func (UnsignedLong) <a href="/target/xsdtypes.go?s=28059:28097#L861">String</a></h3>
 				<pre>func (me UnsignedLong) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			
 		
 			
 			
-			<h2 id="UnsignedShort">type <a href="/target/xsdtypes.go?s=19633:19658#L658">UnsignedShort</a></h2>
+			<h2 id="UnsignedShort">type <a href="/target/xsdtypes.go?s=28366:28391#L871">UnsignedShort</a></h2>
 			<pre>type UnsignedShort uint16</pre>
 			<p>
 Represents an integer with a minimum of zero and maximum of 65535.
@@ -3314,16 +3590,22 @@ Represents an integer with a minimum of zero and maximum of 65535.
 
 			
 				
-				<h3 id="UnsignedShort.SetFromString">func (*UnsignedShort) <a href="/target/xsdtypes.go?s=19661:19710#L660">SetFromString</a></h3>
+				<h3 id="UnsignedShort.SetFromString">func (*UnsignedShort) <a href="/target/xsdtypes.go?s=28503:28551#L874">SetFromString</a></h3>
 				<pre>func (me *UnsignedShort) SetFromString(s string)</pre>
-				
+				<p>
+Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
+</p>
+
 				
 				
 			
 				
-				<h3 id="UnsignedShort.String">func (UnsignedShort) <a href="/target/xsdtypes.go?s=19780:19820#L664">String</a></h3>
+				<h3 id="UnsignedShort.String">func (UnsignedShort) <a href="/target/xsdtypes.go?s=28693:28732#L880">String</a></h3>
 				<pre>func (me UnsignedShort) String() string</pre>
-				
+				<p>
+Returns a string representation of its current non-string scalar value.
+</p>
+
 				
 				
 			

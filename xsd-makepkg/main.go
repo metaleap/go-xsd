@@ -11,16 +11,16 @@ import (
 )
 
 var (
-	flagSchema = flag.String("uri", "", "The XML Schema Definition file URIs to generate a Go wrapper packages from, whitespace-separated. (For each, the protocol prefix can be omitted, it then defaults to http://. Only protocols understood by the net/http package are supported.)")
-	flagLocalCopy = flag.Bool("local", true, "Local copy: only downloads if file does not exist locally")
+	flagSchema     = flag.String("uri", "", "The XML Schema Definition file URIs to generate a Go wrapper packages from, whitespace-separated. (For each, the protocol prefix can be omitted, it then defaults to http://. Only protocols understood by the net/http package are supported.)")
+	flagLocalCopy  = flag.Bool("local", true, "Local copy: only downloads if file does not exist locally")
 	flagForceParse = flag.Bool("parse", false, "Not necessary unless the generated Go wrapper package won't compile.")
-	flagBasePath = flag.String("basepath", "", "Defaults to " + xsd.PkgGen.BasePath + ". A $GOPATH/src/-relative path (always a slash-style path, even on Windows) where XSD files are downloaded to / loaded from and generated Go wrapper packages are created. Any XSD imports are also rewritten as Go imports from that path (but are not otherwise auto-magically processed in any way).")
+	flagBasePath   = flag.String("basepath", "", "Defaults to "+xsd.PkgGen.BasePath+". A $GOPATH/src/-relative path (always a slash-style path, even on Windows) where XSD files are downloaded to / loaded from and generated Go wrapper packages are created. Any XSD imports are also rewritten as Go imports from that path (but are not otherwise auto-magically processed in any way).")
 
-	sd *xsd.Schema
-	err error
+	sd          *xsd.Schema
+	err         error
 	outFilePath string
 	//	if no schemas are specified in *flagSchema, we run the pkg-maker through a default series of various XSDs...
-	schemas = []string {
+	schemas = []string{
 		"www.w3.org/2001/xml.xsd",
 		"www.w3.org/2001/03/xml.xsd",
 		"www.w3.org/TR/2002/WD-SVG11-20020108/xml.xsd",
@@ -42,13 +42,13 @@ var (
 	}
 )
 
-func main () {
+func main() {
 	flag.Parse()
 	if len(*flagSchema) > 0 {
 		schemas = strings.Split(*flagSchema, " ")
 	}
 	if len(*flagBasePath) > 0 {
-		xsd.PkgGen.BasePath, xsd.PkgGen.BaseCodePath = *flagBasePath, util.BaseCodePathGo(strings.Split(*flagBasePath, "/") ...)
+		xsd.PkgGen.BasePath, xsd.PkgGen.BaseCodePath = *flagBasePath, util.BaseCodePathGo(strings.Split(*flagBasePath, "/")...)
 	}
 	for _, s := range schemas {
 		fmt.Printf("LOAD:\t%v\n", s)

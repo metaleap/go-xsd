@@ -15,10 +15,10 @@ type SvgDoc struct {
 	svg.TsvgType
 }
 
-func main () {
+func main() {
 	var (
-		dirBasePath = util.BaseCodePathGithub("metaleap", "go-xsd", "makepkg", "tests", "svg")
-		makeEmptyDoc = func () interface{} { return &SvgDoc {} }
+		dirBasePath  = util.BaseCodePathGithub("metaleap", "go-xsd", "makepkg", "tests", "svg")
+		makeEmptyDoc = func() interface{} { return &SvgDoc{} }
 	)
 	tests.TestViaRemarshal(dirBasePath, makeEmptyDoc)
 }

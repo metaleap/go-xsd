@@ -21,12 +21,12 @@ type Col15Doc struct {
 	collada15.TxsdCollada
 }
 
-func main () {
+func main() {
 	var (
-		col14DirBasePath = util.BaseCodePathGithub("metaleap", "go-xsd", "makepkg", "tests", "collada", "1.4.1")
-		col14MakeEmptyDoc = func () interface{} { return &Col14Doc {} }
-		col15DirBasePath = util.BaseCodePathGithub("metaleap", "go-xsd", "makepkg", "tests", "collada", "1.5")
-		col15MakeEmptyDoc = func () interface{} { return &Col15Doc {} }
+		col14DirBasePath  = util.BaseCodePathGithub("metaleap", "go-xsd", "makepkg", "tests", "collada", "1.4.1")
+		col14MakeEmptyDoc = func() interface{} { return &Col14Doc{} }
+		col15DirBasePath  = util.BaseCodePathGithub("metaleap", "go-xsd", "makepkg", "tests", "collada", "1.5")
+		col15MakeEmptyDoc = func() interface{} { return &Col15Doc{} }
 	)
 	tests.TestViaRemarshal(col14DirBasePath, col14MakeEmptyDoc)
 	tests.TestViaRemarshal(col15DirBasePath, col15MakeEmptyDoc)

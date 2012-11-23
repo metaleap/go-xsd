@@ -15,10 +15,10 @@ type RssDoc struct {
 	rss.TxsdRss
 }
 
-func main () {
+func main() {
 	var (
-		dirBasePath = util.BaseCodePathGithub("metaleap", "go-xsd", "makepkg", "tests", "rss")
-		makeEmptyDoc = func () interface{} { return &RssDoc {} }
+		dirBasePath  = util.BaseCodePathGithub("metaleap", "go-xsd", "makepkg", "tests", "rss")
+		makeEmptyDoc = func() interface{} { return &RssDoc{} }
 	)
 	tests.TestViaRemarshal(dirBasePath, makeEmptyDoc)
 }

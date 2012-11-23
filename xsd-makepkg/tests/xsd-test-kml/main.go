@@ -15,10 +15,10 @@ type KmlDoc struct {
 	kml.TKmlType
 }
 
-func main () {
+func main() {
 	var (
-		dirBasePath = util.BaseCodePathGithub("metaleap", "go-xsd", "makepkg", "tests", "kml")
-		makeEmptyDoc = func () interface{} { return &KmlDoc {} }
+		dirBasePath  = util.BaseCodePathGithub("metaleap", "go-xsd", "makepkg", "tests", "kml")
+		makeEmptyDoc = func() interface{} { return &KmlDoc{} }
 	)
 	tests.TestViaRemarshal(dirBasePath, makeEmptyDoc)
 }
