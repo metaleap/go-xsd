@@ -112,7 +112,7 @@ type ToXsdtBoolean interface {
 	ToXsdtBoolean() Boolean
 }
 
-//	Represents an integer with a minimum value of -128 and maximum of 127. This data type is derived from short.
+//	Represents an integer with a minimum value of -128 and maximum of 127.
 type Byte int8
 
 //	Since this is a non-string scalar type, sets its current value obtained from parsing the specified string.
@@ -238,8 +238,7 @@ func (me Entities) String() string {
 
 //	This type declares a String containing a whitespace-separated list of values. This Values() method creates and returns a slice of all elements in that list.
 func (me Entities) Values() (list []Entity) {
-	var btv = new(Entity)
-	var spl = ListValues(string(me))
+	btv, spl := new(Entity), ListValues(string(me))
 	list = make([]Entity, len(spl))
 	for i, s := range spl {
 		btv.SetFromString(s)
@@ -449,8 +448,7 @@ func (me Idrefs) String() string {
 
 //	This type declares a String containing a whitespace-separated list of values. This Values() method creates and returns a slice of all elements in that list.
 func (me Idrefs) Values() (list []Idref) {
-	var btv = new(Idref)
-	var spl = ListValues(string(me))
+	btv, spl := new(Idref), ListValues(string(me))
 	list = make([]Idref, len(spl))
 	for i, s := range spl {
 		btv.SetFromString(s)
@@ -627,8 +625,7 @@ func (me Nmtokens) String() string {
 
 //	This type declares a String containing a whitespace-separated list of values. This Values() method creates and returns a slice of all elements in that list.
 func (me Nmtokens) Values() (list []Nmtoken) {
-	var btv = new(Nmtoken)
-	var spl = ListValues(string(me))
+	btv, spl := new(Nmtoken), ListValues(string(me))
 	list = make([]Nmtoken, len(spl))
 	for i, s := range spl {
 		btv.SetFromString(s)
@@ -713,8 +710,7 @@ func (me Notation) String() string {
 
 //	This type declares a String containing a whitespace-separated list of values. This Values() method creates and returns a slice of all elements in that list.
 func (me Notation) Values() (list []Qname) {
-	var btv = new(Qname)
-	var spl = ListValues(string(me))
+	btv, spl := new(Qname), ListValues(string(me))
 	list = make([]Qname, len(spl))
 	for i, s := range spl {
 		btv.SetFromString(s)
@@ -898,7 +894,7 @@ type ToXsdtUnsignedShort interface {
 
 // XSD "list" types are always space-separated strings. All generated Go types based on any XSD's list types get a Values() method, which will always resort to this function.
 func ListValues(v string) (spl []string) {
-	var cur = ""
+	cur := ""
 	for _, r := range v {
 		if r == ' ' {
 			if len(cur) > 0 {
@@ -908,6 +904,9 @@ func ListValues(v string) (spl []string) {
 		} else {
 			cur += string(r)
 		}
+	}
+	if len(cur) > 0 {
+		spl = append(spl, cur)
 	}
 	return
 }
