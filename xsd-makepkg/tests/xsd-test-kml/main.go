@@ -17,7 +17,7 @@ type KmlDoc struct {
 
 func main() {
 	var (
-		dirBasePath  = util.BaseCodePathGithub("metaleap", "go-xsd", "makepkg", "tests", "kml")
+		dirBasePath  = util.GopathSrcGithub("metaleap", "go-xsd", "makepkg", "tests", "kml")
 		makeEmptyDoc = func() interface{} { return &KmlDoc{} }
 	)
 	tests.TestViaRemarshal(dirBasePath, makeEmptyDoc)

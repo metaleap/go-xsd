@@ -22,9 +22,9 @@ type AtomFeedDoc struct {
 
 func main() {
 	var (
-		entryDirBasePath  = util.BaseCodePathGithub("metaleap", "go-xsd", "makepkg", "tests", "atom", "entry")
+		entryDirBasePath  = util.GopathSrcGithub("metaleap", "go-xsd", "makepkg", "tests", "atom", "entry")
 		entryMakeEmptyDoc = func() interface{} { return &AtomEntryDoc{} }
-		feedDirBasePath   = util.BaseCodePathGithub("metaleap", "go-xsd", "makepkg", "tests", "atom", "feed")
+		feedDirBasePath   = util.GopathSrcGithub("metaleap", "go-xsd", "makepkg", "tests", "atom", "feed")
 		feedMakeEmptyDoc  = func() interface{} { return &AtomFeedDoc{} }
 	)
 	tests.TestViaRemarshal(entryDirBasePath, entryMakeEmptyDoc)

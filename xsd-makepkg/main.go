@@ -48,7 +48,7 @@ func main() {
 		schemas = strings.Split(*flagSchema, " ")
 	}
 	if len(*flagBasePath) > 0 {
-		xsd.PkgGen.BasePath, xsd.PkgGen.BaseCodePath = *flagBasePath, util.BaseCodePathGo(strings.Split(*flagBasePath, "/")...)
+		xsd.PkgGen.BasePath, xsd.PkgGen.BaseCodePath = *flagBasePath, util.GopathSrc(strings.Split(*flagBasePath, "/")...)
 	}
 	for _, s := range schemas {
 		fmt.Printf("LOAD:\t%v\n", s)
