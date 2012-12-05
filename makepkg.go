@@ -197,13 +197,13 @@ func (me *PkgBag) assembleSource() string {
 		render(gr)
 	}
 	if len(me.walkerTypes) > 0 {
-		doc := sfmt("//\tProvides %v strong-typed hooks for your own custom handler functions to be invoked when the Walk() method is called on any instance of any (non-attribute-related) struct type defined in this package.", len(me.walkerTypes))
+		doc := sfmt("//\tProvides %v strong-typed hooks for your own custom handler functions to be invoked when the Walk() method is called on any instance of any (non-attribute-related) struct type defined in this package.\n//\tIf your custom handler does get called at all for a given struct instance, then it always gets called twice, first with the 'enter' bool argument set to true, then (after having Walk()ed all subordinate struct instances, if any) once again with it set to false.", len(me.walkerTypes))
 		me.appendFmt(false, doc)
 		me.appendFmt(true, "var WalkHandlers = &%vWalkHandlers {}", idPrefix)
 		me.appendFmt(false, doc)
 		me.appendFmt(false, "type %vWalkHandlers struct {", idPrefix)
 		for wt, _ := range me.walkerTypes {
-			me.appendFmt(false, "\t%v func (o *%v)", wt, wt)
+			me.appendFmt(false, "\t%v func (o *%v, enter bool)", wt, wt)
 		}
 		me.appendFmt(true, "}")
 	}
@@ -469,7 +469,7 @@ func (me *declType) render(bag *PkgBag) {
 				}
 				bag.appendFmt(true, "}")
 				if PkgGen.AddWalkers && !strings.HasPrefix(myName, idPrefix+"HasAtt") {
-					var walkBody = sfmt("\n\tif fn := WalkHandlers.%v; fn != nil { fn(me) }\n", myName)
+					var walkBody = sfmt("\n\tfn := WalkHandlers.%v\n\tif fn != nil { fn(me, true) }\n", myName)
 					var ec, fc = 0, 0
 					bag.walkerTypes[myName] = true
 					for _, e := range me.Embeds {
@@ -486,6 +486,7 @@ func (me *declType) render(bag *PkgBag) {
 							walkBody += sfmt("\tfor _, x := range me.%v { x.Walk() }\n", f.Name)
 						}
 					}
+					walkBody += sfmt("\tif fn != nil { fn(me, false) }\n")
 					me.addMethod(nil, "*"+myName, "Walk", "", walkBody, sfmt("If the WalkHandlers.%v function is not nil (ie. was set by outside code), calls it with this %v instance as the single argument. Then calls the Walk() method on %v/%v embed(s) and %v/%v field(s) belonging to this %v instance.", myName, myName, ec, len(me.Embeds), fc, len(me.Fields), myName))
 				}
 			}
