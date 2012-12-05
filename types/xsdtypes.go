@@ -910,3 +910,16 @@ func ListValues(v string) (spl []string) {
 	}
 	return
 }
+
+//	A helper function for the Walk() functionality of generated wrapper packages.
+func OnWalkError(err *error, slice *[]error, breakWalk bool, handler func(error)) (ret bool) {
+	if e := *err; e != nil {
+		*slice = append(*slice, e)
+		ret = breakWalk
+		if handler != nil {
+			handler(e)
+		}
+	}
+	*err = nil
+	return
+}

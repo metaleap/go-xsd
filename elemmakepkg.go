@@ -349,8 +349,11 @@ func (me *Documentation) makePkg(bag *PkgBag) {
 }
 
 func (me *Element) makePkg(bag *PkgBag) {
-	var safeName, typeName, valueType, tmp, key, defVal, impName string
-	var asterisk, defName = "", "Default"
+	var (
+		safeName, typeName, valueType, tmp, key, defVal, impName string
+		subEl                                                    *Element
+	)
+	asterisk, defName, doc := "", "Default", ""
 	me.elemBase.beforeMakePkg(bag)
 	if len(me.Form) == 0 {
 		me.Form = bag.Schema.ElementFormDefault
@@ -392,6 +395,10 @@ func (me *Element) makePkg(bag *PkgBag) {
 		if valueType = bag.simpleContentValueTypes[typeName]; len(valueType) == 0 {
 			valueType = typeName
 		}
+		isPt := bag.isParseType(valueType)
+		if _, isChoice := me.Parent().(*Choice); isChoice && isPt {
+			asterisk = "*"
+		}
 		for pref, cache := range map[string]map[string]string{"HasElem_": bag.elemsCacheOnce, "HasElems_": bag.elemsCacheMult} {
 			if tmp = idPrefix + pref + key; !bag.elemsWritten[tmp] {
 				bag.elemsWritten[tmp], bag.elemKeys[me] = true, key
@@ -399,13 +406,12 @@ func (me *Element) makePkg(bag *PkgBag) {
 				var td = bag.addType(me, tmp, "", me.Annotation)
 				td.addField(me, util.Ifs(pref == "HasElems_", pluralize(safeName), safeName), util.Ifs(pref == "HasElems_", "[]"+asterisk+typeName, asterisk+typeName), util.Ifs(len(bag.Schema.TargetNamespace) > 0, bag.Schema.TargetNamespace.String()+" ", "")+me.Name.String(), me.Annotation)
 				if me.parent == bag.Schema {
-					for _, subEl := range bag.Schema.RootSchema().globalSubstitutionElems(me) {
+					for _, subEl = range bag.Schema.RootSchema().globalSubstitutionElems(me) {
 						td.addEmbed(subEl, idPrefix+pref+bag.safeName(subEl.Name.String()), subEl.Annotation)
 					}
 				}
 				if len(defVal) > 0 {
-					isPt := bag.isParseType(valueType)
-					doc := sfmt("Returns the %v value for %v -- "+util.Ifs(isPt, "%v", "%#v"), strings.ToLower(defName), safeName, defVal)
+					doc = sfmt("Returns the %v value for %v -- "+util.Ifs(isPt, "%v", "%#v"), strings.ToLower(defName), safeName, defVal)
 					if isPt {
 						if PkgGen.ForceParseForDefaults {
 							td.addMethod(nil, tmp, safeName+defName, valueType, sfmt("var x = new(%v); x.SetFromString(%#v); return *x", valueType, defVal), doc)

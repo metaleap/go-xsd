@@ -17,7 +17,7 @@ type RssDoc struct {
 
 func main() {
 	var (
-		dirBasePath  = util.GopathSrcGithub("metaleap", "go-xsd", "makepkg", "tests", "rss")
+		dirBasePath  = util.GopathSrcGithub("metaleap", "go-xsd", "xsd-makepkg", "tests", "xsd-test-rss")
 		makeEmptyDoc = func() interface{} { return &RssDoc{} }
 	)
 	tests.TestViaRemarshal(dirBasePath, makeEmptyDoc)

@@ -67,6 +67,9 @@ Same for base64- and hex-encoded binary data: since Unmarshal() won&#39;t decode
 				
 				<dd><a href="#ListValues">func ListValues(v string) (spl []string)</a></dd>
 			
+				
+				<dd><a href="#OnWalkError">func OnWalkError(err *error, slice *[]error, breakWalk bool, handler func(error)) (ret bool)</a></dd>
+			
 			
 				
 				<dd><a href="#AnySimpleType">type AnySimpleType</a></dd>
@@ -835,6 +838,16 @@ Same for base64- and hex-encoded binary data: since Unmarshal() won&#39;t decode
 			<pre>func ListValues(v string) (spl []string)</pre>
 			<p>
 XSD &#34;list&#34; types are always space-separated strings. All generated Go types based on any XSD&#39;s list types get a Values() method, which will always resort to this function.
+</p>
+
+			
+		
+			
+			
+			<h2 id="OnWalkError">func <a href="/target/xsdtypes.go?s=29375:29467#L905">OnWalkError</a></h2>
+			<pre>func OnWalkError(err *error, slice *[]error, breakWalk bool, handler func(error)) (ret bool)</pre>
+			<p>
+A helper function for the Walk() functionality of generated wrapper packages.
 </p>
 
 			

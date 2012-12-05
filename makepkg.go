@@ -198,12 +198,21 @@ func (me *PkgBag) assembleSource() string {
 	}
 	if len(me.walkerTypes) > 0 {
 		doc := sfmt("//\tProvides %v strong-typed hooks for your own custom handler functions to be invoked when the Walk() method is called on any instance of any (non-attribute-related) struct type defined in this package.\n//\tIf your custom handler does get called at all for a given struct instance, then it always gets called twice, first with the 'enter' bool argument set to true, then (after having Walk()ed all subordinate struct instances, if any) once again with it set to false.", len(me.walkerTypes))
-		me.appendFmt(false, doc)
-		me.appendFmt(true, "var WalkHandlers = &%vWalkHandlers {}", idPrefix)
+		me.appendFmt(true, `var (
+	//	Set this to false to break a Walk() immediately as soon as the first error is returned by a custom handler function.
+	//	If true, Walk() proceeds and accumulates all errors in the WalkErrors slice.
+	WalkContinueOnError = true
+	//	Contains all errors accumulated during Walk()s. If you're using this, you need to reset this yourself as needed prior to a fresh Walk().
+	WalkErrors          []error
+	//	Your custom error-handling function, if required.
+	WalkOnError         func(error)
+	%s
+	WalkHandlers        = &%sWalkHandlers {}
+)`, doc, idPrefix)
 		me.appendFmt(false, doc)
 		me.appendFmt(false, "type %vWalkHandlers struct {", idPrefix)
 		for wt, _ := range me.walkerTypes {
-			me.appendFmt(false, "\t%v func (o *%v, enter bool)", wt, wt)
+			me.appendFmt(false, "\t%s func (*%s, bool) (error)", wt, wt)
 		}
 		me.appendFmt(true, "}")
 	}
@@ -469,25 +478,27 @@ func (me *declType) render(bag *PkgBag) {
 				}
 				bag.appendFmt(true, "}")
 				if PkgGen.AddWalkers && !strings.HasPrefix(myName, idPrefix+"HasAtt") {
-					var walkBody = sfmt("\n\tfn := WalkHandlers.%v\n\tif fn != nil { fn(me, true) }\n", myName)
-					var ec, fc = 0, 0
+					errCheck := sfmt("%s.OnWalkError(&err, &WalkErrors, WalkContinueOnError, WalkOnError) { return }", bag.impName)
+					fnCall := "\t\tif fn != nil { if err = fn(me, %v); %s }"
+					walkBody := sfmt("\n\tif fn := WalkHandlers.%s; me != nil {\n%s\n", myName, sfmt(fnCall, true, errCheck))
+					ec, fc := 0, 0
 					bag.walkerTypes[myName] = true
 					for _, e := range me.Embeds {
 						if bag.walkerTypes[e.finalTypeName] {
 							ec++
-							walkBody += sfmt("\tme.%v.Walk()\n", e.finalTypeName)
+							walkBody += sfmt("\t\tif err = me.%s.Walk(); %s\n", e.finalTypeName, errCheck)
 						}
 					}
 					for _, f := range me.Fields {
 						if bag.walkerTypes[strings.Replace(f.finalTypeName, "*", "", -1)] {
 							fc++
-							walkBody += sfmt("\tme.%v.Walk()\n", f.Name)
+							walkBody += sfmt("\t\tif err = me.%v.Walk(); %s\n", f.Name, errCheck)
 						} else if strings.HasPrefix(f.finalTypeName, "[]") && bag.walkerTypes[ustr.Replace(f.finalTypeName, typeRenderRepls)] {
-							walkBody += sfmt("\tfor _, x := range me.%v { x.Walk() }\n", f.Name)
+							walkBody += sfmt("\t\tfor _, x := range me.%s { if err = x.Walk(); %s }\n", f.Name, errCheck)
 						}
 					}
-					walkBody += sfmt("\tif fn != nil { fn(me, false) }\n")
-					me.addMethod(nil, "*"+myName, "Walk", "", walkBody, sfmt("If the WalkHandlers.%v function is not nil (ie. was set by outside code), calls it with this %v instance as the single argument. Then calls the Walk() method on %v/%v embed(s) and %v/%v field(s) belonging to this %v instance.", myName, myName, ec, len(me.Embeds), fc, len(me.Fields), myName))
+					walkBody += sfmt("%s\n}\n\treturn\n", sfmt(fnCall, false, errCheck))
+					me.addMethod(nil, "*"+myName, "Walk", "(err error)", walkBody, sfmt("If the WalkHandlers.%v function is not nil (ie. was set by outside code), calls it with this %v instance as the single argument. Then calls the Walk() method on %v/%v embed(s) and %v/%v field(s) belonging to this %v instance.", myName, myName, ec, len(me.Embeds), fc, len(me.Fields), myName))
 				}
 			}
 			bag.declWrittenTypes = append(bag.declWrittenTypes, me)

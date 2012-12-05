@@ -17,7 +17,7 @@ type SvgDoc struct {
 
 func main() {
 	var (
-		dirBasePath  = util.GopathSrcGithub("metaleap", "go-xsd", "makepkg", "tests", "svg")
+		dirBasePath  = util.GopathSrcGithub("metaleap", "go-xsd", "xsd-makepkg", "tests", "xsd-test-svg")
 		makeEmptyDoc = func() interface{} { return &SvgDoc{} }
 	)
 	tests.TestViaRemarshal(dirBasePath, makeEmptyDoc)
