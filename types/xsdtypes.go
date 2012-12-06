@@ -911,6 +911,22 @@ func ListValues(v string) (spl []string) {
 	return
 }
 
+func ListValuesBoolean(vals []Boolean) (sl []bool) {
+	sl = make([]bool, len(vals))
+	for i, b := range vals {
+		sl[i] = bool(b)
+	}
+	return
+}
+
+func ListValuesDouble(vals []Double) (sl []float64) {
+	sl = make([]float64, len(vals))
+	for i, d := range vals {
+		sl[i] = float64(d)
+	}
+	return
+}
+
 //	A helper function for the Walk() functionality of generated wrapper packages.
 func OnWalkError(err *error, slice *[]error, breakWalk bool, handler func(error)) (ret bool) {
 	if e := *err; e != nil {

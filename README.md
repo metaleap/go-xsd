@@ -113,3 +113,5 @@ Command-line flags for *go-xsd/xsd-makepkg* tool:
 - **-local=true**: Local copy -- only downloads if file does not exist locally
 - **-parse=false**: Not necessary, unless the generated Go wrapper package fails to compile with either the error "*cannot convert {value} to type {type}*" or "*cannot use {value} (type {type}) as type {type} in return argument*" -- ultimately down to a slightly faulty XSD file, but while rare, those exist (hello, KML using 0 and 1 for *xs:boolean*s that are clearly spec'd to be only ever either *true* or *false*...)
 - **-uri=""**: The XML Schema Definition file URIs to generate a Go wrapper packages from, whitespace-separated. (For each, the protocol prefix can be omitted, it then defaults to *http://*. Only protocols understood by the *net/http* package are supported.)
+- **-gofmt=true**: Run 'gofmt' against the generated Go wrapper package?
+- **-goinst=true**: Run 'go-buildrun' ( http://github.com/metaleap/go-buildrun ) against the generated Go wrapper package?
