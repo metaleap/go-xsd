@@ -1,16 +1,16 @@
-<feed base="" lang="">
-	<updated xmlns="http://www.w3.org/2005/Atom" base="" lang="">2003-12-13T18:30:02Z</updated>
-	<title xmlns="http://www.w3.org/2005/Atom" type="" base="" lang="">Example Feed</title>
-	<author xmlns="http://www.w3.org/2005/Atom" base="" lang="">
+<feed lang="" base="">
+	<id xmlns="http://www.w3.org/2005/Atom" lang="" base="">urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
+	<link xmlns="http://www.w3.org/2005/Atom" hreflang="" href="http://example.org/" rel="" lang="" base="" type="" title="" length="0"></link>
+	<updated xmlns="http://www.w3.org/2005/Atom" lang="" base="">2003-12-13T18:30:02Z</updated>
+	<entry xmlns="http://www.w3.org/2005/Atom" lang="" base="">
+		<title xmlns="http://www.w3.org/2005/Atom" lang="" base="" type="">Atom-Powered Robots Run Amok</title>
+		<id xmlns="http://www.w3.org/2005/Atom" lang="" base="">urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
+		<summary xmlns="http://www.w3.org/2005/Atom" lang="" base="" type="">Some text.</summary>
+		<updated xmlns="http://www.w3.org/2005/Atom" lang="" base="">2003-12-13T18:30:02Z</updated>
+		<link xmlns="http://www.w3.org/2005/Atom" hreflang="" href="http://example.org/2003/12/13/atom03" rel="" lang="" base="" type="" title="" length="0"></link>
+	</entry>
+	<author xmlns="http://www.w3.org/2005/Atom" lang="" base="">
 		<name xmlns="http://www.w3.org/2005/Atom">John Doe</name>
 	</author>
-	<link xmlns="http://www.w3.org/2005/Atom" title="" length="0" type="" href="http://example.org/" hreflang="" base="" lang="" rel=""></link>
-	<id xmlns="http://www.w3.org/2005/Atom" base="" lang="">urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
-	<entry xmlns="http://www.w3.org/2005/Atom" base="" lang="">
-		<link xmlns="http://www.w3.org/2005/Atom" title="" length="0" type="" href="http://example.org/2003/12/13/atom03" hreflang="" base="" lang="" rel=""></link>
-		<title xmlns="http://www.w3.org/2005/Atom" type="" base="" lang="">Atom-Powered Robots Run Amok</title>
-		<id xmlns="http://www.w3.org/2005/Atom" base="" lang="">urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
-		<summary xmlns="http://www.w3.org/2005/Atom" type="" base="" lang="">Some text.</summary>
-		<updated xmlns="http://www.w3.org/2005/Atom" base="" lang="">2003-12-13T18:30:02Z</updated>
-	</entry>
+	<title xmlns="http://www.w3.org/2005/Atom" lang="" base="" type="">Example Feed</title>
 </feed>
