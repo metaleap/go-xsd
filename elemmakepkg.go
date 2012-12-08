@@ -85,7 +85,7 @@ func (me *Attribute) makePkg(bag *PkgBag) {
 				doc := sfmt("Returns the %v value for %v -- "+util.Ifs(isPt, "%v", "%#v"), strings.ToLower(defName), safeName, defVal)
 				if isPt {
 					if PkgGen.ForceParseForDefaults {
-						td.addMethod(nil, tmp, safeName+defName, typeName, sfmt("var x = new(%v); x.SetFromString(%#v); return *x", typeName, defVal), doc)
+						td.addMethod(nil, tmp, safeName+defName, typeName, sfmt("var x = new(%v); x.Set(%#v); return *x", typeName, defVal), doc)
 					} else {
 						td.addMethod(nil, tmp, safeName+defName, typeName, sfmt("return %v(%v)", typeName, defVal), doc)
 					}
@@ -119,7 +119,7 @@ func (me *AttributeGroup) makePkg(bag *PkgBag) {
 		bag.attGroups[me] = tmp
 		for _, ag := range me.AttributeGroups {
 			if len(ag.Ref) == 0 {
-				ag.Ref.SetFromString(ag.Name.String())
+				ag.Ref.Set(ag.Name.String())
 			}
 			if refName = bag.resolveQnameRef(ag.Ref.String(), "", &refImp); len(refImp) > 0 {
 				td.addEmbed(ag, refImp+"."+idPrefix+"HasAtts_"+refName[(len(refImp)+1):], ag.Annotation)
@@ -414,7 +414,7 @@ func (me *Element) makePkg(bag *PkgBag) {
 					doc = sfmt("Returns the %v value for %v -- "+util.Ifs(isPt, "%v", "%#v"), strings.ToLower(defName), safeName, defVal)
 					if isPt {
 						if PkgGen.ForceParseForDefaults {
-							td.addMethod(nil, tmp, safeName+defName, valueType, sfmt("var x = new(%v); x.SetFromString(%#v); return *x", valueType, defVal), doc)
+							td.addMethod(nil, tmp, safeName+defName, valueType, sfmt("var x = new(%v); x.Set(%#v); return *x", valueType, defVal), doc)
 						} else {
 							td.addMethod(nil, tmp, safeName+defName, valueType, sfmt("return %v(%v)", valueType, defVal), doc)
 						}
@@ -471,7 +471,7 @@ func (me *Group) makePkg(bag *PkgBag) {
 			bag.elemGroupRefImps[me] = refImp
 		}
 	} else {
-		me.Ref.SetFromString(me.Name.String())
+		me.Ref.Set(me.Name.String())
 		safeName := bag.safeName(me.Name.String())
 		tmp := idPrefix + "HasGroup_" + safeName
 		bag.elemGroups[me] = tmp
@@ -551,18 +551,10 @@ func (me *List) makePkg(bag *PkgBag) {
 	st := bag.Stacks.CurSimpleType()
 	safeName = bag.safeName(ustr.PrependIf(st.Name.String(), "T"))
 	body, doc := "", sfmt("%v declares a String containing a whitespace-separated list of %v values. This Values() method creates and returns a slice of all elements in that list", safeName, rtr)
-	if bag.isParseType(rtr) {
-		body = sfmt("btv, svals := new(%v), %v.ListValues(string(me)); list = make([]%v, len(svals)); for i, s := range svals { btv.SetFromString(s); list[i] = *btv }; return", rtr, bag.impName, rtr)
-	} else {
-		body = sfmt("svals := %v.ListValues(string(me)); list = make([]%v, len(svals)); for i, s := range svals { list[i] = %v(s) }; return", bag.impName, rtr, rtr)
-	}
+	body = sfmt("svals := %v.ListValues(string(me)); list = make([]%v, len(svals)); for i, s := range svals { list[i].Set(s) }; return", bag.impName, rtr)
 	bag.ctd.addMethod(me, safeName, "Values", sfmt("(list []%v)", rtr), body, doc+".", me.Annotation)
 	for baseType := bag.simpleBaseTypes[rtr]; len(baseType) > 0; baseType = bag.simpleBaseTypes[baseType] {
-		if bag.isParseType(baseType) {
-			body = sfmt("btv, svals := new(%v), %v.ListValues(string(me)); list = make([]%v, len(svals)); for i, s := range svals { btv.SetFromString(s); list[i] = *btv }; return", baseType, bag.impName, baseType)
-		} else {
-			body = sfmt("svals := %v.ListValues(string(me)); list = make([]%v, len(svals)); for i, s := range svals { list[i] = %v(s) }; return", bag.impName, baseType, baseType)
-		}
+		body = sfmt("svals := %v.ListValues(string(me)); list = make([]%v, len(svals)); for i, s := range svals { list[i].Set(s) }; return", bag.impName, baseType)
 		bag.ctd.addMethod(me, safeName, "Values"+bag.safeName(baseType), sfmt("(list []%v)", baseType), body, sfmt("%s, typed as %s.", doc, baseType), me.Annotation)
 	}
 	me.elemBase.afterMakePkg(bag)
@@ -770,7 +762,7 @@ func (me *SimpleType) makePkg(bag *PkgBag) {
 	} else {
 		doc = sfmt("Since %v is just a simple String type, this merely sets the current value from the specified string.", safeName)
 	}
-	td.addMethod(nil, "*"+safeName, "SetFromString (s string)", "", sfmt("(*%v)(me).SetFromString(s)", baseType), doc)
+	td.addMethod(nil, "*"+safeName, "Set (s string)", "", sfmt("(*%v)(me).Set(s)", baseType), doc)
 	if isPt {
 		doc = sfmt("Returns a string representation of this %v's current non-string scalar value.", safeName)
 	} else {
@@ -798,7 +790,7 @@ func (me *Union) makePkg(bag *PkgBag) {
 	for _, mt := range memberTypes {
 		rtn = bag.resolveQnameRef(mt, "T", nil)
 		safeName, rtnSafeName = bag.safeName(ustr.PrependIf(bag.Stacks.CurSimpleType().Name.String(), "T")), bag.safeName(rtn)
-		bag.ctd.addMethod(me, safeName, "To"+rtnSafeName, rtn, sfmt(util.Ifs(bag.isParseType(rtn), "var x = new(%v); x.SetFromString(me.String()); return *x", "return %v(me)"), rtn), sfmt("%v is an XSD union-type of several types. This is a simple type conversion to %v, but keep in mind the actual value may or may not be a valid %v value.", safeName, rtnSafeName, rtnSafeName), me.Annotation)
+		bag.ctd.addMethod(me, safeName, "To"+rtnSafeName, rtn, sfmt(util.Ifs(bag.isParseType(rtn), "var x = new(%v); x.Set(me.String()); return *x", "return %v(me)"), rtn), sfmt("%v is an XSD union-type of several types. This is a simple type conversion to %v, but keep in mind the actual value may or may not be a valid %v value.", safeName, rtnSafeName, rtnSafeName), me.Annotation)
 	}
 	me.elemBase.afterMakePkg(bag)
 }

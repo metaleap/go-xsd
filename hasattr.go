@@ -70,7 +70,7 @@ func (me *hasAttrMaxOccurs) Value() (l xsdt.Long) {
 	} else if me.MaxOccurs == "unbounded" {
 		l = -1
 	} else {
-		l.SetFromString(me.MaxOccurs)
+		l.Set(me.MaxOccurs)
 	}
 	return
 }
