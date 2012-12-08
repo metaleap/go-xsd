@@ -759,6 +759,7 @@ func (me *SimpleType) makePkg(bag *PkgBag) {
 	if resolve {
 		baseType = bag.resolveQnameRef(baseType, "T", nil)
 	}
+	bag.simpleBaseTypes[safeName] = baseType
 	if isPt = bag.isParseType(baseType); isPt {
 		bag.parseTypes[safeName] = true
 	}
