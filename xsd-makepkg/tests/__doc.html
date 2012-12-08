@@ -60,6 +60,8 @@ A simple test function shared by the various test programs inside this directory
 			<dl>
 			
 			
+				<dd><a href="#pkg-variables">Variables</a></dd>
+			
 			
 				
 				<dd><a href="#TestViaRemarshal">func TestViaRemarshal(dirPath string, makeEmptyDoc func() interface{})</a></dd>
@@ -85,10 +87,18 @@ A simple test function shared by the various test programs inside this directory
 	
 		
 		
+			<h2 id="pkg-variables">Variables</h2>
+			
+				<pre>var (
+    OnDocLoaded func(interface{})
+)</pre>
+				
+			
+		
 		
 			
 			
-			<h2 id="TestViaRemarshal">func <a href="/target/tests.go?s=482:552#L3">TestViaRemarshal</a></h2>
+			<h2 id="TestViaRemarshal">func <a href="/target/tests.go?s=3031:3101#L89">TestViaRemarshal</a></h2>
 			<pre>func TestViaRemarshal(dirPath string, makeEmptyDoc func() interface{})</pre>
 			<p>
 Attempts to xml.Unmarshal() all files in the &#34;infiles&#34; sub-directory of the specified directory path into the interface{} structure returned by the specified constructor.
