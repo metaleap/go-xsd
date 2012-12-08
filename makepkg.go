@@ -75,24 +75,22 @@ type PkgBag struct {
 	allElemGroups []*Group
 	allNotations  []*Notation
 
-	ctd                                                        *declType
-	lines                                                      []string
-	impName                                                    string
-	debug                                                      bool
-	imports                                                    map[string]string
-	impsUsed, elemsWritten, parseTypes, walkerTypes, declConvs map[string]bool
-	anonCounts                                                 map[string]uint64
-	attsCache, elemsCacheOnce, elemsCacheMult                  map[string]string
-	attGroups, attGroupRefImps                                 map[*AttributeGroup]string
-	attsKeys, attRefImps                                       map[*Attribute]string
-	declTypes                                                  map[string]*declType
-	declElemTypes                                              map[element][]*declType
-	declWrittenTypes                                           []*declType
-	elemGroups, elemGroupRefImps                               map[*Group]string
-	elemChoices, elemChoiceRefImps                             map[*Choice]string
-	elemSeqs, elemSeqRefImps                                   map[*Sequence]string
-	elemKeys, elemRefImps                                      map[*Element]string
-	simpleContentValueTypes                                    map[string]string
+	ctd                                                                                          *declType
+	lines                                                                                        []string
+	impName                                                                                      string
+	debug                                                                                        bool
+	imports, attsCache, elemsCacheOnce, elemsCacheMult, simpleBaseTypes, simpleContentValueTypes map[string]string
+	impsUsed, elemsWritten, parseTypes, walkerTypes, declConvs                                   map[string]bool
+	anonCounts                                                                                   map[string]uint64
+	attGroups, attGroupRefImps                                                                   map[*AttributeGroup]string
+	attsKeys, attRefImps                                                                         map[*Attribute]string
+	declTypes                                                                                    map[string]*declType
+	declElemTypes                                                                                map[element][]*declType
+	declWrittenTypes                                                                             []*declType
+	elemGroups, elemGroupRefImps                                                                 map[*Group]string
+	elemChoices, elemChoiceRefImps                                                               map[*Choice]string
+	elemSeqs, elemSeqRefImps                                                                     map[*Sequence]string
+	elemKeys, elemRefImps                                                                        map[*Element]string
 }
 
 func newPkgBag(schema *Schema) (bag *PkgBag) {

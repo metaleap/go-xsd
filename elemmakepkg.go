@@ -541,22 +541,30 @@ func (me *KeyRef) makePkg(bag *PkgBag) {
 }
 
 func (me *List) makePkg(bag *PkgBag) {
-	var rtr = bag.resolveQnameRef(me.ItemType.String(), "T", nil)
 	var safeName string
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsSimpleType.makePkg(bag)
+	rtr := bag.resolveQnameRef(me.ItemType.String(), "T", nil)
 	if len(rtr) == 0 {
 		rtr = me.SimpleTypes[0].Name.String()
 	}
-	safeName = bag.safeName(ustr.PrependIf(bag.Stacks.CurSimpleType().Name.String(), "T"))
-	var doc = sfmt("%v declares a String containing a whitespace-separated list of %v values. This Values() method creates and returns a slice of all elements in that list.", safeName, rtr)
-	var body string
+	st := bag.Stacks.CurSimpleType()
+	safeName = bag.safeName(ustr.PrependIf(st.Name.String(), "T"))
+	body, doc := "", sfmt("%v declares a String containing a whitespace-separated list of %v values. This Values() method creates and returns a slice of all elements in that list", safeName, rtr)
 	if bag.isParseType(rtr) {
-		body = sfmt("var btv = new(%v); var svals = %v.ListValues(string(me)); list = make([]%v, len(svals)); for i, s := range svals { btv.SetFromString(s); list[i] = *btv }; return", rtr, bag.impName, rtr)
+		body = sfmt("btv, svals := new(%v), %v.ListValues(string(me)); list = make([]%v, len(svals)); for i, s := range svals { btv.SetFromString(s); list[i] = *btv }; return", rtr, bag.impName, rtr)
 	} else {
-		body = sfmt("var svals = %v.ListValues(string(me)); list = make([]%v, len(svals)); for i, s := range svals { list[i] = %v(s) }; return", bag.impName, rtr, rtr)
+		body = sfmt("svals := %v.ListValues(string(me)); list = make([]%v, len(svals)); for i, s := range svals { list[i] = %v(s) }; return", bag.impName, rtr, rtr)
 	}
-	bag.ctd.addMethod(me, safeName, "Values", sfmt("(list []%v)", rtr), body, doc, me.Annotation)
+	bag.ctd.addMethod(me, safeName, "Values", sfmt("(list []%v)", rtr), body, doc+".", me.Annotation)
+	for baseType := bag.simpleBaseTypes[rtr]; len(baseType) > 0; baseType = bag.simpleBaseTypes[baseType] {
+		if bag.isParseType(baseType) {
+			body = sfmt("btv, svals := new(%v), %v.ListValues(string(me)); list = make([]%v, len(svals)); for i, s := range svals { btv.SetFromString(s); list[i] = *btv }; return", baseType, bag.impName, baseType)
+		} else {
+			body = sfmt("svals := %v.ListValues(string(me)); list = make([]%v, len(svals)); for i, s := range svals { list[i] = %v(s) }; return", bag.impName, baseType, baseType)
+		}
+		bag.ctd.addMethod(me, safeName, "Values"+bag.safeName(baseType), sfmt("(list []%v)", baseType), body, sfmt("%s, typed as %s.", doc, baseType), me.Annotation)
+	}
 	me.elemBase.afterMakePkg(bag)
 }
 
