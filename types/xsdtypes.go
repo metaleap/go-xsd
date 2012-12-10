@@ -971,28 +971,43 @@ type ToXsdtUnsignedShort interface {
 
 // XSD "list" types are always space-separated strings. All generated Go types based on any XSD's list types get a Values() method, which will always resort to this function.
 func ListValues(v string) (spl []string) {
-	for v[len(v)-1:] == " " {
+	lastWs := true
+	wsr := func(r rune) bool {
+		return (r == ' ') || (r == '\r') || (r == '\n') || (r == '\t')
+	}
+	wss := func(r string) bool {
+		return (r == " ") || (r == "\r") || (r == "\n") || (r == "\t")
+	}
+	for wss(v[len(v)-1:]) {
 		v = v[:len(v)-1]
 	}
-	for v[:1] == " " {
+	for wss(v[:1]) {
 		v = v[1:]
 	}
 	if len(v) > 0 {
 		cur, num, i := "", 1, 0
 		for _, r := range v {
-			if r == ' ' {
-				num++
+			if wsr(r) {
+				if !lastWs {
+					num++
+					lastWs = true
+				}
+			} else {
+				lastWs = false
 			}
 		}
-		spl = make([]string, num)
+		lastWs, spl = true, make([]string, num)
 		for _, r := range v {
-			if r == ' ' {
-				if len(cur) > 0 {
-					spl[i] = cur
-					i++
+			if wsr(r) {
+				if !lastWs {
+					if len(cur) > 0 {
+						spl[i] = cur
+						i++
+					}
+					cur, lastWs = "", true
 				}
-				cur = ""
 			} else {
+				lastWs = false
 				cur += string(r)
 			}
 		}
