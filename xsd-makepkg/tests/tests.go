@@ -99,7 +99,7 @@ func verifyNode(orig, faks *xmlx.Node) (errs []error) {
 func TestViaRemarshal(dirPath string, makeEmptyDoc func() interface{}) {
 	var dirPathInFiles = filepath.Join(dirPath, "infiles")
 	var dirPathOutFiles = filepath.Join(dirPath, "outfiles")
-	var loadXmlDocFile = func(filename string, keepRecursing bool) bool {
+	var loadXmlDocFile = func(_ *uio.DirWalker, filename string, _ bool) bool {
 		log.Printf("Loading %s", filename)
 		doc, dataOrig := makeEmptyDoc(), uio.ReadBinaryFile(filename, true)
 		err := xml.Unmarshal(dataOrig, doc)
@@ -122,7 +122,9 @@ func TestViaRemarshal(dirPath string, makeEmptyDoc func() interface{}) {
 				log.Printf("%v", err)
 			}
 		}
-		return keepRecursing
+		return true
 	}
-	uio.WalkDirectory(dirPathInFiles, "", loadXmlDocFile, true)
+	if errs := uio.NewDirWalker(nil, loadXmlDocFile).Walk(dirPathInFiles); len(errs) > 0 {
+		panic(errs[0])
+	}
 }
