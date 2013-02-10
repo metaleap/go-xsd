@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"log"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -99,7 +100,7 @@ func verifyNode(orig, faks *xmlx.Node) (errs []error) {
 func TestViaRemarshal(dirPath string, makeEmptyDoc func() interface{}) {
 	var dirPathInFiles = filepath.Join(dirPath, "infiles")
 	var dirPathOutFiles = filepath.Join(dirPath, "outfiles")
-	var loadXmlDocFile = func(_ *uio.DirWalker, filename string, _ bool) bool {
+	var loadXmlDocFile = func(_ *uio.DirWalker, filename string, _ os.FileInfo) bool {
 		log.Printf("Loading %s", filename)
 		doc, dataOrig := makeEmptyDoc(), uio.ReadBinaryFile(filename, true)
 		err := xml.Unmarshal(dataOrig, doc)
