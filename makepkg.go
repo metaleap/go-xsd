@@ -5,7 +5,8 @@ import (
 	"path"
 	"strings"
 
-	util "github.com/metaleap/go-util"
+	ugo "github.com/metaleap/go-util"
+	usl "github.com/metaleap/go-util/slice"
 	ustr "github.com/metaleap/go-util/str"
 
 	xsdt "github.com/metaleap/go-xsd/types"
@@ -13,7 +14,7 @@ import (
 
 var (
 	PkgGen = &pkgGen{
-		BaseCodePath:             util.GopathSrcGithub("metaleap", "go-xsd-pkg"),
+		BaseCodePath:             ugo.GopathSrcGithub("metaleap", "go-xsd-pkg"),
 		BasePath:                 "github.com/metaleap/go-xsd-pkg",
 		ForceParseForDefaults:    false,
 		PluralizeSpecialPrefixes: []string{"Library", "Instance"},
@@ -350,7 +351,7 @@ func (me *declMethod) render(bag *PkgBag, dt *declType) {
 	}
 	bag.appendFmt(false, "//\t%s", me.Doc)
 	rt := bag.rewriteTypeSpec(me.ReturnType)
-	bag.appendFmt(true, "func (me %s) %s %s { %s }", bag.rewriteTypeSpec(me.ReceiverType), util.Ifs(strings.Contains(me.Name, "("), me.Name, me.Name+" ()"), rt, strings.Replace(me.Body, me.ReturnType, rt, -1))
+	bag.appendFmt(true, "func (me %s) %s %s { %s }", bag.rewriteTypeSpec(me.ReceiverType), ugo.Ifs(strings.Contains(me.Name, "("), me.Name, me.Name+" ()"), rt, strings.Replace(me.Body, me.ReturnType, rt, -1))
 }
 
 type declType struct {
@@ -414,7 +415,7 @@ func (me *declType) equivalentTo(dt *declType) bool {
 	for e, _ := range dt.Embeds {
 		sdt = append(sdt, e)
 	}
-	if !ustr.Equivalent(sme, sdt) {
+	if !usl.StrEquivalent(sme, sdt) {
 		return false
 	}
 	sme, sdt = []string{}, []string{}
@@ -424,7 +425,7 @@ func (me *declType) equivalentTo(dt *declType) bool {
 	for _, f := range dt.Fields {
 		sdt = append(sdt, f.Name+f.Type+f.XmlTag)
 	}
-	if !ustr.Equivalent(sme, sdt) {
+	if !usl.StrEquivalent(sme, sdt) {
 		return false
 	}
 	sme, sdt = []string{}, []string{}
@@ -438,7 +439,7 @@ func (me *declType) equivalentTo(dt *declType) bool {
 			sdt = append(sdt, m.Name+m.ReturnType+m.Body)
 		}
 	}
-	if !ustr.Equivalent(sme, sdt) {
+	if !usl.StrEquivalent(sme, sdt) {
 		return false
 	}
 	return true
