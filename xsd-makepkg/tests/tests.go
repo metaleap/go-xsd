@@ -125,7 +125,7 @@ func TestViaRemarshal(dirPath string, makeEmptyDoc func() interface{}) {
 		}
 		return true
 	}
-	if errs := uio.NewDirWalker(nil, loadXmlDocFile).Walk(dirPathInFiles); len(errs) > 0 {
+	if errs := uio.NewDirWalker(false, nil, loadXmlDocFile).Walk(dirPathInFiles); len(errs) > 0 {
 		panic(errs[0])
 	}
 }
