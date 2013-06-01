@@ -25,14 +25,14 @@
 -->
 
 	
+		
 		<div id="short-nav">
 			<dl>
 			<dd><code>import "github.com/metaleap/go-xsd/xsd-makepkg/tests"</code></dd>
 			</dl>
 			<dl>
 			<dd><a href="#pkg-overview" class="overviewLink">Overview</a></dd>
-			<dd><a href="#pkg-index">Index</a></dd>
-			
+			<dd><a href="#pkg-index" class="indexLink">Index</a></dd>
 			
 			
 				<dd><a href="#pkg-subdirectories">Subdirectories</a></dd>
@@ -53,10 +53,16 @@ A simple test function shared by the various test programs inside this directory
 			</div>
 		</div>
 		
-	
-		<h2 id="pkg-index">Index</h2>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
 		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
-		<div id="manual-nav">
+			<div id="manual-nav">
 			<dl>
 			
 			
@@ -68,7 +74,8 @@ A simple test function shared by the various test programs inside this directory
 			
 			
 			
-		</dl>
+			</dl>
+			</div><!-- #manual-nav -->
 
 		
 
@@ -84,13 +91,15 @@ A simple test function shared by the various test programs inside this directory
 			</span>
 			</p>
 		
-	
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
 		
 		
 			<h2 id="pkg-variables">Variables</h2>
 			
 				<pre>var (
-    OnDocLoaded func(interface{})
+    <span id="OnDocLoaded">OnDocLoaded</span> func(interface{})
 )</pre>
 				
 			
@@ -98,8 +107,8 @@ A simple test function shared by the various test programs inside this directory
 		
 			
 			
-			<h2 id="TestViaRemarshal">func <a href="/target/tests.go?s=3037:3107#L90">TestViaRemarshal</a></h2>
-			<pre>func TestViaRemarshal(dirPath string, makeEmptyDoc func() interface{})</pre>
+			<h2 id="TestViaRemarshal">func <a href="/target/tests.go?s=3036:3106#L90">TestViaRemarshal</a></h2>
+			<pre>func TestViaRemarshal(dirPath <a href="/pkg/builtin/#string">string</a>, makeEmptyDoc func() interface{})</pre>
 			<p>
 Attempts to xml.Unmarshal() all files in the &#34;infiles&#34; sub-directory of the specified directory path into the interface{} structure returned by the specified constructor.
 For each such input file, then attempts to xml.MarshalIndent() said structure back into a new output XML file with the same name, in the &#34;outfiles&#34; sub-directory of the specified directory path.
@@ -108,12 +117,9 @@ For each such input file, then attempts to xml.MarshalIndent() said structure ba
 			
 		
 		
-		</div>
 	
 
 	
-
-
 
 
 
@@ -177,6 +183,8 @@ For each such input file, then attempts to xml.MarshalIndent() said structure ba
 	
 	</table>
 	
+
+
 
 
 		</div></div>
