@@ -9,7 +9,7 @@ import (
 
 	uio "github.com/metaleap/go-util/io"
 
-	xmlx "github.com/goforks/xmlx"
+	xmlx "github.com/go-forks/xmlx"
 )
 
 var (
