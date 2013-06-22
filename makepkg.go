@@ -5,9 +5,9 @@ import (
 	"path"
 	"strings"
 
-	ugo "github.com/metaleap/go-util"
-	usl "github.com/metaleap/go-util/slice"
-	ustr "github.com/metaleap/go-util/str"
+	"github.com/go-utils/ugo"
+	"github.com/go-utils/uslice"
+	"github.com/go-utils/ustr"
 
 	xsdt "github.com/metaleap/go-xsd/types"
 )
@@ -351,7 +351,7 @@ func (me *declMethod) render(bag *PkgBag, dt *declType) {
 	}
 	bag.appendFmt(false, "//\t%s", me.Doc)
 	rt := bag.rewriteTypeSpec(me.ReturnType)
-	bag.appendFmt(true, "func (me %s) %s %s { %s }", bag.rewriteTypeSpec(me.ReceiverType), ugo.Ifs(strings.Contains(me.Name, "("), me.Name, me.Name+" ()"), rt, strings.Replace(me.Body, me.ReturnType, rt, -1))
+	bag.appendFmt(true, "func (me %s) %s %s { %s }", bag.rewriteTypeSpec(me.ReceiverType), ustr.Ifs(strings.Contains(me.Name, "("), me.Name, me.Name+" ()"), rt, strings.Replace(me.Body, me.ReturnType, rt, -1))
 }
 
 type declType struct {
@@ -415,7 +415,7 @@ func (me *declType) equivalentTo(dt *declType) bool {
 	for e, _ := range dt.Embeds {
 		sdt = append(sdt, e)
 	}
-	if !usl.StrEquivalent(sme, sdt) {
+	if !uslice.StrEquivalent(sme, sdt) {
 		return false
 	}
 	sme, sdt = []string{}, []string{}
@@ -425,7 +425,7 @@ func (me *declType) equivalentTo(dt *declType) bool {
 	for _, f := range dt.Fields {
 		sdt = append(sdt, f.Name+f.Type+f.XmlTag)
 	}
-	if !usl.StrEquivalent(sme, sdt) {
+	if !uslice.StrEquivalent(sme, sdt) {
 		return false
 	}
 	sme, sdt = []string{}, []string{}
@@ -439,7 +439,7 @@ func (me *declType) equivalentTo(dt *declType) bool {
 			sdt = append(sdt, m.Name+m.ReturnType+m.Body)
 		}
 	}
-	if !usl.StrEquivalent(sme, sdt) {
+	if !uslice.StrEquivalent(sme, sdt) {
 		return false
 	}
 	return true

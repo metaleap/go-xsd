@@ -5,7 +5,7 @@ import (
 
 	"github.com/metaleap/go-xsd/xsd-makepkg/tests"
 
-	util "github.com/metaleap/go-util"
+	"github.com/go-utils/ugo"
 
 	kml "github.com/metaleap/go-xsd-pkg/schemas.opengis.net/kml/2.2.0/ogckml22.xsd_go"
 )
@@ -17,7 +17,7 @@ type KmlDoc struct {
 
 func main() {
 	var (
-		dirBasePath  = util.GopathSrcGithub("metaleap", "go-xsd", "xsd-makepkg", "tests", "xsd-test-kml")
+		dirBasePath  = ugo.GopathSrcGithub("metaleap", "go-xsd", "xsd-makepkg", "tests", "xsd-test-kml")
 		makeEmptyDoc = func() interface{} { return &KmlDoc{} }
 	)
 	tests.TestViaRemarshal(dirBasePath, makeEmptyDoc)

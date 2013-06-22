@@ -5,8 +5,7 @@ import (
 	"path"
 	"strings"
 
-	util "github.com/metaleap/go-util"
-	ustr "github.com/metaleap/go-util/str"
+	"github.com/go-utils/ustr"
 
 	xsdt "github.com/metaleap/go-xsd/types"
 )
@@ -80,9 +79,9 @@ func (me *Attribute) makePkg(bag *PkgBag) {
 			bag.attsKeys[me] = key
 			bag.attsCache[key] = tmp
 			var td = bag.addType(me, tmp, "", me.Annotation)
-			td.addField(me, safeName, typeName, util.Ifs(len(bag.Schema.TargetNamespace) > 0, bag.Schema.TargetNamespace.String()+" ", "")+me.Name.String()+",attr", me.Annotation)
+			td.addField(me, safeName, typeName, ustr.Ifs(len(bag.Schema.TargetNamespace) > 0, bag.Schema.TargetNamespace.String()+" ", "")+me.Name.String()+",attr", me.Annotation)
 			if isPt := bag.isParseType(typeName); len(defVal) > 0 {
-				doc := sfmt("Returns the %v value for %v -- "+util.Ifs(isPt, "%v", "%#v"), strings.ToLower(defName), safeName, defVal)
+				doc := sfmt("Returns the %v value for %v -- "+ustr.Ifs(isPt, "%v", "%#v"), strings.ToLower(defName), safeName, defVal)
 				if isPt {
 					if PkgGen.ForceParseForDefaults {
 						td.addMethod(nil, tmp, safeName+defName, typeName, sfmt("var x = new(%v); x.Set(%#v); return *x", typeName, defVal), doc)
@@ -404,14 +403,14 @@ func (me *Element) makePkg(bag *PkgBag) {
 				bag.elemsWritten[tmp], bag.elemKeys[me] = true, key
 				cache[key] = tmp
 				var td = bag.addType(me, tmp, "", me.Annotation)
-				td.addField(me, util.Ifs(pref == "HasElems_", pluralize(safeName), safeName), util.Ifs(pref == "HasElems_", "[]"+asterisk+typeName, asterisk+typeName), util.Ifs(len(bag.Schema.TargetNamespace) > 0, bag.Schema.TargetNamespace.String()+" ", "")+me.Name.String(), me.Annotation)
+				td.addField(me, ustr.Ifs(pref == "HasElems_", pluralize(safeName), safeName), ustr.Ifs(pref == "HasElems_", "[]"+asterisk+typeName, asterisk+typeName), ustr.Ifs(len(bag.Schema.TargetNamespace) > 0, bag.Schema.TargetNamespace.String()+" ", "")+me.Name.String(), me.Annotation)
 				if me.parent == bag.Schema {
 					for _, subEl = range bag.Schema.RootSchema().globalSubstitutionElems(me) {
 						td.addEmbed(subEl, idPrefix+pref+bag.safeName(subEl.Name.String()), subEl.Annotation)
 					}
 				}
 				if len(defVal) > 0 {
-					doc = sfmt("Returns the %v value for %v -- "+util.Ifs(isPt, "%v", "%#v"), strings.ToLower(defName), safeName, defVal)
+					doc = sfmt("Returns the %v value for %v -- "+ustr.Ifs(isPt, "%v", "%#v"), strings.ToLower(defName), safeName, defVal)
 					if isPt {
 						if PkgGen.ForceParseForDefaults {
 							td.addMethod(nil, tmp, safeName+defName, valueType, sfmt("var x = new(%v); x.Set(%#v); return *x", valueType, defVal), doc)
@@ -790,7 +789,7 @@ func (me *Union) makePkg(bag *PkgBag) {
 	for _, mt := range memberTypes {
 		rtn = bag.resolveQnameRef(mt, "T", nil)
 		safeName, rtnSafeName = bag.safeName(ustr.PrependIf(bag.Stacks.CurSimpleType().Name.String(), "T")), bag.safeName(rtn)
-		bag.ctd.addMethod(me, safeName, "To"+rtnSafeName, rtn, sfmt(util.Ifs(bag.isParseType(rtn), "var x = new(%v); x.Set(me.String()); return *x", "return %v(me)"), rtn), sfmt("%v is an XSD union-type of several types. This is a simple type conversion to %v, but keep in mind the actual value may or may not be a valid %v value.", safeName, rtnSafeName, rtnSafeName), me.Annotation)
+		bag.ctd.addMethod(me, safeName, "To"+rtnSafeName, rtn, sfmt(ustr.Ifs(bag.isParseType(rtn), "var x = new(%v); x.Set(me.String()); return *x", "return %v(me)"), rtn), sfmt("%v is an XSD union-type of several types. This is a simple type conversion to %v, but keep in mind the actual value may or may not be a valid %v value.", safeName, rtnSafeName, rtnSafeName), me.Annotation)
 	}
 	me.elemBase.afterMakePkg(bag)
 }

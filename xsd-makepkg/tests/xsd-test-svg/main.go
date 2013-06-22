@@ -5,7 +5,7 @@ import (
 
 	"github.com/metaleap/go-xsd/xsd-makepkg/tests"
 
-	util "github.com/metaleap/go-util"
+	ugo "github.com/go-utils/ugo"
 
 	svg "github.com/metaleap/go-xsd-pkg/www.w3.org/TR/2002/WD-SVG11-20020108/SVG.xsd_go"
 )
@@ -17,7 +17,7 @@ type SvgDoc struct {
 
 func main() {
 	var (
-		dirBasePath  = util.GopathSrcGithub("metaleap", "go-xsd", "xsd-makepkg", "tests", "xsd-test-svg")
+		dirBasePath  = ugo.GopathSrcGithub("metaleap", "go-xsd", "xsd-makepkg", "tests", "xsd-test-svg")
 		makeEmptyDoc = func() interface{} { return &SvgDoc{} }
 	)
 	tests.TestViaRemarshal(dirBasePath, makeEmptyDoc)

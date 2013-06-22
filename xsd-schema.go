@@ -10,9 +10,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	uio "github.com/metaleap/go-util/io"
-	unet "github.com/metaleap/go-util/net"
-	ustr "github.com/metaleap/go-util/str"
+	"github.com/go-utils/uio"
+	"github.com/go-utils/unet"
+	"github.com/go-utils/ustr"
 )
 
 const (
