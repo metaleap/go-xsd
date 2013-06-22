@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/go-utils/uio"
+	"github.com/go-utils/ufs"
 	"github.com/go-utils/unet"
 	"github.com/go-utils/ustr"
 )
@@ -153,8 +153,8 @@ func (me *Schema) MakeGoPkgSrcFile() (goOutFilePath string, err error) {
 	me.hasElemAnnotation.makePkg(bag)
 	bag.appendFmt(true, "")
 	me.makePkg(bag)
-	if err = uio.EnsureDirExists(filepath.Dir(goOutFilePath)); err == nil {
-		err = uio.WriteTextFile(goOutFilePath, bag.assembleSource())
+	if err = ufs.EnsureDirExists(filepath.Dir(goOutFilePath)); err == nil {
+		err = ufs.WriteTextFile(goOutFilePath, bag.assembleSource())
 	}
 	return
 }
@@ -256,8 +256,8 @@ func LoadSchema(uri string, localCopy bool) (sd *Schema, err error) {
 		uri = uri[pos+len(protSep):]
 	}
 	if localCopy {
-		if localPath = filepath.Join(PkgGen.BaseCodePath, uri); !uio.FileExists(localPath) {
-			if err = uio.EnsureDirExists(filepath.Dir(localPath)); err == nil {
+		if localPath = filepath.Join(PkgGen.BaseCodePath, uri); !ufs.FileExists(localPath) {
+			if err = ufs.EnsureDirExists(filepath.Dir(localPath)); err == nil {
 				err = unet.DownloadFile(protocol+uri, localPath)
 			}
 		}

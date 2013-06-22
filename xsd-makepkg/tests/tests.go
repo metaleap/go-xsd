@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/go-utils/uio"
+	"github.com/go-utils/ufs"
 
 	xmlx "github.com/go-forks/xmlx"
 )
@@ -101,7 +101,7 @@ func TestViaRemarshal(dirPath string, makeEmptyDoc func() interface{}) {
 	var dirPathOutFiles = filepath.Join(dirPath, "outfiles")
 	var loadXmlDocFile = func(filename string) bool {
 		log.Printf("Loading %s", filename)
-		doc, dataOrig := makeEmptyDoc(), uio.ReadBinaryFile(filename, true)
+		doc, dataOrig := makeEmptyDoc(), ufs.ReadBinaryFile(filename, true)
 		err := xml.Unmarshal(dataOrig, doc)
 		if err != nil {
 			panic(err)
@@ -115,7 +115,7 @@ func TestViaRemarshal(dirPath string, makeEmptyDoc func() interface{}) {
 		if err != nil {
 			panic(err)
 		}
-		uio.WriteTextFile(outFileName, strings.Trim(string(dataFaks), " \r\n\t"))
+		ufs.WriteTextFile(outFileName, strings.Trim(string(dataFaks), " \r\n\t"))
 		log.Printf("Verifying...")
 		if errs := verifyDocs(dataOrig, dataFaks); len(errs) > 0 {
 			for _, err = range errs {
@@ -124,7 +124,7 @@ func TestViaRemarshal(dirPath string, makeEmptyDoc func() interface{}) {
 		}
 		return true
 	}
-	if errs := uio.NewDirWalker(false, nil, loadXmlDocFile).Walk(dirPathInFiles); len(errs) > 0 {
+	if errs := ufs.NewDirWalker(false, nil, loadXmlDocFile).Walk(dirPathInFiles); len(errs) > 0 {
 		panic(errs[0])
 	}
 }
