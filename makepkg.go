@@ -195,6 +195,11 @@ func (me *PkgBag) assembleSource() string {
 	for _, gr := range me.allElemGroups {
 		render(gr)
 	}
+
+  for _, dt := range me.declTypes {
+    dt.render(me)
+  }
+  
 	if len(me.walkerTypes) > 0 {
 		doc := sfmt("//\tProvides %v strong-typed hooks for your own custom handler functions to be invoked when the Walk() method is called on any instance of any (non-attribute-related) struct type defined in this package.\n//\tIf your custom handler does get called at all for a given struct instance, then it always gets called twice, first with the 'enter' bool argument set to true, then (after having Walk()ed all subordinate struct instances, if any) once again with it set to false.", len(me.walkerTypes))
 		me.appendFmt(true, `var (

@@ -179,6 +179,24 @@ type ToXsdtDateTime interface {
 	ToXsdtDateTime() DateTime
 }
 
+//	Represents a specific instance of time.
+type Time string // time.Time
+
+//	Since this is just a simple String type, this merely sets the current value from the specified string.
+func (me *Time) Set(v string) {
+	*me = Time(v)
+}
+
+//	Since this is just a simple String type, this merely returns its current string value.
+func (me Time) String() string {
+	return string(me)
+}
+
+//	A convenience interface that declares a type conversion to Time.
+type ToXsdtTime interface {
+	ToXsdtTime() Time
+}
+
 //	Represents arbitrary precision numbers.
 type Decimal string // complex128
 

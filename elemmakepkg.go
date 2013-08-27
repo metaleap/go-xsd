@@ -611,7 +611,7 @@ func (me *RestrictionSimpleEnumeration) makePkg(bag *PkgBag) {
 	me.elemBase.beforeMakePkg(bag)
 	safeName := bag.safeName(ustr.PrependIf(bag.Stacks.CurSimpleType().Name.String(), "T"))
 	var doc = sfmt("Returns true if the value of this enumerated %v is %#v.", safeName, me.Value)
-	bag.ctd.addMethod(me, safeName, "Is"+bag.safeName(me.Value), "bool", sfmt("return me == %#v", me.Value), doc)
+	bag.ctd.addMethod(me, safeName, "Is"+bag.safeName(me.Value), "bool", sfmt("return me.String() == %#v", me.Value), doc)
 	me.elemBase.afterMakePkg(bag)
 }
 
