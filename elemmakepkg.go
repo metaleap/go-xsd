@@ -244,6 +244,9 @@ func (me *ComplexType) makePkg(bag *PkgBag) {
 	if me.SimpleContent != nil {
 		td.addAnnotations(me.SimpleContent.Annotation)
 		if me.SimpleContent.ExtensionSimpleContent != nil {
+			if len(me.SimpleContent.ExtensionSimpleContent.Base) > 0 {
+				ctBaseType = me.SimpleContent.ExtensionSimpleContent.Base.String()
+			}
 			td.addAnnotations(me.SimpleContent.ExtensionSimpleContent.Annotation)
 			for _, att = range me.SimpleContent.ExtensionSimpleContent.Attributes {
 				allAtts[att] = true
@@ -256,6 +259,9 @@ func (me *ComplexType) makePkg(bag *PkgBag) {
 			}
 		}
 		if me.SimpleContent.RestrictionSimpleContent != nil {
+			if len(me.SimpleContent.RestrictionSimpleContent.Base) > 0 {
+				ctBaseType = me.SimpleContent.RestrictionSimpleContent.Base.String()
+			}
 			td.addAnnotations(me.SimpleContent.RestrictionSimpleContent.Annotation)
 			for _, att = range me.SimpleContent.RestrictionSimpleContent.Attributes {
 				allAtts[att] = true
@@ -276,8 +282,7 @@ func (me *ComplexType) makePkg(bag *PkgBag) {
 	}
 	if ctBaseType = bag.resolveQnameRef(ctBaseType, "T", nil); len(ctBaseType) > 0 {
 		td.addEmbed(nil, bag.safeName(ctBaseType))
-	}
-	if ctValueType = bag.resolveQnameRef(ctValueType, "T", nil); len(ctValueType) > 0 {
+	} else if ctValueType = bag.resolveQnameRef(ctValueType, "T", nil); len(ctValueType) > 0 {
 		bag.simpleContentValueTypes[typeSafeName] = ctValueType
 		td.addField(nil, idPrefix+"Value", ctValueType, ",chardata")
 		chain := sfmt("me.%vValue", idPrefix)
