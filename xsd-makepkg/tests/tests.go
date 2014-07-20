@@ -9,7 +9,7 @@ import (
 
 	"github.com/go-utils/ufs"
 
-	xmlx "github.com/go-forks/xmlx"
+	xmlx "github.com/jteeuwen/go-pkg-xmlx"
 )
 
 var (
