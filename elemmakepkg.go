@@ -395,7 +395,7 @@ func (me *Element) makePkg(bag *PkgBag) {
 		if me.Parent() == bag.Schema {
 			key = safeName
 		} else {
-			key = bag.Stacks.FullName() + "_" + safeName + "_" + bag.safeName(typeName) + "_" + bag.safeName(defVal)
+			key = bag.safeName(bag.Stacks.FullName()) + "_" + safeName + "_" + bag.safeName(typeName) + "_" + bag.safeName(defVal)
 		}
 		if valueType = bag.simpleContentValueTypes[typeName]; len(valueType) == 0 {
 			valueType = typeName
