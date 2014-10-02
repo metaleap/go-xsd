@@ -384,7 +384,8 @@ func (me *Element) makePkg(bag *PkgBag) {
 			if len(typeName) == 0 {
 				typeName = bag.xsdStringTypeRef()
 			}
-			if typeName = bag.resolveQnameRef(typeName, "T", &impName); bag.Schema.RootSchema().globalComplexType(bag, typeName) != nil {
+			loadedSchemas := make(map[string]bool)
+			if typeName = bag.resolveQnameRef(typeName, "T", &impName); bag.Schema.RootSchema([]string{bag.Schema.loadUri}).globalComplexType(bag, typeName, loadedSchemas) != nil {
 				asterisk = "*"
 			}
 		}
@@ -410,7 +411,8 @@ func (me *Element) makePkg(bag *PkgBag) {
 				var td = bag.addType(me, tmp, "", me.Annotation)
 				td.addField(me, ustr.Ifs(pref == "HasElems_", pluralize(safeName), safeName), ustr.Ifs(pref == "HasElems_", "[]"+asterisk+typeName, asterisk+typeName), ustr.Ifs(len(bag.Schema.TargetNamespace) > 0, bag.Schema.TargetNamespace.String()+" ", "")+me.Name.String(), me.Annotation)
 				if me.parent == bag.Schema {
-					for _, subEl = range bag.Schema.RootSchema().globalSubstitutionElems(me) {
+					loadedSchemas := make(map[string]bool)
+					for _, subEl = range bag.Schema.RootSchema([]string{bag.Schema.loadUri}).globalSubstitutionElems(me, loadedSchemas) {
 						td.addEmbed(subEl, idPrefix+pref+bag.safeName(subEl.Name.String()), subEl.Annotation)
 					}
 				}

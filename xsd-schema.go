@@ -59,15 +59,21 @@ type Schema struct {
 	loadLocalPath, loadUri string
 }
 
-func (me *Schema) allSchemas() (schemas []*Schema) {
+func (me *Schema) allSchemas(loadedSchemas map[string]bool, prefix string) (schemas []*Schema) {
 	schemas = append(schemas, me)
+	loadedSchemas[me.loadUri] = true
 	for _, ss := range me.XMLIncludedSchemas {
-		schemas = append(schemas, ss.allSchemas()...)
+		if v, ok := loadedSchemas[ss.loadUri]; ok && v {
+			continue
+		}
+		loadedSchemas[ss.loadUri] = true
+		schemas = append(schemas, ss.allSchemas(loadedSchemas, prefix+"\t")...)
 	}
 	return
 }
 
-func (me *Schema) collectGlobals(bag *PkgBag) {
+func (me *Schema) collectGlobals(bag *PkgBag, loadedSchemas map[string]bool) {
+	loadedSchemas[me.loadUri] = true
 	for _, att := range me.Attributes {
 		bag.allAtts = append(bag.allAtts, att)
 	}
@@ -84,19 +90,27 @@ func (me *Schema) collectGlobals(bag *PkgBag) {
 		bag.allNotations = append(bag.allNotations, not)
 	}
 	for _, ss := range me.XMLIncludedSchemas {
-		ss.collectGlobals(bag)
+		if v, ok := loadedSchemas[ss.loadUri]; ok && v {
+			continue
+		}
+		ss.collectGlobals(bag, loadedSchemas)
 	}
 }
 
-func (me *Schema) globalComplexType(bag *PkgBag, name string) (ct *ComplexType) {
+func (me *Schema) globalComplexType(bag *PkgBag, name string, loadedSchemas map[string]bool) (ct *ComplexType) {
 	var imp string
 	for _, ct = range me.ComplexTypes {
 		if bag.resolveQnameRef(ustr.PrefixWithSep(me.XMLNamespacePrefix, ":", ct.Name.String()), "T", &imp) == name {
 			return
 		}
 	}
+	loadedSchemas[me.loadUri] = true
 	for _, ss := range me.XMLIncludedSchemas {
-		if ct = ss.globalComplexType(bag, name); ct != nil {
+		if v, ok := loadedSchemas[ss.loadUri]; ok && v {
+			//fmt.Printf("Ignoring processed schema: %s\n", ss.loadUri)
+			continue
+		}
+		if ct = ss.globalComplexType(bag, name, loadedSchemas); ct != nil {
 			return
 		}
 	}
@@ -123,7 +137,7 @@ func (me *Schema) globalElement(bag *PkgBag, name string) (el *Element) {
 	return
 }
 
-func (me *Schema) globalSubstitutionElems(el *Element) (els []*Element) {
+func (me *Schema) globalSubstitutionElems(el *Element, loadedSchemas map[string]bool) (els []*Element) {
 	var elName = el.Ref.String()
 	if len(elName) == 0 {
 		elName = el.Name.String()
@@ -136,7 +150,11 @@ func (me *Schema) globalSubstitutionElems(el *Element) (els []*Element) {
 		}
 	}
 	for _, inc := range me.XMLIncludedSchemas {
-		els = append(els, inc.globalSubstitutionElems(el)...)
+		if v, ok := loadedSchemas[inc.loadUri]; ok && v {
+			//fmt.Printf("Ignoring processed schema: %s\n", inc.loadUri)
+			continue
+		}
+		els = append(els, inc.globalSubstitutionElems(el, loadedSchemas)...)
 	}
 	return
 }
@@ -201,9 +219,16 @@ func (me *Schema) onLoad(rootAtts []xml.Attr, loadUri, localPath string) (err er
 	return
 }
 
-func (me *Schema) RootSchema() *Schema {
+func (me *Schema) RootSchema(pathSchemas []string) *Schema {
 	if me.XSDParentSchema != nil {
-		return me.XSDParentSchema.RootSchema()
+		for _, sch := range pathSchemas {
+			if me.XSDParentSchema.loadUri == sch {
+				//fmt.Printf("schema loop deteced %+v - > %s!\n", pathSchemas, me.XSDParentSchema.loadUri)
+				return me
+			}
+	  }
+		pathSchemas = append(pathSchemas, me.loadUri)
+		return me.XSDParentSchema.RootSchema(pathSchemas)
 	}
 	return me
 }
