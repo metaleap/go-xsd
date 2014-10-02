@@ -67,7 +67,6 @@ func (me *Schema) allSchemas(loadedSchemas map[string]bool) (schemas []*Schema) 
 		if v, ok := loadedSchemas[ss.loadUri]; ok && v {
 			continue
 		}
-		loadedSchemas[ss.loadUri] = true
 		schemas = append(schemas, ss.allSchemas(loadedSchemas)...)
 	}
 	return
@@ -165,7 +164,8 @@ func (me *Schema) MakeGoPkgSrcFile() (goOutFilePath string, err error) {
 	var goOutDirPath = filepath.Join(filepath.Dir(me.loadLocalPath), goPkgPrefix+filepath.Base(me.loadLocalPath)+goPkgSuffix)
 	goOutFilePath = filepath.Join(goOutDirPath, path.Base(me.loadUri)+".go")
 	var bag = newPkgBag(me)
-	for _, inc := range me.XMLIncludedSchemas {
+	loadedSchemas := make(map[string]bool)
+	for _, inc := range me.allSchemas(loadedSchemas) {
 		bag.Schema = inc
 		inc.makePkg(bag)
 	}
