@@ -101,7 +101,7 @@ func newPkgBag(schema *Schema) (bag *PkgBag) {
 	for i := 0; newImpname; i++ {
 		newImpname = false
 		loadedSchemas := make(map[string]bool)
-		for _, s := range schema.allSchemas(loadedSchemas, "") {
+		for _, s := range schema.allSchemas(loadedSchemas) {
 			for ns, _ := range s.XMLNamespaces {
 				if ns == bag.impName {
 					newImpname = true

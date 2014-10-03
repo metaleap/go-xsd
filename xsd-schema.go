@@ -13,6 +13,7 @@ import (
 	"github.com/go-utils/ufs"
 	"github.com/go-utils/unet"
 	"github.com/go-utils/ustr"
+	"fmt"
 )
 
 const (
@@ -59,15 +60,14 @@ type Schema struct {
 	loadLocalPath, loadUri string
 }
 
-func (me *Schema) allSchemas(loadedSchemas map[string]bool, prefix string) (schemas []*Schema) {
+func (me *Schema) allSchemas(loadedSchemas map[string]bool) (schemas []*Schema) {
 	schemas = append(schemas, me)
 	loadedSchemas[me.loadUri] = true
 	for _, ss := range me.XMLIncludedSchemas {
 		if v, ok := loadedSchemas[ss.loadUri]; ok && v {
 			continue
 		}
-		loadedSchemas[ss.loadUri] = true
-		schemas = append(schemas, ss.allSchemas(loadedSchemas, prefix+"\t")...)
+		schemas = append(schemas, ss.allSchemas(loadedSchemas)...)
 	}
 	return
 }
@@ -149,6 +149,7 @@ func (me *Schema) globalSubstitutionElems(el *Element, loadedSchemas map[string]
 			}
 		}
 	}
+	loadedSchemas[me.loadUri] = true
 	for _, inc := range me.XMLIncludedSchemas {
 		if v, ok := loadedSchemas[inc.loadUri]; ok && v {
 			//fmt.Printf("Ignoring processed schema: %s\n", inc.loadUri)
@@ -163,7 +164,8 @@ func (me *Schema) MakeGoPkgSrcFile() (goOutFilePath string, err error) {
 	var goOutDirPath = filepath.Join(filepath.Dir(me.loadLocalPath), goPkgPrefix+filepath.Base(me.loadLocalPath)+goPkgSuffix)
 	goOutFilePath = filepath.Join(goOutDirPath, path.Base(me.loadUri)+".go")
 	var bag = newPkgBag(me)
-	for _, inc := range me.XMLIncludedSchemas {
+	loadedSchemas := make(map[string]bool)
+	for _, inc := range me.allSchemas(loadedSchemas) {
 		bag.Schema = inc
 		inc.makePkg(bag)
 	}
@@ -207,7 +209,14 @@ func (me *Schema) onLoad(rootAtts []xml.Attr, loadUri, localPath string) (err er
 		if tmpUrl = inc.SchemaLocation.String(); strings.Index(tmpUrl, protSep) < 0 {
 			tmpUrl = path.Join(path.Dir(loadUri), tmpUrl)
 		}
-		if sd = loadedSchemas[tmpUrl]; sd == nil {
+		var ok bool
+		var toLoadUri string
+		if pos := strings.Index(tmpUrl, protSep); pos >= 0 {
+			toLoadUri = tmpUrl[pos+len(protSep):]
+		} else {
+			toLoadUri = tmpUrl
+		}
+		if sd, ok = loadedSchemas[toLoadUri]; !ok {
 			if sd, err = LoadSchema(tmpUrl, len(localPath) > 0); err != nil {
 				return
 			}
@@ -223,7 +232,7 @@ func (me *Schema) RootSchema(pathSchemas []string) *Schema {
 	if me.XSDParentSchema != nil {
 		for _, sch := range pathSchemas {
 			if me.XSDParentSchema.loadUri == sch {
-				//fmt.Printf("schema loop deteced %+v - > %s!\n", pathSchemas, me.XSDParentSchema.loadUri)
+				fmt.Printf("schema loop detected %+v - > %s!\n", pathSchemas, me.XSDParentSchema.loadUri)
 				return me
 			}
 	  }
