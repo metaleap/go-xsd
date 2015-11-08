@@ -274,6 +274,7 @@ func (me *PkgBag) resolveQnameRef(ref, pref string, noUsageRec *string) string {
 	}
 	if pos := strings.Index(ref, ":"); pos > 0 {
 		impName, ns = ref[:pos], me.Schema.XMLNamespaces[ref[:pos]]
+		impName = safeIdentifier(impName)
 		ref = ref[(pos + 1):]
 	}
 	if ns == xsdNamespaceUri {
