@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"path"
 	"strings"
+	"unicode"
 
 	"github.com/go-utils/ustr"
 
@@ -516,7 +517,7 @@ func (me *Import) makePkg(bag *PkgBag) {
 	me.hasElemAnnotation.makePkg(bag)
 	for k, v := range bag.Schema.XMLNamespaces {
 		if v == me.Namespace {
-			impName = k
+			impName = safeIdentifier(k)
 			break
 		}
 	}
@@ -834,6 +835,24 @@ func pluralize(s string) string {
 
 func sfmt(s string, a ...interface{}) string {
 	return fmt.Sprintf(s, a...)
+}
+
+// For any rune, return a rune that is a valid in an identifier
+func coerceToIdentifierRune(ch rune) rune {
+	if !unicode.IsLetter(ch) && !unicode.IsNumber(ch) {
+		return '_'
+	}
+	return ch
+}
+
+// Take any string and convert it to a valid identifier
+// Appends an underscore if the first rune is a number
+func safeIdentifier(s string) string {
+	s = strings.Map(coerceToIdentifierRune, s)
+	if unicode.IsNumber([]rune(s)[0]) {
+		s = fmt.Sprint("_", s)
+	}
+	return s
 }
 
 func subMakeElem(bag *PkgBag, td *declType, el *Element, done map[string]bool, parentMaxOccurs xsdt.Long, anns ...*Annotation) {
