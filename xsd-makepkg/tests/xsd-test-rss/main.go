@@ -5,7 +5,7 @@ import (
 
 	"github.com/metaleap/go-xsd/xsd-makepkg/tests"
 
-	ugo "github.com/go-utils/ugo"
+	ugo "github.com/metaleap/go-util-misc"
 
 	rss "github.com/metaleap/go-xsd-pkg/thearchitect.co.uk/schemas/rss-2_0.xsd_go"
 )

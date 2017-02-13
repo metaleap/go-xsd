@@ -10,9 +10,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/go-utils/ufs"
-	"github.com/go-utils/unet"
-	"github.com/go-utils/ustr"
+	"github.com/metaleap/go-util-fs"
+	"github.com/metaleap/go-util-net"
+	"github.com/metaleap/go-util-str"
 	"fmt"
 )
 
