@@ -29,6 +29,7 @@ var (
 
 type Schema struct {
 	elemBase
+
 	XMLName            xml.Name          `xml:"schema"`
 	XMLNamespacePrefix string            `xml:"-"`
 	XMLNamespaces      map[string]string `xml:"-"`
