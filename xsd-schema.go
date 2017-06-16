@@ -271,7 +271,7 @@ func loadSchema(r io.Reader, loadUri, localPath string) (sd *Schema, err error) 
 	return
 }
 
-func loadSchemaFile(filename string, loadUri string) (sd *Schema, err error) {
+func LoadSchemaFile(filename string, loadUri string) (sd *Schema, err error) {
 	var file *os.File
 	if file, err = os.Open(filename); err == nil {
 		defer file.Close()
@@ -297,7 +297,7 @@ func LoadSchema(uri string, localCopy bool) (sd *Schema, err error) {
 			}
 		}
 		if err == nil {
-			if sd, err = loadSchemaFile(localPath, uri); sd != nil {
+			if sd, err = LoadSchemaFile(localPath, uri); sd != nil {
 				sd.loadLocalPath = localPath
 			}
 		}
