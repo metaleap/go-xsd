@@ -2,7 +2,7 @@ go-xsd
 ======
 
 
-A Go package for loading ( **xml.Unmarshal()**ing ) an XML Schema Definition (XSD) document into an **xsd.Schema** structure.
+A Go package for loading ( **xml.Unmarshal()**-ing ) an XML Schema Definition (XSD) document into an **xsd.Schema** structure.
 
 With this, you could probably write an XML validator, or otherwise utilize or further process the loaded XSD --- but the main use-case here was:
 
