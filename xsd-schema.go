@@ -3,6 +3,7 @@ package xsd
 import (
 	"bytes"
 	"encoding/xml"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
@@ -10,10 +11,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/metaleap/go-util-fs"
-	"github.com/metaleap/go-util-net"
-	"github.com/metaleap/go-util-str"
-	"fmt"
+	"github.com/metaleap/go-util/fs"
+	"github.com/metaleap/go-util/net"
+	"github.com/metaleap/go-util/str"
 )
 
 const (
@@ -236,7 +236,7 @@ func (me *Schema) RootSchema(pathSchemas []string) *Schema {
 				fmt.Printf("schema loop detected %+v - > %s!\n", pathSchemas, me.XSDParentSchema.loadUri)
 				return me
 			}
-	  }
+		}
 		pathSchemas = append(pathSchemas, me.loadUri)
 		return me.XSDParentSchema.RootSchema(pathSchemas)
 	}

@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/metaleap/go-util-misc"
+	"github.com/metaleap/go-util/dev/go"
 
 	xsd "github.com/metaleap/go-xsd"
 )
@@ -54,7 +54,7 @@ func main() {
 		schemas = strings.Split(*flagSchema, " ")
 	}
 	if len(*flagBasePath) > 0 {
-		xsd.PkgGen.BasePath, xsd.PkgGen.BaseCodePath = *flagBasePath, ugo.GopathSrc(strings.Split(*flagBasePath, "/")...)
+		xsd.PkgGen.BasePath, xsd.PkgGen.BaseCodePath = *flagBasePath, udevgo.GopathSrc(strings.Split(*flagBasePath, "/")...)
 	}
 	for _, s := range schemas {
 		log.Printf("LOAD:\t%v\n", s)

@@ -5,7 +5,7 @@ import (
 
 	"github.com/metaleap/go-xsd/xsd-makepkg/tests"
 
-	"github.com/metaleap/go-util-misc"
+	"github.com/metaleap/go-util/dev/go"
 
 	atom "github.com/metaleap/go-xsd-pkg/kbcafe.com/rss/atom.xsd.xml_go"
 )
@@ -22,9 +22,9 @@ type AtomFeedDoc struct {
 
 func main() {
 	var (
-		entryDirBasePath  = ugo.GopathSrcGithub("metaleap", "go-xsd", "xsd-makepkg", "tests", "xsd-test-atom", "entry")
+		entryDirBasePath  = udevgo.GopathSrcGithub("metaleap", "go-xsd", "xsd-makepkg", "tests", "xsd-test-atom", "entry")
 		entryMakeEmptyDoc = func() interface{} { return &AtomEntryDoc{} }
-		feedDirBasePath   = ugo.GopathSrcGithub("metaleap", "go-xsd", "xsd-makepkg", "tests", "xsd-test-atom", "feed")
+		feedDirBasePath   = udevgo.GopathSrcGithub("metaleap", "go-xsd", "xsd-makepkg", "tests", "xsd-test-atom", "feed")
 		feedMakeEmptyDoc  = func() interface{} { return &AtomFeedDoc{} }
 	)
 	tests.TestViaRemarshal(entryDirBasePath, entryMakeEmptyDoc)
