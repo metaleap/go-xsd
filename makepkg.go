@@ -102,7 +102,7 @@ func newPkgBag(schema *Schema) (bag *PkgBag) {
 		newImpname = false
 		loadedSchemas := make(map[string]bool)
 		for _, s := range schema.allSchemas(loadedSchemas) {
-			for ns, _ := range s.XMLNamespaces {
+			for ns := range s.XMLNamespaces {
 				if ns == bag.impName {
 					newImpname = true
 					break
@@ -217,12 +217,12 @@ func (me *PkgBag) assembleSource() string {
 )`, doc, idPrefix)
 		me.appendFmt(false, doc)
 		me.appendFmt(false, "type %vWalkHandlers struct {", idPrefix)
-		for wt, _ := range me.walkerTypes {
+		for wt := range me.walkerTypes {
 			me.appendFmt(false, "\t%s func (*%s, bool) (error)", wt, wt)
 		}
 		me.appendFmt(true, "}")
 	}
-	for conv, _ := range me.declConvs {
+	for conv := range me.declConvs {
 		snConv = me.safeName(conv)
 		me.appendFmt(false, "//\tA convenience interface that declares a type conversion to %v.", conv)
 		me.appendFmt(true, "type To%v interface { To%v () %v }", snConv, snConv, conv)
@@ -258,7 +258,7 @@ func (me *PkgBag) checkType(typeSpec string) {
 }
 
 func (me *PkgBag) isParseType(typeRef string) bool {
-	for pt, _ := range me.parseTypes {
+	for pt := range me.parseTypes {
 		if typeRef == pt {
 			return true
 		}
@@ -417,10 +417,10 @@ func (me *declType) equivalentTo(dt *declType) bool {
 		return false
 	}
 	sme, sdt = []string{}, []string{}
-	for e, _ := range me.Embeds {
+	for e := range me.Embeds {
 		sme = append(sme, e)
 	}
-	for e, _ := range dt.Embeds {
+	for e := range dt.Embeds {
 		sdt = append(sdt, e)
 	}
 	if !uslice.StrEquivalent(sme, sdt) {
