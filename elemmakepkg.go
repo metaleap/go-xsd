@@ -282,7 +282,13 @@ func (me *ComplexType) makePkg(bag *PkgBag) {
 		}
 	}
 	if ctBaseType = bag.resolveQnameRef(ctBaseType, "T", nil); len(ctBaseType) > 0 {
-		td.addEmbed(nil, bag.safeName(ctBaseType))
+		if strings.HasPrefix(ctBaseType, "xsdt.") {
+			td.addEmbed(nil, idPrefix+"HasCdata")
+		} else {
+			td.addEmbed(nil, bag.safeName(ctBaseType))
+
+		}
+
 	} else if ctValueType = bag.resolveQnameRef(ctValueType, "T", nil); len(ctValueType) > 0 {
 		bag.simpleContentValueTypes[typeSafeName] = ctValueType
 		td.addField(nil, idPrefix+"Value", ctValueType, ",chardata")
