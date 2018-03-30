@@ -282,13 +282,17 @@ func (me *ComplexType) makePkg(bag *PkgBag) {
 		}
 	}
 	if ctBaseType = bag.resolveQnameRef(ctBaseType, "T", nil); len(ctBaseType) > 0 {
-		td.addEmbed(nil, bag.safeName(ctBaseType))
+		if strings.HasPrefix(ctBaseType, "xsdt.") {
+			td.addEmbed(nil, idPrefix+"HasCdata")
+		} else {
+			td.addEmbed(nil, bag.safeName(ctBaseType))
+		}
 	} else if ctValueType = bag.resolveQnameRef(ctValueType, "T", nil); len(ctValueType) > 0 {
 		bag.simpleContentValueTypes[typeSafeName] = ctValueType
 		td.addField(nil, idPrefix+"Value", ctValueType, ",chardata")
 		chain := sfmt("me.%vValue", idPrefix)
 		td.addMethod(nil, "*"+typeSafeName, sfmt("To%v", bag.safeName(ctValueType)), ctValueType, sfmt("return %v", chain), sfmt("Simply returns the value of its %vValue field.", idPrefix))
-		ttn := ctValueType
+		var ttn string
 		for ttd := bag.declTypes[ctValueType]; ttd != nil; ttd = bag.declTypes[ttn] {
 			if ttd != nil {
 				bag.declConvs[ttd.Name] = true
@@ -306,10 +310,10 @@ func (me *ComplexType) makePkg(bag *PkgBag) {
 	} else if mixed {
 		td.addEmbed(nil, idPrefix+"HasCdata")
 	}
-	for elGr, _ = range allElemGroups {
+	for elGr = range allElemGroups {
 		subMakeElemGroup(bag, td, elGr, grsDone, anns(nil, me.ComplexContent)...)
 	}
-	for el, _ = range allElems {
+	for el = range allElems {
 		subMakeElem(bag, td, el, elsDone, 1, anns(me.All, nil)...)
 	}
 	for _, ch := range allChoices {
@@ -328,11 +332,11 @@ func (me *ComplexType) makePkg(bag *PkgBag) {
 			subMakeElemGroup(bag, td, elGr, grsDone, seq.Annotation)
 		}
 	}
-	for attGroup, _ = range allAttGroups {
+	for attGroup = range allAttGroups {
 		td.addEmbed(attGroup, ustr.PrefixWithSep(bag.attGroupRefImps[attGroup], ".", bag.attGroups[attGroup][(strings.Index(bag.attGroups[attGroup], ".")+1):]), attGroup.Annotation)
 	}
 
-	for att, _ = range allAtts {
+	for att = range allAtts {
 		if key := bag.attsKeys[att]; len(key) > 0 {
 			td.addEmbed(att, ustr.PrefixWithSep(bag.attRefImps[att], ".", bag.attsCache[key][(strings.Index(bag.attsCache[key], ".")+1):]), att.Annotation)
 		}
